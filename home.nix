@@ -8,6 +8,7 @@
     ripgrep
     neofetch
     nnn
+    cht-sh
     zip
     unzip
     ripgrep
@@ -18,7 +19,7 @@
     lazygit
     lazycli
     gitui
-    jetbrains.rust-rover
+    # jetbrains.rust-rover
     vivaldi
     calibre
     wpsoffice
@@ -34,38 +35,47 @@
     };
   };
 
-  programs.nixvim = {
-    enable = true;
-    # colorschemes.gruvbox.enable = true;
-    plugins.lightline.enable = true;
-    colorschemes.tokyonight = {
-      enable = true;
-      style = "day";
-      transparent = false;
-      terminalColors = false;
-      dayBrightness = 1.0;
-      dimInactive = true;
-      styles = {
-        comments = { italic = true; };
-        keywords = { italic = false; };
-        functions = { };
-        variables = { };
-      };
-    };
-
-    extraPlugins = with pkgs.vimPlugins; [
-      vim-nix
-    ];
-  };
+  # programs.nixvim = {
+  #   enable = true;
+  #   # colorschemes.gruvbox.enable = true;
+  #   plugins.lightline.enable = true;
+  #   colorschemes.tokyonight = {
+  #     enable = true;
+  #     style = "day";
+  #     transparent = false;
+  #     terminalColors = false;
+  #     dayBrightness = 1.0;
+  #     dimInactive = true;
+  #     styles = {
+  #       comments = { italic = true; };
+  #       keywords = { italic = false; };
+  #       functions = { };
+  #       variables = { };
+  #     };
+  #   };
+  #   extraPlugins = with pkgs.vimPlugins; [
+  #     vim-nix
+  #   ];
+  # };
 
   programs.helix = {
     enable = true;
     defaultEditor = true;
-    languages = {
-      language = [{
-        name = "rust";
-        auto-format = true;
-      }];
+      languages = {
+        markdown = [{
+          name = "markdown";
+          file-types = ["md" "mdx" "markdown"];
+          text-width = 80;
+          soft-wrap = { 
+            enable = true;
+            wrap-at-text-width = true; 
+          };
+
+        }];
+        rust = [{
+          name = "rust";
+          auto-format = true;
+        }];
       grammar = [{
         name = "rust";
         source = {
@@ -158,6 +168,7 @@
           "n" = ":write";
           "space" = ":buffer-previous";
           "backspace" = ":buffer-next";
+          "l"=":sh tmux split-window -v -p 70 ";
           "r" = ":sh cargo run 2>&1 || true";
           "t" = ":sh cargo test 2>&1 || true";
         };
@@ -192,7 +203,9 @@
     shell = "${pkgs.fish}/bin/fish";
     extraConfig = ''
       bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
-      bind-key -r Enter new-window -c "#{pane_current_path}"
+      # bind-key -r Enter new-window -c "#{pane_current_path}"
+      bind-key -r Bspace kill-pane
+      bind-key -r Enter split-window -v -p 20 -c "#{pane_current_path}"
       set  -g default-terminal "tmux-256color"
       set -ag terminal-overrides ",alacritty:RGB"
       set-option -sa terminal-overrides ",xterm*:Tc"
@@ -211,7 +224,7 @@
     enable = true;
     settings = {
       env.TERM = "xterm-256color";
-      font = { size = 14; };
+      font = { size = 11; };
       colors = {
         primary = {
           background = "#ffffff";

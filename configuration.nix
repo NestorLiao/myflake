@@ -109,14 +109,21 @@
 
   programs.fish = {
     enable = true;
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+    '';
     shellInit = ''
       fish_vi_key_bindings
+      export CHTSH_QUERY_OPTIONS="T"
       zoxide init fish | source
       thefuck --alias | source 
     '';
 
     shellAbbrs = {
+      "cr"="cht.sh rust | less";
+      "c"="cht.sh | less";
       "e" = "hx";
+      "en" = "hx .";
       "r" = "fg";
       "diff" = "nvim -d";
       "grep" = "rg";
