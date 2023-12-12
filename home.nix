@@ -14,7 +14,7 @@
     unzip
     ripgrep
     fzf
-    # qq
+    qq
     gnome.cheese
     gdbgui
     lazygit
