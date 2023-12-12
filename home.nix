@@ -4,6 +4,7 @@
   home.username = "randy";
   home.homeDirectory = "/home/randy";
   home.packages = with pkgs; [
+    octaveFull
     fcitx5-configtool
     ripgrep
     neofetch
@@ -13,7 +14,7 @@
     unzip
     ripgrep
     fzf
-    qq
+    # qq
     gnome.cheese
     gdbgui
     lazygit
