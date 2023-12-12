@@ -4,8 +4,10 @@
   home.username = "randy";
   home.homeDirectory = "/home/randy";
   home.packages = with pkgs; [
+    intel-gpu-tools
     octaveFull
-    fcitx5-configtool
+    # fcitx5-configtool
+    glmark2
     ripgrep
     neofetch
     nnn
@@ -14,18 +16,21 @@
     unzip
     ripgrep
     fzf
-    qq
+    # qq
     gnome.cheese
-    gdbgui
-    lazygit
-    lazycli
-    gitui
+    # gdbgui
+    # lazygit
+    # lazycli
+    # gitui
     # jetbrains.rust-rover
     vivaldi
     calibre
     wpsoffice
     tldr
     thefuck
+    # blender
+    # kicad
+    glxinfo
   ];
 
   programs = {
