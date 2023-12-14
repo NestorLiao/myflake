@@ -4,9 +4,8 @@
   home.username = "randy";
   home.homeDirectory = "/home/randy";
   home.packages = with pkgs; [
+    tmux-sessionizer
     intel-gpu-tools
-    octaveFull
-    # fcitx5-configtool
     glmark2
     ripgrep
     neofetch
@@ -16,13 +15,10 @@
     unzip
     ripgrep
     fzf
-    # qq
+    qq
+    fd
     gnome.cheese
-    # gdbgui
-    # lazygit
-    # lazycli
-    # gitui
-    # jetbrains.rust-rover
+    gitui
     vivaldi
     calibre
     wpsoffice

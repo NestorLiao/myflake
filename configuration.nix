@@ -121,6 +121,9 @@
   };
   nixpkgs.overlays = [ (self: super: { fcitx-engines = self.fcitx5; }) ];
 
+
+  nix.settings.experimental-features = "nix-command flakes";
+
   services.xserver.layout = "us";
 
   sound.enable = true;
