@@ -92,6 +92,7 @@
   services.xserver.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   programs.xwayland.enable = true;
+  # programs.hyprland.enable = true;
   services.xserver.displayManager.sddm.enable = true;
 
   fonts = {
