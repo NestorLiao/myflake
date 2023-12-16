@@ -3,62 +3,34 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  systemd.network.networks.randy.dns = [ 8.8 0.8 0.8 ];
+  # systemd.network.networks.randy.dns = [ 8.8.8.8 ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   security.sudo.wheelNeedsPassword = false;
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-
   hardware.nvidia = {
-    # Modesetting is required.
     modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     powerManagement.enable = false;
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
     powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
-    # Only available from driver 515.43.04+
-
-    # Currently alpha-quality/buggy, so false is currently the recommended setting.
     open = false;
-
-    # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
     nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+  services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
-
-  # Enable OpenGL
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
   };
 
-	hardware.nvidia.prime = {
+  hardware.nvidia.prime = {
     sync.enable = true;
-		# offload = {
-		# 	enable = true;
-		# 	enableOffloadCmd = true;
-		# };
-		# Make sure to use the correct Bus ID values for your system!
-		intelBusId = "PCI:0:2:0";
-		nvidiaBusId = "PCI:1:0:0";
-	};
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
+  };
 
   time.timeZone = "America/New_York";
 
@@ -90,10 +62,31 @@
 
   services.v2raya.enable = true;
   services.xserver.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  programs.xwayland.enable = true;
-  # programs.hyprland.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command =
+          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%I:%M %p | %a • %h | %F' --cmd Hyprland";
+        user = "randy";
+      };
+    };
+  };
+
+  programs = {
+    hyprland = {
+      enable = true;
+      xwayland = { enable = true; };
+      enableNvidiaPatches = true;
+    };
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+  };
 
   fonts = {
     fontDir.enable = true;
@@ -118,10 +111,13 @@
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-rime fcitx5-chinese-addons fcitx5-nord];
+    fcitx5.addons = with pkgs; [
+      fcitx5-rime
+      fcitx5-chinese-addons
+      fcitx5-nord
+    ];
   };
   nixpkgs.overlays = [ (self: super: { fcitx-engines = self.fcitx5; }) ];
-
 
   nix.settings.experimental-features = "nix-command flakes";
 
@@ -142,6 +138,8 @@
   hardware.bluetooth.powerOnBoot = true;
 
   environment.systemPackages = with pkgs; [
+    firefox
+    greetd.tuigreet
     lshw
     gdb
     libsForQt5.bluedevil
@@ -149,7 +147,7 @@
     gnumake
     gcc
     cmake
-    wl-clipboard-x11
+    wl-clipboard
     wget
     clang-tools
     git
@@ -175,14 +173,14 @@
     '';
 
     shellAbbrs = {
-      "cr"="cht.sh rust | less";
-      "c"="cht.sh | less";
+      "cr" = "cht.sh rust | less";
+      "c" = "cht.sh | less";
       "e" = "hx";
       "en" = "hx .";
       "r" = "fg";
       "diff" = "nvim -d";
       "grep" = "rg";
-      "vi" = "nvim";
+      "vi" = "hx";
       "mann" = "tldr";
       "find" = "fd";
       "tree" = "nnn";
@@ -203,5 +201,4 @@
       "snr" = "sudo nixos-rebuild switch --show-trace";
     };
   };
-
 }

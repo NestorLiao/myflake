@@ -1,12 +1,121 @@
 { inputs, config, pkgs, ... }:
 
 {
+  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.settings = {
+    xwayland = { force_zero_scaling = "true"; };
+    exec-once = [ "fcitx5 -d --replace" ];
+    env = [
+      "XCURSOR_SIZE,24"
+      "_JAVA_AWT_WM_NONREPARENTING,1"
+      "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      "WLR_NO_HARDWARE_CURSORS,1"
+    ];
+    general = {
+      gaps_in = "0";
+      gaps_out = "0";
+      border_size = "1";
+      "col.active_border" = "rgba(ffffffff) rgba(ffffffff) 45deg";
+      "col.inactive_border" = "rgba(00000000)";
+      layout = "dwindle";
+    };
+    windowrulev2 = [ "rounding 0, xwayland:1, floating:1" ];
+    decoration = {
+      rounding = "0";
+      blur = {
+        enabled = "false";
+        size = "3";
+        passes = "1";
+      };
+      drop_shadow = "no";
+      shadow_range = "0";
+      shadow_render_power = "0";
+      "col.shadow" = "rgba(00000000)";
+    };
+    windowrule = "pseudo,fcitx";
+    animations = {
+      enabled = "no";
+      bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+      animation = [
+        "windows, 1, 7, myBezier"
+        "windowsOut, 1, 7, default, popin 80%"
+        "border, 1, 10, default"
+        "borderangle, 1, 8, default"
+        "fade, 1, 7, default"
+        "workspaces, 1, 6, default"
+      ];
+    };
+    dwindle = {
+      pseudotile =
+        "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+      preserve_split = "yes"; # you probably want this
+    };
+    master = { new_is_master = "true"; };
+    gestures = { workspace_swipe = "off"; };
+    monitor = ",preferred,auto,1.5,transform,3";
+    "$mod" = "SUPER";
+    bind = [
+      "$mod, F, exec, vivaldi --enable-wayland-ime"
+      "$mod, Q, exec, alacritty"
+      "$mod, F11, fullscreen"
+      "$mod, C, killactive"
+      "$mod, R, cyclenext"
+      "$mod, M, exit"
+      "$mod, E, exec, thunar"
+      "$mod, V, togglefloating"
+      "$mod, W, exec, pkill fuzzel || fuzzel"
+      "$mod, P, pseudo"
+      "$mod, J, togglesplit"
+      "$mod, left, movefocus, l"
+      "$mod, right, movefocus, r"
+      "$mod, up, movefocus, u"
+      "$mod, down, movefocus, d"
+      ", Print, exec, grimblast copy area"
+    ] ++ (
+      # workspaces
+      # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+      builtins.concatLists (builtins.genList (x:
+        let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
+        in [
+          "$mod, ${ws}, workspace, ${toString (x + 1)}"
+          "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+        ]) 10));
+  };
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 16;
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      package = pkgs.flat-remix-gtk;
+      name = "Flat-Remix-GTK-White";
+    };
+    iconTheme = {
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
+    };
+    font = {
+      name = "Sans";
+      size = 11;
+    };
+  };
+
   home.username = "randy";
   home.homeDirectory = "/home/randy";
   home.packages = with pkgs; [
+    # dunst
+    # cliphist
+    # slurp
+    fuzzel
+    xfce.thunar
     tmux-sessionizer
-    intel-gpu-tools
-    glmark2
+    # intel-gpu-tools
+    # glmark2
     ripgrep
     neofetch
     nnn
@@ -15,17 +124,15 @@
     unzip
     ripgrep
     fzf
-    qq
     fd
     gnome.cheese
     gitui
     vivaldi
     calibre
-    wpsoffice
+    # wpsoffice
+    libreoffice
     tldr
     thefuck
-    # blender
-    # kicad
     glxinfo
   ];
 
@@ -37,101 +144,23 @@
     };
   };
 
-  # wayland.windowManager.hyprland.enable=true;
-  # wayland.windowManager.hyprland.enableNvidiaPatches=true;
-  # wayland.windowManager.hyprland.settings = {
-  #   "$mod" = "SUPER";
-  #   bind =
-  #     [
-  #       "$mod, F, exec, firefox"
-  #       ", Print, exec, grimblast copy area"
-  #     ]
-  #     ++ (
-  #       # workspaces
-  #       # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-  #       builtins.concatLists (builtins.genList (
-  #           x: let
-  #             ws = let
-  #               c = (x + 1) / 10;
-  #             in
-  #               builtins.toString (x + 1 - (c * 10));
-  #           in [
-  #             "$mod, ${ws}, workspace, ${toString (x + 1)}"
-  #             "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-  #           ]
-  #         )
-  #         10)
-  #     );
-  # };
-
-
-  # home.pointerCursor = {
-  #   gtk.enable = true;
-  #   # x11.enable = true;
-  #   package = pkgs.bibata-cursors;
-  #   name = "Bibata-Modern-Classic";
-  #   size = 16;
-  # };
-
-  # gtk = {
-  #   enable = true;
-  #   theme = {
-  #     package = pkgs.flat-remix-gtk;
-  #     name = "Flat-Remix-GTK-Grey-Darkest";
-  #   };
-
-  #   iconTheme = {
-  #     package = pkgs.gnome.adwaita-icon-theme;
-  #     name = "Adwaita";
-  #   };
-
-  #   font = {
-  #     name = "Sans";
-  #     size = 11;
-  #   };
-  # };
-
-  # programs.nixvim = {
-  #   enable = true;
-  #   # colorschemes.gruvbox.enable = true;
-  #   plugins.lightline.enable = true;
-  #   colorschemes.tokyonight = {
-  #     enable = true;
-  #     style = "day";
-  #     transparent = false;
-  #     terminalColors = false;
-  #     dayBrightness = 1.0;
-  #     dimInactive = true;
-  #     styles = {
-  #       comments = { italic = true; };
-  #       keywords = { italic = false; };
-  #       functions = { };
-  #       variables = { };
-  #     };
-  #   };
-  #   extraPlugins = with pkgs.vimPlugins; [
-  #     vim-nix
-  #   ];
-  # };
-
   programs.helix = {
     enable = true;
     defaultEditor = true;
-      languages = {
-        markdown = [{
-          name = "markdown";
-          file-types = ["md" "mdx" "markdown"];
-          text-width = 80;
-          soft-wrap = { 
-            enable = true;
-            wrap-at-text-width = true; 
-          };
-
-        }];
-        rust = [{
-          name = "rust";
-          auto-format = true;
-        }];
+    languages = {
+      markdown = [{
+        name = "markdown";
+        file-types = [ "md" "mdx" "markdown" ];
+        text-width = 80;
+        soft-wrap = {
+          enable = true;
+          wrap-at-text-width = true;
+        };
+      }];
+      rust = [{
+        name = "rust";
+        auto-format = true;
+      }];
       grammar = [{
         name = "rust";
         source = {
@@ -139,19 +168,16 @@
           rev = "0431a2c60828731f27491ee9fdefe25e250ce9c9";
         };
       }];
-
       language-server = {
         bash-language-server = {
           command =
             "${pkgs.nodePackages.bash-language-server}/bin/bash-language-server";
           args = [ "start" ];
         };
-
         clangd = {
           command = "${pkgs.clang-tools}/bin/clangd";
           clangd.fallbackFlags = [ "-std=c++2b" ];
         };
-
         vscode-css-language-server = {
           command =
             "${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
@@ -160,8 +186,7 @@
       };
     };
     settings = {
-      # theme = "onelight";
-      theme = "nord_light";
+      theme = "eink";
       editor = {
         auto-info = true;
         auto-save = true;
@@ -224,12 +249,135 @@
           "n" = ":write";
           "space" = ":buffer-previous";
           "backspace" = ":buffer-next";
-          "l"=":sh tmux split-window -v -p 70 ";
+          "l" = ":sh tmux split-window -v -p 70 ";
           "r" = ":sh cargo run 2>&1 || true";
           "t" = ":sh cargo test 2>&1 || true";
         };
       };
 
+    };
+    themes = {
+      eink = let
+        white = "#FFFFFF";
+        blake = "#000000";
+      in {
+        "ui.background" = { bg = white; };
+        "ui.text" = blake;
+        "ui.selection" = {
+          bg = white;
+          fg = blake;
+          modifiers = [ "bold" ];
+          underline = {
+            color = blake;
+            style = "curl";
+          };
+        };
+        "ui.cursorline" = { bg = blake; };
+        "ui.statusline" = {
+          bg = white;
+          fg = blake;
+        };
+        "ui.virtual.ruler" = { bg = blake; };
+        "ui.cursor.match" = { bg = blake; };
+        "ui.cursor" = {
+          bg = blake;
+          fg = white;
+        };
+        "ui.cursorline.primary" = { bg = blake; };
+        "ui.linenr" = { fg = blake; };
+        "ui.linenr.selected" = {
+          fg = blake;
+          bg = white;
+        };
+        "ui.menu" = {
+          bg = white;
+          fg = blake;
+        };
+        "ui.menu.selected" = { bg = white; };
+        "ui.popup" = { bg = white; };
+        "ui.popup.info" = {
+          bg = white;
+          fg = blake;
+        };
+        "ui.help" = {
+          bg = white;
+          fg = blake;
+        };
+        "ui.window" = { bg = white; };
+        "ui.statusline.normal" = {
+          fg = blake;
+          bg = white;
+        };
+        "ui.statusline.insert" = {
+          fg = blake;
+          bg = white;
+        };
+        "ui.statusline.select" = {
+          fg = blake;
+          bg = white;
+        };
+        "diagnostic.error" = {
+          underline = {
+            color = blake;
+            style = "curl";
+          };
+        };
+        "diagnostic.warning" = {
+          underline = {
+            color = blake;
+            style = "curl";
+          };
+        };
+        "diagnostic.info" = {
+          underline = {
+            color = blake;
+            style = "curl";
+          };
+        };
+        "diagnostic.hint" = {
+          underline = {
+            color = blake;
+            style = "curl";
+          };
+        };
+        "constant.numeric" = { fg = blake; };
+        "constant.builtin" = { fg = blake; };
+        "keyword" = { fg = blake; };
+        "keyword.control" = { fg = blake; };
+        "keyword.function" = { fg = blake; };
+        "function" = { fg = blake; };
+        "function.macro" = {
+          fg = blake;
+          modifiers = [ "bold" ];
+        };
+        "function.method" = { fg = blake; };
+        "function.builtin" = { fg = blake; };
+        "variable.builtin" = { fg = blake; };
+        "variable.other" = { fg = blake; };
+        "variable" = { fg = blake; };
+        "string" = blake;
+        "comment" = {
+          fg = blake;
+          modifiers = [ "italic" ];
+        };
+        "namespace" = { fg = blake; };
+        "attribute" = { fg = blake; };
+        "type" = { fg = blake; };
+        "markup.heading" = {
+          fg = blake;
+          modifiers = [ "bold" ];
+        };
+        "markup.raw" = { fg = blake; };
+        "markup.link.url" = { fg = blake; };
+        "markup.link.text" = { fg = blake; };
+        "markup.quote" = {
+          fg = blake;
+          modifiers = [ "italic" ];
+        };
+        "diff.plus" = { fg = blake; };
+        "diff.delta" = { fg = blake; };
+        "diff.minus" = { fg = blake; };
+      };
     };
   };
 
@@ -259,7 +407,6 @@
     shell = "${pkgs.fish}/bin/fish";
     extraConfig = ''
       bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
-      # bind-key -r Enter new-window -c "#{pane_current_path}"
       bind-key -r Bspace kill-pane
       bind-key -r Enter split-window -v -p 20 -c "#{pane_current_path}"
       set  -g default-terminal "tmux-256color"
