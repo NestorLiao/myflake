@@ -1,9 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
-  # systemd.network.networks.randy.dns = [ 8.8.8.8 ];
+  systemd.network.networks.randy.dns = [ 8.8.8.8 ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   security.sudo.wheelNeedsPassword = false;
@@ -28,6 +30,10 @@
 
   hardware.nvidia.prime = {
     sync.enable = true;
+		# offload = {
+		# 	enable = true;
+		# 	enableOffloadCmd = true;
+		# };
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:1:0:0";
   };
@@ -63,6 +69,13 @@
   services.v2raya.enable = true;
   services.xserver.enable = true;
 
+  # services.xserver.displayManager.sddm= {
+  #   enable=true;
+  #   autoLogin.enable = true;
+  #   autoLogin.user = "randy";
+  # };
+  # services.xserver.desktopManager.plasma5.enable=true;
+
   services.greetd = {
     enable = true;
     settings = {
@@ -73,6 +86,9 @@
       };
     };
   };
+
+
+  programs.nano.enable = false;
 
   programs = {
     hyprland = {
@@ -92,7 +108,12 @@
     fontDir.enable = true;
     packages = with pkgs; [
       noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      nerdfonts
+      twemoji-color-font
       fira-code
+      fira-code-symbols
       source-han-sans
       hack-font
       jetbrains-mono
@@ -133,20 +154,23 @@
     packages = with pkgs; [ ];
   };
 
-  hardware.bluetooth.package = pkgs.bluez;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  # hardware.bluetooth.package = pkgs.bluez;
+  # hardware.bluetooth.enable = true;
+  # hardware.bluetooth.powerOnBoot = true;
 
   environment.systemPackages = with pkgs; [
-    firefox
-    greetd.tuigreet
+    evtest
+    ffmpeg
+    killall
+    mpv
     lshw
     gdb
-    libsForQt5.bluedevil
+    # libsForQt5.bluedevil
     alsa-utils
     gnumake
     gcc
     cmake
+    # xclip
     wl-clipboard
     wget
     clang-tools
@@ -156,9 +180,13 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  system.stateVersion = "23.11";
+
+
   nix.settings.trusted-users = [ "randy" ];
   users.defaultUserShell = pkgs.fish;
+  environment.sessionVariables = {
+    CHTSH_QUERY_OPTIONS= "T";
+  };
 
   programs.fish = {
     enable = true;
@@ -167,9 +195,9 @@
     '';
     shellInit = ''
       fish_vi_key_bindings
-      export CHTSH_QUERY_OPTIONS="T"
       zoxide init fish | source
       thefuck --alias | source 
+      clear
     '';
 
     shellAbbrs = {
@@ -187,6 +215,7 @@
       "sed" = "sd";
       "df" = "duf";
       "du" = "gdu";
+      "py" = "python";
       "ping" = "gping";
       "mpc" = "vimpc";
       "top" = "gotop";
@@ -201,4 +230,8 @@
       "snr" = "sudo nixos-rebuild switch --show-trace";
     };
   };
+  environment.variables.EDITOR = "hx";
+
+  system.stateVersion = "23.11";
+
 }
