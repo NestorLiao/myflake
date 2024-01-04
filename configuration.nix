@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
   ];
 
-  systemd.network.networks.randy.dns = [ 8.8.8.8 ];
+  systemd.network.networks.randy.dns = [  185.199.108.133 ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   security.sudo.wheelNeedsPassword = false;
@@ -94,7 +94,6 @@
     hyprland = {
       enable = true;
       xwayland = { enable = true; };
-      enableNvidiaPatches = true;
     };
   };
 
@@ -145,7 +144,15 @@
   services.xserver.layout = "us";
 
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  security.rtkit.enable=true;
+  services.pipewire={
+    enable=true;
+    alsa.enable=true;
+    alsa.support32Bit=true;
+    pulse.enable=true;
+    jack.enable=true;
+  };
+  # hardware.pulseaudio.enable = true;
 
   users.users.randy = {
     shell = pkgs.fish;
@@ -154,11 +161,13 @@
     packages = with pkgs; [ ];
   };
 
-  # hardware.bluetooth.package = pkgs.bluez;
-  # hardware.bluetooth.enable = true;
-  # hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.package = pkgs.bluez;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
   environment.systemPackages = with pkgs; [
+    networkmanagerapplet
+    dunst
     evtest
     ffmpeg
     killall
@@ -216,7 +225,7 @@
       "df" = "duf";
       "du" = "gdu";
       "py" = "python";
-      "ping" = "gping";
+      # "ping" = "gping";
       "mpc" = "vimpc";
       "top" = "gotop";
       "cat" = "bat";

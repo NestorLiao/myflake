@@ -5,7 +5,8 @@
     builders-use-substitutes = true;
     experimental-features = [ "nix-command" "flakes" ];
     substituters = [
-      "https://mirror.sjtu.edu.cn/nix-channels/store"
+      # "https://mirror.sjtu.edu.cn/nix-channels/store"
+      https:/mirrors.sjtug.sjtu.edu.cn/nix-channels/store
       "https://cache.nixos.org/"
       "https://anyrun.cachix.org"
     ];
@@ -31,6 +32,7 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs =inputs@{ nixpkgs, home-manager, nur, anyrun, ...  }: let
@@ -47,12 +49,12 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {
-            # inherit inputs;
-            inherit anyrun;
+            inherit inputs;
           };
           home-manager.users.randy= {
             imports=[
               anyrun.homeManagerModules.default
+              # nix-colors.homeManagerModules.default
               ./home.nix
             ];
           };

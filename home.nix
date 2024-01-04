@@ -1,10 +1,10 @@
-{ inputs, config, pkgs, anyrun, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   programs.anyrun = {
     enable = true;
     config = {
-      plugins = with anyrun.packages.${pkgs.system}; [
+      plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
         randr
         rink
@@ -21,61 +21,8 @@
 
     # custom css for anyrun, based on catppuccin-mocha
     extraCss = ''
-      @define-color bg-col  rgba(30, 30, 46, 0.7);
-      @define-color bg-col-light rgba(150, 220, 235, 0.7);
-      @define-color border-col rgba(30, 30, 46, 0.7);
-      @define-color selected-col rgba(150, 205, 251, 0.7);
-      @define-color fg-col #D9E0EE;
-      @define-color fg-col2 #F28FAD;
-
-      * {
-        transition: 200ms ease;
-        font-family: "JetBrainsMono Nerd Font";
-        font-size: 1.3rem;
-      }
-
       #window {
         background: transparent;
-      }
-
-      #plugin,
-      #main {
-        border: 3px solid @border-col;
-        color: @fg-col;
-        background-color: @bg-col;
-      }
-      /* anyrun's input window - Text */
-      #entry {
-        color: @fg-col;
-        background-color: @bg-col;
-      }
-
-      /* anyrun's ouput matches entries - Base */
-      #match {
-        color: @fg-col;
-        background: @bg-col;
-      }
-
-      /* anyrun's selected entry - Red */
-      #match:selected {
-        color: @fg-col2;
-        background: @selected-col;
-      }
-
-      #match {
-        padding: 3px;
-        border-radius: 16px;
-      }
-
-      #entry, #plugin:hover {
-        border-radius: 16px;
-      }
-
-      box#main {
-        background: rgba(30, 30, 46, 0.7);
-        border: 1px solid @border-col;
-        border-radius: 15px;
-        padding: 5px;
       }
     '';
   };
@@ -83,22 +30,26 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     xwayland = { force_zero_scaling = "true"; };
-    # exec = "pkill waybar & sleep 0.5 && waybar";
+    exec = [
+      # "pkill waybar & sleep 0.5 && waybar"
+      # "nm-applet --indicator &"
+      # "dunst"
+      ];
     exec-once = [
       "fcitx5 -d --replace" 
-      "swaybg -i /home/randy/nink/nixos/wallpaper.png -m fill &"
+      "swaybg -i /home/randy/nink/nixos/wallpaper.jpg -m fill &"
       "wl-paste --type text --watch cliphist store"
-      "wl-paste --type image --watch cliphist store"
     ];
     env = [
+      "NIXOS_OZONE_WL,1"
       "XCURSOR_SIZE,24"
       "_JAVA_AWT_WM_NONREPARENTING,1"
       "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
       "WLR_NO_HARDWARE_CURSORS,1"
     ];
     general = {
-      gaps_in = "3";
-      gaps_out = "6";
+      gaps_in = "0";
+      gaps_out = "0";
       border_size = "0";
       "col.active_border" = "rgba(ffffffff) rgba(ffffffff) 45deg";
       "col.inactive_border" = "rgba(ffffffff)";
@@ -142,8 +93,8 @@
     };
     gestures = { workspace_swipe = "off"; };
     # monitor = ",preferred,auto,1.5,transform,3";
-    # monitor = ",preferred,auto,1.5";
-    monitor = ",preferred,auto,1";
+    monitor = ",preferred,auto,1.5";
+    # monitor = ",preferred,auto,1";
     "$mod" = "SUPER";
     bindm=[
       "$mod, mouse:272, movewindow"
@@ -151,7 +102,8 @@
     ];
     bind = [
       "$mod SHIFT, R, workspace,previous"
-      "$mod, V, exec, vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
+      "$mod, B, exec, vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --disable-gpu"
+      "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
       "$mod, A, exec, alacritty"
       "$mod, S, fullscreen"
       "$mod, C, killactive"
@@ -212,11 +164,22 @@
   home.username = "randy";
   home.homeDirectory = "/home/randy";
   home.packages = with pkgs; [
+    # w3m-nox
+    w3m
+    lynx
+    traceroute
+    manix
+    graph-easy
+    slides
+    mprocs
+    bacon
+    firefox
+    gimp
+    rofi
     imv
     wf-recorder
     qq
-    kitty
-    firefox
+    # kitty
     grimblast
     # dunst
     cliphist
@@ -288,6 +251,13 @@
         clangd = {
           command = "${pkgs.clang-tools}/bin/clangd";
           clangd.fallbackFlags = [ "-std=c++2b" ];
+          auto-pairs = {
+            "(" = ")";
+            "{" = "}";
+            "[" = "]";
+            "\"" = ''"'';
+            "`" = "`";
+          };
         };
         vscode-css-language-server = {
           command =
@@ -334,17 +304,16 @@
         indent-guides = {
           render = true;
           character = "╎";
-          skip-levels = 0;
+          skip-levels = 1;
         };
         lsp.display-messages = true;
-        # line-number = "relative";
         line-number = "relative";
         mouse = true;
-        # mouse = false;
-        scrolloff = 6;
+        scrolloff = 3;
       };
       keys = {
         normal = {
+          esc=["collapse_selection" "keep_primary_selection"];
           "C-h" = ":open ~/nink/nixos";
           "C-e" = ":open ~/nink/inklife";
           "C-p" = ":open /home/randy/playground";
@@ -353,8 +322,8 @@
           "A-x" = "extend_to_line_bounds";
           "g" = { "a" = "code_action"; };
           "A-s" = ":sh sudo nixos-rebuild switch --show-trace";
-          "A-backspace" = ["open_above" "normal_mode"];
-          "A-ret" = ["open_below" "normal_mode"];
+          "ret" = ["open_below" "normal_mode"];
+          "A-ret" = ["open_above" "normal_mode"];
         };
         select = { "X" = [ "extend_line_up" "extend_to_line_bounds" ]; };
         normal.space = {
@@ -369,35 +338,36 @@
         };
         normal.tab= {
           "m" = ":sh make 2>&1 || true";
+          "s" = ":lsp-stop";
+          "l" = ":lsp-restart";
           "r" = ":sh ./a 2>&1 || true";
         };
 
 
-        normal.ret= {
-          "a" ="goto_prev_diag";
-          "A" ="goto_first_diag";
-          "r" ="goto_prev_function";
-          "s" ="goto_prev_class";
-          "t" ="goto_prev_parameter";
-          "n" ="goto_prev_comment";
-          "e" ="goto_prev_test";
-          "i" ="goto_prev_paragraph";
-          "o" ="goto_prev_change";
-          "O" ="goto_first_change";
-        };
+        # normal.ret= {
+        #   "d" ="goto_prev_diag";
+        #   "D" ="goto_first_diag";
+        #   "f" ="goto_prev_function";
+        #   "a" ="goto_prev_parameter";
+        #   "c" ="goto_prev_comment";
+        #   "T" ="goto_prev_test";
+        #   "p" ="goto_prev_paragraph";
+        #   "o" ="goto_prev_change";
+        #   "G" ="goto_first_change";
+        # };
 
-        normal.backspace= {
-          "a" ="goto_next_diag";
-          "A" ="goto_last_diag";
-          "r" ="goto_next_function";
-          "s" ="goto_next_class";
-          "t" ="goto_next_parameter";
-          "n" ="goto_next_comment";
-          "e" ="goto_next_test";
-          "i" ="goto_next_paragraph";
-          "o" ="goto_next_change";
-          "O" ="goto_last_change";
-        };
+        # normal.backspace= {
+        #   "a" ="goto_next_diag";
+        #   "A" ="goto_last_diag";
+        #   "r" ="goto_next_function";
+        #   "s" ="goto_next_class";
+        #   "t" ="goto_next_parameter";
+        #   "n" ="goto_next_comment";
+        #   "e" ="goto_next_test";
+        #   "i" ="goto_next_paragraph";
+        #   "o" ="goto_next_change";
+        #   "O" ="goto_last_change";
+        # };
 
         normal."]"= {
           "]" ="goto_next_paragraph";
@@ -411,124 +381,124 @@
     themes = {
       eink = let
         white = "#FFFFFF";
-        blake = "#000000";
+        black = "#000000";
       in {
         "ui.background" = { bg = white; };
-        "ui.text" = blake;
+        "ui.text" = black;
         "ui.selection" = {
           bg = white;
-          fg = blake;
+          fg = black;
           modifiers = [ "bold" ];
           underline = {
-            color = blake;
+            color = black;
             style = "curl";
           };
         };
-        "ui.cursorline" = { bg = blake; };
+        "ui.cursorline" = { bg = black; };
         "ui.statusline" = {
           bg = white;
-          fg = blake;
+          fg = black;
         };
-        "ui.virtual.ruler" = { bg = blake; };
-        "ui.cursor.match" = { bg = blake; };
+        "ui.virtual.ruler" = { bg = black; };
+        "ui.cursor.match" = { bg = black; };
         "ui.cursor" = {
-          bg = blake;
+          bg = black;
           fg = white;
         };
-        "ui.cursorline.primary" = { bg = blake; };
-        "ui.linenr" = { fg = blake; };
+        "ui.cursorline.primary" = { bg = black; };
+        "ui.linenr" = { fg = black; };
         "ui.linenr.selected" = {
-          fg = blake;
+          fg = black;
           bg = white;
         };
         "ui.menu" = {
           bg = white;
-          fg = blake;
+          fg = black;
         };
         "ui.menu.selected" = { bg = white; };
         "ui.popup" = { bg = white; };
         "ui.popup.info" = {
           bg = white;
-          fg = blake;
+          fg = black;
         };
         "ui.help" = {
           bg = white;
-          fg = blake;
+          fg = black;
         };
         "ui.window" = { bg = white; };
         "ui.statusline.normal" = {
-          fg = blake;
+          fg = black;
           bg = white;
         };
         "ui.statusline.insert" = {
-          fg = blake;
+          fg = black;
           bg = white;
         };
         "ui.statusline.select" = {
-          fg = blake;
+          fg = black;
           bg = white;
         };
         "diagnostic.error" = {
           underline = {
-            color = blake;
+            color = black;
             style = "curl";
           };
         };
         "diagnostic.warning" = {
           underline = {
-            color = blake;
+            color = black;
             style = "curl";
           };
         };
         "diagnostic.info" = {
           underline = {
-            color = blake;
+            color = black;
             style = "curl";
           };
         };
         "diagnostic.hint" = {
           underline = {
-            color = blake;
+            color = black;
             style = "curl";
           };
         };
-        "constant.numeric" = { fg = blake; };
-        "constant.builtin" = { fg = blake; };
-        "keyword" = { fg = blake; };
-        "keyword.control" = { fg = blake; };
-        "keyword.function" = { fg = blake; };
-        "function" = { fg = blake; };
+        "constant.numeric" = { fg = black; };
+        "constant.builtin" = { fg = black; };
+        "keyword" = { fg = black; };
+        "keyword.control" = { fg = black; };
+        "keyword.function" = { fg = black; };
+        "function" = { fg = black; };
         "function.macro" = {
-          fg = blake;
+          fg = black;
           modifiers = [ "bold" ];
         };
-        "function.method" = { fg = blake; };
-        "function.builtin" = { fg = blake; };
-        "variable.builtin" = { fg = blake; };
-        "variable.other" = { fg = blake; };
-        "variable" = { fg = blake; };
-        "string" = blake;
+        "function.method" = { fg = black; };
+        "function.builtin" = { fg = black; };
+        "variable.builtin" = { fg = black; };
+        "variable.other" = { fg = black; };
+        "variable" = { fg = black; };
+        "string" = black;
         "comment" = {
-          fg = blake;
+          fg = black;
           modifiers = [ "italic" ];
         };
-        "namespace" = { fg = blake; };
-        "attribute" = { fg = blake; };
-        "type" = { fg = blake; };
+        "namespace" = { fg = black; };
+        "attribute" = { fg = black; };
+        "type" = { fg = black; };
         "markup.heading" = {
-          fg = blake;
+          fg = black;
           modifiers = [ "bold" ];
         };
-        "markup.raw" = { fg = blake; };
-        "markup.link.url" = { fg = blake; };
-        "markup.link.text" = { fg = blake; };
+        "markup.raw" = { fg = black; };
+        "markup.link.url" = { fg = black; };
+        "markup.link.text" = { fg = black; };
         "markup.quote" = {
-          fg = blake;
+          fg = black;
           modifiers = [ "italic" ];
         };
-        "diff.plus" = { fg = blake; };
-        "diff.delta" = { fg = blake; };
-        "diff.minus" = { fg = blake; };
+        "diff.plus" = { fg = black; };
+        "diff.delta" = { fg = black; };
+        "diff.minus" = { fg = black; };
       };
     };
   };
@@ -701,7 +671,7 @@
                  padding-left: 6px;
                  padding-right: 4px;
                  color: #7ebae4;
-               # }
+               }
          #mode, #clock, #memory, #temperature,#cpu,#mpd, #custom-wall, #temperature, #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava-internal {
                  padding-left: 10px;
                  padding-right: 10px;
@@ -823,20 +793,20 @@
           "interval" = 1;
           "format" = "󰍛 {usage}%";
         };
-        # "mpd" = {
-        #   "max-length" = 25;
-        #   "format" = "<span foreground='#bb9af7'></span> {title}";
-        #   "format-paused" = " {title}";
-        #   "format-stopped" = "<span foreground='#bb9af7'></span>";
-        #   "format-disconnected" = "";
-        #   "on-click" = "mpc --quiet toggle";
-        #   "on-click-right" = "mpc update; mpc ls | mpc add";
-        #   "on-click-middle" = "kitty --class='ncmpcpp' ncmpcpp ";
-        #   "on-scroll-up" = "mpc --quiet prev";
-        #   "on-scroll-down" = "mpc --quiet next";
-        #   "smooth-scrolling-threshold" = 5;
-        #   "tooltip-format" = "{title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})";
-        # };
+        "mpd" = {
+          "max-length" = 25;
+          "format" = "<span foreground='#bb9af7'></span> {title}";
+          "format-paused" = " {title}";
+          "format-stopped" = "<span foreground='#bb9af7'></span>";
+          "format-disconnected" = "";
+          "on-click" = "mpc --quiet toggle";
+          "on-click-right" = "mpc update; mpc ls | mpc add";
+          "on-click-middle" = "kitty --class='ncmpcpp' ncmpcpp ";
+          "on-scroll-up" = "mpc --quiet prev";
+          "on-scroll-down" = "mpc --quiet next";
+          "smooth-scrolling-threshold" = 5;
+          "tooltip-format" = "{title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})";
+        };
         "network" = {
           "format-disconnected" = "󰯡 Disconnected";
           "format-ethernet" = "󰒢 Connected!";
