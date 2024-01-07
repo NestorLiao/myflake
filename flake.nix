@@ -32,10 +32,14 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim={
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
      # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs =inputs@{ nixpkgs, home-manager, nur, anyrun, ...  }: let
+  outputs =inputs@{ nixpkgs, home-manager, nur, anyrun, nixvim,...  }: let
     system = "x86_64-linux";
   in
   {
@@ -53,6 +57,7 @@
           };
           home-manager.users.randy= {
             imports=[
+              nixvim.homeManagerModules.nixvim
               anyrun.homeManagerModules.default
               # nix-colors.homeManagerModules.default
               ./home.nix

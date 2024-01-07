@@ -1,6 +1,62 @@
 { inputs, config, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    bacon
+    calibre
+    cht-sh
+    cliphist
+    fd
+    firefox
+    fzf
+    gimp
+    gitui
+    gnome.cheese
+    grimblast
+    imv
+    libreoffice
+    manix
+    mprocs
+    mpv
+    neofetch
+    nnn
+    qq
+    ripgrep
+    rofi
+    swaybg
+    thefuck
+    tldr
+    tmux-sessionizer
+    translate-shell
+    unzip
+    vivaldi
+    wf-recorder
+    wl-clipboard
+    wpsoffice-cn
+    xfce.thunar
+    zip
+    # alsa-utils
+    # dunst
+    # evtest
+    # glmark2
+    # glxinfo
+    # graph-easy
+    # intel-gpu-tools
+    # killall
+    # kitty
+    # lshw
+    # slides
+    # slurp
+  ];
+
+
+  programs.nixvim = {
+    enable = true;
+
+    colorschemes.gruvbox.enable = true;
+    plugins.lightline.enable = true;
+  };
+
   programs.anyrun = {
     enable = true;
     config = {
@@ -101,30 +157,29 @@
       "$mod, mouse:273, resizewindow"
     ];
     bind = [
-      "$mod SHIFT, R, workspace,previous"
-      "$mod, B, exec, vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --disable-gpu"
-      "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
       "$mod, A, exec, alacritty"
-      "$mod, S, fullscreen"
+      "$mod, B, exec, vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --disable-gpu"
       "$mod, C, killactive"
-      "$mod, R, cyclenext"
-      # "$mod  SHIFT, Q, exit"
-      "$mod  SHIFT, H, exec, systemctl hibernate"
-      "$mod  SHIFT, S, exec, systemctl suspend"
+      "$mod, down, movefocus, d"
       "$mod, E, exec, thunar"
       "$mod, F, togglefloating"
-      # "$mod, W, exec, pkill fuzzel || fuzzel"
-      "$mod, W, exec, pkill anyrun || anyrun"
-      "$mod, P, pseudo"
-      "$mod, T, togglesplit"
-      "$mod, left, movefocus, l"
-      "$mod, right, movefocus, r"
-      "$mod, up, movefocus, u"
-      "$mod, down, movefocus, d"
       "$mod, H, movewindow, l"
-      "$mod, L, movewindow, r"
-      "$mod, K, movewindow, u"
       "$mod, J, movewindow, d"
+      "$mod, K, movewindow, u"
+      "$mod, left, movefocus, l"
+      "$mod, L, movewindow, r"
+      "$mod, P, pseudo"
+      "$mod, R, cyclenext"
+      "$mod, right, movefocus, r"
+      "$mod, S, fullscreen"
+      "$mod  SHIFT, H, exec, systemctl hibernate"
+      # "$mod  SHIFT, Q, exit"
+      "$mod SHIFT, R, workspace,previous"
+      "$mod  SHIFT, S, exec, systemctl suspend"
+      "$mod, T, togglesplit"
+      "$mod, up, movefocus, u"
+      "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+      "$mod, W, exec, pkill anyrun || anyrun"
       ", Print, exec, grimblast copy area"
       "SHIFT, Print, exec, wf-recorder"
     ] ++ (
@@ -163,52 +218,6 @@
 
   home.username = "randy";
   home.homeDirectory = "/home/randy";
-  home.packages = with pkgs; [
-    # w3m-nox
-    w3m
-    lynx
-    traceroute
-    manix
-    graph-easy
-    slides
-    mprocs
-    bacon
-    firefox
-    gimp
-    rofi
-    imv
-    wf-recorder
-    qq
-    # kitty
-    grimblast
-    # dunst
-    cliphist
-    swaybg
-    # slurp
-    fuzzel
-    xfce.thunar
-    tmux-sessionizer
-    # intel-gpu-tools
-    # glmark2
-    ripgrep
-    neofetch
-    nnn
-    cht-sh
-    zip
-    unzip
-    ripgrep
-    fzf
-    fd
-    gnome.cheese
-    gitui
-    vivaldi
-    calibre
-    wpsoffice-cn
-    libreoffice
-    tldr
-    thefuck
-    glxinfo
-  ];
 
   programs = {
     direnv = {
@@ -308,7 +317,8 @@
         };
         lsp.display-messages = true;
         line-number = "relative";
-        mouse = true;
+        # mouse = true;
+        mouse = false;
         scrolloff = 3;
       };
       keys = {
@@ -332,6 +342,7 @@
           "n" = ":write";
           "space" = ":buffer-previous";
           "backspace" = ":buffer-next";
+          "o" = "file_picker_in_current_buffer_directory";
           "l" = ":sh tmux split-window -v -p 70 ";
           "r" = ":sh cargo run 2>&1 || true";
           "t" = ":sh cargo test 2>&1 || true";
@@ -551,7 +562,7 @@
       selection.save_to_clipboard = true;
       env.TERM = "xterm-256color";
       font = let family = "Noto Sans Mono"; in {
-        size = 11;
+        size = 10;
         normal = {
           inherit family;
           style = "Medium";

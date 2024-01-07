@@ -3,9 +3,10 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./hosts.nix
   ];
 
-  systemd.network.networks.randy.dns = [  185.199.108.133 ];
+  # systemd.network.networks.randy.dns = [  185.199.108.133 ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   security.sudo.wheelNeedsPassword = false;
@@ -152,7 +153,6 @@
     pulse.enable=true;
     jack.enable=true;
   };
-  # hardware.pulseaudio.enable = true;
 
   users.users.randy = {
     shell = pkgs.fish;
@@ -165,26 +165,10 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
+  environment.variables.EDITOR = "hx";
   environment.systemPackages = with pkgs; [
-    networkmanagerapplet
-    dunst
-    evtest
-    ffmpeg
-    killall
-    mpv
-    lshw
-    gdb
-    # libsForQt5.bluedevil
-    alsa-utils
-    gnumake
-    gcc
-    cmake
-    # xclip
-    wl-clipboard
     wget
-    clang-tools
     git
-    alacritty
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -201,6 +185,7 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
+      set -x DIRENV_LOG_FORMAT ""
     '';
     shellInit = ''
       fish_vi_key_bindings
@@ -215,31 +200,30 @@
       "e" = "hx";
       "en" = "hx .";
       "r" = "fg";
-      "diff" = "nvim -d";
-      "grep" = "rg";
-      "vi" = "hx";
-      "mann" = "tldr";
+      # "diff" = "nvim -d";
+      # "grep" = "rg";
+      # "vi" = "hx";
+      # "mann" = "tldr";
       "find" = "fd";
-      "tree" = "nnn";
-      "sed" = "sd";
-      "df" = "duf";
-      "du" = "gdu";
+      # "tree" = "nnn";
+      # "sed" = "sd";
+      # "df" = "duf";
+      # "du" = "gdu";
       "py" = "python";
       # "ping" = "gping";
-      "mpc" = "vimpc";
-      "top" = "gotop";
-      "cat" = "bat";
-      "sh" = "nix shell nixpkgs#";
-      "nixh" = "nix-prefetch-url";
-      "nixhu" = "nix-prefetch-url --unpack";
-      "sys" = "systemctl";
-      "sysu" = "systemctl --user";
-      "up" = "nixos-rebuild --flake .# build";
-      "upp" = "doas nixos-rebuild --flake .# switch";
+      # "mpc" = "vimpc";
+      # "top" = "gotop";
+      # "cat" = "bat";
+      # "sh" = "nix shell nixpkgs#";
+      # "nixh" = "nix-prefetch-url";
+      # "nixhu" = "nix-prefetch-url --unpack";
+      # "sys" = "systemctl";
+      # "sysu" = "systemctl --user";
+      # "up" = "nixos-rebuild --flake .# build";
+      # "upp" = "doas nixos-rebuild --flake .# switch";
       "snr" = "sudo nixos-rebuild switch --show-trace";
     };
   };
-  environment.variables.EDITOR = "hx";
 
   system.stateVersion = "23.11";
 
