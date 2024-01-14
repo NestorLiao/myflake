@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, lib,config, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -32,21 +32,9 @@
     vivaldi
     wf-recorder
     wl-clipboard
-    wpsoffice-cn
+    # wpsoffice-cn
     xfce.thunar
     zip
-    # alsa-utils
-    # dunst
-    # evtest
-    # glmark2
-    # glxinfo
-    # graph-easy
-    # intel-gpu-tools
-    # killall
-    # kitty
-    # lshw
-    # slides
-    # slurp
   ];
 
 
@@ -57,31 +45,31 @@
     plugins.lightline.enable = true;
   };
 
-  programs.anyrun = {
-    enable = true;
-    config = {
-      plugins = with inputs.anyrun.packages.${pkgs.system}; [
-        applications
-        randr
-        rink
-        shell
-        symbols
-        translate
-      ];
+  # programs.anyrun = {
+  #   enable = true;
+  #   config = {
+  #     plugins = with inputs.anyrun.packages.${pkgs.system}; [
+  #       applications
+  #       randr
+  #       rink
+  #       shell
+  #       symbols
+  #       translate
+  #     ];
 
-      width.fraction = 0.3;
-      y.absolute = 15;
-      hidePluginInfo = true;
-      closeOnClick = true;
-    };
+  #     width.fraction = 0.3;
+  #     y.absolute = 15;
+  #     hidePluginInfo = true;
+  #     closeOnClick = true;
+  #   };
 
-    # custom css for anyrun, based on catppuccin-mocha
-    extraCss = ''
-      #window {
-        background: transparent;
-      }
-    '';
-  };
+  #   # custom css for anyrun, based on catppuccin-mocha
+  #   extraCss = ''
+  #     #window {
+  #       background: transparent;
+  #     }
+  #   '';
+  # };
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
@@ -148,8 +136,8 @@
       no_gaps_when_only = "false";
     };
     gestures = { workspace_swipe = "off"; };
-    # monitor = ",preferred,auto,1.5,transform,3";
-    monitor = ",preferred,auto,1.5";
+    monitor = ",preferred,auto,1.5,transform,3";
+    # monitor = ",preferred,auto,1.5";
     # monitor = ",preferred,auto,1";
     "$mod" = "SUPER";
     bindm=[
@@ -326,7 +314,7 @@
           esc=["collapse_selection" "keep_primary_selection"];
           "C-h" = ":open ~/nink/nixos";
           "C-e" = ":open ~/nink/inklife";
-          "C-p" = ":open /home/randy/playground";
+          "C-p" = ":open /home/randy/playground/snippet";
           "\\" = ":reload-all";
           "X" = [ "extend_line_up" "extend_to_line_bounds" ];
           "A-x" = "extend_to_line_bounds";
@@ -343,7 +331,7 @@
           "space" = ":buffer-previous";
           "backspace" = ":buffer-next";
           "o" = "file_picker_in_current_buffer_directory";
-          "l" = ":sh tmux split-window -v -p 70 ";
+          "l" = ":sh tmux split-window -v -p 70 'fhs' ";
           "r" = ":sh cargo run 2>&1 || true";
           "t" = ":sh cargo test 2>&1 || true";
         };

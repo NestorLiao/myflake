@@ -167,8 +167,124 @@
 
   environment.variables.EDITOR = "hx";
   environment.systemPackages = with pkgs; [
+    # create a fhs environment by command `fhs`, so we can run non-nixos packages in nixos!
+    (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
+      pkgs.buildFHSUserEnv (base // {
+        name = "fhs";
+        targetPkgs = pkgs: (
+          (base.targetPkgs pkgs) ++ [
+            pkgsi686Linux.glibc
+            pkgsi686Linux.gcc
+            # If your FHS program has additional dependencies, add them here
+          ]
+        );
+        # multiArch = true;
+        profile = "export FHS=1";
+        runScript = "fish";
+        extraOutputsToInstall = ["dev"];
+      })
+    )
     wget
     git
+  ];
+
+
+ # environment.variables = {
+ #    NIX_LD_LIBRARY_PATH =with pkgs; lib.makeLibraryPath [
+ #      pkgs.stdenv.cc.cc
+ #      pkgs.openssl
+ #      # ...
+ #    ];
+ #    NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
+ #  };
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    openssl
+    xorg.libXcomposite
+    xorg.libXtst
+    xorg.libXrandr
+    xorg.libXext
+    xorg.libX11
+    xorg.libXfixes
+    libGL
+    libva
+    # pipewire.lib
+    xorg.libxcb
+    xorg.libXdamage
+    xorg.libxshmfence
+    xorg.libXxf86vm
+    libelf
+    # Required
+    glib
+    gtk2
+    bzip2
+    # Without these it silently fails
+    xorg.libXinerama
+    xorg.libXcursor
+    xorg.libXrender
+    xorg.libXScrnSaver
+    xorg.libXi
+    xorg.libSM
+    xorg.libICE
+    gnome2.GConf
+    nspr
+    nss
+    cups
+    libcap
+    SDL2
+    libusb1
+    dbus-glib
+    ffmpeg
+    # Only libraries are needed from those two
+    libudev0-shim
+    # Verified games requirements
+    xorg.libXt
+    xorg.libXmu
+    libogg
+    libvorbis
+    SDL
+    SDL2_image
+    glew110
+    libidn
+    tbb
+    # Other things from runtime
+    flac
+    freeglut
+    libjpeg
+    libpng
+    libpng12
+    libsamplerate
+    libmikmod
+    libtheora
+    libtiff
+    pixman
+    speex
+    SDL_image
+    SDL_ttf
+    SDL_mixer
+    SDL2_ttf
+    SDL2_mixer
+    libappindicator-gtk2
+    libdbusmenu-gtk2
+    libindicator-gtk2
+    libcaca
+    libcanberra
+    libgcrypt
+    libvpx
+    librsvg
+    xorg.libXft
+    libvdpau
+    gnome2.pango
+    cairo
+    atk
+    gdk-pixbuf
+    fontconfig
+    freetype
+    dbus
+    alsaLib
+    expat
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -195,6 +311,9 @@
     '';
 
     shellAbbrs = {
+      "snr" = "sudo nixos-rebuild switch --show-trace";
+      "find" = "fd";
+      "py" = "python";
       "cr" = "cht.sh rust | less";
       "c" = "cht.sh | less";
       "e" = "hx";
@@ -204,12 +323,10 @@
       # "grep" = "rg";
       # "vi" = "hx";
       # "mann" = "tldr";
-      "find" = "fd";
       # "tree" = "nnn";
       # "sed" = "sd";
       # "df" = "duf";
       # "du" = "gdu";
-      "py" = "python";
       # "ping" = "gping";
       # "mpc" = "vimpc";
       # "top" = "gotop";
@@ -221,7 +338,6 @@
       # "sysu" = "systemctl --user";
       # "up" = "nixos-rebuild --flake .# build";
       # "upp" = "doas nixos-rebuild --flake .# switch";
-      "snr" = "sudo nixos-rebuild switch --show-trace";
     };
   };
 
