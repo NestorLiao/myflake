@@ -37,7 +37,6 @@
     zip
   ];
 
-
   programs.nixvim = {
     enable = true;
 
@@ -167,7 +166,7 @@
       "$mod, T, togglesplit"
       "$mod, up, movefocus, u"
       "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
-      "$mod, W, exec, pkill anyrun || anyrun"
+      "$mod, W, exec, pkill rofi || rofi -dmenu"
       ", Print, exec, grimblast copy area"
       "SHIFT, Print, exec, wf-recorder"
     ] ++ (
@@ -314,7 +313,7 @@
           esc=["collapse_selection" "keep_primary_selection"];
           "C-h" = ":open ~/nink/nixos";
           "C-e" = ":open ~/nink/inklife";
-          "C-p" = ":open /home/randy/playground/snippet";
+          "C-p" = ":open ~/playground/snippet";
           "\\" = ":reload-all";
           "X" = [ "extend_line_up" "extend_to_line_bounds" ];
           "A-x" = "extend_to_line_bounds";
@@ -324,6 +323,7 @@
           "A-ret" = ["open_above" "normal_mode"];
         };
         select = { "X" = [ "extend_line_up" "extend_to_line_bounds" ]; };
+
         normal.space = {
           "e" = ":buffer-close";
           "q" = ":quit!";
@@ -334,12 +334,13 @@
           "l" = ":sh tmux split-window -v -p 70 'fhs' ";
           "r" = ":sh cargo run 2>&1 || true";
           "t" = ":sh cargo test 2>&1 || true";
+          "i" = [ "yank_to_clipboard" ":sh ./.config/helix/trans.sh 2>&1 || true"];
         };
         normal.tab= {
-          "m" = ":sh make 2>&1 || true";
+          "m" = ":sh make clean 2>&1 || true; make btest 2>&1 || true";
           "s" = ":lsp-stop";
           "l" = ":lsp-restart";
-          "r" = ":sh ./a 2>&1 || true";
+          "r" = ":sh ./dlc -e bits.c 2>&1 || true;  ./dlc bits.c 2>&1 || true";
         };
 
 

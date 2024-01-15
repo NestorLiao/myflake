@@ -3,6 +3,11 @@
 { networking.extraHosts = ''
 
 
+20.205.243.166  github.com
+185.199.108.133 raw.githubusercontent.com
+185.199.109.133 raw.github.com
+185.199.110.153 assets-cdn.github.com
+162.125.32.10 github.global.ssl.fastly.net
 # This hosts file is brought to you by Dan Pollock and can be found at
 # http://someonewhocares.org/hosts/
 # You are free to copy and distribute this file for non-commercial uses,

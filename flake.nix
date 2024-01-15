@@ -65,6 +65,7 @@
               nixvim.homeManagerModules.nixvim
               # anyrun.homeManagerModules.default
               # nix-colors.homeManagerModules.default
+              ./script
               ./home.nix
             ];
           };
