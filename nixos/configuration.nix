@@ -1,48 +1,57 @@
-{ config, lib, pkgs, ... }:
+# This is your system's configuration file.
+# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{
+{ inputs, outputs, lib, config, pkgs, ... }: {
+  # You can import other NixOS modules here
   imports = [
+    # If you want to use modules your own flake exports (from modules/nixos):
+    # outputs.nixosModules.example
+
+    # Or modules from other flakes (such as nixos-hardware):
+    # inputs.hardware.nixosModules.common-cpu-amd
+    # inputs.hardware.nixosModules.common-ssd
+
+    # You can also split up your configuration and import pieces of it here:
+
+
+    # Import home-manager's NixOS module
+    inputs.home-manager.nixosModules.home-manager
+    
+    # Import modules
+    ./modules
+
+    # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
-    ./hosts.nix
   ];
 
-  # systemd.network.networks.randy.dns = [  185.199.108.133 ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  security.sudo.wheelNeedsPassword = false;
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-
-
-  hardware.bluetooth.package = pkgs.bluez;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    # useGlobalPkgs = true;
+    useUserPackages = true;
+    users = {
+      # Import your home-manager configuration
+      randy = import ../home-manager/home.nix;
+    };
   };
 
-  hardware.nvidia.prime = {
-    sync.enable = true;
-		# offload = {
-		# 	enable = true;
-		# 	enableOffloadCmd = true;
-		# };
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
+  nix = {
+    # This will add each flake input as a registry
+    # To make nix3 commands consistent with your flake
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+
+    # This will additionally add your inputs to the system's legacy channels
+    # Making legacy nix commands consistent as well, awesome!
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+
+    settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+      # Deduplicate and optimize nix store
+      auto-optimise-store = true;
+    };
   };
+
+  # FIXME: Add the rest of your current configuration
 
   time.timeZone = "America/New_York";
 
@@ -63,7 +72,6 @@
       LC_TIME = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8";
     };
-
     supportedLocales = [ "en_US.UTF-8/UTF-8" ];
   };
 
@@ -144,8 +152,6 @@
     ];
   };
   nixpkgs.overlays = [ (self: super: { fcitx-engines = self.fcitx5; }) ];
-
-  nix.settings.experimental-features = "nix-command flakes";
 
   services.xserver.layout = "us";
 
@@ -292,7 +298,6 @@
   nixpkgs.config.allowUnfree = true;
 
 
-
   nix.settings.trusted-users = [ "randy" ];
   users.defaultUserShell = pkgs.fish;
   environment.sessionVariables = {
@@ -342,7 +347,4 @@
       # "upp" = "doas nixos-rebuild --flake .# switch";
     };
   };
-
-  system.stateVersion = "23.11";
-
 }
