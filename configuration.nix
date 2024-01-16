@@ -13,6 +13,11 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
+
+  hardware.bluetooth.package = pkgs.bluez;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -161,9 +166,6 @@
     packages = with pkgs; [ ];
   };
 
-  hardware.bluetooth.package = pkgs.bluez;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
 
   environment.variables.EDITOR = "hx";
   environment.systemPackages = with pkgs; [

@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    htop
     bacon
     calibre
     cht-sh
@@ -37,38 +38,6 @@
     zip
   ];
 
-  programs.nixvim = {
-    enable = true;
-
-    colorschemes.gruvbox.enable = true;
-    plugins.lightline.enable = true;
-  };
-
-  # programs.anyrun = {
-  #   enable = true;
-  #   config = {
-  #     plugins = with inputs.anyrun.packages.${pkgs.system}; [
-  #       applications
-  #       randr
-  #       rink
-  #       shell
-  #       symbols
-  #       translate
-  #     ];
-
-  #     width.fraction = 0.3;
-  #     y.absolute = 15;
-  #     hidePluginInfo = true;
-  #     closeOnClick = true;
-  #   };
-
-  #   # custom css for anyrun, based on catppuccin-mocha
-  #   extraCss = ''
-  #     #window {
-  #       background: transparent;
-  #     }
-  #   '';
-  # };
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
@@ -166,7 +135,7 @@
       "$mod, T, togglesplit"
       "$mod, up, movefocus, u"
       "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
-      "$mod, W, exec, pkill rofi || rofi -dmenu"
+      "$mod, W, exec, pkill rofi || rofi -show drun "
       ", Print, exec, grimblast copy area"
       "SHIFT, Print, exec, wf-recorder"
     ] ++ (
@@ -203,8 +172,6 @@
     };
   };
 
-  home.username = "randy";
-  home.homeDirectory = "/home/randy";
 
   programs = {
     direnv = {
@@ -827,6 +794,8 @@
       }];
     };
 
+  home.username = "randy";
+  home.homeDirectory = "/home/randy";
 
   home.stateVersion = "23.05";
   programs.home-manager.enable = true;
