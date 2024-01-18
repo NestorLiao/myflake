@@ -1,5 +1,5 @@
 {
-  description = "Your new nix config";
+  description = "My new nix config";
 
 
   nixConfig = {
@@ -72,7 +72,7 @@
       nixosModules = import ./modules/nixos;
       # Reusable home-manager modules you might want to export
       # These are usually stuff you would upstream into home-manager
-      homeManagerModules = import ./modules/home-manager;
+      # homeManagerModules = import ./modules/home-manager;
 
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'

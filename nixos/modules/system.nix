@@ -46,6 +46,9 @@
     nvidiaBusId = "PCI:1:0:0";
   };
 
+  services.udev.extraRules = ''
+    KERNEL=="ttyACM0", MODE:="666"
+  '';
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

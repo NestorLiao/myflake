@@ -1,5 +1,9 @@
 { pkgs, config, ... }: 
 {
+
+  # 直接将当前文件夹的配置文件，链接到 Home 目录下的指定位置
+  home.file.".config/hypr/wallpaper.jpg".source = ./wallpaper.jpg;
+
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     xwayland = { force_zero_scaling = "true"; };
@@ -9,8 +13,8 @@
       # "dunst"
       ];
     exec-once = [
-      "fcitx5 -d --replace" 
-      "swaybg -i /home/randy/nink/nixos/wallpaper.jpg -m fill &"
+      # "fcitx5 -d --replace" 
+      "swaybg -i ~/.config/hypr/wallpaper.jpg -m fill &"
       "wl-paste --type text --watch cliphist store"
     ];
     env = [
@@ -86,12 +90,12 @@
       "$mod, left, movefocus, l"
       "$mod, L, movewindow, r"
       "$mod, P, pseudo"
-      "$mod, R, cyclenext"
+      "$mod SHIFT, R, cyclenext"
       "$mod, right, movefocus, r"
       "$mod, S, fullscreen"
       "$mod  SHIFT, H, exec, systemctl hibernate"
       # "$mod  SHIFT, Q, exit"
-      "$mod SHIFT, R, workspace,previous"
+      "$mod, R, workspace,previous"
       "$mod  SHIFT, S, exec, systemctl suspend"
       "$mod, T, togglesplit"
       "$mod, up, movefocus, u"

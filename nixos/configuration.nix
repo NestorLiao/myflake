@@ -26,7 +26,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
-    # useGlobalPkgs = true;
+    useGlobalPkgs = true;
     useUserPackages = true;
     users = {
       # Import your home-manager configuration
@@ -318,9 +318,9 @@
     '';
 
     shellAbbrs = {
-      "snr" = "sudo nixos-rebuild switch --show-trace";
       "find" = "fd";
       "py" = "python";
+      "snr" = "sudo nixos-rebuild switch --show-trace";
       "cr" = "cht.sh rust | less";
       "c" = "cht.sh | less";
       "e" = "hx";

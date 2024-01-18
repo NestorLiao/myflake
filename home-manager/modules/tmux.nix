@@ -18,14 +18,17 @@
       set  -g default-terminal "tmux-256color"
       set -ag terminal-overrides ",alacritty:RGB"
       set-option -sa terminal-overrides ",xterm*:Tc"
+      set -g status off
       bind v copy-mode
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
       bind '"' split-window -v -c "#{pane_current_path}"
       bind-key x kill-pane
+      bind o display-popup -E "tms"
+      bind j display-popup -E "tms switch"
+      bind w display-popup -E "tms windows"
       bind % split-window -h -c "#{pane_current_path}"
-      set -g status off
     '';
   };
 }

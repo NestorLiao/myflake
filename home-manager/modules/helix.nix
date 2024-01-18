@@ -111,6 +111,21 @@
         };
         select = { "X" = [ "extend_line_up" "extend_to_line_bounds" ]; };
 
+        select.space = {
+          "e" = ":buffer-close";
+          "q" = ":quit!";
+          "n" = ":write";
+          "space" = ":buffer-previous";
+          "backspace" = ":buffer-next";
+          "o" = "file_picker_in_current_buffer_directory";
+          "t" = ":sh ./key.sh 1 2>&1 || true";
+          "m" = ":sh ./key.sh 2 2>&1 || true";
+          "r" = ":sh ./key.sh 3 2>&1 || true";
+          "l" = ":sh ./key.sh 4 2>&1 || true";
+          "i" = [ "yank_to_clipboard" ":sh ts  2>&1 || true"];
+          "ret" =":sh tmux last-window";
+        };
+
         normal.space = {
           "e" = ":buffer-close";
           "q" = ":quit!";
@@ -118,43 +133,24 @@
           "space" = ":buffer-previous";
           "backspace" = ":buffer-next";
           "o" = "file_picker_in_current_buffer_directory";
-          "l" = ":sh tmux split-window -v -p 70 'fhs' ";
-          "r" = ":sh cargo run 2>&1 || true";
-          "t" = ":sh cargo test 2>&1 || true";
-          "i" = [ "yank_to_clipboard" ":sh ./.config/helix/trans.sh 2>&1 || true"];
-        };
-        normal.tab= {
-          "m" = ":sh make clean 2>&1 || true; make btest 2>&1 || true";
-          "s" = ":lsp-stop";
-          "l" = ":lsp-restart";
-          "r" = ":sh ./dlc -e bits.c 2>&1 || true;  ./dlc bits.c 2>&1 || true";
+          "t" = ":sh ./key.sh 1 2>&1 || true";
+          "m" = ":sh ./key.sh 2 2>&1 || true";
+          "r" = ":sh ./key.sh 3 2>&1 || true";
+          "l" = ":sh ./key.sh 4 2>&1 || true";
+          "i" = [ "yank_to_clipboard" ":sh ts  2>&1 || true"];
+          "ret" =":sh tmux last-window";
         };
 
-
-        # normal.ret= {
-        #   "d" ="goto_prev_diag";
-        #   "D" ="goto_first_diag";
-        #   "f" ="goto_prev_function";
-        #   "a" ="goto_prev_parameter";
-        #   "c" ="goto_prev_comment";
-        #   "T" ="goto_prev_test";
-        #   "p" ="goto_prev_paragraph";
-        #   "o" ="goto_prev_change";
-        #   "G" ="goto_first_change";
-        # };
-
-        # normal.backspace= {
-        #   "a" ="goto_next_diag";
-        #   "A" ="goto_last_diag";
-        #   "r" ="goto_next_function";
-        #   "s" ="goto_next_class";
-        #   "t" ="goto_next_parameter";
-        #   "n" ="goto_next_comment";
-        #   "e" ="goto_next_test";
-        #   "i" ="goto_next_paragraph";
-        #   "o" ="goto_next_change";
-        #   "O" ="goto_last_change";
-        # };
+        normal."tab"= {
+          "n" =":sh tmux split-window -v -p 70 'cht.sh --shell'";
+          "e" =":sh ";
+          "i" =":sh ";
+          "o" =":sh ";
+          "a" =":sh ";
+          "r" =":sh ";
+          "s" =":sh ";
+          "t" =":sh ";
+        };
 
         normal."]"= {
           "]" ="goto_next_paragraph";
@@ -163,8 +159,8 @@
           "[" ="goto_prev_paragraph";
         };
       };
-
     };
+
     themes = {
       eink = let
         white = "#FFFFFF";
