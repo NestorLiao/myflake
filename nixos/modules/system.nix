@@ -3,18 +3,19 @@
 #
 # Configure the system
 #
-
-{ pkgs, config, ... }:
-
 {
+  pkgs,
+  config,
+  ...
+}: {
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot";
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   # systemd.network.networks.randy.dns = [  185.199.108.133 ];
-
 
   hardware.bluetooth.package = pkgs.bluez;
   hardware.bluetooth.enable = true;
@@ -28,7 +29,7 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.opengl = {
     enable = true;
@@ -38,17 +39,17 @@
 
   hardware.nvidia.prime = {
     sync.enable = true;
-		# offload = {
-		# 	enable = true;
-		# 	enableOffloadCmd = true;
-		# };
+    # offload = {
+    # 	enable = true;
+    # 	enableOffloadCmd = true;
+    # };
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:1:0:0";
   };
 
-  services.udev.extraRules = ''
-    KERNEL=="ttyACM0", MODE:="666"
-  '';
+  # services.udev.extraRules = ''
+  #   KERNEL=="ttyACM0", MODE:="666"
+  # '';
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

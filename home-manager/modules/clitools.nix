@@ -46,6 +46,10 @@
     path = '${config.home.homeDirectory}/playground/cowboyliao.github.io'
     depth = 10
 
+    [[search_dirs]]
+    path = '${config.home.homeDirectory}/test/esp'
+    depth = 10
+
   '';
 
 

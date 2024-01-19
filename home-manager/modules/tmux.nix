@@ -1,10 +1,12 @@
-{ pkgs, config, ... }:
-
 {
+  pkgs,
+  config,
+  ...
+}: {
   programs.tmux = {
     enable = true;
     clock24 = true;
-    plugins = with pkgs.tmuxPlugins; [ sensible yank ];
+    plugins = with pkgs.tmuxPlugins; [sensible yank];
     prefix = "C-Space";
     baseIndex = 1;
     escapeTime = 0;
@@ -14,7 +16,8 @@
     extraConfig = ''
       bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'wl-copy -in -selection clipboard'
       bind-key -r Bspace kill-pane
-      bind-key -r Enter split-window -v -p 20 -c "#{pane_current_path}"
+      bind -r Space select-pane -l
+      bind-key -r Enter split-window -v -p 50 -c "#{pane_current_path}"
       set  -g default-terminal "tmux-256color"
       set -ag terminal-overrides ",alacritty:RGB"
       set-option -sa terminal-overrides ",xterm*:Tc"
@@ -27,7 +30,6 @@
       bind-key x kill-pane
       bind o display-popup -E "tms"
       bind j display-popup -E "tms switch"
-      bind w display-popup -E "tms windows"
       bind % split-window -h -c "#{pane_current_path}"
     '';
   };
