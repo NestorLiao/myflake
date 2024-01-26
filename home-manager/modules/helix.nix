@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   # kinda annoying but it'll have to do
   # TODO: make sure to keep it updated for now
   typst-ts-rev = "791cac478226e3e78809b67ff856010bde709594";
@@ -14,6 +18,7 @@ in {
     source = "${repo}/queries";
   };
   programs.helix = {
+    package = inputs.helix.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
       alejandra
       clang-tools
@@ -29,9 +34,11 @@ in {
       nodePackages.yaml-language-server
       rust-analyzer-unwrapped
       taplo
+      typst-lsp
     ];
     settings = {
-      theme = "eink";
+      # theme = "eink";
+      theme = "emacs";
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
@@ -138,7 +145,7 @@ in {
           wrap-indicator = "";
         };
         indent-guides = {
-          render = false;
+          render = true;
           character = "╎";
           skip-levels = 1;
         };

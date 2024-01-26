@@ -1,11 +1,18 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-
-{ inputs, outputs, lib, config, pkgs, ... }: {
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
     # outputs.nixosModules.example
+    # inputs.hosts.nixosModule.networking
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -13,20 +20,49 @@
 
     # You can also split up your configuration and import pieces of it here:
 
-
     # Import home-manager's NixOS module
     inputs.home-manager.nixosModules.home-manager
-    
+
     # Import modules
     ./modules
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+
+    # inputs.xremap-flake.nixosModules.default
   ];
 
+  # networking.stevenBlackHosts.enable = true;
+  # networking.stevenblackHosts = {
+  #   blockFakenews = true;
+  #   blockGambling = true;
+  #   blockPorn = true;
+  #   blockSocial = true;
+  # };
+
+  # services.xremap = {
+  #   userName = "randy";
+  #   # serviceMode = "user";
+  #   withWlroots = true;
+  #   # withHypr = true;
+  #   # yamlConfig = ''keymap:'';
+  #   mouse = true;
+  #   yamlConfig = ''
+  #     modmap:
+  #       - name: Global
+  #         application:
+  #           not: firefox
+  #         remap:
+  #           BTN_RIGHT:
+  #             alone: BTN_RIGHT
+  #             held: BTN_MIDDLE
+  #             alone_timeout_millis: 1000 # Optional
+  #   '';
+  # };
+
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
-    useGlobalPkgs = true;
+    extraSpecialArgs = {inherit inputs outputs;};
+    # useGlobalPkgs = true;
     useUserPackages = true;
     users = {
       # Import your home-manager configuration
@@ -37,7 +73,7 @@
   nix = {
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
@@ -51,7 +87,8 @@
     };
   };
 
-  # FIXME: Add the rest of your current configuration
+  services.udisks2.enable = true;
+  services.udisks2.mountOnMedia = true;
 
   time.timeZone = "America/New_York";
 
@@ -72,7 +109,7 @@
       LC_TIME = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8";
     };
-    supportedLocales = [ "en_US.UTF-8/UTF-8" ];
+    supportedLocales = ["en_US.UTF-8/UTF-8"];
   };
 
   console = {
@@ -83,38 +120,30 @@
   services.v2raya.enable = true;
   services.xserver.enable = true;
 
-  # services.xserver.displayManager.sddm= {
-  #   enable=true;
-  #   autoLogin.enable = true;
-  #   autoLogin.user = "randy";
-  # };
-  # services.xserver.desktopManager.plasma5.enable=true;
-
   services.greetd = {
     enable = true;
     settings = {
-      default_session = {
-        command =
-          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%I:%M %p | %a • %h | %F' --cmd Hyprland";
+      default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+      # Autologin
+      initial_session = {
+        command = "Hyprland";
         user = "randy";
       };
     };
   };
 
+  programs.hyprland = {
+    enable = true;
+    xwayland = {enable = true;};
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
 
   programs.nano.enable = false;
-
-  programs = {
-    hyprland = {
-      enable = true;
-      xwayland = { enable = true; };
-    };
-  };
 
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+    extraPortals = with pkgs; [xdg-desktop-portal-wlr];
   };
 
   fonts = {
@@ -135,11 +164,10 @@
 
   fonts.fontconfig = {
     defaultFonts = {
-      emoji = [ "Noto Color Emoji" ];
-      monospace =
-        [ "Noto Sans Mono CJK SC" "Sarasa Mono SC" "DejaVu Sans Mono" ];
-      sansSerif = [ "Noto Sans CJK SC" "Source Han Sans SC" "DejaVu Sans" ];
-      serif = [ "Noto Serif CJK SC" "Source Han Serif SC" "DejaVu Serif" ];
+      emoji = ["Noto Color Emoji"];
+      monospace = ["Noto Sans Mono CJK SC" "Sarasa Mono SC" "DejaVu Sans Mono"];
+      sansSerif = ["Noto Sans CJK SC" "Source Han Sans SC" "DejaVu Sans"];
+      serif = ["Noto Serif CJK SC" "Source Han Serif SC" "DejaVu Serif"];
     };
   };
 
@@ -151,61 +179,57 @@
       fcitx5-nord
     ];
   };
-  nixpkgs.overlays = [ (self: super: { fcitx-engines = self.fcitx5; }) ];
+  nixpkgs.overlays = [(self: super: {fcitx-engines = self.fcitx5;})];
 
   services.xserver.layout = "us";
 
   sound.enable = true;
-  security.rtkit.enable=true;
-  services.pipewire={
-    enable=true;
-    alsa.enable=true;
-    alsa.support32Bit=true;
-    pulse.enable=true;
-    jack.enable=true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
   };
-
-  # users.users.randy = {
-  #   shell = pkgs.fish;
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" "plugdev" ];
-  #   packages = with pkgs; [ ];
-  # };
-
 
   environment.variables.EDITOR = "hx";
   environment.systemPackages = with pkgs; [
     # create a fhs environment by command `fhs`, so we can run non-nixos packages in nixos!
-    (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
-      pkgs.buildFHSUserEnv (base // {
-        name = "fhs";
-        targetPkgs = pkgs: (
-          (base.targetPkgs pkgs) ++ [
-            pkgsi686Linux.glibc
-            pkgsi686Linux.gcc
-            # If your FHS program has additional dependencies, add them here
-          ]
-        );
-        # multiArch = true;
-        profile = "export FHS=1";
-        runScript = "fish";
-        extraOutputsToInstall = ["dev"];
-      })
+    (
+      let
+        base = pkgs.appimageTools.defaultFhsEnvArgs;
+      in
+        pkgs.buildFHSUserEnv (base
+          // {
+            name = "fhs";
+            targetPkgs = pkgs: (
+              (base.targetPkgs pkgs)
+              ++ [
+                pkgsi686Linux.glibc
+                pkgsi686Linux.gcc
+                # If your FHS program has additional dependencies, add them here
+              ]
+            );
+            # multiArch = true;
+            profile = "export FHS=1";
+            runScript = "fish";
+            extraOutputsToInstall = ["dev"];
+          })
     )
     cowsay
     wget
     git
   ];
 
-
- # environment.variables = {
- #    NIX_LD_LIBRARY_PATH =with pkgs; lib.makeLibraryPath [
- #      pkgs.stdenv.cc.cc
- #      pkgs.openssl
- #      # ...
- #    ];
- #    NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
- #  };
+  # environment.variables = {
+  #    NIX_LD_LIBRARY_PATH =with pkgs; lib.makeLibraryPath [
+  #      pkgs.stdenv.cc.cc
+  #      pkgs.openssl
+  #      # ...
+  #    ];
+  #    NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
+  #  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -298,12 +322,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
-
-  nix.settings.trusted-users = [ "randy" ];
+  nix.settings.trusted-users = ["randy"];
   users.defaultUserShell = pkgs.fish;
   environment.sessionVariables = {
-    CHTSH_QUERY_OPTIONS= "T";
+    CHTSH_QUERY_OPTIONS = "T";
   };
-
-  
 }

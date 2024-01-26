@@ -3,10 +3,7 @@
 #
 # Configure the users
 #
-
-{ config, ... }:
-
-{
+{config, ...}: {
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
     # FIXME: Replace with your username
@@ -21,7 +18,7 @@
       ];
       # shell = pkgs.fish;
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "wheel" "networkmanager" "audio" "plugdev" "docker" "dialout"];
+      extraGroups = ["wheel" "networkmanager" "audio" "plugdev" "docker" "dialout" "storage"];
     };
   };
 

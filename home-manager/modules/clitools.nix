@@ -1,6 +1,62 @@
-{ pkgs, config, ... }:
-
 {
+  pkgs,
+  config,
+  ...
+}: {
+  home.packages = with pkgs; [
+    killall
+    go-mtpfs
+    quickemu
+    zathura
+    bacon
+    bat
+    cht-sh
+    ethtool
+    eza
+    fd
+    fzf
+    gitui
+    imv
+    lm_sensors # for `sensors` command
+    lsof # list open files
+    ltrace # library call monitoring
+    manix
+    mprocs
+    neofetch
+    nix-output-monitor
+    pciutils # lspci
+    ripgrep
+    strace # system call monitoring
+    sysstat
+    # system call monitoring
+    # system tools
+    thefuck
+    tldr
+    tmux-sessionizer
+    translate-shell
+    tree
+    typst
+    unrar-free
+    unzip
+    usbutils # lsusb
+    xdragon
+    (pkgs.writeScriptBin "ts" ''
+      #!/usr/bin/env bash
+
+      # Execute wl-paste and store the output in a variable
+      clipboard_content=$(wl-paste)
+
+      # Translate the clipboard content from English to Simplified Chinese using `trans`
+      translated_content=$(echo "$clipboard_content" | trans :zh)
+
+      # Remove ANSI escape codes from the translated content using `sed`
+      cleaned_content=$(echo "$translated_content" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g")
+
+      # Print the final cleaned content
+      echo "$cleaned_content"
+    '')
+  ];
+
   programs = {
     direnv = {
       enable = true;
@@ -9,10 +65,9 @@
     };
   };
 
-  
   programs.zoxide = {
     enable = true;
-    options = [ "--cmd j" ];
+    options = ["--cmd j"];
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
@@ -23,7 +78,6 @@
     userName = "cowboyliao";
     userEmail = "2730647052@qq.com";
   };
-
 
   # TODO: find some way to express this as an attrset, and then convert to toml,
   # instead of hand-writing the toml
@@ -51,7 +105,6 @@
     depth = 10
 
   '';
-
 
   home.file.".config/neofetch/config.conf".text = ''
     print_info() {
@@ -87,5 +140,5 @@
     ascii_colors=(distro)
     ascii_bold="on"
     gap=1 # num -num
-'';
+  '';
 }
