@@ -98,7 +98,7 @@
           inputs.hosts.nixosModule
           {
             networking.stevenBlackHosts = {
-              enable = true;
+              enable = false;
               blockFakenews = true;
               blockGambling = true;
               blockPorn = true;

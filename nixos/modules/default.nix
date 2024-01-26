@@ -1,7 +1,7 @@
 {
   imports = [
     #ad-blocker
-    ./hosts.nix
+    # ./hosts.nix
 
     #fish shell
     ./fish.nix

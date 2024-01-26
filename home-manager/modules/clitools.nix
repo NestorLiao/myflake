@@ -77,6 +77,12 @@
     enable = true;
     userName = "cowboyliao";
     userEmail = "2730647052@qq.com";
+    lfs.enable = true;
+    extraConfig = {
+      credential.helper = "${
+        pkgs.git.override {withLibsecret = true;}
+      }/bin/git-credential-libsecret";
+    };
   };
 
   # TODO: find some way to express this as an attrset, and then convert to toml,

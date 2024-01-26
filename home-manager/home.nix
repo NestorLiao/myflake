@@ -11,6 +11,7 @@
   username = "randy";
 in {
   home.packages = with pkgs; [
+    discord
     arduino-ide
     hugo
     blender
