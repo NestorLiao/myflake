@@ -5,7 +5,7 @@
 }: {
   home.packages = with pkgs; [
     killall
-    go-mtpfs
+    # go-mtpfs
     quickemu
     zathura
     bacon
@@ -24,12 +24,10 @@
     mprocs
     neofetch
     nix-output-monitor
-    pciutils # lspci
+    pciutils
     ripgrep
-    strace # system call monitoring
+    strace
     sysstat
-    # system call monitoring
-    # system tools
     thefuck
     tldr
     tmux-sessionizer
@@ -38,7 +36,8 @@
     typst
     unrar-free
     unzip
-    usbutils # lsusb
+    zip
+    usbutils
     xdragon
     (pkgs.writeScriptBin "ts" ''
       #!/usr/bin/env bash

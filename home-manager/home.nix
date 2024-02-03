@@ -11,21 +11,20 @@
   username = "randy";
 in {
   home.packages = with pkgs; [
-    discord
+    # discord
     arduino-ide
     hugo
-    blender
+    # blender
     calibre
     gimp
-    gnome.cheese
-    kicad
-    libreoffice
+    # gnome.cheese
+    # kicad
+    # libreoffice
     mpv
     qq
     vivaldi
-    wpsoffice
+    # wpsoffice
     xfce.thunar
-    zip
   ];
 
   # You can import other home-manager modules here

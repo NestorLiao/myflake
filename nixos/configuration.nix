@@ -32,32 +32,23 @@
     # inputs.xremap-flake.nixosModules.default
   ];
 
-  # networking.stevenBlackHosts.enable = true;
-  # networking.stevenblackHosts = {
-  #   blockFakenews = true;
-  #   blockGambling = true;
-  #   blockPorn = true;
-  #   blockSocial = true;
-  # };
-
   # services.xremap = {
   #   userName = "randy";
-  #   # serviceMode = "user";
+  #   serviceMode = "user";
   #   withWlroots = true;
   #   # withHypr = true;
-  #   # yamlConfig = ''keymap:'';
-  #   mouse = true;
   #   yamlConfig = ''
   #     modmap:
-  #       - name: Global
+  #       - name: Except Chrome
   #         application:
-  #           not: firefox
+  #           only:zathura
   #         remap:
-  #           BTN_RIGHT:
-  #             alone: BTN_RIGHT
-  #             held: BTN_MIDDLE
-  #             alone_timeout_millis: 1000 # Optional
+  #           Space: Pagedown
+  #           Tab: Pageup
   #   '';
+  #   # alone: BTN_RIGHT
+  #   # held: BTN_MIDDLE
+  #   # alone_timeout_millis: 1000 # Optional
   # };
 
   home-manager = {
@@ -181,7 +172,7 @@
   };
   nixpkgs.overlays = [(self: super: {fcitx-engines = self.fcitx5;})];
 
-  services.xserver.layout = "us";
+  services.xserver.xkb.layout = "us";
 
   sound.enable = true;
   security.rtkit.enable = true;
@@ -195,6 +186,9 @@
 
   environment.variables.EDITOR = "hx";
   environment.systemPackages = with pkgs; [
+    # searxng
+    # android-studio
+    # android-tools
     # create a fhs environment by command `fhs`, so we can run non-nixos packages in nixos!
     (
       let

@@ -5,6 +5,10 @@
 }: {
   networking.extraHosts = ''
 
+    # 20.205.243.166  github.com
+    185.199.110.133 raw.githubusercontent.com
+    185.199.109.133 raw.github.com
+    185.199.108.153 assets-cdn.github.com
 
     # This hosts file is a merged collection of hosts from reputable sources,
     # with a dash of crowd sourcing via Github
@@ -80568,10 +80572,6 @@
     0.0.0.0 data-hoisin.coocaa.com
     0.0.0.0 hoisin.coocaa.com
 
-    # 20.205.243.166  github.com
-    185.199.108.133 raw.githubusercontent.com
-    185.199.109.133 raw.github.com
-    185.199.110.153 assets-cdn.github.com
     # 162.125.32.10 github.global.ssl.fastly.net
     # This hosts file is brought to you by Dan Pollock and can be found at
     # http://someonewhocares.org/hosts/
@@ -81630,8 +81630,11 @@
     127.0.0.1 s.go-mpulse.net
     127.0.0.1 s.update.fbsbx.com
     127.0.0.1 s.youtube.com				# Blocking this will interfere with video watching history and may interfere with Google Podcasts
-    # 127.0.0.1 www.youtube.com
-    127.0.0.1 www.youtubemusic.com
+    127.0.0.1 www.youtube.com
+    127.0.0.1 www.v2ex.com
+    127.0.0.1 www.twitter.com
+    127.0.0.1 www.facebook.com
+    127.0.0.1 music.youtube.com
     127.0.0.1 www.bilibili.com
     127.0.0.1 www.zhihu.com
     127.0.0.1 m.youtube.com

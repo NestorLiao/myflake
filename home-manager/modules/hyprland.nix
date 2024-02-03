@@ -76,10 +76,12 @@
       no_gaps_when_only = "false";
     };
     gestures = {workspace_swipe = "off";};
-    # monitor = ",preferred,auto,1.466667,transform,3";
+    # monitor = ",preferred,auto,1.5,transform,3";
+    monitor = ",preferred,auto,1.466667,transform,3";
+    # monitor = ",preferred,auto,1.466667";
     # monitor = ",preferred,auto,1,transform,3";
     # monitor = ",preferred,auto,1.5";
-    monitor = ",preferred,auto,1";
+    # monitor = ",preferred,auto,1";
     # monitor = [
     # "HDMI-A-1,preferred,1920x0,transform,3"
     # "HDMI-A-1,preferred,auto,transform,3"
@@ -116,6 +118,7 @@
         "$mod, P, pseudo"
         "$mod, R, cyclenext"
         "$mod  SHIFT, R, workspace,previous"
+        "$mod  SHIFT, Q, exit"
         "$mod, S, fullscreen"
         "$mod  SHIFT, H, exec, systemctl hibernate"
         "$mod  SHIFT, S, exec, systemctl suspend"
