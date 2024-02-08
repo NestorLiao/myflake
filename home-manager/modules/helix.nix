@@ -55,46 +55,51 @@ in {
         };
         select = {"X" = ["extend_line_up" "extend_to_line_bounds"];};
         select.space = {
-          "e" = ":buffer-close";
           "f" = "file_picker_in_current_directory";
           "F" = "file_picker";
-          "q" = ":quit!";
-          "n" = ":write";
           "space" = ":buffer-previous";
-          "backspace" = ":buffer-next";
+
+          "e" = ["page_down" "goto_window_center"];
+          "i" = ["page_up" "goto_window_center"];
+          "q" = ":quit!";
+          "r" = ":write";
+          "n" = ":buffer-close";
+          "t" = ["yank_to_clipboard" ":sh ts  2>&1 || true"];
           "o" = "file_picker_in_current_buffer_directory";
-          "t" = ":sh ./key.sh 1 2>&1 || true";
-          "m" = ":sh ./key.sh 2 2>&1 || true";
-          "r" = ":sh ./key.sh 3 2>&1 || true";
-          "l" = ":sh ./key.sh 4 2>&1 || true";
-          "i" = ["yank_to_clipboard" ":sh ts  2>&1 || true"];
-          "ret" = ":sh tmux last-window";
+          "ret" = ":hsplit-new";
+          "backspace" = ":buffer-close!";
         };
         normal.space = {
           "f" = "file_picker_in_current_directory";
           "F" = "file_picker";
-          "e" = ":buffer-close";
-          "q" = ":quit!";
-          "n" = ":write";
           "space" = ":buffer-previous";
-          "backspace" = ":buffer-next";
+
+          "e" = ["page_down" "goto_window_center"];
+          "i" = ["page_up" "goto_window_center"];
+          "q" = ":quit!";
+          "r" = ":write";
+          "n" = ":buffer-close";
+          "t" = ["yank_to_clipboard" ":sh ts  2>&1 || true"];
           "o" = "file_picker_in_current_buffer_directory";
-          "t" = ":sh ./key.sh 1 2>&1 || true";
-          "m" = ":sh ./key.sh 2 2>&1 || true";
-          "r" = ":sh ./key.sh 3 2>&1 || true";
-          "l" = ":sh ./key.sh 4 2>&1 || true";
-          "i" = ["yank_to_clipboard" ":sh ts  2>&1 || true"];
-          "ret" = ":sh tmux last-window";
+          "ret" = ":hsplit-new";
+          "backspace" = ":buffer-close!";
+          # r write-rite-r
+          # t translate-t
+          # n close-buffer_no need this buffer
+          # e pagedown-mybroswerlike
+          # i pageup-mybroswerlike
+          # o open file in buffer dir-open
         };
-        normal."tab" = {
-          "n" = ":sh tmux split-window -v -p 70 'cht.sh --shell'";
-          "e" = ":sh ";
-          "i" = ":sh ";
-          "o" = ":sh ";
-          "a" = ":sh ";
-          "r" = ":sh ";
-          "s" = ":sh ";
-          "t" = ":sh ";
+        normal.backspace = {
+          "backspace" = ":buffer-next";
+          "z" = ":bco";
+          "r" = [":write" ":sh ./key.sh 1 2>&1 || true"];
+          "t" = [":write" ":sh ./key.sh 2 2>&1 || true"];
+          "n" = [":write" ":sh ./key.sh 3 2>&1 || true"];
+          "e" = [":write" ":sh ./key.sh 4 2>&1 || true"];
+          "i" = [":write" ":sh ./key.sh 5 2>&1 || true"];
+          "o" = [":write" ":sh ./key.sh 6 2>&1 || true"];
+          "l" = [":write" ":sh ./key.sh 6 2>&1 || true"];
         };
         normal."]" = {
           "]" = "goto_next_paragraph";
@@ -103,16 +108,16 @@ in {
           "[" = "goto_prev_paragraph";
         };
       };
+
       editor = {
         lsp = {
           display-messages = true;
           auto-signature-help = false; # https://github.com/helix-editor/helix/discussions/6710
         };
-        gutters = ["diagnostics" "spacer" "diff"];
+        # gutters = ["diagnostics" "spacer" "diff"];
         bufferline = "multiple";
         auto-info = true;
         auto-save = true;
-        file-picker.hidden = true;
         statusline = {
           left = [
             "mode"
@@ -139,7 +144,7 @@ in {
           "`" = "`";
         };
         soft-wrap = {
-          enable = true;
+          enable = false;
           max-wrap = 25;
           max-indent-retain = 0;
           wrap-indicator = "";
@@ -149,7 +154,7 @@ in {
           character = "╎";
           skip-levels = 1;
         };
-        # line-number = "relative";
+        line-number = "relative";
         mouse = true;
         # mouse = false;
         scrolloff = 3;
@@ -172,6 +177,10 @@ in {
           name = "nix";
           formatter.command = "alejandra";
           auto-format = true;
+          indent = {
+            tab-width = 8;
+            unit = "t";
+          };
         }
         {
           name = "markdown";
@@ -315,7 +324,7 @@ in {
         "ui.selection" = {
           bg = white;
           fg = black;
-          modifiers = ["bold"];
+          # modifiers = ["bold"];
           underline = {
             color = black;
             style = "dashed";
@@ -334,7 +343,7 @@ in {
         "ui.cursor" = {
           fg = white;
           bg = black;
-          modifiers = ["bold"];
+          # modifiers = ["bold"];
           underline = {
             color = white;
             style = "curl";
@@ -406,16 +415,16 @@ in {
         "keyword" = {fg = black;};
         "keyword.control" = {
           fg = black;
-          modifiers = ["bold"];
+          # modifiers = ["bold"];
         };
         "keyword.function" = {
           fg = black;
-          modifiers = ["bold"];
+          # modifiers = ["bold"];
         };
         "function" = {fg = black;};
         "function.macro" = {
           fg = black;
-          modifiers = ["bold"];
+          # modifiers = ["bold"];
         };
         "function.method" = {fg = black;};
         "function.builtin" = {fg = black;};
@@ -431,7 +440,7 @@ in {
         "attribute" = {fg = black;};
         "type" = {
           fg = black;
-          modifiers = ["bold"];
+          # modifiers = ["bold"];
         };
         "markup.heading" = {
           fg = black;

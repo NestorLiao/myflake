@@ -11,7 +11,7 @@
       font = let
         family = "Noto Sans Mono";
       in {
-        size = 10;
+        size = 12;
         normal = {
           inherit family;
           style = "Medium";

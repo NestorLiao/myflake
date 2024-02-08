@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   # 直接将当前文件夹的配置文件，链接到 Home 目录下的指定位置
-
   home.packages = with pkgs; [
     cliphist
     grimblast
@@ -22,7 +21,7 @@
       "fcitx5 -d --replace"
       "swaybg -i ~/.config/hypr/wallpaper.jpg -m fill &"
       "wl-paste --type text --watch cliphist store"
-    ]; # exec-once = ''${startupScript}/bin/start'';
+    ];
     env = [
       "NIXOS_OZONE_WL,1"
       "XCURSOR_SIZE,24"

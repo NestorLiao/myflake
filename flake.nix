@@ -1,6 +1,8 @@
 {
   description = "My new nix config";
 
+  # nix develop --option substituters "https://mirrors.ustc.edu.cn/nix-channels/store  https://cache.nixos.org"
+
   nixConfig = {
     builders-use-substitutes = true;
     experimental-features = ["nix-command" "flakes"];

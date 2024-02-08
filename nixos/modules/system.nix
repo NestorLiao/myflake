@@ -47,9 +47,25 @@
     nvidiaBusId = "PCI:1:0:0";
   };
 
-  # services.udev.extraRules = ''
-  #   KERNEL=="ttyACM0", MODE:="666"
-  # '';
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [xdg-desktop-portal-wlr];
+  };
+
+  sound.enable = true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+
+  time.timeZone = "Asia/Shanghai";
+  # services.udisks2.enable = true;
+  # services.udisks2.mountOnMedia = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

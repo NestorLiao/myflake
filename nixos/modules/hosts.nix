@@ -5,7 +5,7 @@
 }: {
   networking.extraHosts = ''
 
-    # 20.205.243.166  github.com
+    20.205.243.166  github.com
     185.199.110.133 raw.githubusercontent.com
     185.199.109.133 raw.github.com
     185.199.108.153 assets-cdn.github.com
@@ -81630,14 +81630,16 @@
     127.0.0.1 s.go-mpulse.net
     127.0.0.1 s.update.fbsbx.com
     127.0.0.1 s.youtube.com				# Blocking this will interfere with video watching history and may interfere with Google Podcasts
-    127.0.0.1 www.youtube.com
+    # 127.0.0.1 www.youtube.com
+    # 127.0.0.1 m.youtube.com
+    127.0.0.1 music.youtube.com
     127.0.0.1 www.v2ex.com
     127.0.0.1 www.twitter.com
     127.0.0.1 www.facebook.com
-    127.0.0.1 music.youtube.com
     127.0.0.1 www.bilibili.com
+    127.0.0.1 www.baidu.com
+    127.0.0.1 www.sspai.com
     127.0.0.1 www.zhihu.com
-    127.0.0.1 m.youtube.com
     127.0.0.1 s1-tracking.adalyser.com
     127.0.0.1 s1.shinystat.it
     127.0.0.1 s10.histats.com

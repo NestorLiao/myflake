@@ -11,6 +11,10 @@
   username = "randy";
 in {
   home.packages = with pkgs; [
+    ghostscript
+    (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
+    nvidia-system-monitor-qt
+
     # discord
     arduino-ide
     hugo
@@ -18,7 +22,7 @@ in {
     calibre
     gimp
     # gnome.cheese
-    # kicad
+    kicad
     # libreoffice
     mpv
     qq
