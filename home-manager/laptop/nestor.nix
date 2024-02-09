@@ -1,14 +1,11 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
-  inputs,
   outputs,
-  lib,
-  config,
   pkgs,
   ...
 }: let
-  username = "randy";
+  username = "nestor";
 in {
   home.packages = with pkgs; [
     ghostscript
@@ -40,7 +37,7 @@ in {
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    ./modules
+    ../modules
   ];
 
   nixpkgs = {
@@ -72,8 +69,8 @@ in {
 
   # TODO: Set your username
   home = {
-    username = "randy";
-    homeDirectory = "/home/randy";
+    username = "${username}";
+    homeDirectory = "/home/${username}";
   };
 
   # Add stuff for your user as you see fit:

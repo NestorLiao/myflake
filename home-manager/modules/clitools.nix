@@ -75,8 +75,8 @@
 
   programs.git = {
     enable = true;
-    userName = "cowboyliao";
-    userEmail = "2730647052@qq.com";
+    userName = "Cowboyliao";
+    userEmail = "2730647025@qq.com";
     lfs.enable = true;
     extraConfig = {
       credential.helper = "${

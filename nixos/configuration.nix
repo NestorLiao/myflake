@@ -35,8 +35,9 @@
     useUserPackages = true;
     users = {
       # Import your home-manager configuration
-      server = import ../home-manager/server.nix;
-      randy = import ../home-manager/home.nix;
+      randy = import ../home-manager/laptop/randy.nix;
+      nestor = import ../home-manager/laptop/nestor.nix;
+      server = import ../home-manager/server/server.nix;
     };
   };
   services.xserver.enable = true;

@@ -18,7 +18,7 @@
       experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
-      trusted-users = ["randy"];
+      trusted-users = ["randy" "nestor"];
     };
 
     gc = {
