@@ -1,12 +1,8 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   programs.tmux = {
     enable = true;
     clock24 = true;
-    plugins = with pkgs.tmuxPlugins; [sensible yank];
+    plugins = with pkgs.tmuxPlugins; [sensible yank resurrect];
     prefix = "C-Space";
     baseIndex = 1;
     escapeTime = 0;

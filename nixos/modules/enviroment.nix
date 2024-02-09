@@ -1,36 +1,21 @@
 {pkgs, ...}: {
   environment.shellAliases = {
-    cat = "bat";
     c = "clear";
-    df = "duf";
-    diff = "nvim -d";
-    du = "gdu";
     e = "hx";
+    r = "fg";
     en = "hx .";
-    find = "fd";
     garbage = "nix-collect-garbage -d";
     get = "cd /etc/nixos/ && sudo sh update.sh";
-    grep = "rg";
-    la = "exa -a";
-    ls = "eza";
-    mann = "tldr";
     nixh = "nix-prefetch-url";
     nixhu = "nix-prefetch-url --unpack";
-    nix = "nom";
-    ping = "gping";
-    py = "python";
     rb = "sudo nixos-rebuild boot";
-    r = "fg";
     rs = "sudo nixos-rebuild switch --show-trace";
     rsu = "sudo nixos-rebuild switch --upgrade";
-    sed = "sd";
     sh = "nix shell nixpkgs#";
     sys = "systemctl";
     sysu = "systemctl --user";
-    top = "gotop";
     up = "nixos-rebuild --flake .# build";
     upp = "doas nixos-rebuild --flake .# switch";
-    vi = "hx";
   };
 
   environment.variables.EDITOR = "hx";

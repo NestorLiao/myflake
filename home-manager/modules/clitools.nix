@@ -4,6 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
+    uutils-coreutils-noprefix
     glxinfo
     nvidia-system-monitor-qt
     killall
@@ -11,7 +12,7 @@
     quickemu
     zathura
     bacon
-    bat
+    # bat
     ethtool
     eza
     fd
@@ -103,6 +104,10 @@
 
     [[search_dirs]]
     path = '${config.home.homeDirectory}/playground/cowboyliao.github.io'
+    depth = 10
+
+    [[search_dirs]]
+    path = '${config.home.homeDirectory}/playground/rust'
     depth = 10
 
     [[search_dirs]]

@@ -15,8 +15,6 @@
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
-  # systemd.network.networks.randy.dns = [  185.199.108.133 ];
-
   hardware.bluetooth.package = pkgs.bluez;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -53,14 +51,14 @@
     extraPortals = with pkgs; [xdg-desktop-portal-wlr];
   };
 
-  sound.enable = true;
+  sound.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
+    jack.enable = false;
   };
 
   time.timeZone = "Asia/Shanghai";

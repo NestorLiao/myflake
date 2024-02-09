@@ -114,7 +114,7 @@ in {
           display-messages = true;
           auto-signature-help = false; # https://github.com/helix-editor/helix/discussions/6710
         };
-        # gutters = ["diagnostics" "spacer" "diff"];
+        gutters = ["diagnostics" "spacer" "diff"];
         bufferline = "multiple";
         auto-info = true;
         auto-save = true;
@@ -150,14 +150,14 @@ in {
           wrap-indicator = "";
         };
         indent-guides = {
-          render = true;
+          render = false;
           character = "╎";
           skip-levels = 1;
         };
-        line-number = "relative";
+        # line-number = "relative";
         mouse = true;
         # mouse = false;
-        scrolloff = 3;
+        scrolloff = 0;
       };
     };
     enable = true;
@@ -188,7 +188,7 @@ in {
             command = "prettier";
             args = ["--parser" "markdown"];
           };
-          auto-format = true;
+          auto-format = false;
         }
         {
           name = "javascript";

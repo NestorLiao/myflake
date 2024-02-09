@@ -5,7 +5,7 @@
     ./lf.nix
     ./tmux.nix
     ./alacritty.nix
-    ./waybar.nix
+    # ./waybar.nix
     ./clitools.nix
   ];
 }
