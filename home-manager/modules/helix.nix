@@ -44,7 +44,7 @@ in {
           esc = ["collapse_selection" "keep_primary_selection"];
           "C-h" = ":open ~/nink/nixos";
           "C-e" = ":open ~/nink/inklife";
-          "C-p" = ":open ~/playground/snippet";
+          "C-p" = ":open ~/nink/retain";
           "\\" = ":reload-all";
           "X" = ["extend_line_up" "extend_to_line_bounds"];
           "A-x" = "extend_to_line_bounds";

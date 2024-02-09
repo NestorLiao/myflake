@@ -73,49 +73,14 @@ in {
     homeDirectory = "/home/${username}";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  programs.firefox = {
-    enable = true;
-    profiles.${username} = {
-      userChrome = ''
-         /* hides the title bar */
-         #titlebar {
-           visibility: collapse;
-         }
+  # 直接以 text 的方式，在 nix 配置文件中硬编码文件内容
+  home.file.".cargo/config".text = ''
+    [source.crates-io]
+    replace-with = 'ustc'
 
-
-        #nav-bar {
-          /* customize this value. */
-          --navbar-margin: -38px;
-
-          margin-top: var(--navbar-margin);
-          margin-bottom: 0;
-          z-index: -100;
-          transition: all 0.3s ease !important;
-          opacity: 0;
-        }
-
-        #navigator-toolbox:focus-within > #nav-bar,
-        #navigator-toolbox:hover > #nav-bar
-        {
-          margin-top: 0;
-          margin-bottom: var(--navbar-margin);
-          z-index: 100;
-          opacity: 1;
-        }
-
-
-      '';
-
-      settings = {
-        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        "browser.display.os-zoom-behavior" = 0;
-      };
-    };
-  };
-
-  # home.packages = with pkgs; [ steam ];
+    [source.ustc]
+    registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+  '';
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

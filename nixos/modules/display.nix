@@ -10,7 +10,7 @@
       # Autologin
       initial_session = {
         command = "Hyprland";
-        user = "nestor";
+        user = "randy";
       };
     };
   };

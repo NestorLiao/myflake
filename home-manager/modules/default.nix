@@ -1,6 +1,7 @@
 {
   imports = [
-    ./helix.nix
+    # ./helix.nix
+    # ./firefox.nix
     ./hyprland.nix
     ./lf.nix
     ./tmux.nix
