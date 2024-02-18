@@ -10,26 +10,26 @@
 }: let
   username = "randy";
 in {
-  home.packages = with pkgs; [
-    ghostscript
-    (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
-    nvidia-system-monitor-qt
+  # home.packages = with pkgs; [
+  #   ghostscript
+  #   (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
+  #   nvidia-system-monitor-qt
 
-    # discord
-    arduino-ide
-    hugo
-    # blender
-    calibre
-    gimp
-    # gnome.cheese
-    kicad
-    # libreoffice
-    mpv
-    qq
-    vivaldi
-    # wpsoffice
-    xfce.thunar
-  ];
+  #   # discord
+  #   arduino-ide
+  #   hugo
+  #   # blender
+  #   calibre
+  #   gimp
+  #   # gnome.cheese
+  #   kicad
+  #   # libreoffice
+  #   mpv
+  #   qq
+  #   vivaldi
+  #   # wpsoffice
+  #   xfce.thunar
+  # ];
 
   # You can import other home-manager modules here
   imports = [
@@ -40,7 +40,7 @@ in {
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    ../modules
+    # ../modules
   ];
 
   nixpkgs = {

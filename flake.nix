@@ -7,7 +7,7 @@
     builders-use-substitutes = true;
     experimental-features = ["nix-command" "flakes"];
     substituters = [
-      "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
     ];
     extra-substituters = [
@@ -19,6 +19,7 @@
   };
 
   inputs = {
+    daeuniverse.url = "github:daeuniverse/flake.nix";
     # Nixpkgs
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -43,6 +44,14 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-utils.url = "github:numtide/flake-utils";
+
+    nur-xddxdd = {
+      url = "github:xddxdd/nur-packages";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 
@@ -100,7 +109,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main nixos configuration file <
-          # inputs.hosts.nixosModule
+          inputs.nur-xddxdd.nixosModules.setupOverlay
           inputs.hosts.nixosModule
           {
             networking.stevenBlackHosts = {

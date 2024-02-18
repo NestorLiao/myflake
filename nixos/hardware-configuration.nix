@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
@@ -27,10 +26,10 @@
     fsType = "vfat";
   };
 
-  fileSystems."/home/server" = {
-    device = "/dev/nvme0n1p1";
-    fsType = "ext4";
-  };
+  # fileSystems."/home/server" = {
+  #   device = "/dev/nvme0n1p1";
+  #   fsType = "ext4";
+  # };
 
   swapDevices = [
     {device = "/dev/disk/by-uuid/de941c45-0f5d-46d2-b006-cc539bf8224c";}

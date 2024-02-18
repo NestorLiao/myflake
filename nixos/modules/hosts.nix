@@ -5,6 +5,7 @@
 }: {
   networking.extraHosts = ''
 
+    151.101.78.217  cache.nixos.org
     20.205.243.166  github.com
     185.199.110.133 raw.githubusercontent.com
     185.199.109.133 raw.github.com

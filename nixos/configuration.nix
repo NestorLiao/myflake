@@ -1,6 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
+  pkgs,
   inputs,
   outputs,
   ...
@@ -26,7 +27,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
-    # inputs.xremap-flake.nixosModules.default
+    inputs.xremap-flake.nixosModules.default
   ];
 
   home-manager = {
@@ -35,10 +36,10 @@
     useUserPackages = true;
     users = {
       # Import your home-manager configuration
-      randy = import ../home-manager/laptop/randy.nix;
+      # randy = import ../home-manager/laptop/randy.nix;
       nestor = import ../home-manager/laptop/nestor.nix;
-      server = import ../home-manager/server/server.nix;
+      # server = import ../home-manager/server/server.nix;
     };
   };
-  services.xserver.enable = true;
+  users.defaultUserShell = pkgs.fish;
 }

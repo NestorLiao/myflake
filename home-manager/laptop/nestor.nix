@@ -8,18 +8,20 @@
   username = "nestor";
 in {
   home.packages = with pkgs; [
-    ghostscript
-    (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
-    nvidia-system-monitor-qt
+    # ghostscript
+    # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
+    android-studio
+    android-tools
 
-    # discord
-    arduino-ide
-    hugo
+    discord
+    # arduino-ide
+    # hugo
     # blender
-    calibre
-    gimp
+    telegram-desktop
+    # calibre
+    # gimp
     # gnome.cheese
-    kicad
+    # kicad
     # libreoffice
     mpv
     qq
@@ -72,15 +74,6 @@ in {
     username = "${username}";
     homeDirectory = "/home/${username}";
   };
-
-  # 直接以 text 的方式，在 nix 配置文件中硬编码文件内容
-  home.file.".cargo/config".text = ''
-    [source.crates-io]
-    replace-with = 'ustc'
-
-    [source.ustc]
-    registry = "git://mirrors.ustc.edu.cn/crates.io-index"
-  '';
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

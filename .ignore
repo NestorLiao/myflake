@@ -1,0 +1,7 @@
+nixos/modules/hosts.nix
+home-manager/modules/icons
+flake.lock
+README.md
+LICENSE
+
+

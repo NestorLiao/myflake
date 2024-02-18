@@ -4,19 +4,20 @@
   ...
 }: {
   home.packages = with pkgs; [
-    uutils-coreutils-noprefix
-    glxinfo
-    nvidia-system-monitor-qt
-    killall
-    # go-mtpfs
-    quickemu
-    zathura
+    scc
+    just
     bacon
-    # bat
+
+    uutils-coreutils-noprefix
+    # glxinfo
+    # nvidia-system-monitor-qt
+    killall
+    # quickemu
+    zathura
+    bat
     ethtool
     eza
     fd
-    fzf
     gitui
     imv
     lm_sensors # for `sensors` command
@@ -34,7 +35,7 @@
     tmux-sessionizer
     translate-shell
     tree
-    typst
+    # typst
     unrar-free
     unzip
     zip
@@ -58,11 +59,43 @@
   ];
 
   programs = {
+    fzf = {
+      enable = false;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+    };
+  };
+
+  # programs.zsh = {
+  #   oh-my-zsh = {
+  #     enable = true;
+  #     plugins = ["git" "thefuck" "zsh-autocomplete"];
+  #   };
+  # };
+
+  programs = {
     direnv = {
       enable = true;
       enableBashIntegration = true;
       nix-direnv.enable = true;
     };
+  };
+
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+    # TODO 在这里添加你的自定义 bashrc 内容
+    bashrcExtra = ''
+      eval "$(zoxide init bash)"
+    '';
+
+    # TODO 设置一些别名方便使用，你可以根据自己的需要进行增删
+    # shellAliases = {
+    #   k = "kubectl";
+    #   urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
+    #   urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+    # };
   };
 
   programs.zoxide = {
@@ -150,4 +183,30 @@
     ascii_distro="auto"
     image_size="auto"
   '';
+
+  # # 启用 starship，这是一个漂亮的 shell 提示符
+  # programs.starship = {
+  #   enable = false;
+  #   # 自定义配置
+  #   settings = {
+  #     add_newline = false;
+  #     aws.disabled = true;
+  #     gcloud.disabled = true;
+  #     line_break.disabled = true;
+  #   };
+  # };
+
+  # # 直接以 text 的方式，在 nix 配置文件中硬编码文件内容
+  # home.file.".cargo/config".text = ''
+  #   [source.crates-io]
+  #   replace-with = 'rsproxy-sparse'
+  #   [source.rsproxy]
+  #   registry = "https://rsproxy.cn/crates.io-index"
+  #   [source.rsproxy-sparse]
+  #   registry = "sparse+https://rsproxy.cn/index/"
+  #   [registries.rsproxy]
+  #   index = "https://rsproxy.cn/crates.io-index"
+  #   [net]
+  #   git-fetch-with-cli = true
+  # '';
 }

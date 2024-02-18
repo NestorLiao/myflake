@@ -3,6 +3,7 @@
   inputs,
   ...
 }: {
+  services.xserver.enable = true;
   services.greetd = {
     enable = true;
     settings = {
@@ -10,7 +11,7 @@
       # Autologin
       initial_session = {
         command = "Hyprland";
-        user = "randy";
+        user = "nestor";
       };
     };
   };

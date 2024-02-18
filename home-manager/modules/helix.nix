@@ -18,6 +18,7 @@ in {
     source = "${repo}/queries";
   };
   programs.helix = {
+    # package = inputs.packages.${pkgs.system}.default;
     package = inputs.helix.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
       alejandra
@@ -37,8 +38,8 @@ in {
       typst-lsp
     ];
     settings = {
-      theme = "eink";
-      # theme = "emacs";
+      # theme = "eink";
+      theme = "emacs";
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
@@ -114,7 +115,7 @@ in {
           display-messages = true;
           auto-signature-help = false; # https://github.com/helix-editor/helix/discussions/6710
         };
-        gutters = ["diagnostics" "spacer" "diff"];
+        # gutters = ["diagnostics" "spacer" "diff"];
         bufferline = "multiple";
         auto-info = true;
         auto-save = true;
@@ -144,7 +145,7 @@ in {
           "`" = "`";
         };
         soft-wrap = {
-          enable = false;
+          enable = true;
           max-wrap = 25;
           max-indent-retain = 0;
           wrap-indicator = "";
@@ -154,7 +155,7 @@ in {
           character = "╎";
           skip-levels = 1;
         };
-        # line-number = "relative";
+        line-number = "relative";
         mouse = true;
         # mouse = false;
         scrolloff = 0;

@@ -11,15 +11,67 @@
     pkgs.dconf
   ];
 
-  home.file.".config/hypr/wallpaper.jpg".source = ./wallpaper.jpg;
+  # home.file.".config/hypr/wallpaper.jpg".source = ./wallpaper.jpg;
 
   wayland.windowManager.hyprland.enable = true;
 
   wayland.windowManager.hyprland.settings = {
+    bind =
+      [
+        "$mod, A, exec, alacritty"
+        "$mod, B, exec, firefox"
+        ",code:87, workspace,1"
+        ",code:88, workspace,2"
+        ",code:89, workspace,3"
+        ",code:83, workspace,4"
+        ",code:84, workspace,5"
+        ",code:85, workspace,6"
+        ",code:79, workspace,7"
+        ",code:80, workspace,8"
+        ",code:81, workspace,9"
+        ",code:90, cyclenext"
+        "$mod, C, killactive"
+        "$mod, down, movefocus, d"
+        "$mod, D, exec,"
+        "$mod, F, togglefloating"
+        "$mod SHIFT, left, movewindow, l"
+        "$mod SHIFT, right, movewindow, r"
+        "$mod SHIFT, up, movewindow, u"
+        "$mod SHIFT, down, movewindow, d"
+        "$mod, N, movefocus, l"
+        "$mod, O, movefocus, r"
+        "$mod, E, workspace, +1"
+        "$mod, I, workspace, -1"
+        "$mod, P, pseudo"
+        "$mod, J, cyclenext"
+        "$mod, R, workspace,previous"
+        "$mod  SHIFT, Q, exit"
+        "$mod, S, fullscreen"
+        "$mod  SHIFT, H, exec, systemctl hibernate"
+        "$mod  SHIFT, S, fakefullscreen"
+        "$mod, T, togglesplit"
+        "$mod, up, movefocus, u"
+        "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+        "$mod, W, exec, pkill rofi || rofi -show drun "
+        ", Print, exec, grimblast copy area"
+        "SHIFT, Print, exec, wf-recorder"
+      ]
+      ++ (
+        # workspaces
+        # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+        builtins.concatLists (builtins.genList (x: let
+            ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
+          in [
+            "$mod, ${ws}, workspace, ${toString (x + 1)}"
+            "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+          ])
+          10)
+      );
+
     xwayland = {force_zero_scaling = "true";};
     exec-once = [
       "fcitx5 -d --replace"
-      "swaybg -i ~/.config/hypr/wallpaper.jpg -m fill &"
+      # "swaybg -i ~/.config/hypr/wallpaper.jpg -m fill &"
       "wl-paste --type text --watch cliphist store"
     ];
     env = [
@@ -38,7 +90,12 @@
       "col.inactive_border" = "rgba(ffffffff)";
       layout = "dwindle";
     };
-    windowrulev2 = ["rounding 0, xwayland:1, floating:1"];
+    windowrulev2 = [
+      "rounding 0, xwayland:1, floating:1"
+      "float, title:rofi.*"
+      "float, title:QQ"
+      "float, title:图片查看器"
+    ];
     decoration = {
       rounding = "9";
       blur = {
@@ -51,7 +108,9 @@
       shadow_render_power = "0";
       "col.shadow" = "rgba(00000000)";
     };
-    windowrule = "pseudo,fcitx";
+    windowrule = [
+      "pseudo,fcitx"
+    ];
     # windowrule = "pseudo";
     animations = {
       enabled = "no";
@@ -76,11 +135,11 @@
     };
     gestures = {workspace_swipe = "off";};
     # monitor = ",preferred,auto,1.5,transform,3";
-    monitor = ",preferred,auto,1.466667,transform,3";
+    # monitor = ",preferred,auto,1.466667,transform,3";
     # monitor = ",preferred,auto,1.466667";
     # monitor = ",preferred,auto,1,transform,3";
     # monitor = ",preferred,auto,1.5";
-    # monitor = ",preferred,auto,1";
+    monitor = ",preferred,auto,1";
     # monitor = [
     # "HDMI-A-1,preferred,1920x0,transform,3"
     # "HDMI-A-1,preferred,auto,transform,3"
@@ -98,47 +157,6 @@
       "$mod, mouse:272, movewindow"
       "$mod, mouse:273, resizewindow"
     ];
-    bind =
-      [
-        "$mod, A, exec, alacritty"
-        "$mod, B, exec, vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --disable-gpu"
-        "$mod, C, killactive"
-        "$mod, down, movefocus, d"
-        "$mod, D, exec,"
-        "$mod, F, togglefloating"
-        "$mod SHIFT, left, movewindow, l"
-        "$mod SHIFT, right, movewindow, r"
-        "$mod SHIFT, up, movewindow, u"
-        "$mod SHIFT, down, movewindow, d"
-        "$mod, N, movefocus, l"
-        "$mod, O, movefocus, r"
-        "$mod, E, workspace, +1"
-        "$mod, I, workspace, -1"
-        "$mod, P, pseudo"
-        "$mod, J, cyclenext"
-        "$mod, R, workspace,previous"
-        "$mod  SHIFT, Q, exit"
-        "$mod, S, fullscreen"
-        "$mod  SHIFT, H, exec, systemctl hibernate"
-        "$mod  SHIFT, S, exec, systemctl suspend"
-        "$mod, T, togglesplit"
-        "$mod, up, movefocus, u"
-        "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
-        "$mod, W, exec, pkill rofi || rofi -show drun "
-        ", Print, exec, grimblast copy area"
-        "SHIFT, Print, exec, wf-recorder"
-      ]
-      ++ (
-        # workspaces
-        # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-        builtins.concatLists (builtins.genList (x: let
-            ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
-          in [
-            "$mod, ${ws}, workspace, ${toString (x + 1)}"
-            "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-          ])
-          10)
-      );
   };
 
   home.pointerCursor = {

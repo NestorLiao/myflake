@@ -2,8 +2,8 @@
   environment.shellAliases = {
     c = "clear";
     e = "hx";
-    r = "fg";
     en = "hx .";
+    r = "fg";
     garbage = "nix-collect-garbage -d";
     get = "cd /etc/nixos/ && sudo sh update.sh";
     nixh = "nix-prefetch-url";
@@ -45,54 +45,54 @@
             extraOutputsToInstall = ["dev"];
           })
     )
-    (
-      let
-        base = pkgs.appimageTools.defaultFhsEnvArgs;
-      in
-        pkgs.buildFHSUserEnv (base
-          // {
-            name = "cuda-env";
-            targetPkgs = pkgs:
-              with pkgs; [
-                git
-                gitRepo
-                gnupg
-                autoconf
-                curl
-                procps
-                gnumake
-                util-linux
-                m4
-                gperf
-                unzip
-                cudatoolkit
-                linuxPackages.nvidia_x11
-                libGLU
-                libGL
-                xorg.libXi
-                xorg.libXmu
-                freeglut
-                xorg.libXext
-                xorg.libX11
-                xorg.libXv
-                xorg.libXrandr
-                zlib
-                ncurses5
-                gcc11Stdenv.cc
+    # (
+    #   let
+    #     base = pkgs.appimageTools.defaultFhsEnvArgs;
+    #   in
+    #     pkgs.buildFHSUserEnv (base
+    #       // {
+    #         name = "cuda-env";
+    #         targetPkgs = pkgs:
+    #           with pkgs; [
+    #             git
+    #             gitRepo
+    #             gnupg
+    #             autoconf
+    #             curl
+    #             procps
+    #             gnumake
+    #             util-linux
+    #             m4
+    #             gperf
+    #             unzip
+    #             cudatoolkit
+    #             linuxPackages.nvidia_x11
+    #             libGLU
+    #             libGL
+    #             xorg.libXi
+    #             xorg.libXmu
+    #             freeglut
+    #             xorg.libXext
+    #             xorg.libX11
+    #             xorg.libXv
+    #             xorg.libXrandr
+    #             zlib
+    #             ncurses5
+    #             gcc11Stdenv.cc
 
-                # stdenv.cc
-                binutils
-              ];
-            multiPkgs = pkgs: with pkgs; [zlib];
-            runScript = "fish";
-            profile = ''
-              export CUDA_PATH=${pkgs.cudatoolkit}
-              # export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
-              export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
-              export EXTRA_CCFLAGS="-I/usr/include"
-            '';
-          })
-    )
+    #             # stdenv.cc
+    #             binutils
+    #           ];
+    #         multiPkgs = pkgs: with pkgs; [zlib];
+    #         runScript = "fish";
+    #         profile = ''
+    #           export CUDA_PATH=${pkgs.cudatoolkit}
+    #           # export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
+    #           export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
+    #           export EXTRA_CCFLAGS="-I/usr/include"
+    #         '';
+    #       })
+    # )
   ];
 
   # environment.variables = {
