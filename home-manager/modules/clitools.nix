@@ -100,7 +100,7 @@
 
   programs.zoxide = {
     enable = true;
-    options = ["--cmd j"];
+    options = ["--cmd t"];
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
