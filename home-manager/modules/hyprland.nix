@@ -11,7 +11,7 @@
     pkgs.dconf
   ];
 
-  # home.file.".config/hypr/wallpaper.jpg".source = ./wallpaper.jpg;
+  home.file.".config/hypr/wallpaper.jpg".source = ./wallpaper.jpg;
 
   wayland.windowManager.hyprland.enable = true;
 
@@ -70,9 +70,10 @@
 
     xwayland = {force_zero_scaling = "true";};
     exec-once = [
-      "fcitx5 -d --replace"
-      # "swaybg -i ~/.config/hypr/wallpaper.jpg -m fill &"
+      "swaybg -i ~/.config/hypr/wallpaper.jpg -m fill &"
+      "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
+      "fcitx5 -d --replace"
     ];
     env = [
       "NIXOS_OZONE_WL,1"
@@ -97,7 +98,7 @@
       "float, title:图片查看器"
     ];
     decoration = {
-      rounding = "9";
+      rounding = "0";
       blur = {
         enabled = "false";
         size = "3";
@@ -136,10 +137,10 @@
     gestures = {workspace_swipe = "off";};
     # monitor = ",preferred,auto,1.5,transform,3";
     # monitor = ",preferred,auto,1.466667,transform,3";
-    # monitor = ",preferred,auto,1.466667";
-    # monitor = ",preferred,auto,1,transform,3";
+    monitor = ",preferred,auto,1.466667";
+    # monitor = ",preferred,auto,1.5,transform,3";
     # monitor = ",preferred,auto,1.5";
-    monitor = ",preferred,auto,1";
+    # monitor = ",preferred,auto,1";
     # monitor = [
     # "HDMI-A-1,preferred,1920x0,transform,3"
     # "HDMI-A-1,preferred,auto,transform,3"

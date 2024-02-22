@@ -10,14 +10,13 @@ in {
   home.packages = with pkgs; [
     # ghostscript
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
-    android-studio
-    android-tools
+    # android-studio
+    # android-tools
 
-    discord
+    # discord
     # arduino-ide
     # hugo
     # blender
-    telegram-desktop
     # calibre
     # gimp
     # gnome.cheese
@@ -25,7 +24,7 @@ in {
     # libreoffice
     mpv
     qq
-    vivaldi
+    # vivaldi
     # wpsoffice
     xfce.thunar
   ];

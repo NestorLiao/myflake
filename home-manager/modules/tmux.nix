@@ -13,7 +13,7 @@
       bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'wl-copy -in -selection clipboard'
       bind-key -r Bspace kill-pane
       bind -r Space select-pane -l
-      bind-key -r Enter split-window -v -p 50 -c "#{pane_current_path}"
+      bind-key -r Enter split-window -v -p 50 -c "#{pane_current_path}" \; select-pane -l;
       bind-key -n C-j select-pane -D
       bind-key -n C-k select-pane -U
       bind-key -n C-l last-window

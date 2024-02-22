@@ -14,8 +14,8 @@
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     settings = {
-      # substituters = ["https://xddxdd.cachix.org" "https://mirrors.ustc.edu.cn/nix-channels/store"];
-      # trusted-public-keys = ["xddxdd.cachix.org-1:ay1HJyNDYmlSwj5NXQG065C8LfoqqKaTNCyzeixGjf8="];
+      substituters = ["https://mirror.sjtu.edu.cn/nix-channels/store" "https://xddxdd.cachix.org"];
+      trusted-public-keys = ["xddxdd.cachix.org-1:ay1HJyNDYmlSwj5NXQG065C8LfoqqKaTNCyzeixGjf8="];
 
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";

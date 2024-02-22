@@ -41,5 +41,6 @@
       # server = import ../home-manager/server/server.nix;
     };
   };
-  users.defaultUserShell = pkgs.fish;
+  # users.defaultUserShell = pkgs.fish;
+  services.ollama.enable = true;
 }

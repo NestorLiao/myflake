@@ -84,8 +84,13 @@
       '';
 
       extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+        ublock-origin
+        sponsorblock
         browserpass
         tridactyl
+        dearrow
+        old-reddit-redirect
+        istilldontcareaboutcookies
       ];
 
       settings = {

@@ -1,21 +1,42 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
+  shell = script: lib.strings.splitString " " "${lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl"} dispatch exec ${lib.getExe' (pkgs.writeShellScriptBin "script" script) "script"}";
+in {
   services.xremap = {
     userName = "nestor";
     serviceMode = "user";
     withWlroots = true;
     # withHypr = true;
     debug = true;
-    yamlConfig = ''
-      modmap:
-        - name: Name # Optional
-          remap: # Required
-            # Replace a key with another
-            KEY_KPMINUS: KEY_PAGEUP
-            KEY_KPPLUS: KEY_PAGEDOWN
-          device:
-            only: [SEMICO Digio2 Ten Key Consumer Control, SEMICO Digio2 Ten Key,SEMICO Digio2 Ten Key System Control,SEMICO Digio2 Ten Key Consumer Control 1]
-
-    '';
+    mouse = true;
+    config = {
+      modmap = [
+        {
+          name = "Name";
+          remap = {
+            BTN_SIDE = "KEY_PAGEDOWN";
+            BTN_EXTRA = "KEY_PAGEUP";
+            KEY_KPMINUS = "KEY_PAGEUP";
+            KEY_KPPLUS = "KEY_PAGEDOWN";
+            KEY_KPENTER = {
+              press = {
+                launch = shell "${lib.getExe' pkgs.hyprland "hyprctl"} dispatch cyclenext";
+              };
+              release = {
+                launch = shell "${lib.getExe' pkgs.tmux "tmux"} select-pane -l";
+              };
+            };
+          };
+          # device = {
+          #   only = ["SEMICO Digio2 Ten Key Consumer Control" "SEMICO Digio2 Ten Key" "SEMICO Digio2 Ten Key System Control" "SEMICO Digio2 Ten Key Consumer Control 1"];
+          # };
+        }
+      ];
+    };
   };
 
   console = {

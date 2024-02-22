@@ -4,43 +4,48 @@
   ...
 }: {
   home.packages = with pkgs; [
-    scc
-    just
-    bacon
+    watchexec #Executes commands in response to file modifications
+    manix #A fast CLI documentation searcher for Nix.
+    mprocs #Run multiple commands in parallel
+    wiki-tui #A simple and easy to use Wikipedia Text User Interface
+    cargo-info #Query crates.io for crates details
+    scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
+    just #just is a handy way to save and run project-specific commands.
+    bacon #bacon is a background rust code checker.
 
-    uutils-coreutils-noprefix
     # glxinfo
     # nvidia-system-monitor-qt
-    killall
     # quickemu
-    zathura
-    bat
-    ethtool
-    eza
-    fd
-    gitui
-    imv
+    # typst
+
+    gitui #git user interface for terminal
+    uutils-coreutils-noprefix #collection of common Unix-like utilities without prefix
+    killall #used to kill processes by name
+    zathura #lightweight document viewer
+    bat #a cat clone with syntax highlighting and Git integration
+    ethtool #utility for displaying and modifying Ethernet device settings
+    eza #command-line JSON processor
+    fd #simple, fast and user-friendly alternative to `find`
+    imv #image viewer for the terminal
+    neofetch #command-line system information tool
+    nix-output-monitor #monitor build outputs of Nix package manager
+    pciutils #utilities for viewing and configuring PCI devices
+    ripgrep #line-oriented search tool that recursively searches directories for a regex pattern
+    strace #diagnostic tool for debugging and profiling Linux processes
+    sysstat #collection of performance monitoring tools for Linux
+    tldr #simplified and community-driven man pages
+    tmux-sessionizer #tool for organizing and cleaning up tmux sessions
+    translate-shell #command-line translator using various translation services
+    tree #displays directory structure in a tree-like format
+    unrar-free #unarchiver for .rar files
+    unzip #decompression tool for .zip archives
+    zip #compression tool and file packaging utility
+    usbutils #utilities for viewing USB devices and details
+    xdragon #(No specific description provided)
     lm_sensors # for `sensors` command
     lsof # list open files
     ltrace # library call monitoring
-    manix
-    mprocs
-    neofetch
-    nix-output-monitor
-    pciutils
-    ripgrep
-    strace
-    sysstat
-    tldr
-    tmux-sessionizer
-    translate-shell
-    tree
-    # typst
-    unrar-free
-    unzip
-    zip
-    usbutils
-    xdragon
+
     (pkgs.writeScriptBin "ts" ''
       #!/usr/bin/env bash
 
@@ -82,22 +87,6 @@
     };
   };
 
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    # TODO 在这里添加你的自定义 bashrc 内容
-    bashrcExtra = ''
-      eval "$(zoxide init bash)"
-    '';
-
-    # TODO 设置一些别名方便使用，你可以根据自己的需要进行增删
-    # shellAliases = {
-    #   k = "kubectl";
-    #   urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-    #   urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
-    # };
-  };
-
   programs.zoxide = {
     enable = true;
     options = ["--cmd t"];
@@ -108,8 +97,8 @@
 
   programs.git = {
     enable = true;
-    userName = "Cowboyliao";
-    userEmail = "2730647025@qq.com";
+    userName = "NestorLiao";
+    userEmail = "gtkndcbfhr@gmail.com";
     lfs.enable = true;
     extraConfig = {
       credential.helper = "${
@@ -120,41 +109,22 @@
 
   # TODO: find some way to express this as an attrset, and then convert to toml,
   # instead of hand-writing the toml
-  home.file.${
-    if pkgs.stdenv.isDarwin
-    then "/Library/Application Support/rs.tms/default-config.toml"
-    else ".config/tms/default-config.toml"
-  }.text = ''
-    search_paths = []
+  home.file.".config/tms/config.toml".text = ''
+    [[search_dirs]]
+    path = "${config.home.homeDirectory}/nink/nixos"
+    depth = 2
 
     [[search_dirs]]
-    path = '${config.home.homeDirectory}/nink/nixos'
-    depth = 10
+    path = "${config.home.homeDirectory}/resin"
+    depth = 2
 
     [[search_dirs]]
-    path = '${config.home.homeDirectory}/training/CSAPP2Rust'
-    depth = 10
+    path = "${config.home.homeDirectory}/stair"
+    depth = 2
 
     [[search_dirs]]
-    path = '${config.home.homeDirectory}/playground/cowboyliao.github.io'
-    depth = 10
-
-    [[search_dirs]]
-    path = '${config.home.homeDirectory}/playground/rust'
-    depth = 10
-
-    [[search_dirs]]
-    path = '${config.home.homeDirectory}/test/esp'
-    depth = 10
-
-    [[search_dirs]]
-    path = '${config.home.homeDirectory}/playground/cuda'
-    depth = 10
-
-    [[search_dirs]]
-    path = '${config.home.homeDirectory}/playground/matlab'
-    depth = 10
-
+    path = "${config.home.homeDirectory}/ornate"
+    depth = 2
   '';
 
   home.file.".config/neofetch/config.conf".text = ''
@@ -184,29 +154,10 @@
     image_size="auto"
   '';
 
-  # # 启用 starship，这是一个漂亮的 shell 提示符
-  # programs.starship = {
-  #   enable = false;
-  #   # 自定义配置
-  #   settings = {
-  #     add_newline = false;
-  #     aws.disabled = true;
-  #     gcloud.disabled = true;
-  #     line_break.disabled = true;
-  #   };
-  # };
+  # 直接以 text 的方式，在 nix 配置文件中硬编码文件内容
+  home.file.".config/wiki-tui/config.toml".source =
+    ./wiki-tui.toml;
 
-  # # 直接以 text 的方式，在 nix 配置文件中硬编码文件内容
-  # home.file.".cargo/config".text = ''
-  #   [source.crates-io]
-  #   replace-with = 'rsproxy-sparse'
-  #   [source.rsproxy]
-  #   registry = "https://rsproxy.cn/crates.io-index"
-  #   [source.rsproxy-sparse]
-  #   registry = "sparse+https://rsproxy.cn/index/"
-  #   [registries.rsproxy]
-  #   index = "https://rsproxy.cn/crates.io-index"
-  #   [net]
-  #   git-fetch-with-cli = true
-  # '';
+  home.file.".cargo/config.toml".source =
+    ./CargoConf.toml;
 }

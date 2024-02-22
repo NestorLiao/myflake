@@ -9,6 +9,7 @@
   ...
 }: {
   # Bootloader
+  boot.loader.timeout = 0;
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;

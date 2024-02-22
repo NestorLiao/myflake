@@ -38,8 +38,8 @@ in {
       typst-lsp
     ];
     settings = {
-      # theme = "eink";
-      theme = "emacs";
+      theme = "eink";
+      # theme = "emacs";
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
@@ -94,13 +94,15 @@ in {
         normal.backspace = {
           "backspace" = ":buffer-next";
           "z" = ":bco";
-          "r" = [":write" ":sh ./key.sh 1 2>&1 || true"];
-          "t" = [":write" ":sh ./key.sh 2 2>&1 || true"];
-          "n" = [":write" ":sh ./key.sh 3 2>&1 || true"];
-          "e" = [":write" ":sh ./key.sh 4 2>&1 || true"];
-          "i" = [":write" ":sh ./key.sh 5 2>&1 || true"];
-          "o" = [":write" ":sh ./key.sh 6 2>&1 || true"];
-          "l" = [":write" ":sh ./key.sh 6 2>&1 || true"];
+          "a" = [":write" ":sh just a"];
+          "r" = [":write" ":sh just r"];
+          "s" = [":write" ":sh just s"];
+          "t" = [":write" ":sh just t"];
+          "n" = [":write" ":sh just n"];
+          "e" = [":write" ":sh just e"];
+          "i" = [":write" ":sh just i"];
+          "o" = [":write" ":sh just o"];
+          "l" = [":write" ":sh just l"];
         };
         normal."]" = {
           "]" = "goto_next_paragraph";
@@ -145,7 +147,7 @@ in {
           "`" = "`";
         };
         soft-wrap = {
-          enable = true;
+          enable = false;
           max-wrap = 25;
           max-indent-retain = 0;
           wrap-indicator = "";
@@ -182,6 +184,10 @@ in {
             tab-width = 8;
             unit = "t";
           };
+        }
+        {
+          name = "just";
+          auto-format = false;
         }
         {
           name = "markdown";
