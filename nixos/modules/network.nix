@@ -5,6 +5,16 @@
 }: {
   imports = [
     inputs.daeuniverse.nixosModules.dae
+    inputs.hosts.nixosModule
+    {
+      networking.stevenBlackHosts = {
+        enable = true;
+        blockFakenews = true;
+        blockGambling = true;
+        blockPorn = true;
+        blockSocial = false;
+      };
+    }
   ];
 
   services.v2raya.enable = true;

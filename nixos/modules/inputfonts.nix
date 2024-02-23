@@ -6,6 +6,9 @@
 }: let
   shell = script: lib.strings.splitString " " "${lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl"} dispatch exec ${lib.getExe' (pkgs.writeShellScriptBin "script" script) "script"}";
 in {
+  imports = [
+    inputs.nur-xddxdd.nixosModules.setupOverlay
+  ];
   services.xremap = {
     userName = "nestor";
     serviceMode = "user";

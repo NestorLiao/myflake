@@ -40,8 +40,8 @@
         "$mod SHIFT, down, movewindow, d"
         "$mod, N, movefocus, l"
         "$mod, O, movefocus, r"
-        "$mod, E, workspace, +1"
-        "$mod, I, workspace, -1"
+        # "$mod, E, workspace, +1"
+        # "$mod, I, workspace, -1"
         "$mod, P, pseudo"
         "$mod, J, cyclenext"
         "$mod, R, workspace,previous"
@@ -70,12 +70,15 @@
 
     xwayland = {force_zero_scaling = "true";};
     exec-once = [
+      "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
       "swaybg -i ~/.config/hypr/wallpaper.jpg -m fill &"
       "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
       "fcitx5 -d --replace"
     ];
     env = [
+      "MOZ_ENABLE_WAYLAND,1"
+      "MOZ_WEBRENDER,1"
       "NIXOS_OZONE_WL,1"
       "XCURSOR_SIZE,24"
       "_JAVA_AWT_WM_NONREPARENTING,1"
@@ -83,7 +86,7 @@
       "WLR_NO_HARDWARE_CURSORS,1"
     ];
     general = {
-      sensitivity = "2";
+      sensitivity = "1";
       gaps_in = "0";
       gaps_out = "0";
       border_size = "0";
@@ -135,12 +138,12 @@
       no_gaps_when_only = "false";
     };
     gestures = {workspace_swipe = "off";};
-    # monitor = ",preferred,auto,1.5,transform,3";
+    # jjjjjor = ",preferred,auto,1.5,transform,3";
     # monitor = ",preferred,auto,1.466667,transform,3";
-    monitor = ",preferred,auto,1.466667";
+    # monitor = ",preferred,auto,1.466667";
     # monitor = ",preferred,auto,1.5,transform,3";
     # monitor = ",preferred,auto,1.5";
-    # monitor = ",preferred,auto,1";
+    monitor = ",preferred,auto,1";
     # monitor = [
     # "HDMI-A-1,preferred,1920x0,transform,3"
     # "HDMI-A-1,preferred,auto,transform,3"

@@ -1,35 +1,33 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
-  inputs,
   outputs,
-  lib,
-  config,
   pkgs,
   ...
 }: let
-  username = "randy";
+  username = "nestor";
 in {
-  # home.packages = with pkgs; [
-  #   ghostscript
-  #   (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
-  #   nvidia-system-monitor-qt
+  home.packages = with pkgs; [
+    # ghostscript
+    # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
+    android-studio
+    android-tools
 
-  #   # discord
-  #   arduino-ide
-  #   hugo
-  #   # blender
-  #   calibre
-  #   gimp
-  #   # gnome.cheese
-  #   kicad
-  #   # libreoffice
-  #   mpv
-  #   qq
-  #   vivaldi
-  #   # wpsoffice
-  #   xfce.thunar
-  # ];
+    # discord
+    # arduino-ide
+    # hugo
+    # blender
+    # calibre
+    # gimp
+    # gnome.cheese
+    # kicad
+    # libreoffice
+    mpv
+    qq
+    # vivaldi
+    # wpsoffice
+    xfce.thunar
+  ];
 
   # You can import other home-manager modules here
   imports = [
@@ -40,7 +38,7 @@ in {
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    # ../modules
+    ./default.nix
   ];
 
   nixpkgs = {
@@ -70,12 +68,11 @@ in {
     };
   };
 
+  # TODO: Set your username
   home = {
     username = "${username}";
     homeDirectory = "/home/${username}";
   };
-
-  # home.packages = with pkgs; [ steam ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

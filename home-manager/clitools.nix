@@ -4,6 +4,9 @@
   ...
 }: {
   home.packages = with pkgs; [
+    tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
+    tailscale #The node agent for Tailscale, a mesh VPN built on WireGuard
+    linux-wifi-hotspot #Feature-rich wifi hotspot creator for Linux which provides both GUI and command-line interface
     watchexec #Executes commands in response to file modifications
     manix #A fast CLI documentation searcher for Nix.
     mprocs #Run multiple commands in parallel
@@ -19,16 +22,17 @@
     # typst
 
     gitui #git user interface for terminal
+    zathura #lightweight document viewer
     uutils-coreutils-noprefix #collection of common Unix-like utilities without prefix
     killall #used to kill processes by name
-    zathura #lightweight document viewer
-    bat #a cat clone with syntax highlighting and Git integration
+    # bat #a cat clone with syntax highlighting and Git integration
     ethtool #utility for displaying and modifying Ethernet device settings
     eza #command-line JSON processor
     fd #simple, fast and user-friendly alternative to `find`
-    imv #image viewer for the terminal
+    # imv #image viewer for the terminal
     neofetch #command-line system information tool
     nix-output-monitor #monitor build outputs of Nix package manager
+
     pciutils #utilities for viewing and configuring PCI devices
     ripgrep #line-oriented search tool that recursively searches directories for a regex pattern
     strace #diagnostic tool for debugging and profiling Linux processes
@@ -72,13 +76,6 @@
     };
   };
 
-  # programs.zsh = {
-  #   oh-my-zsh = {
-  #     enable = true;
-  #     plugins = ["git" "thefuck" "zsh-autocomplete"];
-  #   };
-  # };
-
   programs = {
     direnv = {
       enable = true;
@@ -95,37 +92,16 @@
     enableZshIntegration = true;
   };
 
-  programs.git = {
-    enable = true;
-    userName = "NestorLiao";
-    userEmail = "gtkndcbfhr@gmail.com";
-    lfs.enable = true;
-    extraConfig = {
-      credential.helper = "${
-        pkgs.git.override {withLibsecret = true;}
-      }/bin/git-credential-libsecret";
-    };
-  };
-
-  # TODO: find some way to express this as an attrset, and then convert to toml,
-  # instead of hand-writing the toml
-  home.file.".config/tms/config.toml".text = ''
-    [[search_dirs]]
-    path = "${config.home.homeDirectory}/nink/nixos"
-    depth = 2
-
-    [[search_dirs]]
-    path = "${config.home.homeDirectory}/resin"
-    depth = 2
-
-    [[search_dirs]]
-    path = "${config.home.homeDirectory}/stair"
-    depth = 2
-
-    [[search_dirs]]
-    path = "${config.home.homeDirectory}/ornate"
-    depth = 2
-  '';
+  # programs.git = {
+  #   enable = true;
+  #   userName = "NestorLiao";
+  #   userEmail = "gtkndcbfhr@gmail.com";
+  #   extraConfig = {
+  #     credential.helper = "${
+  #       pkgs.git.override {withLibsecret = true;}
+  #     }/bin/git-credential-libsecret";
+  #   };
+  # };
 
   home.file.".config/neofetch/config.conf".text = ''
     print_info() {

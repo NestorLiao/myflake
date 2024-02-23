@@ -74,7 +74,7 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
-  in rec {
+  in {
     # Your custom packages
     # Acessible through 'nix build', 'nix shell', etc
     packages = forAllSystems (
@@ -83,6 +83,7 @@
       in
         import ./pkgs {inherit pkgs;}
     );
+
     # Devshell for bootstrapping
     # Acessible through 'nix develop' or 'nix-shell' (legacy)
     devShells = forAllSystems (
@@ -109,18 +110,6 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main nixos configuration file <
-          inputs.nur-xddxdd.nixosModules.setupOverlay
-          inputs.hosts.nixosModule
-          {
-            networking.stevenBlackHosts = {
-              enable = true;
-              blockFakenews = true;
-              blockGambling = true;
-              blockPorn = true;
-              blockSocial = false;
-            };
-          }
-
           ./nixos/configuration.nix
         ];
       };
