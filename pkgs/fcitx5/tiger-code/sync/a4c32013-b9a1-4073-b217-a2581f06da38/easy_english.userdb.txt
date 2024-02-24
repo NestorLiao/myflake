@@ -1,0 +1,26 @@
+# Rime user dictionary
+#@/db_name	easy_english
+#@/db_type	userdb
+#@/rime_version	1.9.0
+#@/tick	26
+#@/user_id	a4c32013-b9a1-4073-b217-a2581f06da38
+cargo 	cargo	c=1 d=1 t=26
+chrome 	chrome	c=1 d=0.985112 t=26
+close 	close	c=1 d=0.995012 t=26
+commit 	commit	c=2 d=1.99501 t=26
+datasheet 	datasheet	c=1 d=0.995012 t=26
+firefox 	firefox	c=2 d=1.97025 t=26
+forward 	forward	c=1 d=0.995012 t=26
+gpt 	GPT	c=1 d=0.995012 t=26
+gram 	gram	c=1 d=1 t=26
+just 	just	c=1 d=1 t=26
+linux 	linux	c=4 d=3.916 t=26
+nestor 	nestor	c=1 d=1 t=26
+nix 	nix	c=1 d=1 t=26
+offer 	offer	c=1 d=1 t=26
+pcb 	PCB	c=1 d=0.995012 t=26
+rust 	rust	c=1 d=1 t=26
+straight 	straight	c=1 d=1 t=26
+tiger 	tiger	c=2 d=1.99501 t=26
+window 	window	c=1 d=1 t=26
+youtube 	youtube	c=1 d=1 t=26

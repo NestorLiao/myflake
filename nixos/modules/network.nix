@@ -1,6 +1,6 @@
 {
-  pkgs,
   inputs,
+  userSetting,
   ...
 }: {
   imports = [
@@ -16,19 +16,27 @@
       };
     }
   ];
-
   services.v2raya.enable = true;
-  # systemd.network.networks.randy.dns = [  185.199.108.133 ];
-
   # with dae
   services.dae = {
     enable = true;
-    # configFile = ./bypass-router.dae;
-    configFile = "/home/nestor/nink/retain/config.dae";
-    # configFile = "/etc/dae/config.dae";
+    configFile = "/home/${userSetting.username}/nink/retain/config.dae";
     openFirewall = {
       enable = true;
       port = 12345;
     };
+  };
+
+  # networking.firewall.allowedTCPPorts = [8080];
+  # networking.firewall.extraCommands = ''
+  #   iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+  # '';
+
+  services.create_ap.enable = false;
+  services.create_ap.settings = {
+    INTERNET_IFACE = "enp46s0";
+    PASSPHRASE = "12345678";
+    SSID = "My Wifi Hotspot";
+    WIFI_IFACE = "wlp45s0";
   };
 }

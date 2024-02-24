@@ -1,7 +1,11 @@
 nixos/modules/hosts.nix
 home-manager/modules/icons
+ovelay
+pkgs
 flake.lock
 README.md
 LICENSE
+pkgs/result
+
 
 

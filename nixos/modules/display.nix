@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  userSetting,
   ...
 }: {
   services.xserver.enable = true;
@@ -11,7 +12,7 @@
       # Autologin
       initial_session = {
         command = "Hyprland";
-        user = "nestor";
+        user = userSetting.username;
       };
     };
   };

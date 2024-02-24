@@ -6,6 +6,7 @@
 {
   pkgs,
   config,
+  userSetting,
   ...
 }: {
   # Bootloader
@@ -15,7 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
 
-  networking.hostName = "nixos";
+  networking.hostName = userSetting.hostname;
   networking.networkmanager.enable = true;
   hardware.bluetooth.package = pkgs.bluez;
   hardware.bluetooth.enable = true;

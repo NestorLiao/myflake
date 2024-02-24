@@ -2,11 +2,10 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   outputs,
+  userSetting,
   pkgs,
   ...
-}: let
-  username = "nestor";
-in {
+}: {
   home.packages = with pkgs; [
     # ghostscript
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
@@ -70,8 +69,8 @@ in {
 
   # TODO: Set your username
   home = {
-    username = "${username}";
-    homeDirectory = "/home/${username}";
+    username = "${userSetting.username}";
+    homeDirectory = "/home/${userSetting.username}";
   };
 
   # Enable home-manager and git

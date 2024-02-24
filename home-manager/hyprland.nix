@@ -75,6 +75,7 @@
       "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
       "fcitx5 -d --replace"
+      "hyprctl dispatch workspace 4"
     ];
     env = [
       "MOZ_ENABLE_WAYLAND,1"
@@ -138,7 +139,7 @@
       no_gaps_when_only = "false";
     };
     gestures = {workspace_swipe = "off";};
-    # jjjjjor = ",preferred,auto,1.5,transform,3";
+    # monitor = ",preferred,auto,1.5,transform,3";
     # monitor = ",preferred,auto,1.466667,transform,3";
     # monitor = ",preferred,auto,1.466667";
     # monitor = ",preferred,auto,1.5,transform,3";

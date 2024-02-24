@@ -1,8 +1,14 @@
 {
+  # pkgs-unstable,
   pkgs,
   config,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.nur-xddxdd.nixosModules.setupOverlay
+  ];
+
   home.packages = with pkgs; [
     tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
     tailscale #The node agent for Tailscale, a mesh VPN built on WireGuard
@@ -18,7 +24,7 @@
 
     # glxinfo
     # nvidia-system-monitor-qt
-    # quickemu
+    quickemu
     # typst
 
     gitui #git user interface for terminal
@@ -69,7 +75,7 @@
 
   programs = {
     fzf = {
-      enable = false;
+      enable = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
       enableZshIntegration = true;
@@ -92,16 +98,16 @@
     enableZshIntegration = true;
   };
 
-  # programs.git = {
-  #   enable = true;
-  #   userName = "NestorLiao";
-  #   userEmail = "gtkndcbfhr@gmail.com";
-  #   extraConfig = {
-  #     credential.helper = "${
-  #       pkgs.git.override {withLibsecret = true;}
-  #     }/bin/git-credential-libsecret";
-  #   };
-  # };
+  programs.git = {
+    enable = true;
+    userName = "NestorLiao";
+    userEmail = "gtkndcbfhr@gmail.com";
+    extraConfig = {
+      credential.helper = "${
+        pkgs.git.override {withLibsecret = true;}
+      }/bin/git-credential-libsecret";
+    };
+  };
 
   home.file.".config/neofetch/config.conf".text = ''
     print_info() {

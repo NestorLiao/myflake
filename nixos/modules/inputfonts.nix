@@ -2,15 +2,17 @@
   pkgs,
   lib,
   inputs,
+  userSetting,
   ...
 }: let
   shell = script: lib.strings.splitString " " "${lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl"} dispatch exec ${lib.getExe' (pkgs.writeShellScriptBin "script" script) "script"}";
 in {
   imports = [
     inputs.nur-xddxdd.nixosModules.setupOverlay
+    inputs.xremap-flake.nixosModules.default
   ];
   services.xremap = {
-    userName = "nestor";
+    userName = userSetting.username;
     serviceMode = "user";
     withWlroots = true;
     # withHypr = true;
@@ -23,6 +25,7 @@ in {
           remap = {
             BTN_SIDE = "KEY_PAGEDOWN";
             BTN_EXTRA = "KEY_PAGEUP";
+            KEY_KP0 = "KEY_SEMICOLON";
             KEY_KPMINUS = "KEY_PAGEUP";
             KEY_KPPLUS = "KEY_PAGEDOWN";
             KEY_KPENTER = {
