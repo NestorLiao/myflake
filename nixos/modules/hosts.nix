@@ -81640,7 +81640,7 @@
     127.0.0.1 www.bilibili.com
     127.0.0.1 www.baidu.com
     127.0.0.1 www.sspai.com
-    # 127.0.0.1 www.zhihu.com
+    127.0.0.1 www.zhihu.com
     127.0.0.1 s1-tracking.adalyser.com
     127.0.0.1 s1.shinystat.it
     127.0.0.1 s10.histats.com

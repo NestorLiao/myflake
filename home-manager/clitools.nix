@@ -10,6 +10,7 @@
   ];
 
   home.packages = with pkgs; [
+    openocd
     tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
     tailscale #The node agent for Tailscale, a mesh VPN built on WireGuard
     linux-wifi-hotspot #Feature-rich wifi hotspot creator for Linux which provides both GUI and command-line interface

@@ -23,6 +23,8 @@
   services.ollama.enable = true;
 
   environment.systemPackages = with pkgs; [
+    stlink
+    stm32cubemx
     neovim
     wget
     git

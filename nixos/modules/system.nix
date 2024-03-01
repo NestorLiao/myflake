@@ -65,8 +65,10 @@
   };
 
   time.timeZone = "Asia/Shanghai";
-  # services.udisks2.enable = true;
   # services.udisks2.mountOnMedia = true;
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

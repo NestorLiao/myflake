@@ -6,11 +6,21 @@
   pkgs,
   ...
 }: {
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      # dracula-theme.theme-dracula
+      # vscodevim.vim
+      # yzhang.markdown-all-in-one
+      rust-lang.rust-analyzer
+      llvm-vs-code-extensions.vscode-clangd
+    ];
+  };
+
   home.packages = with pkgs; [
-    # ghostscript
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
-    android-studio
-    android-tools
+    # android-studio
+    # android-tools
 
     # discord
     # arduino-ide
@@ -21,7 +31,7 @@
     # gnome.cheese
     # kicad
     # libreoffice
-    mpv
+    # mpv
     qq
     # vivaldi
     # wpsoffice
@@ -73,7 +83,7 @@
     homeDirectory = "/home/${userSetting.username}";
   };
 
-  # Enable home-manager and git
+  # Enable home-manager
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs

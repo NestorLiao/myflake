@@ -21,7 +21,6 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
@@ -53,7 +52,7 @@
           # inputs.hosts.nixosModule.networking
 
           # Or modules from other flakes (such as nixos-hardware):
-          # inputs.hardware.nixosModules.common-cpu-amd
+          # inputs.hardware.nixosModules.cixpkgs-unstabommon-cpu-amd
           # inputs.hardware.nixosModules.common-ssd
 
           # You can also split up your configuration and import pieces of it here:
@@ -102,7 +101,7 @@
     daeuniverse.url = "github:daeuniverse/flake.nix";
     # Nixpkgs
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixOS/nixpkgs/nixos-unstable";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
