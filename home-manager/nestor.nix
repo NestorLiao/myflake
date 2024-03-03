@@ -20,7 +20,7 @@
   home.packages = with pkgs; [
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
     # android-studio
-    # android-tools
+    android-tools
 
     # discord
     # arduino-ide
@@ -28,7 +28,7 @@
     # blender
     # calibre
     # gimp
-    # gnome.cheese
+    gnome.cheese
     # kicad
     # libreoffice
     # mpv

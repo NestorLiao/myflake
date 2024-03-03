@@ -40,8 +40,8 @@ in {
       typst-lsp
     ];
     settings = {
-      # theme = "eink";
-      theme = "emacs";
+      theme = "eink";
+      # theme = "emacs";
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];

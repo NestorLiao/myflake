@@ -22,6 +22,13 @@
     # Forked from: https://github.com/StevenBlack/hosts
     #
     # ===============================================================
+    127.0.0.1 www.v2ex.com
+    127.0.0.1 www.twitter.com
+    127.0.0.1 www.facebook.com
+    127.0.0.1 www.bilibili.com
+    127.0.0.1 www.baidu.com
+    127.0.0.1 www.sspai.com
+    127.0.0.1 www.zhihu.com
 
     127.0.0.1 localhost
 
@@ -81634,13 +81641,6 @@
     # 127.0.0.1 www.youtube.com
     # 127.0.0.1 m.youtube.com
     127.0.0.1 music.youtube.com
-    127.0.0.1 www.v2ex.com
-    127.0.0.1 www.twitter.com
-    127.0.0.1 www.facebook.com
-    127.0.0.1 www.bilibili.com
-    127.0.0.1 www.baidu.com
-    127.0.0.1 www.sspai.com
-    127.0.0.1 www.zhihu.com
     127.0.0.1 s1-tracking.adalyser.com
     127.0.0.1 s1.shinystat.it
     127.0.0.1 s10.histats.com

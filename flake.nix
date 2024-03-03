@@ -123,6 +123,7 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     flake-utils.url = "github:numtide/flake-utils";
 
     nur-xddxdd = {
