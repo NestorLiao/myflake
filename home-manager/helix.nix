@@ -40,8 +40,8 @@ in {
       typst-lsp
     ];
     settings = {
-      theme = "eink";
-      # theme = "emacs";
+      # theme = "eink";
+      theme = "emacs";
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
@@ -105,6 +105,7 @@ in {
           "i" = [":write" ":sh just i"];
           "o" = [":write" ":sh just o"];
           "l" = [":write" ":sh just l"];
+          "c" = [":write" ":sh just c"];
         };
         normal."]" = {
           "]" = "goto_next_paragraph";

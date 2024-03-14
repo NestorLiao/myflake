@@ -23,12 +23,62 @@
     #
     # ===============================================================
     127.0.0.1 www.v2ex.com
+    # 127.0.0.1 www.youtube.com
+    127.0.0.1 m.youtube.com
+    127.0.0.1 music.youtube.com
     127.0.0.1 www.twitter.com
     127.0.0.1 www.facebook.com
     127.0.0.1 www.bilibili.com
     127.0.0.1 www.baidu.com
+    127.0.0.1 www.tieba.baidu.com
+    127.0.0.1 www.tieba.com
     127.0.0.1 www.sspai.com
-    127.0.0.1 www.zhihu.com
+    # 127.0.0.1 www.zhihu.com
+    127.0.0.1 api-h2.tiktokv.com
+    127.0.0.1 api.tiktokv.com
+    127.0.0.1 api21-h2.tiktokv.com
+    127.0.0.1 ib.tiktokv.com
+    127.0.0.1 m.tiktok.com
+    127.0.0.1 ns-1475.awsdns-56.org
+    127.0.0.1 ns-1574.awsdns-04.co.uk
+    127.0.0.1 ns-440.awsdns-55.com
+    127.0.0.1 ns-722.awsdns-26.net
+    127.0.0.1 p16-tiktokcdn-com.akamaized.net
+    127.0.0.1 t.tiktok.com
+    127.0.0.1 tiktok.com
+    127.0.0.1 tiktok.org
+    127.0.0.1 tiktokcdn-com.akamaized.net
+    127.0.0.1 tiktokcdn.com
+    127.0.0.1 tiktokv.com
+    127.0.0.1 v16-tiktokcdn-com.akamaized.net
+    127.0.0.1 v16.tiktokcdn.com
+    127.0.0.1 vt.tiktok.com
+    127.0.0.1 v19.tiktokcdn.com
+    127.0.0.1 v16.tiktokcdn.com
+    127.0.0.1 api.tiktokv.com
+    127.0.0.1 api-h2.tiktokv.com
+    127.0.0.1 api21-h2.tiktokv.com
+    127.0.0.1 mon.tiktokv.com
+    127.0.0.1 ib.tiktokv.com
+    127.0.0.1 p16-tiktokcdn-com.akamaized.net
+    127.0.0.1 v16-tiktokcdn-com.akamaized.net
+    127.0.0.1 47.252.102.50
+    127.0.0.1 161.117.71.74
+    127.0.0.1 47.252.102.182
+    127.0.0.1 161.117.71.35
+    127.0.0.1 161.117.70.89
+    127.0.0.1 161.117.70.145
+    127.0.0.1 161.117.70.136
+    127.0.0.1 47.252.50.101
+    127.0.0.1 47.252.102.193
+    127.0.0.1 161.117.71.34
+    127.0.0.1 161.117.71.73
+    127.0.0.1 47.252.102.48
+    127.0.0.1 47.252.50.157
+    127.0.0.1 34.196.79.125
+    127.0.0.1 47.252.102.198
+    127.0.0.1 161.117.70.68
+
 
     127.0.0.1 localhost
 
@@ -81638,9 +81688,6 @@
     127.0.0.1 s.go-mpulse.net
     127.0.0.1 s.update.fbsbx.com
     127.0.0.1 s.youtube.com				# Blocking this will interfere with video watching history and may interfere with Google Podcasts
-    # 127.0.0.1 www.youtube.com
-    # 127.0.0.1 m.youtube.com
-    127.0.0.1 music.youtube.com
     127.0.0.1 s1-tracking.adalyser.com
     127.0.0.1 s1.shinystat.it
     127.0.0.1 s10.histats.com

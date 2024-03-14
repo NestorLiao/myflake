@@ -5,11 +5,13 @@
   inputs,
   ...
 }: {
-  imports = [
-    inputs.nur-xddxdd.nixosModules.setupOverlay
-  ];
+  # imports = [
+  # inputs.nur-xddxdd.nixosModules.setupOverlay
+  # ];
 
   home.packages = with pkgs; [
+    aseprite
+    emacs
     openocd
     tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
     tailscale #The node agent for Tailscale, a mesh VPN built on WireGuard

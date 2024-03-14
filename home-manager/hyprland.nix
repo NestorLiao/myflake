@@ -1,20 +1,21 @@
-{pkgs, ...}: {
-  # 直接将当前文件夹的配置文件，链接到 Home 目录下的指定位置
+{
+  pkgs,
+  userSetting,
+  lib,
+  ...
+}:
+lib.mkIf (userSetting.windowmanager == "hyprland") {
   home.packages = with pkgs; [
     cliphist
     grimblast
     hyprpicker
     rofi
-    swaybg
     wf-recorder
     wl-clipboard
     pkgs.dconf
   ];
 
-  home.file.".config/hypr/wallpaper.jpg".source = ./wallpaper.jpg;
-
   wayland.windowManager.hyprland.enable = true;
-
   wayland.windowManager.hyprland.settings = {
     bind =
       [
@@ -71,11 +72,10 @@
     xwayland = {force_zero_scaling = "true";};
     exec-once = [
       "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
-      "swaybg -i ~/.config/hypr/wallpaper.jpg -m fill &"
       "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
       "fcitx5 -d --replace"
-      "hyprctl dispatch workspace 4"
+      "hyprctl dispatch workspace 5"
     ];
     env = [
       "MOZ_ENABLE_WAYLAND,1"
@@ -139,24 +139,25 @@
       no_gaps_when_only = "false";
     };
     gestures = {workspace_swipe = "off";};
-    # monitor = ",preferred,auto,1.5,transform,3";
-    # monitor = ",preferred,auto,1.466667,transform,3";
-    # monitor = ",preferred,auto,1.466667";
-    # monitor = ",preferred,auto,1.5,transform,3";
-    # monitor = ",preferred,auto,1.5";
-    monitor = ",preferred,auto,1";
-    # monitor = [
-    # "HDMI-A-1,preferred,1920x0,transform,3"
-    # "HDMI-A-1,preferred,auto,transform,3"
-    # "DP-2,highres, 0x0, 1.46667,transform,3"
-    # ];
-    # workspace = [
-    #   "4, monitor:DP-2, default:true,rounding:false, decorate:false,on-created-empty:alacritty"
-    #   "5, monitor:DP-2, default:true"
-    #   "6, monitor:HDMI-A-1, default:true, on-created-empty:blender"
-    #   "7, monitor:HDMI-A-1, default:true,  on-created-empty:kicad"
-    # ];
-
+    monitor = [
+      ",1920x1080@60,0x0,1,transform,1"
+      # "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
+      "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"
+    ];
+    workspace = [
+      "1, monitor:DP-2, default:true"
+      "4, monitor:DP-2, default:true"
+      "7, monitor:DP-2, default:true"
+      "1, monitor:DP-1, default:true"
+      "4, monitor:DP-1, default:true"
+      "7, monitor:DP-1, default:true"
+      "2, monitor:HDMI-A-1, default:true"
+      "3, monitor:HDMI-A-1, default:true"
+      "5, monitor:HDMI-A-1, default:true"
+      "6, monitor:HDMI-A-1, default:true"
+      "8, monitor:HDMI-A-1, default:true"
+      "9, monitor:HDMI-A-1, default:true"
+    ];
     "$mod" = "SUPER";
     bindm = [
       "$mod, mouse:272, movewindow"

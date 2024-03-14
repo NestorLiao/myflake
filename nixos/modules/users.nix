@@ -39,5 +39,6 @@
     };
   };
 
+  users.defaultUserShell = pkgs.fish;
   security.sudo.wheelNeedsPassword = false;
 }

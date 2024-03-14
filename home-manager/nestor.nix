@@ -9,6 +9,8 @@
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
+      ms-python.python
+      ms-python.vscode-pylance
       # dracula-theme.theme-dracula
       # vscodevim.vim
       # yzhang.markdown-all-in-one
@@ -19,22 +21,24 @@
 
   home.packages = with pkgs; [
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
-    # android-studio
+    # verilator
+    # libsForQt5.kdenlive
+    android-studio
     android-tools
 
     # discord
     # arduino-ide
     # hugo
-    # blender
+    blender
     # calibre
     # gimp
     gnome.cheese
     # kicad
     # libreoffice
-    # mpv
+    mpv
     qq
     # vivaldi
-    # wpsoffice
+    wpsoffice
     xfce.thunar
   ];
 
@@ -60,6 +64,9 @@
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
+      (final: prev: {
+        blender = prev.blender.override {cudaSupport = true;};
+      })
 
       # Or define it inline, for example:
       # (final: prev: {

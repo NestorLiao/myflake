@@ -36,6 +36,7 @@
       username = "nestor";
       hostname = "nixos";
       email = "gtkndcbfhr@gmail.com";
+      windowmanager = "hyprland";
     };
   in {
     # NixOS configuration entrypoint
@@ -128,7 +129,7 @@
 
     nur-xddxdd = {
       url = "github:xddxdd/nur-packages";
-      inputs.flake-utils.follows = "flake-utils";
+      # inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

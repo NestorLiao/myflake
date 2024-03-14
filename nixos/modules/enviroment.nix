@@ -4,6 +4,7 @@
     e = "hx";
     en = "hx .";
     r = "fg";
+    sl = "ls";
     garbage = "nix-collect-garbage -d";
     get = "cd /etc/nixos/ && sudo sh update.sh";
     nixh = "nix-prefetch-url";
