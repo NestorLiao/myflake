@@ -23,17 +23,19 @@
     #
     # ===============================================================
     127.0.0.1 www.v2ex.com
-    # 127.0.0.1 www.youtube.com
+    127.0.0.1 www.youtube.com
     127.0.0.1 m.youtube.com
     127.0.0.1 music.youtube.com
     127.0.0.1 www.twitter.com
     127.0.0.1 www.facebook.com
     127.0.0.1 www.bilibili.com
+    127.0.0.1 www.thepaper.cn
+    127.0.0.1 www.bilibili.com
     127.0.0.1 www.baidu.com
     127.0.0.1 www.tieba.baidu.com
     127.0.0.1 www.tieba.com
     127.0.0.1 www.sspai.com
-    # 127.0.0.1 www.zhihu.com
+    127.0.0.1 www.zhihu.com
     127.0.0.1 api-h2.tiktokv.com
     127.0.0.1 api.tiktokv.com
     127.0.0.1 api21-h2.tiktokv.com

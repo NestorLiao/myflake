@@ -10,32 +10,30 @@
   # ];
 
   home.packages = with pkgs; [
-    aseprite
-    emacs
-    openocd
-    tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
-    tailscale #The node agent for Tailscale, a mesh VPN built on WireGuard
-    linux-wifi-hotspot #Feature-rich wifi hotspot creator for Linux which provides both GUI and command-line interface
-    watchexec #Executes commands in response to file modifications
-    manix #A fast CLI documentation searcher for Nix.
-    mprocs #Run multiple commands in parallel
-    wiki-tui #A simple and easy to use Wikipedia Text User Interface
-    cargo-info #Query crates.io for crates details
-    scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
+    helix-gpt
+    nix-index
+    # tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
+    # tailscale #The node agent for Tailscale, a mesh VPN built on WireGuard
+    # watchexec #Executes commands in response to file modifications
+    # manix #A fast CLI documentation searcher for Nix.
+    # mprocs #Run multiple commands in parallel
+    # wiki-tui #A simple and easy to use Wikipedia Text User Interface
+    # cargo-info #Query crates.io for crates details
+    # scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
     just #just is a handy way to save and run project-specific commands.
-    bacon #bacon is a background rust code checker.
+    # bacon #bacon is a background rust code checker.
 
     # glxinfo
     # nvidia-system-monitor-qt
-    quickemu
+    # quickemu
     # typst
 
-    gitui #git user interface for terminal
+    # gitui #git user interface for terminal
     zathura #lightweight document viewer
     uutils-coreutils-noprefix #collection of common Unix-like utilities without prefix
     killall #used to kill processes by name
     # bat #a cat clone with syntax highlighting and Git integration
-    ethtool #utility for displaying and modifying Ethernet device settings
+    # ethtool #utility for displaying and modifying Ethernet device settings
     eza #command-line JSON processor
     fd #simple, fast and user-friendly alternative to `find`
     # imv #image viewer for the terminal
@@ -59,21 +57,21 @@
     lsof # list open files
     ltrace # library call monitoring
 
-    (pkgs.writeScriptBin "ts" ''
-      #!/usr/bin/env bash
+    # (pkgs.writeScriptBin "ts" ''
+    #   #!/usr/bin/env bash
 
-      # Execute wl-paste and store the output in a variable
-      clipboard_content=$(wl-paste)
+    #   # Execute wl-paste and store the output in a variable
+    #   clipboard_content=$(wl-paste)
 
-      # Translate the clipboard content from English to Simplified Chinese using `trans`
-      translated_content=$(echo "$clipboard_content" | trans :zh)
+    #   # Translate the clipboard content from English to Simplified Chinese using `trans`
+    #   translated_content=$(echo "$clipboard_content" | trans :zh)
 
-      # Remove ANSI escape codes from the translated content using `sed`
-      cleaned_content=$(echo "$translated_content" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g")
+    #   # Remove ANSI escape codes from the translated content using `sed`
+    #   cleaned_content=$(echo "$translated_content" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g")
 
-      # Print the final cleaned content
-      echo "$cleaned_content"
-    '')
+    #   # Print the final cleaned content
+    #   echo "$cleaned_content"
+    # '')
   ];
 
   programs = {

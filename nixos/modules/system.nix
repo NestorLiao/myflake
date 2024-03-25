@@ -6,9 +6,22 @@
 {
   pkgs,
   config,
-  userSetting,
   ...
 }: {
+  # https://github.com/ghostbuster91/blogposts/blob/main/router2023-part2/main.md
+  boot = {
+    kernel = {
+      sysctl = {
+        # forward network packets that are not destined for the interface on which they were received
+        "net.ipv4.conf.all.forwarding" = true;
+        "net.ipv6.conf.all.forwarding" = true;
+        "net.ipv4.conf.br-lan.rp_filter" = 1;
+        "net.ipv4.conf.wan.rp_filter" = 1;
+      };
+    };
+  };
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # Bootloader
   boot.loader.timeout = 0;
   boot.loader.systemd-boot.enable = true;
@@ -16,11 +29,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
 
-  networking.hostName = userSetting.hostname;
-  networking.networkmanager.enable = true;
-  hardware.bluetooth.package = pkgs.bluez;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  # hardware.bluetooth.package = pkgs.bluez;
+  # hardware.bluetooth.enable = true;
+  # hardware.bluetooth.powerOnBoot = true;
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -54,6 +65,7 @@
     extraPortals = with pkgs; [xdg-desktop-portal-wlr];
   };
 
+  # services.xserver.libinput.enable = true;
   sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -65,10 +77,11 @@
   };
 
   time.timeZone = "Asia/Shanghai";
-  # services.udisks2.mountOnMedia = true;
+  services.udisks2.mountOnMedia = true;
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+  hardware.pulseaudio.enable = false;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

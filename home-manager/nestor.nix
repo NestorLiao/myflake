@@ -3,6 +3,7 @@
 {
   outputs,
   userSetting,
+  inputs,
   pkgs,
   ...
 }: {
@@ -14,8 +15,8 @@
       # dracula-theme.theme-dracula
       # vscodevim.vim
       # yzhang.markdown-all-in-one
-      rust-lang.rust-analyzer
-      llvm-vs-code-extensions.vscode-clangd
+      # rust-lang.rust-analyzer
+      # llvm-vs-code-extensions.vscode-clangd
     ];
   };
 
@@ -25,21 +26,17 @@
     # libsForQt5.kdenlive
     android-studio
     android-tools
-
-    # discord
     # arduino-ide
     # hugo
     blender
     # calibre
     # gimp
-    gnome.cheese
+    # gnome.cheese
     # kicad
     # libreoffice
     mpv
     qq
     # vivaldi
-    wpsoffice
-    xfce.thunar
   ];
 
   # You can import other home-manager modules here
@@ -67,6 +64,13 @@
       (final: prev: {
         blender = prev.blender.override {cudaSupport = true;};
       })
+
+      # Helix bleeding edge
+      # (
+      #   self: super: {
+      #     helix = inputs.helix.packages.${self.system}.default;
+      #   }
+      # )
 
       # Or define it inline, for example:
       # (final: prev: {

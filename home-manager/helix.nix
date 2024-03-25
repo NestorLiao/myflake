@@ -2,24 +2,9 @@
   pkgs,
   inputs,
   ...
-}: let
-  # kinda annoying but it'll have to do
-  # TODO: make sure to keep it updated for now
-  typst-ts-rev = "791cac478226e3e78809b67ff856010bde709594";
-in {
-  # copy queries folder according to instructions
-  # https://github.com/uben0/tree-sitter-typst/tree/master#helix
-  xdg.configFile."helix/runtime/queries/typst" = let
-    repo = builtins.fetchGit {
-      url = "https://github.com/uben0/tree-sitter-typst";
-      rev = typst-ts-rev;
-    };
-  in {
-    source = "${repo}/queries";
-  };
+}: {
   programs.helix = {
-    # package = inputs.packages.${pkgs.system}.default;
-    package = inputs.helix.packages.${pkgs.system}.default;
+    # package = inputs.helix.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
       alejandra
       # ccls
@@ -29,6 +14,7 @@ in {
       lua-language-server
       marksman # Markdown
       nil # Nix
+      python3Packages.python-lsp-server
       nodePackages.bash-language-server
       nodePackages.prettier
       nodePackages.pyright
@@ -37,7 +23,6 @@ in {
       nodePackages.yaml-language-server
       rust-analyzer-unwrapped
       taplo
-      typst-lsp
     ];
     settings = {
       # theme = "eink";
@@ -162,7 +147,6 @@ in {
         };
         line-number = "relative";
         mouse = true;
-        # mouse = false;
         scrolloff = 0;
       };
     };
@@ -170,13 +154,6 @@ in {
     defaultEditor = true;
     languages = {
       grammar = [
-        {
-          name = "typst";
-          source = {
-            git = "https://github.com/uben0/tree-sitter-typst";
-            rev = typst-ts-rev;
-          };
-        }
       ];
       language = [
         {
@@ -187,10 +164,16 @@ in {
             tab-width = 8;
             unit = "t";
           };
+          language-servers = ["nil" "codeium"];
         }
         {
           name = "just";
           auto-format = false;
+        }
+        {
+          name = "python";
+          auto-format = true;
+          language-servers = ["pylsp"];
         }
         {
           name = "markdown";
@@ -212,6 +195,7 @@ in {
           name = "typescript";
           formatter = {
             command = "prettier";
+            language-servers = ["typescript-language-server" "codeium"];
             args = ["--parser" "typescript"];
           };
           auto-format = true;
@@ -250,44 +234,28 @@ in {
         {
           name = "rust";
           auto-format = true;
-        }
-        {
-          name = "c";
-          auto-format = true;
-          language-servers = ["clangd"];
-          formatter = {command = "clang-format";};
+          language-servers = ["rust-analyzer" "codeium"];
           indent = {
             tab-width = 8;
             unit = "t";
           };
         }
         {
-          name = "typst";
-          scope = "source.typst";
-          injection-regex = "^typ(st)?$";
-          file-types = ["typ"];
-          comment-token = "//";
-          indent = {
-            tab-width = 2;
-            unit = "  ";
-          };
-          auto-pairs = {
-            "(" = ")";
-            "{" = "}";
-            "[" = "]";
-            "\"" = "\"";
-            "`" = "`";
-            "$" = "$";
-          };
-          roots = ["typst.toml"];
-          language-servers = ["typst-lsp"];
+          name = "c";
           auto-format = true;
-          formatter = {
-            command = "typst-fmt";
+          language-servers = ["clangd" "codeium"];
+          formatter = {command = "clang-format";};
+          indent = {
+            tab-width = 8;
+            unit = "t";
           };
         }
       ];
       language-server = {
+        codeium = {
+          command = "${pkgs.helix-gpt}/bin/helix-gpt";
+          args = ["--handler" "codeium"];
+        };
         cmake-language-server = {
           command = "${pkgs.cmake-language-server}/bin/cmake-language-server";
         };
@@ -298,6 +266,9 @@ in {
         typescript-language-server = with pkgs.nodePackages; {
           command = "${typescript-language-server}/bin/typescript-language-server";
           args = ["--stdio" "--tsserver-path=${typescript}/lib/node_modules/typescript/lib"];
+        };
+        python-lsp-server = {
+          command = "pylsp";
         };
         bash-language-server = {
           command = "${pkgs.nodePackages.bash-language-server}/bin/bash-language-server";
@@ -311,10 +282,6 @@ in {
           command = "${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
 
           args = ["--stdio"];
-        };
-
-        typst-lsp = {
-          command = "typst-lsp";
         };
       };
     };

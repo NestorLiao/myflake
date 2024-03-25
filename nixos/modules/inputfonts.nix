@@ -7,9 +7,14 @@
 }: let
   shell = script: lib.strings.splitString " " "${lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl"} dispatch exec ${lib.getExe' (pkgs.writeShellScriptBin "script" script) "script"}";
 in {
+  programs.thunar.enable = true;
+
+  programs.thunar.plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
+
   imports = [
     inputs.nur-xddxdd.nixosModules.setupOverlay
     inputs.xremap-flake.nixosModules.default
+    inputs.nur-xddxdd.nixosModules.qemu-user-static-binfmt
   ];
   services.xremap = {
     userName = userSetting.username;

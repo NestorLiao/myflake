@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   environment.shellAliases = {
+    nd = "pwd | wl-copy; pwd";
+    rd = "..; z -";
     c = "clear";
     e = "hx";
     en = "hx .";
@@ -10,7 +12,7 @@
     nixh = "nix-prefetch-url";
     nixhu = "nix-prefetch-url --unpack";
     rb = "sudo nixos-rebuild boot";
-    rs = "sudo nixos-rebuild switch --show-trace";
+    rs = "sudo nixos-rebuild switch --show-trace ";
     rsu = "sudo nixos-rebuild switch --upgrade";
     sh = "nix shell nixpkgs#";
     sys = "systemctl";
@@ -24,11 +26,8 @@
   services.ollama.enable = true;
 
   environment.systemPackages = with pkgs; [
-    stlink
-    stm32cubemx
-    neovim
+    discord
     wget
-    git
     (
       let
         base = pkgs.appimageTools.defaultFhsEnvArgs;
@@ -83,8 +82,7 @@
                 xorg.libXrandr
                 zlib
                 ncurses5
-                gcc11Stdenv.cc
-
+                gcc12Stdenv.cc
                 # stdenv.cc
                 binutils
               ];
@@ -98,6 +96,101 @@
             '';
           })
     )
+    # (
+    #   let
+    #     base = pkgs.appimageTools.defaultFhsEnvArgs;
+    #     pkgs
+    #   in
+    #     pkgs.buildFHSUserEnv (base
+    #       // {
+    #         name = "cuda-but124";
+    #         targetPkgs = pkgs:
+    #           with pkgs; [
+    #             git
+    #             gitRepo
+    #             gnupg
+    #             autoconf
+    #             curl
+    #             procps
+    #             gnumake
+    #             util-linux
+    #             m4
+    #             gperf
+    #             unzip
+    #             cudatoolkit
+    #             linuxPackages.nvidia_x11
+    #             libGLU
+    #             libGL
+    #             xorg.libXi
+    #             xorg.libXmu
+    #             freeglut
+    #             xorg.libXext
+    #             xorg.libX11
+    #             xorg.libXv
+    #             xorg.libXrandr
+    #             zlib
+    #             ncurses5
+    #             gcc12Stdenv.cc
+    #             # stdenv.cc
+    #             binutils
+    #           ];
+    #         multiPkgs = pkgs: with pkgs; [zlib];
+    #         runScript = "fish";
+    #         profile = ''
+    #           export CUDA_PATH=${pkgs.cudatoolkit}
+    #           # export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
+    #           export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
+    #           export EXTRA_CCFLAGS="-I/usr/include"
+    #         '';
+    #       })
+    # )
+    # (
+    #   let
+    #     base = pkgs.appimageTools.defaultFhsEnvArgs;
+    #   in
+    #     pkgs.buildFHSUserEnv (base
+    #       // {
+    #         name = "cuda-but13";
+    #         targetPkgs = pkgs:
+    #           with pkgs; [
+    #             git
+    #             gitRepo
+    #             gnupg
+    #             autoconf
+    #             curl
+    #             procps
+    #             gnumake
+    #             util-linux
+    #             m4
+    #             gperf
+    #             unzip
+    #             cudatoolkit
+    #             linuxPackages.nvidia_x11
+    #             libGLU
+    #             libGL
+    #             xorg.libXi
+    #             xorg.libXmu
+    #             freeglut
+    #             xorg.libXext
+    #             xorg.libX11
+    #             xorg.libXv
+    #             xorg.libXrandr
+    #             zlib
+    #             ncurses5
+    #             gcc13Stdenv.cc
+    #             # stdenv.cc
+    #             binutils
+    #           ];
+    #         multiPkgs = pkgs: with pkgs; [zlib];
+    #         runScript = "fish";
+    #         profile = ''
+    #           export CUDA_PATH=${pkgs.cudatoolkit}
+    #           # export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
+    #           export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
+    #           export EXTRA_CCFLAGS="-I/usr/include"
+    #         '';
+    #       })
+    # )
   ];
 
   # environment.variables = {

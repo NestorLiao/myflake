@@ -39,8 +39,8 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod SHIFT, right, movewindow, r"
         "$mod SHIFT, up, movewindow, u"
         "$mod SHIFT, down, movewindow, d"
-        "$mod, N, cyclenext"
-        # "$mod, O, movefocus, r"
+        "$mod, N, movefocus, l"
+        "$mod, O, movefocus, r"
         "$mod, E, workspace, +1"
         "$mod, I, workspace, -1"
         "$mod, P, pseudo"
@@ -48,13 +48,14 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod, R, workspace,previous"
         "$mod  SHIFT, Q, exit"
         "$mod, S, fullscreen"
-        "$mod  SHIFT, H, exec, systemctl hibernate"
+        # "$mod  SHIFT, H, exec, systemctl hibernate"
         "$mod  SHIFT, S, fakefullscreen"
         "$mod, T, togglesplit"
         "$mod, up, movefocus, u"
         "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
         "$mod, W, exec, pkill rofi || rofi -show drun "
         ", Print, exec, grimblast copy area"
+        # ", PRINT, exec, grimblast save area - | convert png:- \\( +clone -alpha extract -draw 'fill black polygon 0,0 0,20 20,0 fill white circle 20,20 20,0' \\( +clone -flip \\) -compose Multiply -composite \\( +clone -flop \\) -compose Multiply -composite \\) -alpha off -compose CopyOpacity -composite png:- | convert png:- \\( +clone -background black -shadow 70x25+0+0 \\) +swap -background none -layers merge +repage png:- | wl-copy -t image/png"
         "SHIFT, Print, exec, wf-recorder"
       ]
       ++ (
@@ -99,6 +100,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "rounding 0, xwayland:1, floating:1"
       "float, title:rofi.*"
       "float, title:QQ"
+      "fakefullscreen,class:(firefox)"
       "float, title:图片查看器"
     ];
     decoration = {
@@ -141,8 +143,8 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     gestures = {workspace_swipe = "off";};
     monitor = [
       ",1920x1080@60,0x0,1,transform,1"
-      # "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
-      "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"
+      "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
+      # "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"
     ];
     workspace = [
       "1, monitor:DP-2, default:true"

@@ -15,7 +15,7 @@
       bind -r Space select-pane -l
       bind-key -r Enter split-window -v -p 50 -c "#{pane_current_path}" \; select-pane -l;
       bind-key -n C-j select-pane -D
-      bind-key -n C-k select-pane -U
+      bind-key -n C-k select-pane -L
       bind-key -n C-l last-window
       bind-key -n C-n resize-pane -Z
       set  -g default-terminal "tmux-256color"

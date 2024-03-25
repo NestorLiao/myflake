@@ -112,9 +112,9 @@
         "dom.security.https_only_mode" = false;
         "dom.security.https_only_mode_ever_enabled" = false;
         # Privacy and fingerprinting.
-        "privacy.trackingprotection.enabled" = true;
-        "privacy.trackingprotection.socialtracking.enabled" = true;
-        "privacy.userContext.enabled" = true;
+        "privacy.trackingprotection.enabled" = false;
+        "privacy.trackingprotection.socialtracking.enabled" = false;
+        "privacy.userContext.enabled" = false;
         # Disable Pocket.
         "extensions.pocket.enabled" = false;
         # Recently used order for tab cycles.

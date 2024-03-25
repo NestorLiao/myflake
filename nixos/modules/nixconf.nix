@@ -1,11 +1,13 @@
 {
   config,
   lib,
+  pkgs,
   inputs,
   userSetting,
   ...
 }: {
   nix = {
+    package = pkgs.nixUnstable;
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
@@ -15,8 +17,13 @@
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     settings = {
-      substituters = ["https://mirror.sjtu.edu.cn/nix-channels/store" "https://xddxdd.cachix.org"];
-      trusted-public-keys = ["xddxdd.cachix.org-1:ay1HJyNDYmlSwj5NXQG065C8LfoqqKaTNCyzeixGjf8="];
+      substituters = [
+        "https://mirror.sjtu.edu.cn/nix-channels/store"
+        "https://xddxdd.cachix.org"
+        "https://helix.cachix.org"
+        "https://cuda-maintainers.cachix.org"
+      ];
+      trusted-public-keys = ["xddxdd.cachix.org-1:ay1HJyNDYmlSwj5NXQG065C8LfoqqKaTNCyzeixGjf8=" "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs=" "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="];
 
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
