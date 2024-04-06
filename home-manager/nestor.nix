@@ -23,19 +23,23 @@
   home.packages = with pkgs; [
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
     # verilator
+    steam
+    # telegram-desktop
+    stm32cubemx
+    logisim-evolution
     # libsForQt5.kdenlive
-    android-studio
-    android-tools
+    # android-studio
+    # android-tools
     # arduino-ide
     # hugo
+    mpv
     blender
     # calibre
     # gimp
     # gnome.cheese
     # kicad
     # libreoffice
-    mpv
-    qq
+    # qq
     # vivaldi
   ];
 

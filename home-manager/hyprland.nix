@@ -9,7 +9,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     cliphist
     grimblast
     hyprpicker
-    rofi
+    rofi-wayland-unwrapped
     wf-recorder
     wl-clipboard
     pkgs.dconf
@@ -41,14 +41,14 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod SHIFT, down, movewindow, d"
         "$mod, N, movefocus, l"
         "$mod, O, movefocus, r"
-        "$mod, E, workspace, +1"
-        "$mod, I, workspace, -1"
+        "$mod, E, workspace, -1"
+        "$mod, I, workspace, +1"
         "$mod, P, pseudo"
-        # "$mod, J, cyclenext"
+        "$mod, J, cyclenext"
         "$mod, R, workspace,previous"
         "$mod  SHIFT, Q, exit"
         "$mod, S, fullscreen"
-        # "$mod  SHIFT, H, exec, systemctl hibernate"
+        "$mod  SHIFT, H, exec, systemctl hibernate"
         "$mod  SHIFT, S, fakefullscreen"
         "$mod, T, togglesplit"
         "$mod, up, movefocus, u"

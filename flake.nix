@@ -23,6 +23,7 @@
     self,
     nixpkgs,
     home-manager,
+    nix-xilinx,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -110,7 +111,7 @@
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     hyprland.url = "github:hyprwm/Hyprland";
-    # helix.url = "github:helix-editor/helix/master";
+    helix.url = "github:helix-editor/helix/master";
     xremap-flake.url = "github:xremap/nix-flake";
 
     # Home manager
@@ -120,6 +121,13 @@
     };
 
     hosts.url = "github:StevenBlack/hosts";
+
+    nix-xilinx = {
+      # Recommended if you also override the default nixpkgs flake, common among
+      # nixos-unstable users:
+      #inputs.nixpkgs.follows = "nixpkgs";
+      url = "gitlab:doronbehar/nix-xilinx";
+    };
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -186,6 +194,7 @@
       inputs.flake-parts.follows = "flake-parts";
       inputs.nvfetcher.follows = "nvfetcher";
     };
+
     nvfetcher = {
       url = "github:berberman/nvfetcher";
       inputs.nixpkgs.follows = "nixpkgs";

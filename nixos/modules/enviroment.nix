@@ -2,6 +2,7 @@
   environment.shellAliases = {
     nd = "pwd | wl-copy; pwd";
     rd = "..; z -";
+    ff = "fd  | fzf | zoxide";
     c = "clear";
     e = "hx";
     en = "hx .";
@@ -26,6 +27,9 @@
   services.ollama.enable = true;
 
   environment.systemPackages = with pkgs; [
+    samba
+    ventoy-full
+    wineWowPackages.waylandFull
     discord
     wget
     (
@@ -99,7 +103,6 @@
     # (
     #   let
     #     base = pkgs.appimageTools.defaultFhsEnvArgs;
-    #     pkgs
     #   in
     #     pkgs.buildFHSUserEnv (base
     #       // {
@@ -117,7 +120,9 @@
     #             m4
     #             gperf
     #             unzip
-    #             cudatoolkit
+    #             (cudatoolkit.override
+    #               {cudaVersion = "10.0";})
+    #             # https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda_12.4.0_550.54.14_linux.run
     #             linuxPackages.nvidia_x11
     #             libGLU
     #             libGL

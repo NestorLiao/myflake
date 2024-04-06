@@ -76,7 +76,7 @@ in {
       font-awesome
       kaixinsong-fonts
       hanazono
-      hanyi-wenhei
+      # hanyi-wenhei
       hoyo-glyphs
       liberation_ttf
       noto-fonts

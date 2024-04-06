@@ -6,10 +6,11 @@
   ...
 }: {
   # imports = [
-  # inputs.nur-xddxdd.nixosModules.setupOverlay
+  #   inputs.nur-xddxdd.nixosModules.setupOverlay
   # ];
 
   home.packages = with pkgs; [
+    # samba4Full
     helix-gpt
     nix-index
     # tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
@@ -25,7 +26,7 @@
 
     # glxinfo
     # nvidia-system-monitor-qt
-    # quickemu
+    quickemu
     # typst
 
     # gitui #git user interface for terminal

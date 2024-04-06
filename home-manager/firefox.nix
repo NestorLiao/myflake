@@ -130,8 +130,8 @@
         # Locale.
         "browser.search.region" = "US";
         # Don't save passwords or try to fill forms.
-        "signon.rememberSignons" = false;
-        "signon.autofillForms" = false;
+        "signon.rememberSignons" = true;
+        "signon.autofillForms" = true;
         # Tell Firefox not to trust fake Enterprise-injected certificates.
         "security.enterprise_roots.auto-enabled" = false;
         "security.enterprise_roots.enabled" = false;

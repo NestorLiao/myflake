@@ -22,20 +22,44 @@
     # Forked from: https://github.com/StevenBlack/hosts
     #
     # ===============================================================
-    127.0.0.1 www.v2ex.com
-    127.0.0.1 www.youtube.com
+    127.0.0.1 v2ex.com
+    127.0.0.1 douban.com
+    127.0.0.1 www.douban.com
+    127.0.0.1 movie.douban.com
+    127.0.0.1 book.douban.com
+    127.0.0.1 music.douban.com
+    127.0.0.1 so.com
+    127.0.0.1 www.so.com
     127.0.0.1 m.youtube.com
     127.0.0.1 music.youtube.com
+    127.0.0.1 www.music.youtube.com
+    ###################################### don't fucking play with it
+    ###################################### don't fucking play with it
+    ###################################### don't fucking play with it
+    ###################################### don't fucking play with it
+    ###################################### don't fucking play with it
+    ###################################### don't fucking play with it
+    ###################################### don't fucking play with it
+    ###################################### don't fucking play with it
+    127.0.0.1 www.youtube.com
+    127.0.0.1 www.bilibili.com
+    127.0.0.1 www.youtube.com
+    127.0.0.1 www.bilibili.com
+    ###################################### think twice, it's demonic!!!!
+    ###################################### think twice, it's demonic!!!!
+    ###################################### think twice, it's demonic!!!!
+    ###################################### think twice, it's demonic!!!!
+    ###################################### think twice, it's demonic!!!!
+    127.0.0.1 www.thepaper.cn
+    127.0.0.1 www.tieba.baidu.com
     127.0.0.1 www.twitter.com
     127.0.0.1 www.facebook.com
-    127.0.0.1 www.bilibili.com
-    127.0.0.1 www.thepaper.cn
-    127.0.0.1 www.bilibili.com
     127.0.0.1 www.baidu.com
-    127.0.0.1 www.tieba.baidu.com
-    127.0.0.1 www.tieba.com
     127.0.0.1 www.sspai.com
+    127.0.0.1 sspai.com
     127.0.0.1 www.zhihu.com
+    127.0.0.1 zhihu.com
+
     127.0.0.1 api-h2.tiktokv.com
     127.0.0.1 api.tiktokv.com
     127.0.0.1 api21-h2.tiktokv.com

@@ -25,8 +25,8 @@
       taplo
     ];
     settings = {
-      # theme = "eink";
-      theme = "emacs";
+      theme = "eink";
+      # theme = "emacs";
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
@@ -184,18 +184,10 @@
           auto-format = false;
         }
         {
-          name = "javascript";
-          formatter = {
-            command = "prettier";
-            args = ["--parser" "javascript"];
-          };
-          auto-format = true;
-        }
-        {
           name = "typescript";
           formatter = {
             command = "prettier";
-            language-servers = ["typescript-language-server" "codeium"];
+            language-servers = ["typescript-language-server"];
             args = ["--parser" "typescript"];
           };
           auto-format = true;
@@ -250,6 +242,16 @@
             unit = "t";
           };
         }
+        {
+          name = "cpp";
+          auto-format = true;
+          language-servers = ["clangd" "codeium"];
+          formatter = {command = "clang-format";};
+          indent = {
+            tab-width = 8;
+            unit = "t";
+          };
+        }
       ];
       language-server = {
         codeium = {
@@ -276,8 +278,9 @@
         };
         clangd = {
           command = "clangd";
-          args = ["--clang-tidy"];
+          args = ["--clang-tidy  --compile-commands-dir=compile_commands_directory "];
         };
+        # -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
         vscode-css-language-server = {
           command = "${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
 

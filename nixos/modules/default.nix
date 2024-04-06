@@ -3,6 +3,9 @@
     #ad-blocker
     ./hosts.nix
 
+    #cable drives
+    ./udev.nix
+
     # searxng service
     # ./searx.nix
 
