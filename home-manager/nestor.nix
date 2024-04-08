@@ -23,7 +23,7 @@
   home.packages = with pkgs; [
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
     # verilator
-    steam
+    # steam
     # telegram-desktop
     stm32cubemx
     logisim-evolution
@@ -39,7 +39,7 @@
     # gnome.cheese
     # kicad
     # libreoffice
-    # qq
+    qq
     # vivaldi
   ];
 

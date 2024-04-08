@@ -26,10 +26,10 @@
     fsType = "vfat";
   };
 
-  # fileSystems."/home/server" = {
-  #   device = "/dev/nvme0n1p1";
-  #   fsType = "ext4";
-  # };
+  fileSystems."/home/nestor/resin" = {
+    device = "/dev/disk/by-uuid/afb46417-257b-4edc-84de-c626ec9a7a47";
+    fsType = "ext4";
+  };
 
   swapDevices = [
     {device = "/dev/disk/by-uuid/de941c45-0f5d-46d2-b006-cc539bf8224c";}

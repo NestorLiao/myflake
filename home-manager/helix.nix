@@ -25,8 +25,8 @@
       taplo
     ];
     settings = {
-      theme = "eink";
-      # theme = "emacs";
+      # theme = "eink";
+      theme = "emacs";
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
@@ -164,7 +164,7 @@
             tab-width = 8;
             unit = "t";
           };
-          language-servers = ["nil" "codeium"];
+          language-servers = ["nil"];
         }
         {
           name = "just";
@@ -226,7 +226,7 @@
         {
           name = "rust";
           auto-format = true;
-          language-servers = ["rust-analyzer" "codeium"];
+          language-servers = ["rust-analyzer"];
           indent = {
             tab-width = 8;
             unit = "t";
@@ -235,7 +235,7 @@
         {
           name = "c";
           auto-format = true;
-          language-servers = ["clangd" "codeium"];
+          language-servers = ["clangd"];
           formatter = {command = "clang-format";};
           indent = {
             tab-width = 8;
@@ -245,7 +245,7 @@
         {
           name = "cpp";
           auto-format = true;
-          language-servers = ["clangd" "codeium"];
+          language-servers = ["clangd"];
           formatter = {command = "clang-format";};
           indent = {
             tab-width = 8;
@@ -254,10 +254,10 @@
         }
       ];
       language-server = {
-        codeium = {
-          command = "${pkgs.helix-gpt}/bin/helix-gpt";
-          args = ["--handler" "codeium"];
-        };
+        # codeium = {
+        #   command = "${pkgs.helix-gpt}/bin/helix-gpt";
+        #   args = ["--handler" "codeium"];
+        # };
         cmake-language-server = {
           command = "${pkgs.cmake-language-server}/bin/cmake-language-server";
         };

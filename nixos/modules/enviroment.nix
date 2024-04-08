@@ -27,6 +27,7 @@
   services.ollama.enable = true;
 
   environment.systemPackages = with pkgs; [
+    neovim
     samba
     ventoy-full
     wineWowPackages.waylandFull

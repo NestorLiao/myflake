@@ -142,8 +142,9 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     };
     gestures = {workspace_swipe = "off";};
     monitor = [
-      ",1920x1080@60,0x0,1,transform,1"
-      "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
+      ",preferred,0x0,1,transform,1"
+      "HDMI-A-1,preferred,auto,2,transform,0"
+      # "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"
     ];
     workspace = [
