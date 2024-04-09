@@ -31,8 +31,9 @@
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
           "C-h" = ":open ~/nink/nixos";
+          "C-g" = ":sh tmux popup -d \"#{pane_current_path}\" -xC -yC -w80% -h80% -E lazygit";
           "C-e" = ":open ~/nink/inklife";
-          "C-p" = ":open ~/nink/retain";
+          "C-p" = ":open ~/resin/my-dev-env";
           "\\" = ":reload-all";
           "X" = ["extend_line_up" "extend_to_line_bounds"];
           "A-x" = "extend_to_line_bounds";
@@ -106,6 +107,7 @@
           auto-signature-help = false; # https://github.com/helix-editor/helix/discussions/6710
         };
         # gutters = ["diagnostics" "spacer" "diff"];
+        jump-label-alphabet = "gftnseriaodhcjxkblpvuwy";
         bufferline = "multiple";
         auto-info = true;
         auto-save = true;

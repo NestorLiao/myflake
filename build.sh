@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-echo "rebuilding nixos"
+nix flake update;  
 
+echo "rebuilding nixos";
 while ! sudo nixos-rebuild switch
 do
   echo "Try again"

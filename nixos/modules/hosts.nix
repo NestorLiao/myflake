@@ -41,9 +41,9 @@
     ###################################### don't fucking play with it
     ###################################### don't fucking play with it
     ###################################### don't fucking play with it
-    # 127.0.0.1 www.youtube.com
+    127.0.0.1 www.youtube.com
     127.0.0.1 www.bilibili.com
-    # 127.0.0.1 www.youtube.com
+    127.0.0.1 www.youtube.com
     127.0.0.1 www.bilibili.com
     ###################################### think twice, it's demonic!!!!
     ###################################### think twice, it's demonic!!!!

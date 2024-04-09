@@ -11,6 +11,7 @@
 
   home.packages = with pkgs; [
     # samba4Full
+    lazygit
     bat
     helix-gpt
     nix-index
@@ -91,14 +92,13 @@
       enableBashIntegration = true;
       nix-direnv.enable = true;
     };
+    bash.enable = true;
   };
 
   programs.zoxide = {
     enable = true;
     options = ["--cmd t"];
-    enableBashIntegration = true;
     enableFishIntegration = true;
-    enableZshIntegration = true;
   };
 
   programs.git = {
@@ -145,4 +145,11 @@
 
   home.file.".cargo/config.toml".source =
     ./CargoConf.toml;
+
+  home.file.".config/fish/functions/mcdir.fish".text = ''
+    function mcdir
+      command mkdir $argv[1]
+      and cd $argv[1]
+    end
+  '';
 }
