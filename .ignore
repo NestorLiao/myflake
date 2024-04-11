@@ -2,8 +2,6 @@ nixos/modules/hosts.nix
 home-manager/modules/icons
 home-manager/icons
 nixos/modules/tiger-code/rime/
-
-
 ovelay
 pkgs
 flake.lock

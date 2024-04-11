@@ -34,17 +34,18 @@
       bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'wl-copy -in -selection clipboard'
       bind-key -r Bspace kill-pane;
       bind -r Space select-pane -l
-      bind-key -r Enter split-window -v -p 50 -c "#{pane_current_path}" \; select-pane -l;
+      bind-key -r Enter split-window -h -p 50 -c "#{pane_current_path}" \; select-pane -l;
+      bind-key -n C-n resize-pane -Z
+      bind-key -n C-e select-pane -L
       bind-key -n C-j select-pane -D
       bind-key -n C-l last-window
-      bind-key -n C-n resize-pane -Z
+      bind-key  C-o display-popup -E "tms"
       bind v copy-mode
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
       bind '"' split-window -v -c "#{pane_current_path}"
       bind-key x kill-pane
-      bind -n C-o display-popup -E "tms"
       bind j display-popup -E "tms switch"
       bind % split-window -h -c "#{pane_current_path}"
     '';

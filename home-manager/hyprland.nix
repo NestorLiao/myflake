@@ -12,8 +12,19 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     rofi-wayland-unwrapped
     wf-recorder
     wl-clipboard
+    hyprpaper
     pkgs.dconf
   ];
+
+  home.file.".config/hypr/hyprpaper.conf".text = ''
+    preload = /home/nestor/.config/hypr/winxp.jpg
+    wallpaper =,/home/nestor/.config/hypr/winxp.jpg
+    splash = false
+    ipc = off
+  '';
+
+  home.file.".config/hypr/winxp.jpg".source =
+    ./winxp.jpg;
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
@@ -76,9 +87,25 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
       "fcitx5 -d --replace"
-      "hyprctl dispatch workspace 5"
+      "hyprctl dispatch workspace 4"
+      "hyprpaper"
     ];
     env = [
+      "QT_QPA_PLATFORM,wayland"
+      "CLUTTER_BACKEND,wayland"
+      "SDL_VIDEODRIVER,wayland"
+      "XDG_SESSION_TYPE,wayland"
+      "XDG_CURRENT_DESKTOP,hyprland"
+
+      "QT_QPA_PLATFORMTHEME,qt5ct"
+
+      "GLFW_IM_MODULE,fcitx"
+      "GTK_IM_MODULE,fcitx"
+      "INPUT_METHOD,fcitx"
+      "XMODIFIERS,@im=fcitx"
+      "IMSETTINGS_MODULE,fcitx"
+      "QT_IM_MODULE,fcitx"
+
       "MOZ_ENABLE_WAYLAND,1"
       "MOZ_WEBRENDER,1"
       "NIXOS_OZONE_WL,1"
@@ -96,12 +123,25 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "col.inactive_border" = "rgba(ffffffff)";
       layout = "dwindle";
     };
+
+    misc = {
+      disable_autoreload = false;
+      disable_hyprland_logo = true;
+      disable_splash_rendering = true;
+      animate_mouse_windowdragging = false;
+    };
+
     windowrulev2 = [
-      "rounding 0, xwayland:1, floating:1"
+      "rounding 0, xwayland:1"
       "float, title:rofi.*"
       "float, title:QQ"
       "fakefullscreen,class:(firefox)"
       "float, title:图片查看器"
+
+      # "size 640 400, ,float,class:(main), title:(App)"
+      # "size 640 400,move 100 100,float,forceinput,immediate,title:^(App)$"
+      "float,forceinput,immediate,title:^(App)$"
+      # "size 640 400,title:^(App)$"
     ];
     decoration = {
       rounding = "0";
@@ -120,7 +160,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     ];
     # windowrule = "pseudo";
     animations = {
-      enabled = "no";
+      enabled = false;
       bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
       # animation = [
       #   "windows, 1, 7, myBezier"

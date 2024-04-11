@@ -28,7 +28,7 @@
 
     # glxinfo
     # nvidia-system-monitor-qt
-    # quickemu
+    quickemu
     # typst
 
     # gitui #git user interface for terminal

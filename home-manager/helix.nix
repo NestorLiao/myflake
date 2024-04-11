@@ -22,7 +22,7 @@
       nodePackages.vscode-langservers-extracted # HTML/CSS/JSON/ESLint
       nodePackages.yaml-language-server
       rust-analyzer-unwrapped
-      taplo
+      # taplo
     ];
     settings = {
       # theme = "eink";
@@ -32,7 +32,6 @@
           esc = ["collapse_selection" "keep_primary_selection"];
           "C-h" = ":open ~/nink/nixos";
           "C-g" = ":sh tmux popup -d \"#{pane_current_path}\" -xC -yC -w80% -h80% -E lazygit";
-          "C-e" = ":open ~/nink/inklife";
           "C-p" = ":open ~/resin/my-dev-env";
           "\\" = ":reload-all";
           "X" = ["extend_line_up" "extend_to_line_bounds"];
@@ -92,6 +91,18 @@
           "o" = [":write" ":sh just o"];
           "l" = [":write" ":sh just l"];
           "c" = [":write" ":sh just c"];
+
+          "u" = [":write" ":sh just u"];
+          "d" = [":write" ":sh just d"];
+
+          "h" = [":write" ":sh just h"];
+          "j" = [":write" ":sh just j"];
+          "k" = [":write" ":sh just k"];
+          "x" = [":write" ":sh just x"];
+          "b" = [":write" ":sh just b"];
+          "q" = [":write" ":sh just q"];
+
+          "p" = ":open ~/nink/inklife";
         };
         normal."]" = {
           "]" = "goto_next_paragraph";
@@ -183,7 +194,7 @@
             command = "prettier";
             args = ["--parser" "markdown"];
           };
-          auto-format = false;
+          auto-format = true;
         }
         {
           name = "typescript";
