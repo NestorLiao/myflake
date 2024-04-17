@@ -10,8 +10,13 @@
   # ];
 
   home.packages = with pkgs; [
+    delta
+    thefuck
     # samba4Full
-    lazygit
+    ffmpeg
+    pandoc
+
+    gitui
     bat
     helix-gpt
     nix-index
@@ -22,7 +27,7 @@
     # mprocs #Run multiple commands in parallel
     # wiki-tui #A simple and easy to use Wikipedia Text User Interface
     # cargo-info #Query crates.io for crates details
-    # scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
+    scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
     just #just is a handy way to save and run project-specific commands.
     # bacon #bacon is a background rust code checker.
 
@@ -63,7 +68,7 @@
     # (pkgs.writeScriptBin "ts" ''
     #   #!/usr/bin/env bash
 
-    #   # Execute wl-paste and store the output in a variable
+    #   # Execute wl-paste and store sse output in a variable
     #   clipboard_content=$(wl-paste)
 
     #   # Translate the clipboard content from English to Simplified Chinese using `trans`
@@ -152,4 +157,49 @@
       and cd $argv[1]
     end
   '';
+
+  home.file.".gitconfig".text = ''
+    [core]
+        pager = delta
+
+    [interactive]
+        diffFilter = delta --color-only
+
+    [delta]
+        navigate = true    # use n and N to move between diff sections
+
+        # delta detects terminal colors automatically; set one of these to disable auto-detection
+        # dark = true
+        # light = true
+
+    [merge]
+        conflictstyle = diff3
+
+    [diff]
+        colorMoved = default
+  '';
+
+  home.file.".config/fish/functions/rcdir.fish".text = ''
+    function rcdir
+        while true
+            read -l -P 'Do you want to continue? [y/N] ' confirm
+
+            switch $confirm
+                case Y y
+                    rm -rf (pwd)
+                    cd ..
+                    return 0
+                case \'\' N n
+                    return 1
+            end
+        end
+    end
+  '';
+
+  # xdg.configFile."clangd/config.yaml".text = ''
+  #   CompileFlags:
+  #     Add: [-std=c++20]
+  # '';
+
+  programs.command-not-found.enable = false;
 }

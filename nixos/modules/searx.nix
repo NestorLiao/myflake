@@ -1,6 +1,4 @@
 {...}: {
-  programs.command-not-found.enable = false;
-
   services.searx = {
     enable = true;
     settings = {

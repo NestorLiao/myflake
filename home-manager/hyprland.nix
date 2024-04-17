@@ -91,27 +91,42 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "hyprpaper"
     ];
     env = [
-      "QT_QPA_PLATFORM,wayland"
-      "CLUTTER_BACKEND,wayland"
-      "SDL_VIDEODRIVER,wayland"
-      "XDG_SESSION_TYPE,wayland"
-      "XDG_CURRENT_DESKTOP,hyprland"
+      "XMODIFIERS, @im=fcitx"
+      "QT_IM_MODULE, fcitx"
+      "SDL_IM_MODULE, fcitx"
+      "GDK_BACKEND, wayland,x11"
+      "QT_QPA_PLATFORM, wayland;xcb"
+      "QT_WAYLAND_DISABLE_WINDOWDECORATION, 1"
+      "QT_AUTO_SCREEN_SCALE_FACTOR, 1"
+      "CLUTTER_BACKEND, wayland"
+      "ADW_DISABLE_PORTAL, 1"
+      "XCURSOR_SIZE,24"
+      # "XCURSOR_THEME,Dracula-cursors"
+      # "HYPRCURSOR_THEME,hyprcursor_Dracula"
+      # "HYPRCURSOR_SIZE,24"
+      "LANGUAGE, zh_CN:en_US"
 
-      "QT_QPA_PLATFORMTHEME,qt5ct"
+      # "QT_QPA_PLATFORM,wayland;xcb"
+      # "CLUTTER_BACKEND,wayland"
+      # "SDL_VIDEODRIVER,wayland"
+      # "XDG_SESSION_TYPE,wayland"
+      # "XDG_CURRENT_DESKTOP,hyprland"
 
-      "GLFW_IM_MODULE,fcitx"
-      "GTK_IM_MODULE,fcitx"
-      "INPUT_METHOD,fcitx"
-      "XMODIFIERS,@im=fcitx"
-      "IMSETTINGS_MODULE,fcitx"
-      "QT_IM_MODULE,fcitx"
+      # "QT_QPA_PLATFORMTHEME,qt5ct"
+
+      # "GLFW_IM_MODULE,fcitx"
+      # "GTK_IM_MODULE,fcitx"
+      # "INPUT_METHOD,fcitx"
+      # "XMODIFIERS,@im=fcitx"
+      # "IMSETTINGS_MODULE,fcitx"
+      # "QT_IM_MODULE,fcitx"
 
       "MOZ_ENABLE_WAYLAND,1"
       "MOZ_WEBRENDER,1"
-      "NIXOS_OZONE_WL,1"
-      "XCURSOR_SIZE,24"
-      "_JAVA_AWT_WM_NONREPARENTING,1"
-      "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      # "NIXOS_OZONE_WL,1"
+      # "XCURSOR_SIZE,24"
+      # "_JAVA_AWT_WM_NONREPARENTING,1"
+      # "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
       "WLR_NO_HARDWARE_CURSORS,1"
     ];
     general = {
@@ -131,12 +146,33 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       animate_mouse_windowdragging = false;
     };
 
+    windowrule = [
+      # "pseudo,fcitx"
+      "float,title:^(Open File)(.*)$"
+      "float,title:^(Open Folder)(.*)$"
+      "float,title:^(Save As)(.*)$"
+      "float,title:^(Library)(.*)$ "
+      "nofocus,title:^(.*)(mvi)$"
+    ];
+
     windowrulev2 = [
-      "rounding 0, xwayland:1"
-      "float, title:rofi.*"
-      "float, title:QQ"
-      "fakefullscreen,class:(firefox)"
-      "float, title:图片查看器"
+      "float, class:^(.*fcitx.*)$"
+      "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
+      # "opacity 1.0 override 1.0 override, class:^(Google-chrome)$"
+      # "opacity 0.9 override 0.9 override, class:^(QQ)$"
+      "float, class:^(QQ)$"
+      "float, class:^(kruler)$"
+      "float,title:^(查看媒体)$|^(图片查看)$|^(图片查看器)$|^(KDE)$"
+      "float, class:^(yuri)$"
+      "float, class:^(feishu)$"
+      "size 75% 75%, class:^(QQ)$"
+      "center, class:^(QQ)$"
+
+      # "rounding 0, xwayland:1"
+      # "float, title:rofi.*"
+      # "float, title:QQ"
+      # "fakefullscreen,class:(firefox)"
+      # "float, title:图片查看器"
 
       # "size 640 400, ,float,class:(main), title:(App)"
       # "size 640 400,move 100 100,float,forceinput,immediate,title:^(App)$"
@@ -155,9 +191,6 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       shadow_render_power = "0";
       "col.shadow" = "rgba(00000000)";
     };
-    windowrule = [
-      "pseudo,fcitx"
-    ];
     # windowrule = "pseudo";
     animations = {
       enabled = false;
@@ -182,24 +215,28 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     };
     gestures = {workspace_swipe = "off";};
     monitor = [
-      ",preferred,0x0,1,transform,1"
-      "HDMI-A-1,preferred,auto,2,transform,0"
+      # ",preferred,0x0,1,transform,1"
+      # "DP-2,preferred,1920x0,1,transform,0"
+      "DP-2,preferred,1920x-420,1,transform,1"
+      "HDMI-A-1,1920x1080@60,0x0,1,transform,0"
+      # "HDMI-A-1,preferred,auto,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"
     ];
     workspace = [
-      "1, monitor:DP-2, default:true"
-      "4, monitor:DP-2, default:true"
-      "7, monitor:DP-2, default:true"
-      "1, monitor:DP-1, default:true"
-      "4, monitor:DP-1, default:true"
-      "7, monitor:DP-1, default:true"
-      "2, monitor:HDMI-A-1, default:true"
-      "3, monitor:HDMI-A-1, default:true"
-      "5, monitor:HDMI-A-1, default:true"
-      "6, monitor:HDMI-A-1, default:true"
+      "0, monitor:DP-2, default:true"
+      "9, monitor:DP-2, default:true"
+      "6, monitor:DP-2, default:true"
+      "3, monitor:DP-2, default:true"
+      # "9, monitor:DP-1, default:true"
+      # "6, monitor:DP-1, default:true"
+      # "3, monitor:DP-1, default:true"
+      "1, monitor:HDMI-A-1, default:true"
+      "4, monitor:HDMI-A-1, default:true"
+      "7, monitor:HDMI-A-1, default:true"
       "8, monitor:HDMI-A-1, default:true"
-      "9, monitor:HDMI-A-1, default:true"
+      "5, monitor:HDMI-A-1, default:true"
+      "2, monitor:HDMI-A-1, default:true"
     ];
     "$mod" = "SUPER";
     bindm = [

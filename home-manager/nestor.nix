@@ -7,6 +7,7 @@
   pkgs,
   ...
 }: {
+  # virtualisation.waydroid.enable = true;
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
@@ -24,12 +25,13 @@
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
     # verilator
     # steam
+    wpsoffice-cn
     # telegram-desktop
     stm32cubemx
     logisim-evolution
     # libsForQt5.kdenlive
-    # android-studio
-    # android-tools
+    android-studio
+    android-tools
     # arduino-ide
     # hugo
     mpv

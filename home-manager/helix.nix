@@ -22,6 +22,7 @@
       nodePackages.vscode-langservers-extracted # HTML/CSS/JSON/ESLint
       nodePackages.yaml-language-server
       rust-analyzer-unwrapped
+      zls
       # taplo
     ];
     settings = {
@@ -31,7 +32,7 @@
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
           "C-h" = ":open ~/nink/nixos";
-          "C-g" = ":sh tmux popup -d \"#{pane_current_path}\" -xC -yC -w80% -h80% -E lazygit";
+          "C-g" = ":sh tmux popup -d \"#{pane_current_path}\" -xC -yC -w80% -h80% -E gitui";
           "C-p" = ":open ~/resin/my-dev-env";
           "\\" = ":reload-all";
           "X" = ["extend_line_up" "extend_to_line_bounds"];
@@ -174,7 +175,7 @@
           formatter.command = "alejandra";
           auto-format = true;
           indent = {
-            tab-width = 8;
+            tab-width = 4;
             unit = "t";
           };
           language-servers = ["nil"];
@@ -241,7 +242,7 @@
           auto-format = true;
           language-servers = ["rust-analyzer"];
           indent = {
-            tab-width = 8;
+            tab-width = 4;
             unit = "t";
           };
         }
@@ -251,7 +252,7 @@
           language-servers = ["clangd"];
           formatter = {command = "clang-format";};
           indent = {
-            tab-width = 8;
+            tab-width = 4;
             unit = "t";
           };
         }
@@ -259,9 +260,10 @@
           name = "cpp";
           auto-format = true;
           language-servers = ["clangd"];
+          roots = [".git" "CMakeLists.txt"];
           formatter = {command = "clang-format";};
           indent = {
-            tab-width = 8;
+            tab-width = 4;
             unit = "t";
           };
         }
@@ -271,6 +273,9 @@
         #   command = "${pkgs.helix-gpt}/bin/helix-gpt";
         #   args = ["--handler" "codeium"];
         # };
+        zls = {
+          command = "${pkgs.zls}/bin/zls";
+        };
         cmake-language-server = {
           command = "${pkgs.cmake-language-server}/bin/cmake-language-server";
         };
@@ -290,8 +295,8 @@
           args = ["start"];
         };
         clangd = {
-          command = "clangd";
-          args = ["--clang-tidy  --compile-commands-dir=compile_commands_directory "];
+          command = "${pkgs.clang-tools}/bin/clangd";
+          args = ["--enable-config"];
         };
         # -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
         vscode-css-language-server = {

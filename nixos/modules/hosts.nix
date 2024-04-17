@@ -7,7 +7,10 @@
 
     151.101.78.217  cache.nixos.org
     20.205.243.166  github.com
-    185.199.110.133 raw.githubusercontent.com
+    185.199.109.133 raw.githubusercontent.com
+    185.199.109.133 user.githubusercontent.com
+    185.199.110.133 user-images.githubusercontent.com
+    185.199.110.133 private-user-images.githubusercontent.com
     185.199.109.133 raw.github.com
     185.199.108.153 assets-cdn.github.com
 
@@ -44,6 +47,7 @@
     ###################################### don't fucking play with it
     127.0.0.1 www.youtube.com
     127.0.0.1 www.bilibili.com
+    127.0.0.1 bilibili.com
     127.0.0.1 www.youtube.com
     127.0.0.1 www.bilibili.com
     ###################################### think twice, it's demonic!!!!
