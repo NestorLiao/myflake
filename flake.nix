@@ -7,8 +7,9 @@
     builders-use-substitutes = true;
     experimental-features = ["nix-command" "flakes"];
     substituters = [
-      # "https://mirror.sjtu.edu.cn/nix-channels/store"
+      "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
     ];
     extra-substituters = [
@@ -110,8 +111,8 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    helix.url = "github:helix-editor/helix/master";
+    # hyprland.url = "github:hyprwm/Hyprland";
+    # helix.url = "github:helix-editor/helix/master";
     xremap-flake.url = "github:xremap/nix-flake";
 
     # Home manager

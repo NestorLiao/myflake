@@ -8,40 +8,40 @@
   ...
 }: {
   # virtualisation.waydroid.enable = true;
-  programs.vscode = {
-    enable = true;
-    extensions = with pkgs.vscode-extensions; [
-      ms-python.python
-      ms-python.vscode-pylance
-      # dracula-theme.theme-dracula
-      # vscodevim.vim
-      # yzhang.markdown-all-in-one
-      # rust-lang.rust-analyzer
-      # llvm-vs-code-extensions.vscode-clangd
-    ];
-  };
+  # programs.vscode = {
+  #   enable = true;
+  #   extensions = with pkgs.vscode-extensions; [
+  #     ms-python.python
+  #     ms-python.vscode-pylance
+  #     # dracula-theme.theme-dracula
+  #     # vscodevim.vim
+  #     # yzhang.markdown-all-in-one
+  #     # rust-lang.rust-analyzer
+  #     # llvm-vs-code-extensions.vscode-clangd
+  #   ];
+  # };
 
   home.packages = with pkgs; [
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
     # verilator
     # steam
-    wpsoffice-cn
+    # wpsoffice-cn
     # telegram-desktop
-    stm32cubemx
-    logisim-evolution
+    # stm32cubemx
+    # logisim-evolution
     # libsForQt5.kdenlive
-    android-studio
-    android-tools
+    # android-studio
+    # android-tools
     # arduino-ide
     # hugo
-    mpv
-    blender
+    # mpv
+    # blender
     # calibre
     # gimp
     # gnome.cheese
     # kicad
     # libreoffice
-    qq
+    # qq
     # vivaldi
   ];
 

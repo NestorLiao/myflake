@@ -5,7 +5,7 @@
   userSetting,
   ...
 }: let
-  shell = script: lib.strings.splitString " " "${lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl"} dispatch exec ${lib.getExe' (pkgs.writeShellScriptBin "script" script) "script"}";
+  # shell = script: lib.strings.splitString " " "${lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl"} dispatch exec ${lib.getExe' (pkgs.writeShellScriptBin "script" script) "script"}";
 in {
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
@@ -32,14 +32,14 @@ in {
             KEY_KP0 = "KEY_SEMICOLON";
             KEY_KPMINUS = "KEY_PAGEUP";
             KEY_KPPLUS = "KEY_PAGEDOWN";
-            KEY_KPENTER = {
-              press = {
-                launch = shell "${lib.getExe' pkgs.hyprland "hyprctl"} dispatch cyclenext";
-              };
-              release = {
-                launch = shell "${lib.getExe' pkgs.tmux "tmux"} select-pane -l";
-              };
-            };
+            # KEY_KPENTER = {
+            #   press = {
+            #     launch = shell "${lib.getExe' pkgs.hyprland "hyprctl"} dispatch cyclenext";
+            #   };
+            #   release = {
+            #     launch = shell "${lib.getExe' pkgs.tmux "tmux"} select-pane -l";
+            #   };
+            # };
           };
           # device = {
           #   only = ["SEMICO Digio2 Ten Key Consumer Control" "SEMICO Digio2 Ten Key" "SEMICO Digio2 Ten Key System Control" "SEMICO Digio2 Ten Key Consumer Control 1"];
@@ -58,48 +58,48 @@ in {
 
   fonts.packages = with pkgs;
     lib.mkForce [
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          "FiraMono"
-          "Noto"
-          "Terminus"
-          "Ubuntu"
-          "UbuntuMono"
-        ];
-      })
+      # (nerdfonts.override {
+      #   fonts = [
+      #     "FiraCode"
+      #     "FiraMono"
+      #     "Noto"
+      #     "Terminus"
+      #     "Ubuntu"
+      #     "UbuntuMono"
+      #   ];
+      # })
 
-      corefonts
-      fira-code
-      fira-code-symbols
-      font-awesome
-      kaixinsong-fonts
-      hanazono
+      # corefonts
+      # fira-code
+      # fira-code-symbols
+      # font-awesome
+      # kaixinsong-fonts
+      # hanazono
       # hanyi-wenhei
-      hoyo-glyphs
-      liberation_ttf
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-emoji-blob-bin
-      noto-fonts-extra
-      plangothic-fonts.allideo
-      source-code-pro
-      source-han-code-jp
-      source-han-mono
-      source-han-sans
-      source-han-serif
-      source-sans
-      source-sans-pro
-      source-serif
-      source-serif-pro
-      terminus_font_ttf
-      ubuntu_font_family
-      vistafonts
-      vistafonts-chs
-      vistafonts-cht
-      wqy_microhei
-      wqy_zenhei
+      # hoyo-glyphs
+      # liberation_ttf
+      # noto-fonts
+      # noto-fonts-cjk-sans
+      # noto-fonts-cjk-serif
+      # noto-fonts-emoji-blob-bin
+      # noto-fonts-extra
+      # plangothic-fonts.allideo
+      # source-code-pro
+      # source-han-code-jp
+      # source-han-mono
+      # source-han-sans
+      # source-han-serif
+      # source-sans
+      # source-sans-pro
+      # source-serif
+      # source-serif-pro
+      # terminus_font_ttf
+      # ubuntu_font_family
+      # vistafonts
+      # vistafonts-chs
+      # vistafonts-cht
+      # wqy_microhei
+      # wqy_zenhei
     ];
 
   # https://keqingrong.cn/blog/2019-10-01-how-to-display-all-chinese-characters-on-the-computer/

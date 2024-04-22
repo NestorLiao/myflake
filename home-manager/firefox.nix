@@ -24,6 +24,10 @@
         	 * toolkit.legacyUserProfileCustomizations.stylesheets = true
         	 * in about:config
         	 */
+
+            #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+              display: none;
+            }
         	#main-window body { flex-direction: column-reverse !important; }
         	#navigator-toolbox { flex-direction: column-reverse !important; }
         	#urlbar {
@@ -84,11 +88,8 @@
       '';
 
       extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-        ublock-origin
-        sponsorblock
-        browserpass
+        # ublock-origin
         tridactyl
-        dearrow
         old-reddit-redirect
         istilldontcareaboutcookies
       ];

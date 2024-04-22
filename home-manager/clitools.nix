@@ -10,15 +10,15 @@
   # ];
 
   home.packages = with pkgs; [
-    delta
-    thefuck
+    # delta
+    # thefuck
     # samba4Full
-    ffmpeg
-    pandoc
+    # ffmpeg
+    # pandoc
 
     gitui
     bat
-    helix-gpt
+    # helix-gpt
     nix-index
     # tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
     # tailscale #The node agent for Tailscale, a mesh VPN built on WireGuard
@@ -27,18 +27,18 @@
     # mprocs #Run multiple commands in parallel
     # wiki-tui #A simple and easy to use Wikipedia Text User Interface
     # cargo-info #Query crates.io for crates details
-    scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
+    # scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
     just #just is a handy way to save and run project-specific commands.
     # bacon #bacon is a background rust code checker.
 
     # glxinfo
     # nvidia-system-monitor-qt
-    quickemu
+    # quickemu
     # typst
 
     # gitui #git user interface for terminal
-    zathura #lightweight document viewer
-    uutils-coreutils-noprefix #collection of common Unix-like utilities without prefix
+    # zathura #lightweight document viewer
+    # uutils-coreutils-noprefix #collection of common Unix-like utilities without prefix
     killall #used to kill processes by name
     # bat #a cat clone with syntax highlighting and Git integration
     # ethtool #utility for displaying and modifying Ethernet device settings
@@ -48,22 +48,22 @@
     neofetch #command-line system information tool
     nix-output-monitor #monitor build outputs of Nix package manager
 
-    pciutils #utilities for viewing and configuring PCI devices
+    # pciutils #utilities for viewing and configuring PCI devices
     ripgrep #line-oriented search tool that recursively searches directories for a regex pattern
-    strace #diagnostic tool for debugging and profiling Linux processes
-    sysstat #collection of performance monitoring tools for Linux
-    tldr #simplified and community-driven man pages
+    # strace #diagnostic tool for debugging and profiling Linux processes
+    # sysstat #collection of performance monitoring tools for Linux
+    # tldr #simplified and community-driven man pages
     tmux-sessionizer #tool for organizing and cleaning up tmux sessions
-    translate-shell #command-line translator using various translation services
+    # translate-shell #command-line translator using various translation services
     tree #displays directory structure in a tree-like format
     unrar-free #unarchiver for .rar files
     unzip #decompression tool for .zip archives
     zip #compression tool and file packaging utility
-    usbutils #utilities for viewing USB devices and details
-    xdragon #(No specific description provided)
-    lm_sensors # for `sensors` command
-    lsof # list open files
-    ltrace # library call monitoring
+    # usbutils #utilities for viewing USB devices and details
+    # xdragon #(No specific description provided)
+    # lm_sensors # for `sensors` command
+    # lsof # list open files
+    # ltrace # library call monitoring
 
     # (pkgs.writeScriptBin "ts" ''
     #   #!/usr/bin/env bash

@@ -28,7 +28,7 @@
   programs.hyprland = lib.mkIf (userSetting.windowmanager == "hyprland") {
     enable = true;
     xwayland = {enable = true;};
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
 
   qt.enable = true;

@@ -21,7 +21,7 @@
   services.v2raya.enable = true;
   # with dae
   services.dae = {
-    enable = false;
+    enable = true;
     disableTxChecksumIpGeneric = false;
     configFile = "/home/${userSetting.username}/nink/retain/hh.dae";
     assets = with pkgs; [v2ray-geoip v2ray-domain-list-community];
@@ -34,17 +34,15 @@
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [];
+      # allowedTCPPorts = [5000];
       allowedUDPPorts = [];
+      # extraCommands = ''
+      #   iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
+      # '';
     };
     hostName = userSetting.hostname;
     networkmanager.enable = true;
   };
-
-  # networking.firewall.allowedTCPPorts = [8080];
-  # networking.firewall.extraCommands = ''
-  #   iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
-  # '';
 
   services.create_ap.enable = false;
   services.create_ap.settings = {
@@ -71,14 +69,12 @@
       # forces dnsmasq to try each query with each server strictly
       # in the order they appear in the config.
       strict-order = true;
-
       # Never forward plain names (without a dot or domain part)
       domain-needed = true;
       # Never forward addresses in the non-routed address spaces(e.g. private IP).
       bogus-priv = true;
       # don't needlessly read /etc/resolv.conf which only contains the localhost addresses of dnsmasq itself.
       no-resolv = true;
-
       # Cache dns queries.
       cache-size = 1000;
     };

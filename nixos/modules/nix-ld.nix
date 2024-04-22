@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  programs.nix-ld.enable = true;
+  programs.nix-ld.enable = false;
   programs.nix-ld.package = pkgs.nix-ld-rs;
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc

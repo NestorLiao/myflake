@@ -21,7 +21,8 @@
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   # Bootloader
   boot.loader.timeout = 0;
   boot.loader.systemd-boot.enable = true;

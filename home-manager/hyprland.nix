@@ -104,7 +104,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       # "XCURSOR_THEME,Dracula-cursors"
       # "HYPRCURSOR_THEME,hyprcursor_Dracula"
       # "HYPRCURSOR_SIZE,24"
-      "LANGUAGE, zh_CN:en_US"
+      # "LANGUAGE, zh_CN:en_US"
 
       # "QT_QPA_PLATFORM,wayland;xcb"
       # "CLUTTER_BACKEND,wayland"
@@ -167,11 +167,11 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "float, class:^(feishu)$"
       "size 75% 75%, class:^(QQ)$"
       "center, class:^(QQ)$"
+      "fakefullscreen,class:(firefox)"
 
+      "float, title:rofi.*"
       # "rounding 0, xwayland:1"
-      # "float, title:rofi.*"
       # "float, title:QQ"
-      # "fakefullscreen,class:(firefox)"
       # "float, title:图片查看器"
 
       # "size 640 400, ,float,class:(main), title:(App)"
