@@ -34,11 +34,11 @@
   networking = {
     firewall = {
       enable = true;
-      # allowedTCPPorts = [5000];
+      allowedTCPPorts = [5000];
       allowedUDPPorts = [];
-      # extraCommands = ''
-      #   iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
-      # '';
+      extraCommands = ''
+        iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
+      '';
     };
     hostName = userSetting.hostname;
     networkmanager.enable = true;

@@ -2,6 +2,9 @@
   environment.shellAliases = {
     nd = "pwd | wl-copy; pwd";
     rd = "..; z -";
+    rm = "rm -r";
+    cp = "cp -r";
+    weather = "curl wttr.in/chongqing";
     ff = "fd  | fzf | zoxide";
     c = "clear";
     e = "hx";
@@ -28,7 +31,7 @@
     neovim
     # samba
     # ventoy-full
-    # wineWowPackages.waylandFull
+    wineWowPackages.waylandFull
     # discord
     wget
     # (
@@ -56,48 +59,48 @@
     #   let
     #     base = pkgs.appimageTools.defaultFhsEnvArgs;
     #   in
-    # pkgs.buildFHSUserEnv (base
-    #   // {
-    #     name = "cuda-env";
-    #     targetPkgs = pkgs:
-    #       with pkgs; [
-    #         git
-    #         gitRepo
-    #         gnupg
-    #         autoconf
-    #         curl
-    #         procps
-    #         gnumake
-    #         util-linux
-    #         m4
-    #         gperf
-    #         unzip
-    #         cudatoolkit
-    #         linuxPackages.nvidia_x11
-    #         libGLU
-    #         libGL
-    #         xorg.libXi
-    #         xorg.libXmu
-    #         freeglut
-    #         xorg.libXext
-    #         xorg.libX11
-    #         xorg.libXv
-    #         xorg.libXrandr
-    #         zlib
-    #         ncurses5
-    #         gcc12Stdenv.cc
-    #         # stdenv.cc
-    #         binutils
-    #       ];
-    #     multiPkgs = pkgs: with pkgs; [zlib];
-    #     runScript = "fish";
-    #     profile = ''
-    #       export CUDA_PATH=${pkgs.cudatoolkit}
-    #       # export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
-    #       export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
-    #       export EXTRA_CCFLAGS="-I/usr/include"
-    #     '';
-    #   })
+    #     pkgs.buildFHSUserEnv (base
+    #       // {
+    #         name = "cuda-env";
+    #         targetPkgs = pkgs:
+    #           with pkgs; [
+    #             git
+    #             gitRepo
+    #             gnupg
+    #             autoconf
+    #             curl
+    #             procps
+    #             gnumake
+    #             util-linux
+    #             m4
+    #             gperf
+    #             unzip
+    #             cudatoolkit
+    #             linuxPackages.nvidia_x11
+    #             libGLU
+    #             libGL
+    #             xorg.libXi
+    #             xorg.libXmu
+    #             freeglut
+    #             xorg.libXext
+    #             xorg.libX11
+    #             xorg.libXv
+    #             xorg.libXrandr
+    #             zlib
+    #             ncurses5
+    #             gcc12Stdenv.cc
+    #             # stdenv.cc
+    #             binutils
+    #           ];
+    #         multiPkgs = pkgs: with pkgs; [zlib];
+    #         runScript = "fish";
+    #         profile = ''
+    #           export CUDA_PATH=${pkgs.cudatoolkit}
+    #           # export LD_LIBRARY_PATH=${pkgs.linuxPackages.nvidia_x11}/lib
+    #           export EXTRA_LDFLAGS="-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib"
+    #           export EXTRA_CCFLAGS="-I/usr/include"
+    #         '';
+    #       })
     # )
     # (
     #   let

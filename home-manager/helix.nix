@@ -195,7 +195,7 @@
             command = "prettier";
             args = ["--parser" "markdown"];
           };
-          auto-format = true;
+          auto-format = false;
         }
         {
           name = "typescript";

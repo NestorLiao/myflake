@@ -13,7 +13,7 @@
     185.199.110.133 private-user-images.githubusercontent.com
     185.199.109.133 raw.github.com
     185.199.108.153 assets-cdn.github.com
-
+    76.223.82.65    cad.onshape.com
     # This hosts file is a merged collection of hosts from reputable sources,
     # with a dash of crowd sourcing via Github
     #
@@ -47,21 +47,91 @@
     ###################################### don't fucking play with it
     ###################################### don't fucking play with it
     ###################################### don't fucking play with it
+    #  __      __         .__  .__               .__                                                         _____
+    # /  \    /  \ ____   |  | |__|__  __ ____   |__| ____   _____    ____   _____     ____   ____     _____/ ____\
+    # \   \/\/   // __ \  |  | |  \  \/ // __ \  |  |/    \  \__  \  /    \  \__  \   / ___\_/ __ \   /  _ \   __\
+    #  \        /\  ___/  |  |_|  |\   /\  ___/  |  |   |  \  / __ \|   |  \  / __ \_/ /_/  >  ___/  (  <_> )  |
+    #   \__/\  /  \___  > |____/__| \_/  \___  > |__|___|  / (____  /___|  / (____  /\___  / \___  >  \____/|__|
+    #        \/       \/                     \/          \/       \/     \/       \//_____/      \/
+    # .__        _____                            __  .__                                         .__                    .___
+    # |__| _____/ ____\___________  _____ _____ _/  |_|__| ____   ____     _______  __ ___________|  |   _________     __| _/
+    # |  |/    \   __\/  _ \_  __ \/     \\__  \\   __\  |/  _ \ /    \   /  _ \  \/ // __ \_  __ \  |  /  _ \__  \   / __ |
+    # |  |   |  \  | (  <_> )  | \/  Y Y  \/ __ \|  | |  (  <_> )   |  \ (  <_> )   /\  ___/|  | \/  |_(  <_> ) __ \_/ /_/ |
+    # |__|___|  /__|  \____/|__|  |__|_|  (____  /__| |__|\____/|___|  /  \____/ \_/  \___  >__|  |____/\____(____  /\____ |
+    #         \/                        \/     \/                    \/                   \/                      \/      \/
+    ####################################################################################################
+    127.0.0.1 www.zhihu.com
+    127.0.0.1 zhihu.com
     127.0.0.1 www.youtube.com
     127.0.0.1 www.bilibili.com
+    127.0.0.1 www.youtube.com
+    127.0.0.1 www.bilibili.com
+    127.0.0.1 movie.douban.com
+    127.0.0.1 book.douban.com
+    127.0.0.1 music.douban.com
+    127.0.0.1 so.com
+    127.0.0.1 www.so.com
     127.0.0.1 bilibili.com
+    127.0.0.1 www.zhihu.com
+    127.0.0.1 zhihu.com
     127.0.0.1 www.youtube.com
     127.0.0.1 www.bilibili.com
-    ###################################### think twice, it's demonic!!!!
-    ###################################### think twice, it's demonic!!!!
-    ###################################### think twice, it's demonic!!!!
-    ###################################### think twice, it's demonic!!!!
-    ###################################### think twice, it's demonic!!!!
-    127.0.0.1 www.thepaper.cn
     127.0.0.1 www.tieba.baidu.com
+    ###################################### think twice, it's demonic!!!!
+    ###################################### think twice, it's demonic!!!!
+    ###################################### think twice, it's demonic!!!!
+    ###################################### think twice, it's demonic!!!!
+    ###################################### think twice, it's demonic!!!!
+    127.0.0.1 www.tieba.baidu.com
+    127.0.0.1 www.thepaper.cn
+    127.0.0.1 bbs.baidu.com
+    127.0.0.1 forum.baidu.com
+    127.0.0.1 bbs.sina.com
+    127.0.0.1 tieba.qq.com
+    127.0.0.1 passport.weibo.com
+    127.0.0.1 video.weibo.com
+    127.0.0.1 vip.weibo.com
+    127.0.0.1 search.sogou.com
+    127.0.0.1 pic.sogou.com
+    127.0.0.1 wenwen.sogou.com
+    127.0.0.1 tieba.baidu.com
+    127.0.0.1 wenku.baidu.com
+    127.0.0.1 baike.baidu.com
+    127.0.0.1 nba.qq.com
+    127.0.0.1 video.qq.com
+    127.0.0.1 sports.qq.com
+    127.0.0.1 blog.sina.com.cn
+    127.0.0.1 finance.sina.com.cn
+    127.0.0.1 tech.sina.com.cn
+    127.0.0.1 news.163.com
+    127.0.0.1 gb.163.com
+    127.0.0.1 money.163.com
+    127.0.0.1 thepaper.cn
+    127.0.0.1 tieba.baidu.com
+    127.0.0.1 www.tieba.baidu.com
+    127.0.0.1 tieba.baidu.com
+    127.0.0.1 www.zhihu.com
+    127.0.0.1 zhihu.com
     127.0.0.1 www.twitter.com
     127.0.0.1 www.facebook.com
     127.0.0.1 www.baidu.com
+    127.0.0.1 baidu.com
+    127.0.0.1 www.sspai.com
+    127.0.0.1 sspai.com
+    127.0.0.1 www.zhihu.com
+    127.0.0.1 zhihu.com
+    127.0.0.1 www.tieba.baidu.com
+    127.0.0.1 www.thepaper.cn
+    127.0.0.1 thepaper.cn
+    127.0.0.1 tieba.baidu.com
+    127.0.0.1 www.tieba.baidu.com
+    127.0.0.1 tieba.baidu.com
+    127.0.0.1 www.zhihu.com
+    127.0.0.1 zhihu.com
+    127.0.0.1 www.twitter.com
+    127.0.0.1 www.facebook.com
+    127.0.0.1 www.baidu.com
+    127.0.0.1 baidu.com
     127.0.0.1 www.sspai.com
     127.0.0.1 sspai.com
     127.0.0.1 www.zhihu.com

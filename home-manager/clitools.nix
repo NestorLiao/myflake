@@ -15,6 +15,7 @@
     # samba4Full
     # ffmpeg
     # pandoc
+    sdcv
 
     gitui
     bat
@@ -52,7 +53,7 @@
     ripgrep #line-oriented search tool that recursively searches directories for a regex pattern
     # strace #diagnostic tool for debugging and profiling Linux processes
     # sysstat #collection of performance monitoring tools for Linux
-    # tldr #simplified and community-driven man pages
+    tldr #simplified and community-driven man pages
     tmux-sessionizer #tool for organizing and cleaning up tmux sessions
     # translate-shell #command-line translator using various translation services
     tree #displays directory structure in a tree-like format
@@ -65,21 +66,21 @@
     # lsof # list open files
     # ltrace # library call monitoring
 
-    # (pkgs.writeScriptBin "ts" ''
-    #   #!/usr/bin/env bash
+    (pkgs.writeScriptBin "ts" ''
+      #!/usr/bin/env bash
 
-    #   # Execute wl-paste and store sse output in a variable
-    #   clipboard_content=$(wl-paste)
+      # Execute wl-paste and store sse output in a variable
+      clipboard_content=$(wl-paste)
 
-    #   # Translate the clipboard content from English to Simplified Chinese using `trans`
-    #   translated_content=$(echo "$clipboard_content" | trans :zh)
+      # Translate the clipboard content from English to Simplified Chinese using `trans`
+      translated_content=$(sdcv -c -n "$clipboard_content" -u 牛津英汉双解美化版 -u WordNet)
 
-    #   # Remove ANSI escape codes from the translated content using `sed`
-    #   cleaned_content=$(echo "$translated_content" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g")
+      # Remove ANSI escape codes from the translated content using `sed`
+      cleaned_content=$(echo "$translated_content" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g")
 
-    #   # Print the final cleaned content
-    #   echo "$cleaned_content"
-    # '')
+      # Print the final cleaned content
+      echo "$cleaned_content"
+    '')
   ];
 
   programs = {

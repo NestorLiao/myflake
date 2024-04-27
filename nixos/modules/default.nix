@@ -19,7 +19,7 @@
     ./enviroment.nix
 
     # nix-ld cli tool
-    # ./nix-ld.nix
+    ./nix-ld.nix
 
     #fish shell
     ./fish.nix

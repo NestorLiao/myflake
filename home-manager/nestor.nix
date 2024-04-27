@@ -25,23 +25,23 @@
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
     # verilator
     # steam
-    # wpsoffice-cn
+    wpsoffice-cn
     # telegram-desktop
-    # stm32cubemx
+    stm32cubemx
     # logisim-evolution
     # libsForQt5.kdenlive
-    # android-studio
-    # android-tools
+    android-studio
+    android-tools
     # arduino-ide
     # hugo
-    # mpv
-    # blender
+    mpv
+    blender
     # calibre
     # gimp
     # gnome.cheese
     # kicad
     # libreoffice
-    # qq
+    qq
     # vivaldi
   ];
 
