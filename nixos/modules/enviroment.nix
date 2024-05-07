@@ -29,6 +29,7 @@
   services.ollama.enable = false;
   environment.systemPackages = with pkgs; [
     neovim
+    btop
     # samba
     # ventoy-full
     wineWowPackages.waylandFull
@@ -208,6 +209,5 @@
   #    ];
   #    NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
   #  };
-
   programs.nano.enable = false;
 }

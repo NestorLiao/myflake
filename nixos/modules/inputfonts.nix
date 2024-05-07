@@ -5,7 +5,7 @@
   userSetting,
   ...
 }: let
-  # shell = script: lib.strings.splitString " " "${lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl"} dispatch exec ${lib.getExe' (pkgs.writeShellScriptBin "script" script) "script"}";
+  shell = script: lib.strings.splitString " " "${lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl"} dispatch exec ${lib.getExe' (pkgs.writeShellScriptBin "script" script) "script"}";
 in {
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];

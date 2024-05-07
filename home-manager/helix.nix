@@ -57,6 +57,8 @@
           "o" = "file_picker_in_current_buffer_directory";
           "ret" = ":hsplit-new";
           "backspace" = ":buffer-close!";
+
+          "x" = ":sh echo <ctrl-r %> | wl-copy";
         };
         normal.space = {
           "f" = "file_picker_in_current_directory";
@@ -72,6 +74,9 @@
           "o" = "file_picker_in_current_buffer_directory";
           "ret" = ":hsplit-new";
           "backspace" = ":buffer-close!";
+
+          "x" = ":sh echo <ctrl-r %> | wl-copy";
+
           # r write-rite-r
           # t translate-t
           # n close-buffer_no need this buffer
@@ -248,7 +253,7 @@
         }
         {
           name = "c";
-          auto-format = true;
+          auto-format = false;
           language-servers = ["clangd"];
           formatter = {command = "clang-format";};
           indent = {

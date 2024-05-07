@@ -61,6 +61,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod, S, fullscreen"
         "$mod  SHIFT, H, exec, systemctl hibernate"
         "$mod, X, fakefullscreen"
+        "$mod  SHIFT, P, pin"
         "$mod, T, togglesplit"
         "$mod, up, movefocus, u"
         "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
@@ -121,8 +122,8 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       # "IMSETTINGS_MODULE,fcitx"
       # "QT_IM_MODULE,fcitx"
 
-      "MOZ_ENABLE_WAYLAND,1"
-      "MOZ_WEBRENDER,1"
+      # "MOZ_ENABLE_WAYLAND,1"
+      # "MOZ_WEBRENDER,1"
       # "NIXOS_OZONE_WL,1"
       # "XCURSOR_SIZE,24"
       # "_JAVA_AWT_WM_NONREPARENTING,1"

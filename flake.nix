@@ -40,6 +40,8 @@
       hostname = "nixos";
       email = "gtkndcbfhr@gmail.com";
       windowmanager = "hyprland";
+      # windowmanager = "plasma";
+      # windowmanager = "gnome";
     };
   in {
     # NixOS configuration entrypoint
@@ -111,7 +113,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
-    # hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # helix.url = "github:helix-editor/helix/master";
     xremap-flake.url = "github:xremap/nix-flake";
 
