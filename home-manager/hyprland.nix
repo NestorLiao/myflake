@@ -122,8 +122,8 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       # "IMSETTINGS_MODULE,fcitx"
       # "QT_IM_MODULE,fcitx"
 
-      # "MOZ_ENABLE_WAYLAND,1"
-      # "MOZ_WEBRENDER,1"
+      "MOZ_ENABLE_WAYLAND,1"
+      "MOZ_WEBRENDER,1"
       # "NIXOS_OZONE_WL,1"
       # "XCURSOR_SIZE,24"
       # "_JAVA_AWT_WM_NONREPARENTING,1"
@@ -170,6 +170,8 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "size 75% 75%, class:^(QQ)$"
       "center, class:^(QQ)$"
       "fakefullscreen,class:(firefox)"
+      "size 75% 75%, class:^(STM32CubeMX)$"
+      "center, class:^(STM32CubeMX)$"
 
       "float, title:rofi.*"
       # "rounding 0, xwayland:1"

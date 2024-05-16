@@ -15,6 +15,7 @@
     # samba4Full
     # ffmpeg
     # pandoc
+    kitty
     sdcv
 
     gitui

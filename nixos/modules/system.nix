@@ -9,6 +9,13 @@
   ...
 }: {
   # https://github.com/ghostbuster91/blogposts/blob/main/router2023-part2/main.md
+
+  # boot.extraModulePackages = with config.boot.kernelPackages; [ wireguard ];
+
+  boot.extraModprobeConfig = ''
+    options usbcore use_both_schemes=yes
+  '';
+
   boot = {
     kernel = {
       sysctl = {
@@ -21,8 +28,8 @@
     };
   };
 
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages;
   # Bootloader
   boot.loader.timeout = 0;
   boot.loader.systemd-boot.enable = true;

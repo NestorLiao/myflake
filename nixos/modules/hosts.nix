@@ -75,25 +75,19 @@
     # |__|___|  /__|  \____/|__|  |__|_|  (____  /__| |__|\____/|___|  /  \____/ \_/  \___  >__|  |____/\____(____  /\____ |
     #         \/                        \/     \/                    \/                   \/                      \/      \/
     ####################################################################################################
-    127.0.0.1 www.youtube.com
+    # 127.0.0.1 www.youtube.com
     127.0.0.1 www.bilibili.com
     127.0.0.1 search.bilibili.com
     127.0.0.1 www.search.bilibili.com
-    127.0.0.1 www.youtube.com
+    # 127.0.0.1 www.youtube.com
     127.0.0.1 movie.douban.com
     127.0.0.1 book.douban.com
     127.0.0.1 music.douban.com
-    127.0.0.1 www.bilibili.com
-    127.0.0.1 search.bilibili.com
-    127.0.0.1 www.search.bilibili.com
     127.0.0.1 so.com
     127.0.0.1 www.so.com
     # 127.0.0.1 www.zhihu.com
     # 127.0.0.1 zhihu.com
-    127.0.0.1 www.youtube.com
-    127.0.0.1 www.bilibili.com
-    127.0.0.1 search.bilibili.com
-    127.0.0.1 www.search.bilibili.com
+    # 127.0.0.1 www.youtube.com
     127.0.0.1 www.tieba.baidu.com
     ###################################### think twice, it's demonic!!!!
     ###################################### think twice, it's demonic!!!!

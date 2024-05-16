@@ -13,7 +13,7 @@
         blockFakenews = true;
         blockGambling = true;
         blockPorn = true;
-        blockSocial = true;
+        blockSocial = false;
       };
     }
   ];
@@ -34,11 +34,11 @@
   networking = {
     firewall = {
       enable = true;
-      allowedTCPPorts = [5000];
-      allowedUDPPorts = [];
-      extraCommands = ''
-        iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
-      '';
+      # allowedTCPPorts = [5000];
+      # allowedUDPPorts = [];
+      # extraCommands = ''
+      #   iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
+      # '';
     };
     hostName = userSetting.hostname;
     networkmanager.enable = true;

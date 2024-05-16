@@ -36,7 +36,8 @@
       bind -r Space select-pane -l
       bind-key -r Enter split-window -h -p 50 -c "#{pane_current_path}" \; select-pane -l;
       bind-key -n C-n resize-pane -Z
-      bind-key -n C-e select-pane -L \; resize-pane -Z;
+      # bind-key -n C-e select-pane -L \; resize-pane -Z;
+      bind-key -n C-e select-pane -L;
       bind-key -n C-j select-pane -D
       bind-key -n C-l last-window
       bind-key  C-o display-popup -E "tms"
