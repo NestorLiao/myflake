@@ -18,7 +18,9 @@
     kitty
     sdcv
 
+    st
     gitui
+    # gnome.cheese
     bat
     # helix-gpt
     nix-index

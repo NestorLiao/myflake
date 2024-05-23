@@ -87,6 +87,7 @@
         normal.backspace = {
           "backspace" = ":buffer-next";
           "z" = ":bco";
+          "C-c" = ["toggle_comments" "move_visual_line_down" "toggle_comments" "move_visual_line_up"];
           "a" = [":write" ":sh just a"];
           "r" = [":write" ":sh just r"];
           "s" = [":write" ":sh just s"];

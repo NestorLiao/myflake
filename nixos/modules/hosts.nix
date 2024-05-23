@@ -26,7 +26,7 @@
     #
     # ===============================================================
     127.0.0.1 v2ex.com
-    127.0.0.1 reddit.com
+    # 127.0.0.1 reddit.com
     127.0.0.1 bilibili.com
     # 信息茧房
     # 技术最重要
@@ -34,8 +34,11 @@
     # 别TM天天想有的没的
     # 找个工作机会很重要
     127.0.0.1 hk.v2ex.com
+    127.0.0.1 www.nowcoder.com
+    127.0.0.1 nowcoder.com
     127.0.0.1 www.v2ex.com
     127.0.0.1 www.csdn.com
+    127.0.0.1 www.ruanyifeng.com
     127.0.0.1 cn.v2ex.com
     127.0.0.1 www.cn.v2ex.com
     127.0.0.1 douban.com
@@ -45,6 +48,8 @@
     127.0.0.1 music.douban.com
     127.0.0.1 so.com
     127.0.0.1 www.so.com
+    127.0.0.1 linux.do
+    127.0.0.1 www.linux.do
     127.0.0.1 www.uscardforum.com
     127.0.0.1 www.myzaker.com
     127.0.0.1 www.hupu.com
@@ -75,19 +80,19 @@
     # |__|___|  /__|  \____/|__|  |__|_|  (____  /__| |__|\____/|___|  /  \____/ \_/  \___  >__|  |____/\____(____  /\____ |
     #         \/                        \/     \/                    \/                   \/                      \/      \/
     ####################################################################################################
-    # 127.0.0.1 www.youtube.com
+    127.0.0.1 www.youtube.com
     127.0.0.1 www.bilibili.com
     127.0.0.1 search.bilibili.com
     127.0.0.1 www.search.bilibili.com
-    # 127.0.0.1 www.youtube.com
+    127.0.0.1 www.youtube.com
     127.0.0.1 movie.douban.com
     127.0.0.1 book.douban.com
     127.0.0.1 music.douban.com
     127.0.0.1 so.com
     127.0.0.1 www.so.com
-    # 127.0.0.1 www.zhihu.com
-    # 127.0.0.1 zhihu.com
-    # 127.0.0.1 www.youtube.com
+    127.0.0.1 www.zhihu.com
+    127.0.0.1 zhihu.com
+    127.0.0.1 www.youtube.com
     127.0.0.1 www.tieba.baidu.com
     ###################################### think twice, it's demonic!!!!
     ###################################### think twice, it's demonic!!!!

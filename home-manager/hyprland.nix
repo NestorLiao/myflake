@@ -18,13 +18,24 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
 
   home.file.".config/hypr/hyprpaper.conf".text = ''
     preload = /home/nestor/.config/hypr/winxp.jpg
-    wallpaper =,/home/nestor/.config/hypr/winxp.jpg
+    wallpaper =HDMI-A-1,/home/nestor/.config/hypr/winxp.jpg
+
+    preload = /home/nestor/.config/hypr/earth.jpg
+    wallpaper =DP-2,/home/nestor/.config/hypr/earth.jpg
+
+    preload = /home/nestor/.config/hypr/earth.jpg
+    wallpaper =DP-1,/home/nestor/.config/hypr/earth.jpg
+
+
     splash = false
     ipc = off
   '';
 
   home.file.".config/hypr/winxp.jpg".source =
     ./winxp.jpg;
+
+  home.file.".config/hypr/earth.jpg".source =
+    ./earth.jpg;
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
@@ -52,8 +63,8 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod SHIFT, down, movewindow, d"
         "$mod, N, movefocus, l"
         "$mod, O, movefocus, r"
-        "$mod, E, workspace, -1"
-        "$mod, I, workspace, +1"
+        "$mod, E, movefocus, d"
+        "$mod, I, movefocus, u"
         "$mod, P, pseudo"
         "$mod, J, cyclenext"
         "$mod, R, workspace,previous"
@@ -131,13 +142,23 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "WLR_NO_HARDWARE_CURSORS,1"
     ];
     general = {
+      cursor_inactive_timeout = 3;
       sensitivity = "1";
-      gaps_in = "0";
-      gaps_out = "0";
-      border_size = "0";
-      "col.active_border" = "rgba(ffffffff) rgba(ffffffff) 45deg";
-      "col.inactive_border" = "rgba(ffffffff)";
+      gaps_in = "5";
+      gaps_out = "5";
+      border_size = "3";
+      "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+      "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
       layout = "dwindle";
+      no_focus_fallback = true;
+      resize_on_border = true;
+    };
+
+    group = {
+      "col.border_active" = " rgba(E1A2B7ff) rgba(522936ff) 45deg";
+      "col.border_inactive" = " rgba(2F364Acc) rgba(76C4D7cc) 45deg";
+      "col.border_locked_active" = " rgba(0F0F11ff) rgba(090A0Aff) 45deg";
+      "col.border_locked_inactive" = " rgba(FFFFFFcc) rgba(0F0E0Dcc) 45deg";
     };
 
     misc = {
@@ -190,10 +211,12 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         size = "3";
         passes = "1";
       };
-      drop_shadow = "no";
       shadow_range = "0";
       shadow_render_power = "0";
-      "col.shadow" = "rgba(00000000)";
+      drop_shadow = "false";
+      active_opacity = "1.0";
+      inactive_opacity = "1.0";
+      fullscreen_opacity = "1.0";
     };
     # windowrule = "pseudo";
     animations = {
@@ -219,12 +242,12 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     };
     gestures = {workspace_swipe = "off";};
     monitor = [
-      # ",preferred,0x0,1,transform,1"
+      ",preferred,0x0,1.5,transform,0"
       # "DP-2,preferred,1920x0,1,transform,0"
-      ",preferred,1920x-420,1,transform,1"
+      # ",preferred,1920x-420,1,transform,1"
       # ",preferred,1080x0,1,transform,1"
       # "DP-1,preferred,1920x-420,1,transform,1"
-      "HDMI-A-1,1920x1080@60,0x0,1,transform,0"
+      # "HDMI-A-1,1920x1080@60,0x0,1,transform,0"
       # "HDMI-A-1,preferred,auto,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"

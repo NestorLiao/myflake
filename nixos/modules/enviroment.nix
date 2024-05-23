@@ -35,6 +35,26 @@
     wineWowPackages.waylandFull
     # discord
     wget
+    (
+      let
+        base = pkgs.appimageTools.defaultFhsEnvArgs;
+      in
+        pkgs.buildFHSUserEnv (base
+          // {
+            name = "fhs";
+            targetPkgs = pkgs: (
+              (base.targetPkgs pkgs)
+              ++ [
+                stm32cubemx
+                # If your FHS program has additional dependencies, add them here
+              ]
+            );
+            # multiArch = true;
+            profile = "export FHS=1";
+            runScript = "bash";
+            extraOutputsToInstall = ["dev"];
+          })
+    )
     # (
     #   let
     #     base = pkgs.appimageTools.defaultFhsEnvArgs;
