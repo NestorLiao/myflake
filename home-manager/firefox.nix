@@ -16,6 +16,8 @@
       ];
     };
     enable = true;
+
+    # https://github.com/jonhoo/configs
     profiles.firefox = {
       userChrome = ''
         @-moz-document url(chrome://browser/content/browser.xhtml) {
@@ -24,7 +26,6 @@
         	 * toolkit.legacyUserProfileCustomizations.stylesheets = true
         	 * in about:config
         	 */
-
             #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
               display: none;
             }
@@ -32,11 +33,14 @@
         	#navigator-toolbox { flex-direction: column-reverse !important; }
         	#urlbar {
         		top: unset !important;
-        		bottom: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+        		bottom: calc(var(--urlbar-margin-inline)) !important;
         		box-shadow: none !important;
         		display: flex !important;
         		flex-direction: column !important;
         	}
+            #urlbar > * {
+            	flex: none;
+            }
         	#urlbar-input-container {
         		order: 2;
         	}

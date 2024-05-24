@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-nix flake update;  
+# nix flake update;  
 
 echo "rebuilding nixos";
 while ! sudo nixos-rebuild switch

@@ -142,16 +142,15 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "WLR_NO_HARDWARE_CURSORS,1"
     ];
     general = {
-      cursor_inactive_timeout = 3;
       sensitivity = "1";
-      gaps_in = "5";
-      gaps_out = "5";
-      border_size = "3";
+      gaps_in = "0";
+      gaps_out = "0";
+      border_size = "0";
       "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
       "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
       layout = "dwindle";
-      no_focus_fallback = true;
-      resize_on_border = true;
+      # no_focus_fallback = true;
+      # resize_on_border = true;
     };
 
     group = {
@@ -213,10 +212,10 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       };
       shadow_range = "0";
       shadow_render_power = "0";
-      drop_shadow = "false";
-      active_opacity = "1.0";
-      inactive_opacity = "1.0";
-      fullscreen_opacity = "1.0";
+      drop_shadow = false;
+      # active_opacity = "1.0";
+      # inactive_opacity = "1.0";
+      # fullscreen_opacity = "1.0";
     };
     # windowrule = "pseudo";
     animations = {
@@ -242,7 +241,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     };
     gestures = {workspace_swipe = "off";};
     monitor = [
-      ",preferred,0x0,1.5,transform,0"
+      ",preferred,0x0,1.6000000,transform,0"
       # "DP-2,preferred,1920x0,1,transform,0"
       # ",preferred,1920x-420,1,transform,1"
       # ",preferred,1080x0,1,transform,1"
