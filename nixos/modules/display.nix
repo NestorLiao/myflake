@@ -10,7 +10,7 @@
   services.xserver.desktopManager.gnome.enable = lib.mkIf (userSetting.windowmanager == "gnome") true;
   services.xserver.displayManager.gdm.enable = lib.mkIf (userSetting.windowmanager == "gnome") true;
 
-  services.xserver.displayManager.sddm.enable = lib.mkIf (userSetting.windowmanager == "plasma") true;
+  services.displayManager.sddm.enable = lib.mkIf (userSetting.windowmanager == "plasma") true;
   services.desktopManager.plasma6.enable = lib.mkIf (userSetting.windowmanager == "plasma") true;
 
   services.greetd = lib.mkIf (userSetting.windowmanager == "hyprland") {

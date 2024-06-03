@@ -8,6 +8,7 @@
     ff = "fd  | fzf | zoxide";
     c = "clear";
     e = "hx";
+    unzip = "unzip -O gb18030";
     en = "hx .";
     r = "fg";
     sl = "ls";

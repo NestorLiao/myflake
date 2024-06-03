@@ -5,15 +5,15 @@
 }: {
   networking.extraHosts = ''
 
-    # 151.101.78.217  cache.nixos.org
-    # 20.205.243.166  github.com
-    # 185.199.109.133 raw.githubusercontent.com
-    # 185.199.109.133 user.githubusercontent.com
-    # 185.199.110.133 user-images.githubusercontent.com
-    # 185.199.110.133 private-user-images.githubusercontent.com
-    # 185.199.109.133 raw.github.com
-    # 185.199.108.153 assets-cdn.github.com
-    # 76.223.82.65    cad.onshape.com
+    151.101.78.217  cache.nixos.org
+    20.205.243.166  github.com
+    185.199.109.133 raw.githubusercontent.com
+    185.199.109.133 user.githubusercontent.com
+    185.199.110.133 user-images.githubusercontent.com
+    185.199.110.133 private-user-images.githubusercontent.com
+    185.199.109.133 raw.github.com
+    185.199.108.153 assets-cdn.github.com
+    76.223.82.65    cad.onshape.com
     # This hosts file is a merged collection of hosts from reputable sources,
     # with a dash of crowd sourcing via Github
     #
@@ -26,8 +26,8 @@
     #
     # ===============================================================
     127.0.0.1 v2ex.com
-    # 127.0.0.1 reddit.com
-    127.0.0.1 bilibili.com
+    127.0.0.1 reddit.com
+    # 127.0.0.1 bilibili.com
     # 信息茧房
     # 技术最重要
     # 学习最重要
@@ -80,11 +80,11 @@
     # |__|___|  /__|  \____/|__|  |__|_|  (____  /__| |__|\____/|___|  /  \____/ \_/  \___  >__|  |____/\____(____  /\____ |
     #         \/                        \/     \/                    \/                   \/                      \/      \/
     ####################################################################################################
-    127.0.0.1 www.youtube.com
-    127.0.0.1 www.bilibili.com
-    127.0.0.1 search.bilibili.com
-    127.0.0.1 www.search.bilibili.com
-    127.0.0.1 www.youtube.com
+    # 127.0.0.1 www.youtube.com
+    # 127.0.0.1 www.bilibili.com
+    # 127.0.0.1 search.bilibili.com
+    # 127.0.0.1 www.search.bilibili.com
+    # 127.0.0.1 www.youtube.com
     127.0.0.1 movie.douban.com
     127.0.0.1 book.douban.com
     127.0.0.1 music.douban.com
@@ -92,7 +92,7 @@
     127.0.0.1 www.so.com
     127.0.0.1 www.zhihu.com
     127.0.0.1 zhihu.com
-    127.0.0.1 www.youtube.com
+    # 127.0.0.1 www.youtube.com
     127.0.0.1 www.tieba.baidu.com
     ###################################### think twice, it's demonic!!!!
     ###################################### think twice, it's demonic!!!!

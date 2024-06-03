@@ -30,11 +30,11 @@
     stm32cubemx
     # logisim-evolution
     # libsForQt5.kdenlive
-    android-studio
-    android-tools
+    # android-studio
+    # android-tools
     # arduino-ide
     # hugo
-    mpv
+    # mpv
     blender
     # calibre
     # gimp
@@ -42,7 +42,6 @@
     # kicad
     # libreoffice
     qq
-    # vivaldi
   ];
 
   # You can import other home-manager modules here

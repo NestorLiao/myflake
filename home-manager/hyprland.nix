@@ -95,10 +95,10 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
 
     xwayland = {force_zero_scaling = "true";};
     exec-once = [
-      "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
+      # "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
       "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
-      "fcitx5 -d --replace"
+      # "fcitx5 -d --replace"
       "hyprctl dispatch workspace 4"
       "hyprpaper"
     ];
@@ -145,20 +145,22 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       sensitivity = "1";
       gaps_in = "0";
       gaps_out = "0";
-      border_size = "0";
-      "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-      "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+      border_size = "3";
+      # "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+      # "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+      "col.active_border" = "rgba(ffffffff) rgba(ffffffff) 0deg";
+      "col.inactive_border" = "rgba(ffffffff) rgba(ffffffff) 0deg";
       layout = "dwindle";
       # no_focus_fallback = true;
       # resize_on_border = true;
     };
 
-    group = {
-      "col.border_active" = " rgba(E1A2B7ff) rgba(522936ff) 45deg";
-      "col.border_inactive" = " rgba(2F364Acc) rgba(76C4D7cc) 45deg";
-      "col.border_locked_active" = " rgba(0F0F11ff) rgba(090A0Aff) 45deg";
-      "col.border_locked_inactive" = " rgba(FFFFFFcc) rgba(0F0E0Dcc) 45deg";
-    };
+    # group = {
+    #   "col.border_active" = " rgba(E1A2B7ff) rgba(522936ff) 45deg";
+    #   "col.border_inactive" = " rgba(2F364Acc) rgba(76C4D7cc) 45deg";
+    #   "col.border_locked_active" = " rgba(0F0F11ff) rgba(090A0Aff) 45deg";
+    #   "col.border_locked_inactive" = " rgba(FFFFFFcc) rgba(0F0E0Dcc) 45deg";
+    # };
 
     misc = {
       disable_autoreload = false;
@@ -168,7 +170,6 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     };
 
     windowrule = [
-      # "pseudo,fcitx"
       "float,title:^(Open File)(.*)$"
       "float,title:^(Open Folder)(.*)$"
       "float,title:^(Save As)(.*)$"
@@ -190,8 +191,8 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "size 75% 75%, class:^(QQ)$"
       "center, class:^(QQ)$"
       "fakefullscreen,class:(firefox)"
-      "size 75% 75%, class:^(STM32CubeMX)$"
-      "center, class:^(STM32CubeMX)$"
+      # "size 75% 75%, class:^(STM32CubeMX)$"
+      # "center, class:^(STM32CubeMX)$"
 
       "float, title:rofi.*"
       # "rounding 0, xwayland:1"
@@ -211,15 +212,15 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         passes = "1";
       };
       shadow_range = "0";
-      shadow_render_power = "0";
+      shadow_render_power = "4";
       drop_shadow = false;
-      # active_opacity = "1.0";
-      # inactive_opacity = "1.0";
-      # fullscreen_opacity = "1.0";
+      active_opacity = "1.0";
+      inactive_opacity = "1.0";
+      fullscreen_opacity = "1.0";
     };
-    # windowrule = "pseudo";
     animations = {
       enabled = false;
+      first_launch_animation = false;
       bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
       # animation = [
       #   "windows, 1, 7, myBezier"
@@ -241,12 +242,13 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     };
     gestures = {workspace_swipe = "off";};
     monitor = [
-      ",preferred,0x0,1.6000000,transform,0"
+      # ",preferred,0x0,1.6666666,transform,0"
+      # ",preferred,0x0,2,transform,0"
       # "DP-2,preferred,1920x0,1,transform,0"
       # ",preferred,1920x-420,1,transform,1"
       # ",preferred,1080x0,1,transform,1"
-      # "DP-1,preferred,1920x-420,1,transform,1"
-      # "HDMI-A-1,1920x1080@60,0x0,1,transform,0"
+      "DP-1,preferred,1920x-420,1,transform,1"
+      "HDMI-A-1,1920x1080@60,0x0,1,transform,0"
       # "HDMI-A-1,preferred,auto,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"

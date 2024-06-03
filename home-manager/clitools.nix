@@ -61,7 +61,7 @@
     # translate-shell #command-line translator using various translation services
     tree #displays directory structure in a tree-like format
     unrar-free #unarchiver for .rar files
-    unzip #decompression tool for .zip archives
+    unzipNLS #decompression tool for .zip archives
     zip #compression tool and file packaging utility
     # usbutils #utilities for viewing USB devices and details
     # xdragon #(No specific description provided)
