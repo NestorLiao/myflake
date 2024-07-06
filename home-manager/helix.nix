@@ -17,7 +17,7 @@
       python3Packages.python-lsp-server
       nodePackages.bash-language-server
       nodePackages.prettier
-      nodePackages.pyright
+      nodePackages.coc-pyright
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted # HTML/CSS/JSON/ESLint
       nodePackages.yaml-language-server
@@ -87,7 +87,7 @@
         normal.backspace = {
           "backspace" = ":buffer-next";
           "z" = ":bco";
-          "C-c" = ["toggle_comments" "move_visual_line_down" "toggle_comments" "move_visual_line_up"];
+          "C-c" = ["toggle_comments" "move_visual_line_down" "toggle_comments" "move_visual_line_up" ":write"];
           "a" = [":write" ":sh just a"];
           "r" = [":write" ":sh just r"];
           "s" = [":write" ":sh just s"];

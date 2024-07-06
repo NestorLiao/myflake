@@ -12,90 +12,171 @@
     package = pkgs.firefox.override {
       nativeMessagingHosts = [
         pkgs.tridactyl-native
-        pkgs.passff-host
+        # pkgs.passff-host
       ];
     };
     enable = true;
 
+    policies = {
+      # mostly overwritten by nix and the user.js in ./settings.nix
+      DisableFirefoxStudies = true;
+      DisablePocket = true;
+      DisableTelemetry = true;
+      OfferToSaveLogins = false;
+      FirefoxHome = {
+        Search = false;
+        Pocket = false;
+        Snippets = false;
+        Highlights = false;
+        TopSites = true;
+      };
+      AutofillAddressEnabled = false;
+      AutofillCreditCardEnabled = false;
+      DefaultDownloadDirectory = "\${home}/Downloads";
+      OfferToSaveLoginsDefault = false;
+      PromptForDownloadLocation = true;
+      SearchSuggestEnabled = false;
+      TranslateEnabled = false;
+      FirefoxSuggest = {
+        WebSuggestions = false;
+        SponsoredSuggestions = false;
+        ImproveSuggest = false;
+        Locked = false;
+      };
+      UserMessaging = {
+        ExtensionRecommendations = false;
+        SkipOnboarding = true;
+      };
+      SearchBar = "unified";
+      PasswordManagerEnabled = true;
+      # PasswordManagerEnabled = false;
+      NoDefaultBookmarks = true;
+      DontCheckDefaultBrowser = true;
+      DisableSetDesktopBackground = true;
+      DisableSystemAddonUpdate = true;
+      ExtensionUpdate = false;
+      EnableTrackingProtection = {
+        Value = true;
+        Locked = true;
+        Cryptomining = true;
+        Fingerprinting = true;
+      };
+
+      DisableFeedbackCommands = true;
+      SearchEngines.Default = "Google";
+      # BlockAboutAddons = true;
+      DisableFormHistory = true;
+      AppAutoUpdate = false;
+      DisableAppUpdate = true;
+    };
+
     # https://github.com/jonhoo/configs
+
+    # #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+    #   display: none;
+    # }
+
     profiles.firefox = {
+      # userChrome = ''
+      #   @-moz-document url(chrome://browser/content/browser.xhtml) {
+      #   	/* tabs on bottom of window */
+      #   	/* requires that you set
+      #   	 * toolkit.legacyUserProfileCustomizations.stylesheets = true
+      #   	 * in about:config
+      #   	 */
+
+      #       /* ########  Sidetabs Styles  ######### */
+
+      #       /* ~~~~~~~~ Hidden elements styles ~~~~~~~~~ */
+      #       #sidebar-header {
+      #       	display: none !important;
+      #       }
+      #       /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+      #       /* #################################### */
+      #   	#main-window body { flex-direction: column-reverse !important; }
+      #   	#navigator-toolbox { flex-direction: column-reverse !important; }
+      #   	#urlbar {
+      #   		top: unset !important;
+      #   		bottom: calc(var(--urlbar-margin-inline)) !important;
+      #   		box-shadow: none !important;
+      #   		display: flex !important;
+      #   		flex-direction: column !important;
+      #   	}
+      #       #urlbar > * {
+      #       	flex: none;
+      #       }
+      #   	#urlbar-input-container {
+      #   		order: 2;
+      #   	}
+      #   	#urlbar > .urlbarView {
+      #   		order: 1;
+      #   		border-bottom: 1px solid #666;
+      #   	}
+      #   	#urlbar-results {
+      #   		display: flex;
+      #   		flex-direction: column-reverse;
+      #   	}
+      #   	.search-one-offs { display: none !important; }
+      #   	.tab-background { border-top: none !important; }
+      #   	#navigator-toolbox::after { border: none; }
+      #   	#TabsToolbar .tabbrowser-arrowscrollbox,
+      #   	#tabbrowser-tabs, .tab-stack { min-height: 28px !important; }
+      #   	.tabbrowser-tab { font-size: 80%; }
+      #   	.tab-content { padding: 0 5px; }
+      #   	.tab-close-button .toolbarbutton-icon { width: 12px !important; height: 12px !important; }
+      #   	toolbox[inFullscreen=true] { display: none; }
+      #   	/*
+      #   	 * the following makes it so that the on-click panels in the nav-bar
+      #   	 * extend upwards, not downwards. some of them are in the #mainPopupSet
+      #   	 * (hamburger + unified extensions), and the rest are in
+      #   	 * #navigator-toolbox. They all end up with an incorrectly-measured
+      #   	 * max-height (based on the distance to the _bottom_ of the screen), so
+      #   	 * we correct that. The ones in #navigator-toolbox then adjust their
+      #   	 * positioning automatically, so we can just set max-height. The ones
+      #   	 * in #mainPopupSet do _not_, and so we need to give them a
+      #   	 * negative margin-top to offset them *and* a fixed height so their
+      #   	 * bottoms align with the nav-bar. We also calc to ensure they don't
+      #   	 * end up overlapping with the nav-bar itself. The last bit around
+      #   	 * cui-widget-panelview is needed because "new"-style panels (those
+      #   	 * using "unified" panels) don't get flex by default, which results in
+      #   	 * them being the wrong height.
+      #   	 *
+      #   	 * Oh, yeah, and the popup-notification-panel (like biometrics prompts)
+      #   	 * of course follows different rules again, and needs its own special
+      #   	 * rule.
+      #   	 */
+      #   	#mainPopupSet panel.panel-no-padding { margin-top: calc(-50vh + 40px) !important; }
+      #   	#mainPopupSet .panel-viewstack, #mainPopupSet popupnotification { max-height: 50vh !important; height: 50vh; }
+      #   	#mainPopupSet panel.panel-no-padding.popup-notification-panel { margin-top: calc(-50vh - 35px) !important; }
+      #   	#navigator-toolbox .panel-viewstack { max-height: 75vh !important; }
+      #   	panelview.cui-widget-panelview { flex: 1; }
+      #   	panelview.cui-widget-panelview > vbox { flex: 1; min-height: 50vh; }
+      #   }
+      # '';
       userChrome = ''
         @-moz-document url(chrome://browser/content/browser.xhtml) {
-        	/* tabs on bottom of window */
-        	/* requires that you set
-        	 * toolkit.legacyUserProfileCustomizations.stylesheets = true
-        	 * in about:config
-        	 */
-            #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
-              display: none;
+            /* ########  Sidetabs Styles  ######### */
+            #sidebar-header {
+            	display: none !important;
             }
-        	#main-window body { flex-direction: column-reverse !important; }
-        	#navigator-toolbox { flex-direction: column-reverse !important; }
-        	#urlbar {
-        		top: unset !important;
-        		bottom: calc(var(--urlbar-margin-inline)) !important;
-        		box-shadow: none !important;
-        		display: flex !important;
-        		flex-direction: column !important;
-        	}
-            #urlbar > * {
-            	flex: none;
+            #TabsToolbar {
+            	display: none !important;
             }
-        	#urlbar-input-container {
-        		order: 2;
-        	}
-        	#urlbar > .urlbarView {
-        		order: 1;
-        		border-bottom: 1px solid #666;
-        	}
-        	#urlbar-results {
-        		display: flex;
-        		flex-direction: column-reverse;
-        	}
-        	.search-one-offs { display: none !important; }
-        	.tab-background { border-top: none !important; }
-        	#navigator-toolbox::after { border: none; }
-        	#TabsToolbar .tabbrowser-arrowscrollbox,
-        	#tabbrowser-tabs, .tab-stack { min-height: 28px !important; }
-        	.tabbrowser-tab { font-size: 80%; }
-        	.tab-content { padding: 0 5px; }
-        	.tab-close-button .toolbarbutton-icon { width: 12px !important; height: 12px !important; }
-        	toolbox[inFullscreen=true] { display: none; }
-        	/*
-        	 * the following makes it so that the on-click panels in the nav-bar
-        	 * extend upwards, not downwards. some of them are in the #mainPopupSet
-        	 * (hamburger + unified extensions), and the rest are in
-        	 * #navigator-toolbox. They all end up with an incorrectly-measured
-        	 * max-height (based on the distance to the _bottom_ of the screen), so
-        	 * we correct that. The ones in #navigator-toolbox then adjust their
-        	 * positioning automatically, so we can just set max-height. The ones
-        	 * in #mainPopupSet do _not_, and so we need to give them a
-        	 * negative margin-top to offset them *and* a fixed height so their
-        	 * bottoms align with the nav-bar. We also calc to ensure they don't
-        	 * end up overlapping with the nav-bar itself. The last bit around
-        	 * cui-widget-panelview is needed because "new"-style panels (those
-        	 * using "unified" panels) don't get flex by default, which results in
-        	 * them being the wrong height.
-        	 *
-        	 * Oh, yeah, and the popup-notification-panel (like biometrics prompts)
-        	 * of course follows different rules again, and needs its own special
-        	 * rule.
-        	 */
-        	#mainPopupSet panel.panel-no-padding { margin-top: calc(-50vh + 40px) !important; }
-        	#mainPopupSet .panel-viewstack, #mainPopupSet popupnotification { max-height: 50vh !important; height: 50vh; }
-        	#mainPopupSet panel.panel-no-padding.popup-notification-panel { margin-top: calc(-50vh - 35px) !important; }
-        	#navigator-toolbox .panel-viewstack { max-height: 75vh !important; }
-        	panelview.cui-widget-panelview { flex: 1; }
-        	panelview.cui-widget-panelview > vbox { flex: 1; min-height: 50vh; }
-        }
+
+            #navigator-toolbox[fullscreenShouldAnimate] {
+                transition: none !important;
+            }
 
       '';
 
-      extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-        tridactyl
-        old-reddit-redirect
-        istilldontcareaboutcookies
-      ];
+      # extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+      #   tridactyl
+      # old-reddit-redirect
+      # ublock-origin
+      # istilldontcareaboutcookies
+      # sponsorblock
+      # ];
 
       settings = {
         "browser.tabs.closeTabByDblclick" = true;

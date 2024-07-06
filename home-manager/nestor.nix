@@ -6,7 +6,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+in {
   # virtualisation.waydroid.enable = true;
   # programs.vscode = {
   #   enable = true;
@@ -30,8 +31,8 @@
     stm32cubemx
     # logisim-evolution
     # libsForQt5.kdenlive
-    # android-studio
-    # android-tools
+    android-studio
+    android-tools
     # arduino-ide
     # hugo
     # mpv
@@ -41,7 +42,6 @@
     # gnome.cheese
     # kicad
     # libreoffice
-    qq
   ];
 
   # You can import other home-manager modules here

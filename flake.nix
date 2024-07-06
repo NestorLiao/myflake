@@ -7,9 +7,9 @@
     builders-use-substitutes = true;
     experimental-features = ["nix-command" "flakes"];
     substituters = [
+      # "https://mirrors.ustc.edu.cn/nix-channels/store"
       "https://mirror.sjtu.edu.cn/nix-channels/store"
-      "https://mirrors.ustc.edu.cn/nix-channels/store"
-      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+      # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
     ];
     extra-substituters = [
@@ -65,6 +65,7 @@
 
           # Import home-manager's NixOS module
           inputs.home-manager.nixosModules.home-manager
+          inputs.stylix.nixosModules.stylix
 
           # Import modules
           ./nixos/modules
@@ -104,6 +105,23 @@
   };
 
   inputs = {
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      # Optional, to download less. Neither the module nor the overlay uses this input.
+      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.systems.follows = "systems";
+      inputs.emacs-overlay.follows = "emacs-overlay";
+    };
+    # doom-config.url = "https://github.com/hlissner/.doom.d.git";
+    # doom-config.flake = false;
+
     daeuniverse.url = "github:daeuniverse/flake.nix";
     # Nixpkgs
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
@@ -116,6 +134,8 @@
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # helix.url = "github:helix-editor/helix/master";
     xremap-flake.url = "github:xremap/nix-flake";
+
+    stylix.url = "github:danth/stylix";
 
     # Home manager
     home-manager = {

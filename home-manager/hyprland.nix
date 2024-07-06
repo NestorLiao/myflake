@@ -16,15 +16,18 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     pkgs.dconf
   ];
 
+  # preload = /home/nestor/.config/hypr/winxp.jpg
+  # wallpaper =HDMI-A-1,/home/nestor/.config/hypr/winxp.jpg
   home.file.".config/hypr/hyprpaper.conf".text = ''
-    preload = /home/nestor/.config/hypr/winxp.jpg
-    wallpaper =HDMI-A-1,/home/nestor/.config/hypr/winxp.jpg
+    preload = /home/nestor/.config/hypr/doom.jpg
+    wallpaper =HDMI-A-1,/home/nestor/.config/hypr/doom.jpg
 
     preload = /home/nestor/.config/hypr/earth.jpg
     wallpaper =DP-2,/home/nestor/.config/hypr/earth.jpg
 
     preload = /home/nestor/.config/hypr/earth.jpg
     wallpaper =DP-1,/home/nestor/.config/hypr/earth.jpg
+
 
 
     splash = false
@@ -37,12 +40,17 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
   home.file.".config/hypr/earth.jpg".source =
     ./earth.jpg;
 
+  home.file.".config/hypr/doom.jpg".source =
+    ./doom.jpg;
+
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     bind =
       [
         "$mod, A, exec, alacritty"
         "$mod, B, exec, firefox"
+        "$mod, R, exec, emacsclient -c -a 'emacs'"
+        # "$mod, R, exec, emacs"
         ",code:87, workspace,1"
         ",code:88, workspace,2"
         ",code:89, workspace,3"
@@ -67,7 +75,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod, I, movefocus, u"
         "$mod, P, pseudo"
         "$mod, J, cyclenext"
-        "$mod, R, workspace,previous"
+        "$mod  SHIFT, R, workspace,previous"
         "$mod  SHIFT, Q, exit"
         "$mod, S, fullscreen"
         "$mod  SHIFT, H, exec, systemctl hibernate"
@@ -95,10 +103,10 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
 
     xwayland = {force_zero_scaling = "true";};
     exec-once = [
-      # "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
+      "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
       "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
-      # "fcitx5 -d --replace"
+      "fcitx5 -d --replace"
       "hyprctl dispatch workspace 4"
       "hyprpaper"
     ];
@@ -142,14 +150,14 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "WLR_NO_HARDWARE_CURSORS,1"
     ];
     general = {
-      sensitivity = "1";
+      sensitivity = "1.2";
       gaps_in = "0";
       gaps_out = "0";
-      border_size = "3";
+      border_size = "0";
       # "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
       # "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-      "col.active_border" = "rgba(ffffffff) rgba(ffffffff) 0deg";
-      "col.inactive_border" = "rgba(ffffffff) rgba(ffffffff) 0deg";
+      # "col.active_border" = "rgba(ffffffff) rgba(ffffffff) 0deg";
+      # "col.inactive_border" = "rgba(ffffffff) rgba(ffffffff) 0deg";
       layout = "dwindle";
       # no_focus_fallback = true;
       # resize_on_border = true;
@@ -242,28 +250,40 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     };
     gestures = {workspace_swipe = "off";};
     monitor = [
-      # ",preferred,0x0,1.6666666,transform,0"
+      # ",preferred,0x0,1.66666,transform,0"
       # ",preferred,0x0,2,transform,0"
-      # "DP-2,preferred,1920x0,1,transform,0"
+      ",preferred,0x0,1,transform,0"
+      "DP-2,preferred,1920x0,1,transform,0"
       # ",preferred,1920x-420,1,transform,1"
       # ",preferred,1080x0,1,transform,1"
-      "DP-1,preferred,1920x-420,1,transform,1"
-      "HDMI-A-1,1920x1080@60,0x0,1,transform,0"
+      # ",preferred,1920x0,1,transform,0"
+      # "DP-1,preferred,1920x-420,1,transform,1"
+      # "DP-2,preferred,1920x-420,1,transform,1"
       # "HDMI-A-1,preferred,auto,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"
+
+      # ",preferred,1920x0,1,transform,0"
+      # "HDMI-A-2,disable"
+      # "HDMI-A-1,1920x1080@60,0x0,1,transform,0"
     ];
     workspace = [
       "0, monitor:DP-2, default:true"
       "9, monitor:DP-2, default:true"
+      "6, monitor:DP-2, default:true"
+      "3, monitor:DP-2, default:true"
+      "0, monitor:DP-1, default:true"
+      "9, monitor:DP-1, default:true"
       "6, monitor:DP-1, default:true"
       "3, monitor:DP-1, default:true"
-      "1, monitor:HDMI-A-1, default:true"
-      "4, monitor:HDMI-A-1, default:true,on-created-empty:firefox"
+
+      "4, monitor:HDMI-A-1, default:true"
       "7, monitor:HDMI-A-1, default:true"
       "8, monitor:HDMI-A-1, default:true"
       "5, monitor:HDMI-A-1, default:true"
       "2, monitor:HDMI-A-1, default:true"
+      "1, monitor:HDMI-A-1, default:true"
+      "1, monitor:HDMI-A-1, default:true"
     ];
     "$mod" = "SUPER";
     bindm = [

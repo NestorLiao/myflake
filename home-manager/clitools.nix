@@ -34,10 +34,12 @@
     # scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
     just #just is a handy way to save and run project-specific commands.
     # bacon #bacon is a background rust code checker.
+    samba
 
     # glxinfo
     # nvidia-system-monitor-qt
     # quickemu
+    (quickemu.override {qemu = qemu_full;})
     # typst
 
     # gitui #git user interface for terminal
