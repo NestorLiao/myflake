@@ -39,7 +39,7 @@
     # glxinfo
     # nvidia-system-monitor-qt
     # quickemu
-    (quickemu.override {qemu = qemu_full;})
+    # (quickemu.override {qemu = qemu_full;})
     # typst
 
     # gitui #git user interface for terminal

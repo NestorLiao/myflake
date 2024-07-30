@@ -26,17 +26,17 @@ in {
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
     # verilator
     # steam
-    wpsoffice-cn
+    # wpsoffice-cn
     # telegram-desktop
-    stm32cubemx
+    # stm32cubemx
     # logisim-evolution
     # libsForQt5.kdenlive
-    android-studio
-    android-tools
-    # arduino-ide
+    # android-studio
+    # android-tools
+    arduino-ide
     # hugo
     # mpv
-    blender
+    # blender
     # calibre
     # gimp
     # gnome.cheese
@@ -66,9 +66,9 @@ in {
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
-      (final: prev: {
-        blender = prev.blender.override {cudaSupport = true;};
-      })
+      # (final: prev: {
+      #   blender = prev.blender.override {cudaSupport = true;};
+      # })
 
       # Helix bleeding edge
       # (

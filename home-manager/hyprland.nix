@@ -107,6 +107,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
       "fcitx5 -d --replace"
+      "fcitx5-remote -r"
       "hyprctl dispatch workspace 4"
       "hyprpaper"
     ];
@@ -244,7 +245,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       preserve_split = "yes"; # you probably want this
     };
     master = {
-      new_is_master = "true";
+      # new_is_master = "true";
       special_scale_factor = "0.8";
       no_gaps_when_only = "false";
     };
@@ -306,7 +307,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       name = "Flat-Remix-GTK-White";
     };
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
     font = {

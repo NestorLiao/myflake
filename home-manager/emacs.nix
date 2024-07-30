@@ -9,6 +9,12 @@
     inputs.nix-doom-emacs-unstraightened.hmModule
   ];
 
+  # home.file."./.local/share/fcitx5/rime" = {
+  #   source = ./rime;
+  #   recursive = true;
+  # executable = true;
+  # };
+
   home.packages = with pkgs;
     [
       fd
@@ -47,7 +53,7 @@
   programs.pandoc.enable = true;
 
   programs.doom-emacs = {
-    enable = true;
+    enable = false;
     doomDir = ./doom;
     extraPackages = epkgs: [epkgs.vterm epkgs.treesit-grammars.with-all-grammars];
     provideEmacs = true;

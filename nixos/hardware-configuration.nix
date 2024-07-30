@@ -4,6 +4,7 @@
 {
   config,
   lib,
+  pkgs,
   modulesPath,
   ...
 }: {
@@ -11,29 +12,36 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "vmd" "nvme" "usbhid" "usb_storage" "sd_mod"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "vmd" "nvme" "usbhid"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/68e1657a-ed40-4941-9e7b-c3c8fbaed567";
-    fsType = "ext4";
+    device = "/dev/disk/by-uuid/c2af3dda-2417-4ed6-b4c2-eeab011a8e34";
+    fsType = "btrfs";
+    options = ["subvol=root"];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/c2af3dda-2417-4ed6-b4c2-eeab011a8e34";
+    fsType = "btrfs";
+    options = ["subvol=nix"];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/c2af3dda-2417-4ed6-b4c2-eeab011a8e34";
+    fsType = "btrfs";
+    options = ["subvol=home"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/9465-4E3D";
+    device = "/dev/disk/by-uuid/12CE-A600";
     fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
   };
 
-  fileSystems."/home/nestor/resin" = {
-    device = "/dev/disk/by-uuid/afb46417-257b-4edc-84de-c626ec9a7a47";
-    fsType = "ext4";
-  };
-
-  swapDevices = [
-    {device = "/dev/disk/by-uuid/de941c45-0f5d-46d2-b006-cc539bf8224c";}
-  ];
+  swapDevices = [{device = "/swap/swapfile";}];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -44,6 +52,5 @@
   # networking.interfaces.wlp45s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

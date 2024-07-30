@@ -31,9 +31,9 @@
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
-          "C-h" = ":open ~/nink/nixos";
+          "C-h" = ":open ~/config";
           "C-g" = ":sh tmux popup -d \"#{pane_current_path}\" -xC -yC -w80% -h80% -E gitui";
-          "C-p" = ":open ~/resin/my-dev-env";
+          "C-p" = ":open ~/env";
           "\\" = ":reload-all";
           "X" = ["extend_line_up" "extend_to_line_bounds"];
           "A-x" = "extend_to_line_bounds";
@@ -306,7 +306,7 @@
         };
         # -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
         vscode-css-language-server = {
-          command = "${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
+          command = "${pkgs.vscode-langservers-extracted}/bin/css-languageserver";
 
           args = ["--stdio"];
         };

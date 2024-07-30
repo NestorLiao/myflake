@@ -3,7 +3,7 @@
 # nix flake update;  
 
 echo "rebuilding nixos";
-while ! sudo nixos-rebuild switch
+while ! sudo nixos-rebuild boot
 do
   echo "Try again"
 done

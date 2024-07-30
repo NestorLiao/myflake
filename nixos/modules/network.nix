@@ -42,7 +42,7 @@
   services.v2raya.enable = true;
   # with dae
   services.dae = {
-    enable = true;
+    enable = false;
     disableTxChecksumIpGeneric = false;
     configFile = "/home/${userSetting.username}/nink/retain/hh.dae";
     assets = with pkgs; [v2ray-geoip v2ray-domain-list-community];

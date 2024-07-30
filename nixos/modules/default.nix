@@ -4,7 +4,7 @@
     ./hosts.nix
 
     #cable drives
-    ./udev.nix
+    # ./udev.nix
 
     # searxng service
     # ./searx.nix

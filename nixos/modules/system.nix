@@ -16,6 +16,9 @@
     options usbcore use_both_schemes=yes
   '';
 
+  boot.resumeDevice = "/dev/disk/by-uuid/c2af3dda-2417-4ed6-b4c2-eeab011a8e34";
+  boot.kernelParams = ["resume_offset=22816000"];
+
   boot = {
     kernel = {
       sysctl = {
@@ -51,10 +54,9 @@
   };
   services.xserver.videoDrivers = ["nvidia"];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   hardware.nvidia.prime = {
@@ -74,7 +76,7 @@
   };
 
   # services.xserver.libinput.enable = true;
-  sound.enable = true;
+  # sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

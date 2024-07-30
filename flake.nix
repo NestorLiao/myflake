@@ -7,9 +7,9 @@
     builders-use-substitutes = true;
     experimental-features = ["nix-command" "flakes"];
     substituters = [
-      # "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://mirrors.ustc.edu.cn/nix-channels/store"
       "https://mirror.sjtu.edu.cn/nix-channels/store"
-      # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
     ];
     extra-substituters = [
@@ -24,7 +24,7 @@
     self,
     nixpkgs,
     home-manager,
-    nix-xilinx,
+    # nix-xilinx,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -37,10 +37,10 @@
     ];
     userSetting = {
       username = "nestor";
-      hostname = "nixos";
+      hostname = "mynixos";
       email = "gtkndcbfhr@gmail.com";
-      windowmanager = "hyprland";
-      # windowmanager = "plasma";
+      # windowmanager = "hyprland";
+      windowmanager = "plasma";
       # windowmanager = "gnome";
     };
   in {
@@ -145,12 +145,12 @@
 
     hosts.url = "github:StevenBlack/hosts";
 
-    nix-xilinx = {
-      # Recommended if you also override the default nixpkgs flake, common among
-      # nixos-unstable users:
-      #inputs.nixpkgs.follows = "nixpkgs";
-      url = "gitlab:doronbehar/nix-xilinx";
-    };
+    # nix-xilinx = {
+    #   # Recommended if you also override the default nixpkgs flake, common among
+    #   # nixos-unstable users:
+    #   #inputs.nixpkgs.follows = "nixpkgs";
+    #   url = "gitlab:doronbehar/nix-xilinx";
+    # };
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
