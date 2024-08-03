@@ -30,16 +30,54 @@
     upp = "doas nixos-rebuild --flake .# switch";
   };
 
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/grayscale-light.yaml";
+  services.ollama.enable = false;
+
+  # programs.steam.enable = true;
+  # programs.steam.gamescopeSession = true;
+  # programs.gamemode.enable = true;
+
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${userSetting.colorscheme}.yaml";
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-plateau-light.yaml";
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+  stylix.image = ./doom.jpg;
+  stylix.enable = true;
+
+  stylix.cursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+  };
+  stylix.polarity = "light";
+  stylix.fonts = {
+    monospace = {
+      package = pkgs.noto-fonts;
+      name = "Noto Sans Mono";
+    };
+    sansSerif = {
+      package = pkgs.source-han-sans;
+      name = "Source Han Sans SC";
+    };
+    serif = {
+      package = pkgs.noto-fonts;
+      name = "Noto Serif";
+    };
+    sizes = {
+      applications = 12;
+      terminal = 12;
+      desktop = 12;
+      popups = 12;
+    };
+  };
 
   environment.variables.EDITOR = "hx";
-  services.ollama.enable = false;
   environment.systemPackages = with pkgs; [
+    # protonup
+    # mangohud
     neovim
     btop
     # samba
     # ventoy-full
     wineWowPackages.waylandFull
+    alsa-utils
     # discord
     wget
     # (

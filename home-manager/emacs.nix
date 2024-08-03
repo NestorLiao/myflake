@@ -53,7 +53,7 @@
   programs.pandoc.enable = true;
 
   programs.doom-emacs = {
-    enable = false;
+    enable = true;
     doomDir = ./doom;
     extraPackages = epkgs: [epkgs.vterm epkgs.treesit-grammars.with-all-grammars];
     provideEmacs = true;

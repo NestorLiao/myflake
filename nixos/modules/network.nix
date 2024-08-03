@@ -42,9 +42,9 @@
   services.v2raya.enable = true;
   # with dae
   services.dae = {
-    enable = false;
+    enable = true;
     disableTxChecksumIpGeneric = false;
-    configFile = "/home/${userSetting.username}/nink/retain/hh.dae";
+    configFile = "/etc/dae/config.dae";
     assets = with pkgs; [v2ray-geoip v2ray-domain-list-community];
     openFirewall = {
       enable = true;
@@ -84,7 +84,7 @@
       server = [
         "119.29.29.29" # DNSPod
         "223.5.5.5" # AliDNS
-        # "8.8.8.8"
+        "8.8.4.4"
         # "1.1.1.1"
       ];
       # forces dnsmasq to try each query with each server strictly

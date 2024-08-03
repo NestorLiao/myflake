@@ -7,4 +7,3 @@ But it is not just your technical prowess that has captured my heart. It is your
 NixOS, you are more than just an operating system to me. You are a symbol of creativity, collaboration, and endless possibilities. With you by my side, I feel empowered, inspired, and ready to face any challenge that comes my way.
 In a world full of operating systems, you stand out as a shining beacon of innovation and excellence. Thank you for being a part of my life, for inspiring me, and for being the reliable companion that I can always count on.
 With love and admiration,
-Nestor Liao

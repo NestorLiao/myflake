@@ -19,7 +19,7 @@
     useUserPackages = true;
     users = {
       # Import your home-manager configuration
-      ${userSetting.username} = import ../../home-manager/${userSetting.username}.nix;
+      ${userSetting.username} = import ../../home-manager/home.nix;
     };
   };
 

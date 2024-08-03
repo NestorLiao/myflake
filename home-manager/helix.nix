@@ -3,6 +3,7 @@
   inputs,
   ...
 }: {
+  # stylix.targets.helix.enable = false;
   programs.helix = {
     # package = inputs.helix.packages.${pkgs.system}.default;
     extraPackages = with pkgs; [
@@ -27,7 +28,7 @@
     ];
     settings = {
       # theme = "eink";
-      theme = "emacs";
+      # theme = "emacs";
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];

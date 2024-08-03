@@ -9,39 +9,43 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     cliphist
     grimblast
     hyprpicker
-    rofi-wayland-unwrapped
+    # rofi-wayland-unwrapped
     wf-recorder
     wl-clipboard
     hyprpaper
     pkgs.dconf
   ];
 
-  # preload = /home/nestor/.config/hypr/winxp.jpg
-  # wallpaper =HDMI-A-1,/home/nestor/.config/hypr/winxp.jpg
-  home.file.".config/hypr/hyprpaper.conf".text = ''
-    preload = /home/nestor/.config/hypr/doom.jpg
-    wallpaper =HDMI-A-1,/home/nestor/.config/hypr/doom.jpg
+  stylix.targets.tofi.enable = false;
+  programs.tofi = {
+    enable = true;
+    settings = {
+      anchor = "top";
+      width = "100%";
+      height = 30;
+      horizontal = true;
+      font-size = 14;
+      prompt-text = " run: ";
+      font = "monospace";
+      outline-width = 0;
+      border-width = 0;
+      background-color = "#ffffff";
+      text-color = "#000000";
 
-    preload = /home/nestor/.config/hypr/earth.jpg
-    wallpaper =DP-2,/home/nestor/.config/hypr/earth.jpg
-
-    preload = /home/nestor/.config/hypr/earth.jpg
-    wallpaper =DP-1,/home/nestor/.config/hypr/earth.jpg
-
-
-
-    splash = false
-    ipc = off
-  '';
-
-  home.file.".config/hypr/winxp.jpg".source =
-    ./winxp.jpg;
-
-  home.file.".config/hypr/earth.jpg".source =
-    ./earth.jpg;
-
-  home.file.".config/hypr/doom.jpg".source =
-    ./doom.jpg;
+      # # Selection text
+      selection-color = "#ffffff";
+      selection-background = "#000000";
+      # selection-match-color = "#00000000";
+      # selection-background-padding = 2;
+      # selection-background-corner-radius = 2;
+      min-input-width = 120;
+      result-spacing = 15;
+      padding-top = 0;
+      padding-bottom = 0;
+      padding-left = 0;
+      padding-right = 0;
+    };
+  };
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
@@ -83,10 +87,10 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod  SHIFT, P, pin"
         "$mod, T, togglesplit"
         "$mod, up, movefocus, u"
-        "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
-        "$mod, W, exec, pkill rofi || rofi -show drun "
+        "$mod, V, exec, cliphist list | tofi | cliphist decode | wl-copy"
+        # "$mod, W, exec, pkill tofi || tofi-drun --drun-launch=true "
+        "$mod, W, exec, tofi-drun --drun-launch=true "
         ", Print, exec, grimblast copy area"
-        # ", PRINT, exec, grimblast save area - | convert png:- \\( +clone -alpha extract -draw 'fill black polygon 0,0 0,20 20,0 fill white circle 20,20 20,0' \\( +clone -flip \\) -compose Multiply -composite \\( +clone -flop \\) -compose Multiply -composite \\) -alpha off -compose CopyOpacity -composite png:- | convert png:- \\( +clone -background black -shadow 70x25+0+0 \\) +swap -background none -layers merge +repage png:- | wl-copy -t image/png"
         "SHIFT, Print, exec, wf-recorder"
       ]
       ++ (
@@ -106,10 +110,11 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
       "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
-      "fcitx5 -d --replace"
-      "fcitx5-remote -r"
+      # "fcitx5 -d --replace"
+      # "fcitx5-remote -r"
       "hyprctl dispatch workspace 4"
       "hyprpaper"
+      # "ags"
     ];
     env = [
       "XMODIFIERS, @im=fcitx"
@@ -203,7 +208,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       # "size 75% 75%, class:^(STM32CubeMX)$"
       # "center, class:^(STM32CubeMX)$"
 
-      "float, title:rofi.*"
+      "float, title:tofi.*"
       # "rounding 0, xwayland:1"
       # "float, title:QQ"
       # "float, title:图片查看器"
@@ -252,9 +257,9 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     gestures = {workspace_swipe = "off";};
     monitor = [
       # ",preferred,0x0,1.66666,transform,0"
-      # ",preferred,0x0,2,transform,0"
-      ",preferred,0x0,1,transform,0"
-      "DP-2,preferred,1920x0,1,transform,0"
+      ",preferred,0x0,2,transform,0"
+      # ",preferred,0x0,1,transform,0"
+      # "DP-2,preferred,1920x0,1,transform,0"
       # ",preferred,1920x-420,1,transform,1"
       # ",preferred,1080x0,1,transform,1"
       # ",preferred,1920x0,1,transform,0"
@@ -293,26 +298,26 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     ];
   };
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
-    size = 16;
-  };
+  # home.pointerCursor = {
+  #   gtk.enable = true;
+  #   package = pkgs.bibata-cursors;
+  #   name = "Bibata-Modern-Ice";
+  #   size = 16;
+  # };
 
-  gtk = {
-    enable = true;
-    theme = {
-      package = pkgs.flat-remix-gtk;
-      name = "Flat-Remix-GTK-White";
-    };
-    iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-    font = {
-      name = "Sans";
-      size = 11;
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     package = pkgs.flat-remix-gtk;
+  #     name = "Flat-Remix-GTK-White";
+  #   };
+  #   # iconTheme = {
+  #   #   package = pkgs.adwaita-icon-theme;
+  #   #   name = "Adwaita";
+  #   # };
+  #   # font = {
+  #   #   name = "Sans";
+  #   #   size = 11;
+  #   # };
+  # };
 }

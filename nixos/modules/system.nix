@@ -71,8 +71,14 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-wlr];
+    # wlr.enable = true;
+    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+
+    # xdg-desktop-portal-hyprland
+    # xdg-desktop-portal
+    # xdg-desktop-portal-gtk
+    # xdg-desktop-portal-wlr
+    # xdg-desktop-portal-gnome
   };
 
   # services.xserver.libinput.enable = true;

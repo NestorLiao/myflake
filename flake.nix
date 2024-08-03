@@ -39,9 +39,11 @@
       username = "nestor";
       hostname = "mynixos";
       email = "gtkndcbfhr@gmail.com";
-      # windowmanager = "hyprland";
-      windowmanager = "plasma";
+      windowmanager = "hyprland";
+      # windowmanager = "plasma";
       # windowmanager = "gnome";
+      colorscheme = "google-light";
+      # colorscheme = "github";
     };
   in {
     # NixOS configuration entrypoint
@@ -65,6 +67,7 @@
 
           # Import home-manager's NixOS module
           inputs.home-manager.nixosModules.home-manager
+
           inputs.stylix.nixosModules.stylix
 
           # Import modules
@@ -105,6 +108,13 @@
   };
 
   inputs = {
+    ags.url = "github:Aylur/ags";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -136,6 +146,7 @@
     xremap-flake.url = "github:xremap/nix-flake";
 
     stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Home manager
     home-manager = {
@@ -224,6 +235,7 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
+    nix-colors.url = "github:misterio77/nix-colors";
     # secrets = {
     #   # url = "/home/lantian/Projects/nixos-secrets";
     #   url = "github:xddxdd/nixos-secrets";

@@ -29,7 +29,6 @@
     # watchexec #Executes commands in response to file modifications
     # manix #A fast CLI documentation searcher for Nix.
     # mprocs #Run multiple commands in parallel
-    # wiki-tui #A simple and easy to use Wikipedia Text User Interface
     # cargo-info #Query crates.io for crates details
     # scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
     just #just is a handy way to save and run project-specific commands.
@@ -149,10 +148,6 @@
     ascii_distro="auto"
     image_size="auto"
   '';
-
-  # 直接以 text 的方式，在 nix 配置文件中硬编码文件内容
-  home.file.".config/wiki-tui/config.toml".source =
-    ./wiki-tui.toml;
 
   home.file.".cargo/config.toml".source =
     ./CargoConf.toml;

@@ -1,13 +1,30 @@
 {
   inputs,
   pkgs,
+  lib,
+  userSetting,
   ...
-}: {
-  programs.browserpass = {
-    enable = true;
-    browsers = ["firefox"];
-  };
-
+}: let
+  colorScheme = inputs.nix-colors.colorschemes.${userSetting.colorscheme};
+in {
+  # programs.discocss = {
+  #   enable = true;
+  #   discordPackage = pkgs.discord.override {withVencord = true;};
+  #   discordAlias = false;
+  #   css = lib.mkDefault (lib.mkBefore ''
+  #     /* ${colorScheme.slug} */
+  #     .theme-dark, .theme-light {
+  #       --background-primary:       #${colorScheme.palette.base00};
+  #       --background-secondary:     #${colorScheme.palette.base01};
+  #       --background-primary-alt:   #${colorScheme.palette.base02};
+  #       --background-secondary-alt: #${colorScheme.palette.base02};
+  #       --background-tertiary:      #${colorScheme.palette.base03};
+  #     }
+  #     div[class^=nowPlayingColumn] {
+  #       display: none !important;
+  #     }
+  #   '');
+  # };
   programs.firefox = {
     package = pkgs.firefox.override {
       nativeMessagingHosts = [
@@ -48,8 +65,7 @@
         SkipOnboarding = true;
       };
       SearchBar = "unified";
-      PasswordManagerEnabled = true;
-      # PasswordManagerEnabled = false;
+      PasswordManagerEnabled = false;
       NoDefaultBookmarks = true;
       DontCheckDefaultBrowser = true;
       DisableSetDesktopBackground = true;
@@ -78,22 +94,14 @@
 
     profiles.firefox = {
       # userChrome = ''
+
       #   @-moz-document url(chrome://browser/content/browser.xhtml) {
       #   	/* tabs on bottom of window */
       #   	/* requires that you set
       #   	 * toolkit.legacyUserProfileCustomizations.stylesheets = true
       #   	 * in about:config
+      #   	 * figure out current firefox's profile folder in about:support
       #   	 */
-
-      #       /* ########  Sidetabs Styles  ######### */
-
-      #       /* ~~~~~~~~ Hidden elements styles ~~~~~~~~~ */
-      #       #sidebar-header {
-      #       	display: none !important;
-      #       }
-      #       /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-      #       /* #################################### */
       #   	#main-window body { flex-direction: column-reverse !important; }
       #   	#navigator-toolbox { flex-direction: column-reverse !important; }
       #   	#urlbar {
@@ -103,10 +111,10 @@
       #   		display: flex !important;
       #   		flex-direction: column !important;
       #   	}
-      #       #urlbar > * {
-      #       	flex: none;
-      #       }
-      #   	#urlbar-input-container {
+      #   		#urlbar > * {
+      #   			flex: none;
+      #   		}
+      #   	#urlbar .urlbar-input-container {
       #   		order: 2;
       #   	}
       #   	#urlbar > .urlbarView {
@@ -152,6 +160,12 @@
       #   	#navigator-toolbox .panel-viewstack { max-height: 75vh !important; }
       #   	panelview.cui-widget-panelview { flex: 1; }
       #   	panelview.cui-widget-panelview > vbox { flex: 1; min-height: 50vh; }
+      #       #navigator-toolbox[fullscreenShouldAnimate] {
+      #           transition: none !important;
+      #       }
+      #       #sidebar-header {
+      #       	display: none !important;
+      #       }
       #   }
       # '';
       userChrome = ''
@@ -163,23 +177,52 @@
             #TabsToolbar {
             	display: none !important;
             }
-
             #navigator-toolbox[fullscreenShouldAnimate] {
                 transition: none !important;
             }
-
       '';
 
-      # extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-      #   tridactyl
-      # old-reddit-redirect
-      # ublock-origin
-      # istilldontcareaboutcookies
-      # sponsorblock
-      # ];
+      extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+        tridactyl
+        old-reddit-redirect
+        # ublock-origin
+        istilldontcareaboutcookies
+        keepassxc-browser
+        sponsorblock
+      ];
 
+      # userContent = ''
+      #   /* Hide scrollbar in FF Quantum */
+      #   *{scrollbar-width:none !important}
+
+      #   @-moz-document url(about:home), url(about:newtab) {
+      #     body {
+      #       --newtab-background-color: ${colorScheme.palette.base00};
+      #       --newtab-element-hover-color: ${colorScheme.palette.base01};
+      #       --newtab-icon-primary-color: ${colorScheme.palette.base04};
+      #       --newtab-search-border-color: ${colorScheme.palette.base01};
+      #       --newtab-search-dropdown-color: ${colorScheme.palette.base00};
+      #       --newtab-search-dropdown-header-color: ${colorScheme.palette.base00};
+      #       --newtab-search-icon-color: ${colorScheme.palette.base04};
+      #       --newtab-section-header-text-color: ${colorScheme.palette.base05};
+      #       --newtab-snippets-background-color: ${colorScheme.palette.base01};
+      #       --newtab-text-primary-color: ${colorScheme.palette.base05};
+      #       --newtab-textbox-background-color: ${colorScheme.palette.base01};
+      #       --newtab-textbox-border: ${colorScheme.palette.base01};
+      #       --newtab-topsites-background-color: ${colorScheme.palette.base04};
+      #       --newtab-topsites-label-color: ${colorScheme.palette.base05};
+      #       --darkreader-neutral-background: #${colorScheme.palette.base00} !important;
+      #       --darkreader-neutral-text: #${colorScheme.palette.base05} !important;
+      #       --darkreader-selection-background: #${colorScheme.palette.base01} !important;
+      #       --darkreader-selection-text: #${colorScheme.palette.base05} !important;
+      #     }
+      #   }
+      # '';
       settings = {
         "browser.tabs.closeTabByDblclick" = true;
+        # disable first-run onboarding
+        "browser.aboutwelcome.enabled" = false;
+        "general.smoothscroll" = false;
         "browser.tabs.closeWindowWithLastTab" = false;
         "full-screen-api.transition.timeout" = 0;
         "full-screen-api.warning.delay" = 0;
@@ -212,11 +255,13 @@
         "browser.aboutConfig.showWarning" = false;
         # Plain new tabs.
         "browser.newtabpage.enabled" = false;
+        # when you open a link image or media in a new tab switch to it immediately
+        "browser.tabs.loadInBackground" = true;
         # Locale.
         "browser.search.region" = "US";
         # Don't save passwords or try to fill forms.
-        "signon.rememberSignons" = true;
-        "signon.autofillForms" = true;
+        "signon.rememberSignons" = false;
+        "signon.autofillForms" = false;
         # Tell Firefox not to trust fake Enterprise-injected certificates.
         "security.enterprise_roots.auto-enabled" = false;
         "security.enterprise_roots.enabled" = false;
@@ -226,7 +271,8 @@
     };
   };
 
-  home.file.".config/tridactyl/themes/mysupertheme.css".source = ./tridactyl.css;
+  home.file.".config/tridactyl/themes/mysupertheme/mysupertheme.css".source = ./tridactyl.css;
+
   xdg.configFile."tridactyl/tridactylrc".text = ''
     js tri.config.set("editorcmd", "alacritty -e hx")
   '';

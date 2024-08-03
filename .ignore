@@ -1,6 +1,7 @@
 nixos/modules/hosts.nix
 home-manager/modules/icons
 home-manager/icons
+home-manager/ags
 nixos/modules/tiger-code/rime/
 ovelay
 pkgs
