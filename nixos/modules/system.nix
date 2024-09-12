@@ -37,6 +37,7 @@
   boot.loader.timeout = 0;
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 5;
+
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
 
@@ -98,6 +99,8 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
   hardware.pulseaudio.enable = false;
+
+  hardware.keyboard.qmk.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

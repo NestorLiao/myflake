@@ -15,49 +15,63 @@
   # executable = true;
   # };
 
-  home.packages = with pkgs;
-    [
-      fd
-      curl
-      sqlite
+  # home.packages = with pkgs;
+  #   [
+  #     fd
+  #     curl
+  #     sqlite
 
-      # for emacs sqlite
-      gcc
-      # org mode dot
-      graphviz
-      imagemagick
+  #     # for emacs sqlite
+  #     gcc
+  #     # org mode dot
+  #     graphviz
+  #     imagemagick
 
-      # mpvi required
-      tesseract5
-      ffmpeg_5
-      ffmpegthumbnailer
-      mediainfo
-      # email
-      # mu4e
-      # spell check
-      aspell
+  #     # mpvi required
+  #     tesseract5
+  #     # ffmpeg_5
+  #     ffmpegthumbnailer
+  #     mediainfo
+  #     # email
+  #     # mu4e
+  #     # spell check
+  #     aspell
 
-      # for emacs rime
-      librime
+  #     # for emacs rime
+  #     librime
 
-      libwebp
-      tdlib
-      fira-code-nerdfont
-      pkg-config
-    ]
-    ++ (lib.optionals pkgs.stdenv.isDarwin) [
-      # pngpaste for org mode download clip
-      pngpaste
-    ];
+  #     libwebp
+  #     tdlib
+  #     fira-code-nerdfont
+  #     pkg-config
+  #   ]
+  #   ++ (lib.optionals pkgs.stdenv.isDarwin) [
+  #     # pngpaste for org mode download clip
+  #     pngpaste
+  #   ];
 
-  programs.pandoc.enable = true;
-
-  programs.doom-emacs = {
+  programs.emacs = {
     enable = true;
-    doomDir = ./doom;
-    extraPackages = epkgs: [epkgs.vterm epkgs.treesit-grammars.with-all-grammars];
-    provideEmacs = true;
+    package = pkgs.emacs; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+    extraConfig = ''
+      (setq standard-indent 2)
+    '';
   };
+
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs; # replace with emacs-gtk, or a version provided by the community overlay if desired.
+  };
+
+  # programs.pandoc.enable = true;
+
+  # programs.doom-emacs = {
+  #   enable = true;
+  #   doomDir = ./doom;
+  #   extraPackages = epkgs: [epkgs.vterm epkgs.treesit-grammars.with-all-grammars];
+  #   provideEmacs = true;
+  #   experimentalFetchTree = true;
+  # };
   # services.emacs = {
   #   enable = pkgs.stdenv.isLinux;
   #   client.enable = true;

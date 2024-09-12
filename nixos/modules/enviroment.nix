@@ -33,13 +33,14 @@
   services.ollama.enable = false;
 
   # programs.steam.enable = true;
-  # programs.steam.gamescopeSession = true;
+  # programs.steam.gamescopeSession.enable = true;
   # programs.gamemode.enable = true;
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${userSetting.colorscheme}.yaml";
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-plateau-light.yaml";
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
-  stylix.image = ./doom.jpg;
+  # stylix.image = ./misuzu-kamio.jpeg;
+  stylix.image = ./white.jpg;
   stylix.enable = true;
 
   stylix.cursor = {
@@ -69,14 +70,23 @@
   };
 
   environment.variables.EDITOR = "hx";
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+  };
+
   environment.systemPackages = with pkgs; [
     # protonup
+    via
     # mangohud
     neovim
     btop
     # samba
     # ventoy-full
     wineWowPackages.waylandFull
+    # bluez
+    # bluez-tools
+    # libsForQt5.bluez-qt
+
     alsa-utils
     # discord
     wget

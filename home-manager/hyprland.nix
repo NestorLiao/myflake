@@ -12,6 +12,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     # rofi-wayland-unwrapped
     wf-recorder
     wl-clipboard
+    wlsunset
     hyprpaper
     pkgs.dconf
   ];
@@ -20,30 +21,19 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
   programs.tofi = {
     enable = true;
     settings = {
-      anchor = "top";
       width = "100%";
-      height = 30;
-      horizontal = true;
-      font-size = 14;
-      prompt-text = " run: ";
-      font = "monospace";
-      outline-width = 0;
+      height = "100%";
       border-width = 0;
-      background-color = "#ffffff";
-      text-color = "#000000";
-
-      # # Selection text
-      selection-color = "#ffffff";
-      selection-background = "#000000";
-      # selection-match-color = "#00000000";
-      # selection-background-padding = 2;
-      # selection-background-corner-radius = 2;
-      min-input-width = 120;
-      result-spacing = 15;
-      padding-top = 0;
-      padding-bottom = 0;
-      padding-left = 0;
-      padding-right = 0;
+      outline-width = 0;
+      padding-left = "15%";
+      padding-top = "15%";
+      result-spacing = 25;
+      num-results = 10;
+      text-color = "#0A3";
+      selection-color = "#0F6";
+      font = "monospace";
+      background-color = "#FFFF";
+      prompt-text = "choose the lost memory: ";
     };
   };
 
@@ -83,7 +73,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod  SHIFT, Q, exit"
         "$mod, S, fullscreen"
         "$mod  SHIFT, H, exec, systemctl hibernate"
-        "$mod, X, fakefullscreen"
+        "$mod, X, fullscreenstate, 0 2"
         "$mod  SHIFT, P, pin"
         "$mod, T, togglesplit"
         "$mod, up, movefocus, u"
@@ -107,15 +97,18 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
 
     xwayland = {force_zero_scaling = "true";};
     exec-once = [
+      "wlsunset -l 29.5 -L 106.5"
       "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
       "systemctl --user start xremap"
       "wl-paste --type text --watch cliphist store"
-      # "fcitx5 -d --replace"
-      # "fcitx5-remote -r"
+      "fcitx5 -d --replace"
+      "fcitx5-remote -r"
       "hyprctl dispatch workspace 4"
       "hyprpaper"
       # "ags"
     ];
+
+    "debug:disable_scale_checks" = true;
     env = [
       "XMODIFIERS, @im=fcitx"
       "QT_IM_MODULE, fcitx"
@@ -204,7 +197,8 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "float, class:^(feishu)$"
       "size 75% 75%, class:^(QQ)$"
       "center, class:^(QQ)$"
-      "fakefullscreen,class:(firefox)"
+      # "fullscreenstate, 0 2,class:(firefox)"
+      # "syncfullscreen 0,class:(firefox)"
       # "size 75% 75%, class:^(STM32CubeMX)$"
       # "center, class:^(STM32CubeMX)$"
 
@@ -257,7 +251,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     gestures = {workspace_swipe = "off";};
     monitor = [
       # ",preferred,0x0,1.66666,transform,0"
-      ",preferred,0x0,2,transform,0"
+      # ",4096x2160@60,0x0,2.2,transform,0"
       # ",preferred,0x0,1,transform,0"
       # "DP-2,preferred,1920x0,1,transform,0"
       # ",preferred,1920x-420,1,transform,1"
@@ -269,7 +263,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"
 
-      # ",preferred,1920x0,1,transform,0"
+      ",preferred,1920x0,1,transform,0"
       # "HDMI-A-2,disable"
       # "HDMI-A-1,1920x1080@60,0x0,1,transform,0"
     ];

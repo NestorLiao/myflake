@@ -10,6 +10,6 @@
     ./alacritty.nix
     # ./waybar.nix
     ./clitools.nix
-    # ./emacs.nix
+    ./emacs.nix
   ];
 }

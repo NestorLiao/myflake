@@ -168,6 +168,9 @@ in {
       #       }
       #   }
       # '';
+      # #sidebar-box {
+      #     width: 300px !important;
+      # }
       userChrome = ''
         @-moz-document url(chrome://browser/content/browser.xhtml) {
             /* ########  Sidetabs Styles  ######### */

@@ -30,6 +30,7 @@ in {
     # logisim-evolution
     # shotcut
     # zed-editor
+    # wechat-uos
     # libsForQt5.kdenlive
     keepassxc
     # android-studio

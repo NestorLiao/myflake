@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   services.udev.packages = [
+    pkgs.via
     (pkgs.writeTextFile {
       name = "52-xilinx-digilent-usb.rules";
       text = ''

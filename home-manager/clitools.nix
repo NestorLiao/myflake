@@ -37,7 +37,7 @@
 
     # glxinfo
     # nvidia-system-monitor-qt
-    # quickemu
+    quickemu
     # (quickemu.override {qemu = qemu_full;})
     # typst
 

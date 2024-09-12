@@ -129,8 +129,6 @@
       # inputs.systems.follows = "systems";
       inputs.emacs-overlay.follows = "emacs-overlay";
     };
-    # doom-config.url = "https://github.com/hlissner/.doom.d.git";
-    # doom-config.flake = false;
 
     daeuniverse.url = "github:daeuniverse/flake.nix";
     # Nixpkgs

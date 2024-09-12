@@ -7,3 +7,4 @@ while ! sudo nixos-rebuild switch --flake .#mynixos
 do
   echo "Try again"
 done
+poweroff
