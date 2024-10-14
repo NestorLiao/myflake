@@ -12,12 +12,14 @@
 
   # boot.extraModulePackages = with config.boot.kernelPackages; [ wireguard ];
 
-  boot.extraModprobeConfig = ''
-    options usbcore use_both_schemes=yes
-  '';
+  # boot.extraModprobeConfig = ''
+  #   options usbcore use_both_schemes=yes
+  # '';
 
-  boot.resumeDevice = "/dev/disk/by-uuid/c2af3dda-2417-4ed6-b4c2-eeab011a8e34";
-  boot.kernelParams = ["resume_offset=22816000"];
+  # boot.resumeDevice = "/swap/swapfile";
+  # boot.resumeDevice = "/dev/disk/by-uuid/c2af3dda-2417-4ed6-b4c2-eeab011a8e34";
+  # boot.kernelParams = ["resume_offset=27270400"];
+  # boot.kernelParams = ["resume_offset=22816000"];
 
   boot = {
     kernel = {
@@ -36,7 +38,7 @@
   # Bootloader
   boot.loader.timeout = 0;
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 10;
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
@@ -47,13 +49,16 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = true;
+    powerManagement.enable = false;
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
   services.xserver.videoDrivers = ["nvidia"];
+
+  # services.asusd.enable = true;
+  # services.asusd.enableUserService = true;
 
   hardware.graphics = {
     enable = true;
@@ -63,8 +68,8 @@
   hardware.nvidia.prime = {
     sync.enable = true;
     # offload = {
-    # 	enable = true;
-    # 	enableOffloadCmd = true;
+    #   enable = true;
+    #   enableOffloadCmd = true;
     # };
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:1:0:0";
@@ -82,8 +87,7 @@
     # xdg-desktop-portal-gnome
   };
 
-  # services.xserver.libinput.enable = true;
-  # sound.enable = true;
+  # services.libinput.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

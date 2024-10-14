@@ -29,21 +29,25 @@ in {
     # stm32cubemx
     # logisim-evolution
     # shotcut
+    qq
     # zed-editor
+    bambu-studio
     # wechat-uos
     # libsForQt5.kdenlive
     keepassxc
     # android-studio
+    delta
+    yt-dlp-light
     # android-tools
     # (arduino-ide.overrideAttrs {extraPkgs = with pkgs; [python311 python311Packages.pyserial pkgs.libsecret];})
     arduino-ide
     # hugo
-    # mpv
+    mpv
     # blender
-    # calibre
+    calibre
     # gimp
     # gnome.cheese
-    # kicad
+    kicad
     # libreoffice
   ];
 

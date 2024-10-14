@@ -14,6 +14,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     wl-clipboard
     wlsunset
     hyprpaper
+    hyprlock
     pkgs.dconf
   ];
 
@@ -67,7 +68,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod, O, movefocus, r"
         "$mod, E, movefocus, d"
         "$mod, I, movefocus, u"
-        "$mod, P, pseudo"
+        "$mod, P, exec, hyprlock"
         "$mod, J, cyclenext"
         "$mod  SHIFT, R, workspace,previous"
         "$mod  SHIFT, Q, exit"
@@ -95,14 +96,14 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
           10)
       );
 
-    xwayland = {force_zero_scaling = "true";};
+    xwayland = {force_zero_scaling = true;};
     exec-once = [
       "wlsunset -l 29.5 -L 106.5"
-      "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
-      "systemctl --user start xremap"
-      "wl-paste --type text --watch cliphist store"
-      "fcitx5 -d --replace"
-      "fcitx5-remote -r"
+      # "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
+      # "systemctl --user start xremap"
+      # "wl-paste --type text --watch cliphist store"
+      # "fcitx5 -d --replace"
+      # "fcitx5-remote -r"
       "hyprctl dispatch workspace 4"
       "hyprpaper"
       # "ags"
@@ -119,7 +120,9 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "QT_AUTO_SCREEN_SCALE_FACTOR, 1"
       "CLUTTER_BACKEND, wayland"
       "ADW_DISABLE_PORTAL, 1"
-      "XCURSOR_SIZE,24"
+      # "GDK_DPI_SCALE,0.5"
+      "GDK_SCALE,2"
+      "XCURSOR_SIZE,32"
       # "XCURSOR_THEME,Dracula-cursors"
       # "HYPRCURSOR_THEME,hyprcursor_Dracula"
       # "HYPRCURSOR_SIZE,24"
@@ -148,8 +151,10 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       # "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
       "WLR_NO_HARDWARE_CURSORS,1"
     ];
+    cursor = {
+      inactive_timeout = "3";
+    };
     general = {
-      sensitivity = "1.2";
       gaps_in = "0";
       gaps_out = "0";
       border_size = "0";
@@ -165,7 +170,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     # group = {
     #   "col.border_active" = " rgba(E1A2B7ff) rgba(522936ff) 45deg";
     #   "col.border_inactive" = " rgba(2F364Acc) rgba(76C4D7cc) 45deg";
-    #   "col.border_locked_active" = " rgba(0F0F11ff) rgba(090A0Aff) 45deg";
+    #   "col.border_locked_active" 文版。Emacs Lisp 为一个函数式的语言，所以它全部 功能都是由函数来实现的。 = " rgba(0F0F11ff) rgba(090A0Aff) 45deg";
     #   "col.border_locked_inactive" = " rgba(FFFFFFcc) rgba(0F0E0Dcc) 45deg";
     # };
 
@@ -197,7 +202,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "float, class:^(feishu)$"
       "size 75% 75%, class:^(QQ)$"
       "center, class:^(QQ)$"
-      # "fullscreenstate, 0 2,class:(firefox)"
+      "fullscreenstate 0 2,class:(firefox)"
       # "syncfullscreen 0,class:(firefox)"
       # "size 75% 75%, class:^(STM32CubeMX)$"
       # "center, class:^(STM32CubeMX)$"
@@ -250,8 +255,10 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     };
     gestures = {workspace_swipe = "off";};
     monitor = [
-      # ",preferred,0x0,1.66666,transform,0"
-      # ",4096x2160@60,0x0,2.2,transform,0"
+      # ",preferred,0x0,1.2,transform,0"
+      "DP-1,preferred,0x0,1.2,transform,0"
+      "DP-2,preferred,0x0,1.2,transform,0"
+      "HDMI-A-1,4096x2160@60,0x0,2.5,transform,0"
       # ",preferred,0x0,1,transform,0"
       # "DP-2,preferred,1920x0,1,transform,0"
       # ",preferred,1920x-420,1,transform,1"
@@ -263,7 +270,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,0"
       # "HDMI-A-1,1920x1080@60,1080x0,1,transform,3"
 
-      ",preferred,1920x0,1,transform,0"
+      # ",preferred,1920x0,1,transform,0"
       # "HDMI-A-2,disable"
       # "HDMI-A-1,1920x1080@60,0x0,1,transform,0"
     ];
@@ -282,7 +289,6 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "8, monitor:HDMI-A-1, default:true"
       "5, monitor:HDMI-A-1, default:true"
       "2, monitor:HDMI-A-1, default:true"
-      "1, monitor:HDMI-A-1, default:true"
       "1, monitor:HDMI-A-1, default:true"
     ];
     "$mod" = "SUPER";

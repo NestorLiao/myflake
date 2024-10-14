@@ -6,6 +6,7 @@
   environment.shellAliases = {
     nd = "pwd | wl-copy; pwd";
     rd = "..; z -";
+    t = "z";
     rm = "rm -r";
     cp = "cp -r";
     weather = "curl wttr.in/chongqing";
@@ -62,10 +63,10 @@
       name = "Noto Serif";
     };
     sizes = {
-      applications = 12;
-      terminal = 12;
-      desktop = 12;
-      popups = 12;
+      applications = 16;
+      terminal = 16;
+      desktop = 16;
+      popups = 16;
     };
   };
 
@@ -83,6 +84,8 @@
     # samba
     # ventoy-full
     wineWowPackages.waylandFull
+    helix
+    # asusctl
     # bluez
     # bluez-tools
     # libsForQt5.bluez-qt

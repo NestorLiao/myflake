@@ -45,7 +45,7 @@ in {
         Pocket = false;
         Snippets = false;
         Highlights = false;
-        TopSites = true;
+        TopSites = false;
       };
       AutofillAddressEnabled = false;
       AutofillCreditCardEnabled = false;
@@ -80,7 +80,7 @@ in {
 
       DisableFeedbackCommands = true;
       SearchEngines.Default = "Google";
-      # BlockAboutAddons = true;
+      BlockAboutAddons = false;
       DisableFormHistory = true;
       AppAutoUpdate = false;
       DisableAppUpdate = true;

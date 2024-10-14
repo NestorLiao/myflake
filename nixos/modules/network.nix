@@ -9,7 +9,7 @@
     inputs.hosts.nixosModule
     {
       networking.stevenBlackHosts = {
-        enable = false;
+        enable = true;
         blockFakenews = true;
         ###################################### don't fucking play with it
         ###################################### don't fucking play with it

@@ -13,12 +13,13 @@
     # delta
     # thefuck
     # samba4Full
-    # ffmpeg
+    ffmpeg
     # pandoc
     kitty
     sdcv
 
-    st
+    delta
+    # st
     gitui
     # gnome.cheese
     bat
@@ -107,7 +108,7 @@
 
   programs.zoxide = {
     enable = true;
-    options = ["--cmd t"];
+    # options = ["--cmd t"];
     enableFishIntegration = true;
   };
 
