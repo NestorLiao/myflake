@@ -35,6 +35,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages;
+
   # Bootloader
   boot.loader.timeout = 0;
   boot.loader.systemd-boot.enable = true;
@@ -43,37 +44,37 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
 
-  hardware.bluetooth.package = pkgs.bluez;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  # hardware.bluetooth.package = pkgs.bluez;
+  # hardware.bluetooth.enable = false;
+  # hardware.bluetooth.powerOnBoot = false;
 
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-  services.xserver.videoDrivers = ["nvidia"];
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+  #   powerManagement.enable = false;
+  #   powerManagement.finegrained = false;
+  #   open = false;
+  #   nvidiaSettings = true;
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # };
+  # services.xserver.videoDrivers = ["nvidia"];
 
   # services.asusd.enable = true;
   # services.asusd.enableUserService = true;
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+  # hardware.graphics = {
+  #   enable = true;
+  #   enable32Bit = true;
+  # };
 
-  hardware.nvidia.prime = {
-    sync.enable = true;
-    # offload = {
-    #   enable = true;
-    #   enableOffloadCmd = true;
-    # };
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
-  };
+  # hardware.nvidia.prime = {
+  #   sync.enable = true;
+  #   # offload = {
+  #   #   enable = true;
+  #   #   enableOffloadCmd = true;
+  #   # };
+  #   intelBusId = "PCI:0:2:0";
+  #   nvidiaBusId = "PCI:1:0:0";
+  # };
 
   xdg.portal = {
     enable = true;
@@ -99,12 +100,12 @@
 
   time.timeZone = "Asia/Shanghai";
   services.udisks2.mountOnMedia = true;
-  services.devmon.enable = true;
-  services.gvfs.enable = true;
   services.udisks2.enable = true;
+  services.gvfs.enable = true;
+
   hardware.pulseaudio.enable = false;
 
-  hardware.keyboard.qmk.enable = true;
+  # hardware.keyboard.qmk.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

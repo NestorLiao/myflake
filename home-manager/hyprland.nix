@@ -2,23 +2,72 @@
   pkgs,
   userSetting,
   lib,
+  inputs,
   ...
 }:
 lib.mkIf (userSetting.windowmanager == "hyprland") {
   home.packages = with pkgs; [
     cliphist
+    hyprshade
+    # wpaperd
+    # (cliphist.overrideAttrs (_old: {
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "sentriz";
+    #     repo = "cliphist";
+    #     rev = "c49dcd26168f704324d90d23b9381f39c30572bd";
+    #     sha256 = "sha256-2mn55DeF8Yxq5jwQAjAcvZAwAg+pZ4BkEitP6S2N0HY=";
+    #   };
+    #   vendorHash = "sha256-M5n7/QWQ5POWE4hSCMa0+GOVhEDCOILYqkSYIGoy/l0=";
+    # }))
     grimblast
     hyprpicker
     # rofi-wayland-unwrapped
     wf-recorder
     wl-clipboard
     wlsunset
-    hyprpaper
-    hyprlock
-    pkgs.dconf
+    # hyprpaper
+    # pkgs.dconf
   ];
 
   stylix.targets.tofi.enable = false;
+
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        disable_loading_bar = true;
+        grace = 300;
+        hide_cursor = true;
+        no_fade_in = false;
+      };
+
+      background = [
+        {
+          path = ".config/hypr/takeabreak.png";
+          # blur_passes = 3;
+          # blur_size = 8;
+        }
+      ];
+
+      # input-field = [
+      #   {
+      # size = "200, 50";
+      # position = "0, -80";
+      #   monitor = "";
+      #   dots_center = true;
+      #   fade_on_empty = false;
+      #   font_color = "rgb(202, 211, 245)";
+      #   inner_color = "rgb(91, 96, 120)";
+      #   outer_color = "rgb(24, 25, 38)";
+      #   outline_thickness = 5;
+      #   shadow_passes = 2;
+      # }
+      # ];
+    };
+  };
+
+  home.file.".config/hypr/takeabreak.png".source = ./takeabreak.png;
+
   programs.tofi = {
     enable = true;
     settings = {
@@ -26,25 +75,28 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       height = "100%";
       border-width = 0;
       outline-width = 0;
-      padding-left = "15%";
-      padding-top = "15%";
-      result-spacing = 25;
+      padding-left = "5%";
+      padding-top = "5%";
+      result-spacing = 20;
       num-results = 10;
       text-color = "#0A3";
       selection-color = "#0F6";
       font = "monospace";
       background-color = "#FFFF";
-      prompt-text = "choose the lost memory: ";
+      prompt-text = "Lost Grace: ";
     };
   };
 
   wayland.windowManager.hyprland.enable = true;
+  # wayland.windowManager.hyprland.plugins = [inputs.hy3.packages.x86_64-linux.hy3];
   wayland.windowManager.hyprland.settings = {
     bind =
       [
+        "$mod, mouse_down, exec, hyprctl keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor | grep float | awk '{print $2 + 1}')"
+        "$mod, mouse_up, exec, hyprctl keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor | grep float | awk '{print $2 - 1}')"
         "$mod, A, exec, alacritty"
-        "$mod, B, exec, firefox"
-        "$mod, R, exec, emacsclient -c -a 'emacs'"
+        "$mod, B, exec, firefox-beta"
+        "$mod SHIFT, R, exec, emacsclient -c -a 'emacs'"
         # "$mod, R, exec, emacs"
         ",code:87, workspace,1"
         ",code:88, workspace,2"
@@ -70,10 +122,10 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
         "$mod, I, movefocus, u"
         "$mod, P, exec, hyprlock"
         "$mod, J, cyclenext"
-        "$mod  SHIFT, R, workspace,previous"
+        "$mod, R, workspace,previous"
         "$mod  SHIFT, Q, exit"
         "$mod, S, fullscreen"
-        "$mod  SHIFT, H, exec, systemctl hibernate"
+        # "$mod  SHIFT, H, exec, systemctl hibernate"
         "$mod, X, fullscreenstate, 0 2"
         "$mod  SHIFT, P, pin"
         "$mod, T, togglesplit"
@@ -99,13 +151,14 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     xwayland = {force_zero_scaling = true;};
     exec-once = [
       "wlsunset -l 29.5 -L 106.5"
+      "wpaperd"
+      # "hyprpaper"
       # "cp ~/.config/fcitx5/profile-bak ~/.config/fcitx5/profile"
       # "systemctl --user start xremap"
-      # "wl-paste --type text --watch cliphist store"
       # "fcitx5 -d --replace"
       # "fcitx5-remote -r"
       "hyprctl dispatch workspace 4"
-      "hyprpaper"
+      "wl-paste --type text --watch cliphist store"
       # "ags"
     ];
 
@@ -120,7 +173,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "QT_AUTO_SCREEN_SCALE_FACTOR, 1"
       "CLUTTER_BACKEND, wayland"
       "ADW_DISABLE_PORTAL, 1"
-      # "GDK_DPI_SCALE,0.5"
+      # "GDK_DPI_SCALE,1.5"
       "GDK_SCALE,2"
       "XCURSOR_SIZE,32"
       # "XCURSOR_THEME,Dracula-cursors"
@@ -192,6 +245,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     windowrulev2 = [
       "float, class:^(.*fcitx.*)$"
       "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
+      "size 1000 500, title:^(Save As)(.*)$"
       # "opacity 1.0 override 1.0 override, class:^(Google-chrome)$"
       # "opacity 0.9 override 0.9 override, class:^(QQ)$"
       "float, class:^(QQ)$"
@@ -202,7 +256,7 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
       "float, class:^(feishu)$"
       "size 75% 75%, class:^(QQ)$"
       "center, class:^(QQ)$"
-      "fullscreenstate 0 2,class:(firefox)"
+      # "fullscreenstate 0 2,class:(firefox)"
       # "syncfullscreen 0,class:(firefox)"
       # "size 75% 75%, class:^(STM32CubeMX)$"
       # "center, class:^(STM32CubeMX)$"
@@ -255,9 +309,9 @@ lib.mkIf (userSetting.windowmanager == "hyprland") {
     };
     gestures = {workspace_swipe = "off";};
     monitor = [
-      # ",preferred,0x0,1.2,transform,0"
-      "DP-1,preferred,0x0,1.2,transform,0"
-      "DP-2,preferred,0x0,1.2,transform,0"
+      # ",preferred,0x0,1,transform,0"
+      # "DP-1,preferred,0x0,1.2,transform,0"
+      # "DP-2,preferred,0x0,1.2,transform,0"
       "HDMI-A-1,4096x2160@60,0x0,2.5,transform,0"
       # ",preferred,0x0,1,transform,0"
       # "DP-2,preferred,1920x0,1,transform,0"

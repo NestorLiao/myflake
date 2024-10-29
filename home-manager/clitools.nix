@@ -9,14 +9,29 @@
   #   inputs.nur-xddxdd.nixosModules.setupOverlay
   # ];
 
+  programs.mpv = {
+    enable = true;
+    config = {
+      # osc = false;
+      # osd-bar = false;
+      # hwdec = "auto";
+      demuxer-max-back-bytes = 10000000000;
+      demuxer-max-bytes = 10000000000;
+      save-position-on-quit = true;
+      profile = "high-quality";
+      video-sync = "display-resample";
+      interpolation = true;
+    };
+  };
+
   home.packages = with pkgs; [
     # delta
     # thefuck
     # samba4Full
-    ffmpeg
+    # ffmpeg
     # pandoc
     kitty
-    sdcv
+    # sdcv
 
     delta
     # st
@@ -24,7 +39,7 @@
     # gnome.cheese
     bat
     # helix-gpt
-    nix-index
+    # nix-index
     # tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
     # tailscale #The node agent for Tailscale, a mesh VPN built on WireGuard
     # watchexec #Executes commands in response to file modifications
@@ -34,11 +49,11 @@
     # scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
     just #just is a handy way to save and run project-specific commands.
     # bacon #bacon is a background rust code checker.
-    samba
+    # samba
 
     # glxinfo
     # nvidia-system-monitor-qt
-    quickemu
+    # quickemu
     # (quickemu.override {qemu = qemu_full;})
     # typst
 
@@ -52,14 +67,14 @@
     fd #simple, fast and user-friendly alternative to `find`
     # imv #image viewer for the terminal
     neofetch #command-line system information tool
-    nix-output-monitor #monitor build outputs of Nix package manager
+    # nix-output-monitor #monitor build outputs of Nix package manager
 
     # pciutils #utilities for viewing and configuring PCI devices
     ripgrep #line-oriented search tool that recursively searches directories for a regex pattern
     # strace #diagnostic tool for debugging and profiling Linux processes
     # sysstat #collection of performance monitoring tools for Linux
     tldr #simplified and community-driven man pages
-    tmux-sessionizer #tool for organizing and cleaning up tmux sessions
+    # tmux-sessionizer #tool for organizing and cleaning up tmux sessions
     # translate-shell #command-line translator using various translation services
     tree #displays directory structure in a tree-like format
     unrar-free #unarchiver for .rar files

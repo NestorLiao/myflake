@@ -1,0 +1,6 @@
+bind --mode=normal e scrollpage 1
+bind --mode=normal i scrollpage -1
+bind --mode=normal , scrollline 10
+bind --mode=normal . scrollline -10
+bind --mode=normal N tabprev
+bind --mode=normal n tabnext

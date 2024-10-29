@@ -7,32 +7,14 @@
 }: let
   colorScheme = inputs.nix-colors.colorschemes.${userSetting.colorscheme};
 in {
-  # programs.discocss = {
-  #   enable = true;
-  #   discordPackage = pkgs.discord.override {withVencord = true;};
-  #   discordAlias = false;
-  #   css = lib.mkDefault (lib.mkBefore ''
-  #     /* ${colorScheme.slug} */
-  #     .theme-dark, .theme-light {
-  #       --background-primary:       #${colorScheme.palette.base00};
-  #       --background-secondary:     #${colorScheme.palette.base01};
-  #       --background-primary-alt:   #${colorScheme.palette.base02};
-  #       --background-secondary-alt: #${colorScheme.palette.base02};
-  #       --background-tertiary:      #${colorScheme.palette.base03};
-  #     }
-  #     div[class^=nowPlayingColumn] {
-  #       display: none !important;
-  #     }
-  #   '');
-  # };
   programs.firefox = {
-    package = pkgs.firefox.override {
+    enable = true;
+    package = pkgs.firefox-beta.override {
       nativeMessagingHosts = [
         pkgs.tridactyl-native
         # pkgs.passff-host
       ];
     };
-    enable = true;
 
     policies = {
       # mostly overwritten by nix and the user.js in ./settings.nix
@@ -102,6 +84,7 @@ in {
       #   	 * in about:config
       #   	 * figure out current firefox's profile folder in about:support
       #   	 */
+      #       :root[tabsintitlebar] #titlebar:-moz-window-inactive { opacity: 1 !important; }
       #   	#main-window body { flex-direction: column-reverse !important; }
       #   	#navigator-toolbox { flex-direction: column-reverse !important; }
       #   	#urlbar {
@@ -160,30 +143,38 @@ in {
       #   	#navigator-toolbox .panel-viewstack { max-height: 75vh !important; }
       #   	panelview.cui-widget-panelview { flex: 1; }
       #   	panelview.cui-widget-panelview > vbox { flex: 1; min-height: 50vh; }
-      #       #navigator-toolbox[fullscreenShouldAnimate] {
-      #           transition: none !important;
-      #       }
-      #       #sidebar-header {
-      #       	display: none !important;
-      #       }
+      #     #statuspanel { display: none !important; }
+      #     #navigator-toolbox[fullscreenShouldAnimate] {
+      #         transition: none !important;
+      #     }}
       #   }
       # '';
-      # #sidebar-box {
-      #     width: 300px !important;
-      # }
+
       userChrome = ''
         @-moz-document url(chrome://browser/content/browser.xhtml) {
             /* ########  Sidetabs Styles  ######### */
             #sidebar-header {
-            	display: none !important;
+              display: none;
+            }
+            #statuspanel { display: none !important; }
+            :root[tabsintitlebar] #titlebar:-moz-window-inactive {
+              opacity: 1 !important;
             }
             #TabsToolbar {
             	display: none !important;
             }
             #navigator-toolbox[fullscreenShouldAnimate] {
                 transition: none !important;
-            }
+            }}
+
       '';
+
+      # #sidebar-header {
+      # 	display: none !important;
+      # }
+      # #TabsToolbar {
+      # 	display: none !important;
+      # }
 
       extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
         tridactyl
@@ -274,7 +265,7 @@ in {
     };
   };
 
-  home.file.".config/tridactyl/themes/mysupertheme/mysupertheme.css".source = ./tridactyl.css;
+  home.file.".config/tridactyl/themes/mysupertheme.css".source = ./tridactyl.css;
 
   xdg.configFile."tridactyl/tridactylrc".text = ''
     js tri.config.set("editorcmd", "alacritty -e hx")

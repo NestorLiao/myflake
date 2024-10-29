@@ -13,7 +13,7 @@ in {
   imports = [
     inputs.nur-xddxdd.nixosModules.setupOverlay
     inputs.xremap-flake.nixosModules.default
-    inputs.nur-xddxdd.nixosModules.qemu-user-static-binfmt
+    # inputs.nur-xddxdd.nixosModules.qemu-user-static-binfmt
   ];
   services.xremap = {
     userName = userSetting.username;

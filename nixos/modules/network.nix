@@ -39,7 +39,7 @@
     }
   ];
 
-  services.v2raya.enable = true;
+  services.v2raya.enable = false;
   # with dae
   services.dae = {
     enable = true;

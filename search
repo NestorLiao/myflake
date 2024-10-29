@@ -21,4 +21,6 @@ set searchurls {
 "tb":"https://s.taobao.com/search?commend=all&ie=utf8&initiative_id=tbindexz_20170306&localImgKey=&page=1&q=%s&search_type=item&sourceId=tb.index&spm=a21bo.jianhua%2Fa.201856.d13&ssid=s5-e&tab=all",
 "jlc":"https://oshwhub.com/search?wd=%s",
 "py":"https://docs.python.org/zh-cn/3/search.html?q=%s",
-"cpp":"https://duckduckgo.com/?sites=cppreference.com&q=%s&ia=web"}
+"cpp":"https://duckduckgo.com/?sites=cppreference.com&q=%s&ia=web"
+}
+

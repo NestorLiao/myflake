@@ -23,6 +23,35 @@ in {
   # };
 
   home.packages = with pkgs; [
+    fd
+    curl
+    sqlite
+
+    # for emacs sqlite
+    gcc
+    # org mode dot
+    graphviz
+    imagemagick
+
+    # mpvi required
+    tesseract5
+    # ffmpeg_5
+    ffmpegthumbnailer
+    mediainfo
+    # email
+    # mu4e
+    # spell check
+    aspell
+
+    # for emacs rime
+    librime
+
+    libwebp
+    tdlib
+    fira-code-nerdfont
+    pkg-config
+
+    # foliate
     # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
     # verilator
     # telegram-desktop
@@ -31,24 +60,25 @@ in {
     # shotcut
     qq
     # zed-editor
-    bambu-studio
+    # bambu-studio
     # wechat-uos
     # libsForQt5.kdenlive
     keepassxc
     # android-studio
-    delta
-    yt-dlp-light
+    # yt-dlp-light
     # android-tools
     # (arduino-ide.overrideAttrs {extraPkgs = with pkgs; [python311 python311Packages.pyserial pkgs.libsecret];})
-    arduino-ide
+    # arduino-ide
     # hugo
-    mpv
-    # blender
-    calibre
+    # calibre
     # gimp
     # gnome.cheese
-    kicad
+    # kicad
     # libreoffice
+
+    cargo
+    rustc
+    rust-analyzer
   ];
 
   # You can import other home-manager modules here
@@ -66,6 +96,12 @@ in {
     ./default.nix
   ];
 
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  };
   programs.ags = {
     enable = false;
 
