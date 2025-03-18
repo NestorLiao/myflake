@@ -5,9 +5,9 @@
   inputs,
   ...
 }: {
-  # imports = [
-  #   inputs.nur-xddxdd.nixosModules.setupOverlay
-  # ];
+  imports = [
+    # inputs.nur-xddxdd.nixosModules.setupOverlay
+  ];
 
   programs.mpv = {
     enable = true;
@@ -25,19 +25,11 @@
   };
 
   home.packages = with pkgs; [
-    # delta
     # thefuck
     # samba4Full
-    # ffmpeg
-    # pandoc
-    kitty
-    # sdcv
 
-    delta
-    # st
-    gitui
-    # gnome.cheese
-    bat
+    # sdcv
+    # delta
     # helix-gpt
     # nix-index
     # tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
@@ -57,17 +49,16 @@
     # (quickemu.override {qemu = qemu_full;})
     # typst
 
-    # gitui #git user interface for terminal
     # zathura #lightweight document viewer
     # uutils-coreutils-noprefix #collection of common Unix-like utilities without prefix
     killall #used to kill processes by name
     # bat #a cat clone with syntax highlighting and Git integration
     # ethtool #utility for displaying and modifying Ethernet device settings
-    eza #command-line JSON processor
+    # eza #command-line JSON processor
     fd #simple, fast and user-friendly alternative to `find`
     # imv #image viewer for the terminal
-    neofetch #command-line system information tool
-    # nix-output-monitor #monitor build outputs of Nix package manager
+    fastfetch #command-line system information tool
+    nix-output-monitor #monitor build outputs of Nix package manager
 
     # pciutils #utilities for viewing and configuring PCI devices
     ripgrep #line-oriented search tool that recursively searches directories for a regex pattern
@@ -86,21 +77,21 @@
     # lsof # list open files
     # ltrace # library call monitoring
 
-    (pkgs.writeScriptBin "ts" ''
-      #!/usr/bin/env bash
+    # (pkgs.writeScriptBin "ts" ''
+    #   #!/usr/bin/env bash
 
-      # Execute wl-paste and store sse output in a variable
-      clipboard_content=$(wl-paste)
+    #   # Execute wl-paste and store sse output in a variable
+    #   clipboard_content=$(wl-paste)
 
-      # Translate the clipboard content from English to Simplified Chinese using `trans`
-      translated_content=$(sdcv -c -n "$clipboard_content" -u 牛津英汉双解美化版 -u WordNet)
+    #   # Translate the clipboard content from English to Simplified Chinese using `trans`
+    #   translated_content=$(sdcv -c -n "$clipboard_content" -u 牛津英汉双解美化版 -u WordNet)
 
-      # Remove ANSI escape codes from the translated content using `sed`
-      cleaned_content=$(echo "$translated_content" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g")
+    #   # Remove ANSI escape codes from the translated content using `sed`
+    #   cleaned_content=$(echo "$translated_content" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g")
 
-      # Print the final cleaned content
-      echo "$cleaned_content"
-    '')
+    #   # Print the final cleaned content
+    #   echo "$cleaned_content"
+    # '')
   ];
 
   programs = {
@@ -125,76 +116,19 @@
     enable = true;
     # options = ["--cmd t"];
     enableFishIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.git = {
     enable = true;
     userName = "NestorLiao";
     userEmail = "gtkndcbfhr@gmail.com";
-    extraConfig = {
-      credential.helper = "${
-        pkgs.git.override {withLibsecret = true;}
-      }/bin/git-credential-libsecret";
-    };
+    # extraConfig = {
+    #   credential.helper = "${
+    #     pkgs.git.override {withLibsecret = true;}
+    #   }/bin/git-credential-libsecret";
+    # };
   };
-
-  home.file.".config/neofetch/config.conf".text = ''
-    print_info() {
-        info "System" distro
-        info "Kernel" kernel
-        info "Environment" de
-        info "Uptime" uptime
-        info "Packages" packages
-        info "CPU" cpu
-        info "GPU" gpu
-        info "Memory" memory
-        info "Disk" disk
-        info "Local IP" local_ip
-        info "Public IP" public_ip
-    }
-
-    distro_shorthand="on"
-    os_arch="on"
-    uptime_shorthand="tiny"
-    package_managers="on"
-    public_ip_host="https://ident.me"
-    de_version="on"
-    disk_subtitle="none"
-    separator=" =="
-    ascii_distro="auto"
-    image_size="auto"
-  '';
-
-  home.file.".cargo/config.toml".source =
-    ./CargoConf.toml;
-
-  home.file.".config/fish/functions/mcdir.fish".text = ''
-    function mcdir
-      command mkdir $argv[1]
-      and cd $argv[1]
-    end
-  '';
-
-  home.file.".gitconfig".text = ''
-    [core]
-        pager = delta
-
-    [interactive]
-        diffFilter = delta --color-only
-
-    [delta]
-        navigate = true    # use n and N to move between diff sections
-
-        # delta detects terminal colors automatically; set one of these to disable auto-detection
-        # dark = true
-        # light = true
-
-    [merge]
-        conflictstyle = diff3
-
-    [diff]
-        colorMoved = default
-  '';
 
   home.file.".config/fish/functions/rcdir.fish".text = ''
     function rcdir
@@ -213,10 +147,15 @@
     end
   '';
 
-  # xdg.configFile."clangd/config.yaml".text = ''
-  #   CompileFlags:
-  #     Add: [-std=c++20]
-  # '';
+  home.file.".config/fish/functions/mcdir.fish".text = ''
+    function mcdir
+      command mkdir $argv[1]
+      and cd $argv[1]
+    end
+  '';
+
+  home.file.".cargo/config.toml".source =
+    ./CargoConf.toml;
 
   programs.command-not-found.enable = false;
 }

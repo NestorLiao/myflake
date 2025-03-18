@@ -4,15 +4,13 @@
   lib,
   userSetting,
   ...
-}: let
-  colorScheme = inputs.nix-colors.colorschemes.${userSetting.colorscheme};
-in {
+}: {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-beta.override {
+    package = pkgs.unstable.firefox-devedition.override {
       nativeMessagingHosts = [
-        pkgs.tridactyl-native
-        # pkgs.passff-host
+        # pkgs.tridactyl-native
+        pkgs.keepassxc
       ];
     };
 
@@ -31,7 +29,7 @@ in {
       };
       AutofillAddressEnabled = false;
       AutofillCreditCardEnabled = false;
-      DefaultDownloadDirectory = "\${home}/Downloads";
+      DefaultDownloadDirectory = "\${home}/save";
       OfferToSaveLoginsDefault = false;
       PromptForDownloadLocation = true;
       SearchSuggestEnabled = false;
@@ -62,156 +60,184 @@ in {
 
       DisableFeedbackCommands = true;
       SearchEngines.Default = "Google";
-      BlockAboutAddons = false;
+      BlockAboutAddons = true;
       DisableFormHistory = true;
       AppAutoUpdate = false;
       DisableAppUpdate = true;
     };
 
-    # https://github.com/jonhoo/configs
-
-    # #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
-    #   display: none;
-    # }
-
     profiles.firefox = {
-      # userChrome = ''
-
-      #   @-moz-document url(chrome://browser/content/browser.xhtml) {
-      #   	/* tabs on bottom of window */
-      #   	/* requires that you set
-      #   	 * toolkit.legacyUserProfileCustomizations.stylesheets = true
-      #   	 * in about:config
-      #   	 * figure out current firefox's profile folder in about:support
-      #   	 */
-      #       :root[tabsintitlebar] #titlebar:-moz-window-inactive { opacity: 1 !important; }
-      #   	#main-window body { flex-direction: column-reverse !important; }
-      #   	#navigator-toolbox { flex-direction: column-reverse !important; }
-      #   	#urlbar {
-      #   		top: unset !important;
-      #   		bottom: calc(var(--urlbar-margin-inline)) !important;
-      #   		box-shadow: none !important;
-      #   		display: flex !important;
-      #   		flex-direction: column !important;
-      #   	}
-      #   		#urlbar > * {
-      #   			flex: none;
-      #   		}
-      #   	#urlbar .urlbar-input-container {
-      #   		order: 2;
-      #   	}
-      #   	#urlbar > .urlbarView {
-      #   		order: 1;
-      #   		border-bottom: 1px solid #666;
-      #   	}
-      #   	#urlbar-results {
-      #   		display: flex;
-      #   		flex-direction: column-reverse;
-      #   	}
-      #   	.search-one-offs { display: none !important; }
-      #   	.tab-background { border-top: none !important; }
-      #   	#navigator-toolbox::after { border: none; }
-      #   	#TabsToolbar .tabbrowser-arrowscrollbox,
-      #   	#tabbrowser-tabs, .tab-stack { min-height: 28px !important; }
-      #   	.tabbrowser-tab { font-size: 80%; }
-      #   	.tab-content { padding: 0 5px; }
-      #   	.tab-close-button .toolbarbutton-icon { width: 12px !important; height: 12px !important; }
-      #   	toolbox[inFullscreen=true] { display: none; }
-      #   	/*
-      #   	 * the following makes it so that the on-click panels in the nav-bar
-      #   	 * extend upwards, not downwards. some of them are in the #mainPopupSet
-      #   	 * (hamburger + unified extensions), and the rest are in
-      #   	 * #navigator-toolbox. They all end up with an incorrectly-measured
-      #   	 * max-height (based on the distance to the _bottom_ of the screen), so
-      #   	 * we correct that. The ones in #navigator-toolbox then adjust their
-      #   	 * positioning automatically, so we can just set max-height. The ones
-      #   	 * in #mainPopupSet do _not_, and so we need to give them a
-      #   	 * negative margin-top to offset them *and* a fixed height so their
-      #   	 * bottoms align with the nav-bar. We also calc to ensure they don't
-      #   	 * end up overlapping with the nav-bar itself. The last bit around
-      #   	 * cui-widget-panelview is needed because "new"-style panels (those
-      #   	 * using "unified" panels) don't get flex by default, which results in
-      #   	 * them being the wrong height.
-      #   	 *
-      #   	 * Oh, yeah, and the popup-notification-panel (like biometrics prompts)
-      #   	 * of course follows different rules again, and needs its own special
-      #   	 * rule.
-      #   	 */
-      #   	#mainPopupSet panel.panel-no-padding { margin-top: calc(-50vh + 40px) !important; }
-      #   	#mainPopupSet .panel-viewstack, #mainPopupSet popupnotification { max-height: 50vh !important; height: 50vh; }
-      #   	#mainPopupSet panel.panel-no-padding.popup-notification-panel { margin-top: calc(-50vh - 35px) !important; }
-      #   	#navigator-toolbox .panel-viewstack { max-height: 75vh !important; }
-      #   	panelview.cui-widget-panelview { flex: 1; }
-      #   	panelview.cui-widget-panelview > vbox { flex: 1; min-height: 50vh; }
-      #     #statuspanel { display: none !important; }
-      #     #navigator-toolbox[fullscreenShouldAnimate] {
-      #         transition: none !important;
-      #     }}
-      #   }
-      # '';
-
       userChrome = ''
         @-moz-document url(chrome://browser/content/browser.xhtml) {
-            /* ########  Sidetabs Styles  ######### */
-            #sidebar-header {
-              display: none;
-            }
-            #statuspanel { display: none !important; }
-            :root[tabsintitlebar] #titlebar:-moz-window-inactive {
-              opacity: 1 !important;
-            }
-            #TabsToolbar {
-            	display: none !important;
-            }
-            #navigator-toolbox[fullscreenShouldAnimate] {
-                transition: none !important;
-            }}
+              /* ########  Sidetabs Styles  ######### */
+              /* Set Bookerly for all Firefox UI */
+              * {
+                  font-family: Bookerly !important
+              }
+              #navigator-toolbox { font-family:Bookerly !important }
+              #TabsToolbar { font-family: Bookerly !important }
+              #sidebar-header {
+                display: none;
+              }
 
+              #statuspanel { display: none !important; }
+              :root[tabsintitlebar] #titlebar:-moz-window-inactive {
+                opacity: 1 !important;
+              }
+
+              #TabsToolbar {
+              	display: none !important;
+              }
+
+              #navigator-toolbox[fullscreenShouldAnimate] {
+                  transition: none !important;
+              }
+
+              #contentAreaContextMenu #context-openlinkincurrent,
+              #contentAreaContextMenu #context-openlinkinusercontext-menu,
+              #contentAreaContextMenu #context-bookmarklink,
+              #contentAreaContextMenu #context-selectall,
+              #contentAreaContextMenu #context-sendlinktodevice,
+              #contentAreaContextMenu #context-sendpagetodevice,
+              #contentAreaContextMenu #context-sep-sendlinktodevice,
+              #contentAreaContextMenu #context-sep-sendpagetodevice,
+              #contentAreaContextMenu #context-viewpartialsource-selection {
+              	display: none !important;
+              }
+
+
+              :root {
+              	scrollbar-color: #ffffff #FFFFFF;
+              	scrollbar-width: none;
+              }
+              *{ scrollbar-width: none !important; } }
+
+              *{ scrollbar-width: none }
+              #navigator-toolbox,
+              #TabsToolbar,
+              #tabbrowser-tabs {
+                background-color: #FFFFFFF !important;
+              }
+
+              :root{
+                --uc-autohide-toolbox-delay: 200ms; /* Wait 0.1s before hiding toolbars */
+                --uc-toolbox-rotation: 82deg;  /* This may need to be lower on mac - like 75 or so */
+              }
+
+              :root[sizemode="maximized"]{
+                --uc-toolbox-rotation: 88.5deg;
+              }
+
+              @media  (-moz-platform: windows){
+                :root:not([lwtheme]) #navigator-toolbox{ background-color: -moz-dialog !important; }
+              }
+
+              :root[sizemode="fullscreen"],
+              :root[sizemode="fullscreen"] #navigator-toolbox{ margin-top: 0 !important; }
+
+              #navigator-toolbox{
+                --browser-area-z-index-toolbox: 3;
+                position: fixed !important;
+                background-color: var(--lwt-accent-color,black) !important;
+                transition: transform 82ms linear, opacity 82ms linear !important;
+                transition-delay: var(--uc-autohide-toolbox-delay) !important;
+                transform-origin: top;
+                transform: rotateX(var(--uc-toolbox-rotation));
+                opacity: 0;
+                line-height: 0;
+                z-index: 1;
+                pointer-events: none;
+              }
+              :root[sessionrestored] #urlbar[popover]{
+                pointer-events: none;
+                opacity: 0;
+                transition: transform 82ms linear var(--uc-autohide-toolbox-delay), opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms);
+                transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+                transform: rotateX(89.9deg);
+              }
+              #mainPopupSet:has(> [panelopen]:not(#ask-chat-shortcuts,#tab-preview-panel)) ~ toolbox #urlbar[popover],
+              #navigator-toolbox:is(:hover,:focus-within) #urlbar[popover],
+              #urlbar-container > #urlbar[popover]:is([focused],[open]){
+                pointer-events: auto;
+                opacity: 1;
+                transition-delay: 33ms;
+                transform: rotateX(0deg);
+              }
+              #mainPopupSet:has(> [panelopen]:not(#ask-chat-shortcuts,#tab-preview-panel)) ~ toolbox,
+              #navigator-toolbox:has(#urlbar:is([open],[focus-within])),
+              #navigator-toolbox:hover,
+              #navigator-toolbox:focus-within{
+                transition-delay: 33ms !important;
+                transform: rotateX(0);
+                opacity: 1;
+              }
+              /* This makes things like OS menubar/taskbar show the toolbox when hovered in maximized windows.
+               * Unfortunately it also means that other OS native surfaces (such as context menu on macos)
+               * and other always-on-top applications will trigger toolbox to show up. */
+              @media (-moz-bool-pref: "userchrome.autohide-toolbox.unhide-by-native-ui.enabled"){
+                :root[sizemode="maximized"]:not(:hover){
+                  #navigator-toolbox:not(:-moz-window-inactive),
+                  #urlbar[popover]:not(:-moz-window-inactive){
+                    transition-delay: 33ms !important;
+                    transform: rotateX(0);
+                    opacity: 1;
+                  }
+                }
+              }
+
+              #navigator-toolbox > *{ line-height: normal; pointer-events: auto }
+
+              #navigator-toolbox,
+              #navigator-toolbox > *{
+                width: 100vw;
+                -moz-appearance: none !important;
+              }
+
+              /* These two exist for oneliner compatibility */
+              #nav-bar{ width: var(--uc-navigationbar-width,100vw) }
+              #TabsToolbar{ width: calc(100vw - var(--uc-navigationbar-width,0px)) }
+
+              /* Don't apply transform before window has been fully created */
+              :root:not([sessionrestored]) #navigator-toolbox{ transform:none !important }
+
+              :root[customizing] #navigator-toolbox{
+                position: relative !important;
+                transform: none !important;
+                opacity: 1 !important;
+              }
+
+              #navigator-toolbox[inFullscreen] > #PersonalToolbar,
+              #PersonalToolbar[collapsed="true"]{ display: none }
+
+              /* Uncomment this if tabs toolbar is hidden with hide_tabs_toolbar.css */
+               /*#titlebar{ margin-bottom: -9px }*/
+
+              /* Uncomment the following for compatibility with tabs_on_bottom.css - this isn't well tested though */
+              /*
+              #navigator-toolbox{ flex-direction: column; display: flex; }
+              #titlebar{ order: 2 }
+              */
+
+
+
+
+                                    }
       '';
 
-      # #sidebar-header {
-      # 	display: none !important;
-      # }
-      # #TabsToolbar {
-      # 	display: none !important;
-      # }
+      # nav-bar, #urlbar-container, #searchbar { visibility: collapse !important; }
+      # extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+      #   # tridactyl
+      #   ublacklist
+      #   vimium-c
+      #   decentraleyes
+      #   clearurls
+      #   disconnect
+      #   ublock-origin
+      #   istilldontcareaboutcookies
+      #   keepassxc-browser
+      #   sponsorblock
+      # ];
 
-      extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-        tridactyl
-        old-reddit-redirect
-        # ublock-origin
-        istilldontcareaboutcookies
-        keepassxc-browser
-        sponsorblock
-      ];
-
-      # userContent = ''
-      #   /* Hide scrollbar in FF Quantum */
-      #   *{scrollbar-width:none !important}
-
-      #   @-moz-document url(about:home), url(about:newtab) {
-      #     body {
-      #       --newtab-background-color: ${colorScheme.palette.base00};
-      #       --newtab-element-hover-color: ${colorScheme.palette.base01};
-      #       --newtab-icon-primary-color: ${colorScheme.palette.base04};
-      #       --newtab-search-border-color: ${colorScheme.palette.base01};
-      #       --newtab-search-dropdown-color: ${colorScheme.palette.base00};
-      #       --newtab-search-dropdown-header-color: ${colorScheme.palette.base00};
-      #       --newtab-search-icon-color: ${colorScheme.palette.base04};
-      #       --newtab-section-header-text-color: ${colorScheme.palette.base05};
-      #       --newtab-snippets-background-color: ${colorScheme.palette.base01};
-      #       --newtab-text-primary-color: ${colorScheme.palette.base05};
-      #       --newtab-textbox-background-color: ${colorScheme.palette.base01};
-      #       --newtab-textbox-border: ${colorScheme.palette.base01};
-      #       --newtab-topsites-background-color: ${colorScheme.palette.base04};
-      #       --newtab-topsites-label-color: ${colorScheme.palette.base05};
-      #       --darkreader-neutral-background: #${colorScheme.palette.base00} !important;
-      #       --darkreader-neutral-text: #${colorScheme.palette.base05} !important;
-      #       --darkreader-selection-background: #${colorScheme.palette.base01} !important;
-      #       --darkreader-selection-text: #${colorScheme.palette.base05} !important;
-      #     }
-      #   }
-      # '';
       settings = {
         "browser.tabs.closeTabByDblclick" = true;
         # disable first-run onboarding
@@ -222,8 +248,11 @@ in {
         "full-screen-api.warning.delay" = 0;
         "full-screen-api.warning.timeout" = 0;
         "browser.tabs.tabClipWidth" = 999;
+        "places.history.enabled" = false;
+        "services.sync.engine.history" = false;
         "widget.non-native-theme.scrollbar.style" = 3;
         "ui.key.menuAccessKeyFocuses" = false;
+        "ui.key.menuAccessKey" = 17;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         # "browser.display.os-zoom-behavior" = 0;
         "app.update.auto" = false;
@@ -265,9 +294,5 @@ in {
     };
   };
 
-  home.file.".config/tridactyl/themes/mysupertheme.css".source = ./tridactyl.css;
-
-  xdg.configFile."tridactyl/tridactylrc".text = ''
-    js tri.config.set("editorcmd", "alacritty -e hx")
-  '';
+  # home.file.".config/tridactyl/themes/eink.css".source = ./tridactyl.css;
 }

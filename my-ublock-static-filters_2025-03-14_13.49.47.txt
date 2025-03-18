@@ -1,0 +1,351 @@
+||support.google.com/websearch/answer/181196?hl=en-HK
+##a[jsname="KI37ad"]
+##a.gyPpGe
+
+
+! Oct 21, 2024 https://old.reddit.com
+old.reddit.com##ul.hover.sr-bar.flat-list > li > .choice
+old.reddit.com##.side
+old.reddit.com###sr-header-area
+old.reddit.com###header-bottom-left
+old.reddit.com##.unvoted.midcol
+
+! Oct 21, 2024 https://news.ycombinator.com
+news.ycombinator.com##.votelinks
+
+! Oct 21, 2024 https://old.reddit.com
+old.reddit.com##.unvoted.score
+
+! Oct 22, 2024 https://old.reddit.com
+old.reddit.com##.warn-on-unload.cloneable.usertext
+old.reddit.com##.unvoted.entry > .buttons.flat-list
+old.reddit.com##.unvoted.entry > .tagline > .score-hidden
+
+! Jul 29, 2024 http://www.cqupt.edu.cn
+www.cqupt.edu.cn##.rightbox.ml35.left.info-box
+www.cqupt.edu.cn##.left.may-iframe > .news
+
+! Jul 29, 2024 https://zhuanlan.zhihu.com
+##.Recommendations-Main
+zhuanlan.zhihu.com##.PostIndex-Contributions
+
+! Jul 30, 2024 https://y.qq.com
+y.qq.com##.detail_layout__main
+y.qq.com##a.mod_btn:nth-of-type(4)
+y.qq.com##a.mod_btn:nth-of-type(2)
+y.qq.com##.top_nav__item--subnav.top_nav__item > .top_nav__link
+||y.qq.com/mediastyle/yqq/extra/mark_1.png?max_age=2592000$image
+y.qq.com##.mod_select--open.mod_select_green.mod_select > .select__choose
+y.qq.com##.mod_select--pay.mod_select > .select__choose
+y.qq.com##.footer
+
+! Jul 31, 2024 https://askubuntu.com
+askubuntu.com##.show-votes
+
+! Aug 1, 2024 https://www.taobao.com
+||gw.alicdn.com/imgextra/i4/O1CN01Lhv9BJ1WcZWbP0a7w_!!6000000002809-0-tps-7680-1320.jpg$image
+||gw.alicdn.com/imgextra/i4/O1CN01Lhv9BJ1WcZWbP0a7w_!!6000000002809-0-tps-7680-1320.jpg$image
+www.taobao.com##.tb-picks-container
+||gw.alicdn.com/imgextra/i4/O1CN01Lhv9BJ1WcZWbP0a7w_!!6000000002809-0-tps-7680-1320.jpg$image
+||gw.alicdn.com/imgextra/i4/O1CN01Lhv9BJ1WcZWbP0a7w_!!6000000002809-0-tps-7680-1320.jpg$image
+||gw.alicdn.com/imgextra/i4/O1CN01Lhv9BJ1WcZWbP0a7w_!!6000000002809-0-tps-7680-1320.jpg$image
+||gw.alicdn.com/imgextra/i4/O1CN01Lhv9BJ1WcZWbP0a7w_!!6000000002809-0-tps-7680-1320.jpg$image
+
+! Aug 1, 2024 https://csdiy.wiki
+||giscus.app/zh-CN/widget?origin=https%3A%2F%2Fcsdiy.wiki%2F%25E5%25BF%2585%25E5%25AD%25A6%25E5%25B7%25A5%25E5%2585%25B7%2FEmacs%2F&session=&theme=light_protanopia&reactionsEnabled=1&emitMetadata=0&inputPosition=top&repo=PKUFlyingPig%2Fcs-self-learning&repoId=R_kgDOGP67ng&category=Announcements&categoryId=DIC_kwDOGP67ns4COM9Q&strict=0&description=CS%E8%87%AA%E5%AD%A6%E6%8C%87%E5%8D%97&backLink=https%3A%2F%2Fcsdiy.wiki%2F%25E5%25BF%2585%25E5%25AD%25A6%25E5%25B7%25A5%25E5%2585%25B7%2FEmacs%2F&term=Emacs+-+CS%E8%87%AA%E5%AD%A6%E6%8C%87%E5%8D%97$subdocument
+
+! Aug 2, 2024 https://www.taobao.com
+||img.alicdn.com/imgextra/i4/O1CN01ZP0KtL29v8Z7mIKHT_!!0-tbCommonAudio.jpg$image
+www.taobao.com##.business-entry-live-card
+www.taobao.com##.business-entry-container
+
+! Aug 4, 2024 https://y.qq.com
+||y.qq.com/ryqq/static/media/bg_detail.bb32b2d1.jpg?max_age=2592000$image
+||y.qq.com/ryqq/static/media/bg_detail.bb32b2d1.jpg?max_age=2592000$image
+||y.qq.com/ryqq/static/media/bg_detail.bb32b2d1.jpg?max_age=2592000$image
+||y.qq.com/ryqq/static/media/bg_detail.bb32b2d1.jpg?max_age=2592000$image
+||y.qq.com/mediastyle/yqq/img/player_logo*.png?max_age=2592000$image
+||y.qq.com/mediastyle/yqq/img/logo.png?max_age=2592000$image
+y.qq.com##.top_nav__link
+||y.qq.com/mediastyle/yqq/img/logo.png?max_age=2592000$image
+||y.gtimg.cn/mediastyle/yqq/extra/mark_1.png?max_age=2592000&err_retry=1$image
+||y.qq.com/mediastyle/yqq/img/logo.png?max_age=2592000$image
+||y.gtimg.cn/mediastyle/yqq/extra/mark_1.png?max_age=2592000&err_retry=1$image
+y.qq.com##.mod_header > .section_inner
+
+! Aug 4, 2024 https://open.spotify.com
+open.spotify.com##.contentSpacing.ZLSAuA1tn0bSdQRwhhj6
+
+! Aug 18, 2024 https://www.infoq.cn
+##.sidebar-artilce
+
+! Aug 18, 2024 https://cloud.tencent.com
+##.detail-section-inner
+
+! Aug 21, 2024 https://www.gamersky.com
+||image.gamersky.com/webimg15/adtop.png$image
+||image.gamersky.com/webimg15/adtop.png$image
+||image.gamersky.com/webimg15/adtop.png$image
+||image.gamersky.com/webimg15/adtop.png$image
+||image.gamersky.com/webimg15/adtop.png$image
+
+! Aug 26, 2024 https://zh.wikipedia.org
+zh.wikipedia.org##.mw-logo
+
+! Aug 28, 2024 https://new.qq.com
+new.qq.com##.AM5A7ObvSYaNTRY2wzPT
+
+! Aug 31, 2024 https://www.1point3acres.com
+www.1point3acres.com##.frame-1-c.column
+
+! Sep 1, 2024 https://www.perplexity.ai
+www.perplexity.ai##.h-10.font-medium.px-md.text-base.w-full.flex.whitespace-nowrap.origin-center.active\:scale-95.cursor-point.rounded.justify-start.group\/button.relative.items-center.select-none.ease-in-out.duration-300.transition.outline-transparent.outline-none.focus\:outline-none.font-sans.py-md.dark\:md\:hover\:text-textMainDark.dark\:md\:hover\:bg-offsetPlusDark.md\:hover\:text-textMain.dark\:text-textOffDark.text-textOff.md\:hover\:bg-offsetPlus > .gap-xs.w-full.justify-left.min-w-0.items-center.flex
+www.perplexity.ai##.md\:grid-cols-2.md\:auto-rows-fr.gap-sm.grid-cols-1.grid
+www.perplexity.ai##.md\:block.pb-md.hidden
+
+! Sep 2, 2024 https://www.2rk.cc
+||www.2rk.cc/ad_bomb.gif$image
+
+! Sep 4, 2024 https://old.reddit.com
+old.reddit.com##.side
+
+! Sep 8, 2024 https://www.youtube.com
+www.youtube.com##.ytd-topbar-logo-renderer.style-scope > .ytd-logo.style-scope
+
+! Sep 10, 2024 http://www.cqupt.edu.cn
+||www.cqupt.edu.cn/dfiles/13011/cqupt/img/silder_bg.png$image
+www.cqupt.edu.cn##.banner
+
+! Sep 19, 2024 https://www.taobao.com
+www.taobao.com##.tb-footer-with-logo.tb-footer
+www.taobao.com##.layer > div
+
+! Sep 29, 2024 https://www.youtube.com
+www.youtube.com###search-form
+www.youtube.com###search
+www.youtube.com###center
+accounts.google.com/gsi/*
+! Sep 30, 2024 https://zh.wikipedia.org
+zh.wikipedia.org###asn-dismissable-notice .mw-parser-output
+
+! Oct 9, 2024 https://www.reddit.com
+www.reddit.com##.items-center.flex.h-header-large
+www.reddit.com##left-nav-top-section
+www.reddit.com##reddit-recent-pages
+www.reddit.com##.select-none.min-h-screen-without-header.w-full.s\:shrink.shrink-0.pt-md.mb-0.mt-0.flex-col.flex.box-border.z-\[2\]
+
+twitter.com##body
+9gag.com##body
+news.google.com##body
+www.nyoooz.com##body
+
+! Oct 10, 2024 https://www.reddit.com
+www.reddit.com##.inline-flex.button.justify-center.items-center.button-secondary.px-\[var\(--rem14\)\].button-medium.hover\:no-underline.no-underline.w-100
+www.reddit.com##.xs\:block.hidden.my-md.rounded-\[8px\].bg-neutral-background-weak > .py-md
+
+www.goodreads.com##.wtrRating.ratingStars.hasRating
+www.goodreads.com###metacol > .stacked.uitext
+www.goodreads.com###reviews
+
+! Oct 22, 2024 https://old.reddit.com
+old.reddit.com## .unvoted.entry > .top-matter > .buttons.flat-list
+||www.redditstatic.com/sprite-expando.*.png$image
+old.reddit.com##.unvoted.entry > .top-matter > .title > .domain
+old.reddit.com##.rank
+old.reddit.com##.unvoted.entry > .top-matter > .tagline
+old.reddit.com##.unvoted.entry > .top-matter > .selftext.hide-when-pinned.collapsed.expando-button
+old.reddit.com##.footer-parent
+
+! Oct 23, 2024 https://en.wikipedia.org
+en.wikipedia.org##.mw-interlanguage-selector.vector-dropdown-checkbox
+en.wikipedia.org##.mw-portlet-lang-heading-10.cdx-button--action-progressive.cdx-button--weight-quiet.cdx-button--fake-button--enabled.cdx-button--fake-button.cdx-button.vector-dropdown-label
+en.wikipedia.org##.mw-header.vector-header
+en.wikipedia.org##.mw-portlet-lang.mw-portlet.vector-dropdown
+
+! Oct 24, 2024 https://soundcloud.com
+soundcloud.com##.sc-browsers-enable-gpu.sc-clearfix.userSidebar
+
+||www.google.com/logos/doodles/*
+
+
+
+! Oct 25, 2024 https://old.reddit.com
+old.reddit.com##.listingsignupbar.infobar
+old.reddit.com##.commentsignupbar.infobar
+old.reddit.com###header-bottom-right
+old.reddit.com###header
+
+
+! Oct 25, 2024 https://old.reddit.com
+old.reddit.com##.nextprev
+
+
+! Oct 25, 2024 https://old.reddit.com
+old.reddit.com##.menuarea
+
+! Oct 26, 2024 https://news.ycombinator.com
+news.ycombinator.com##td:nth-of-type(2)
+news.ycombinator.com##[href="https://news.ycombinator.com"]
+news.ycombinator.com##[href^="login"]
+
+! Oct 26, 2024 https://old.reddit.com
+old.reddit.com##.seo-comments-recommendations.spacer > .linklisting.sitetable
+old.reddit.com##.seo-comments-flex
+old.reddit.com##.spacer.seo-comments
+old.reddit.com###bottom-comments > .seo-comments
+
+! Oct 30, 2024 https://news.cctv.com
+news.cctv.com##.ELMTvbmTWIjQv22N8k5eDvhN190810 > .md
+news.cctv.com##.ELMTI0j7C2U0szEIppZQUAtp190810 > .md
+
+
+
+! Nov 6, 2024 https://s.taobao.com
+s.taobao.com##.wrap--r2cn7LQN.visible--R6auhFRs > div
+
+! Nov 7, 2024 https://zh.wikipedia.org
+zh.wikipedia.org###vector-page-titlebar-toc > .vector-dropdown-checkbox
+zh.wikipedia.org###vector-page-titlebar-toc > .cdx-button--icon-only.cdx-button--fake-button--enabled.cdx-button--fake-button.cdx-button.vector-dropdown-label
+
+
+
+! Nov 12, 2024 https://news.ycombinator.com
+news.ycombinator.com##td > table > tbody > tr > .default > div > .comhead
+
+! Dec 29, 2024 https://chatgpt.com
+chatgpt.com##.max-md\:hidden.bg-token-main-surface-primary.font-semibold.h-header-height.z-10.justify-between.items-center.flex.mb-1\.5.p-3.top-0.sticky.no-draggable-children.draggable
+
+
+! Dec 31, 2024 https://www.reddit.com
+www.reddit.com##.xs\:flex-row.flex-col.justify-between.items-end.flex-1.flex
+
+
+
+! Jan 2, 2025 https://chat.deepseek.com
+chat.deepseek.com##.be88ba8a
+
+! 2025年1月4日 https://chat.deepseek.com
+chat.deepseek.com##.fcaa63f8
+
+! Jan 6, 2025 https://search.nixos.org
+search.nixos.org##h1
+
+
+
+! Jan 7, 2025 https://www.google.com
+www.google.com##.oIk2Cb
+
+! Jan 7, 2025 https://chat.deepseek.com
+chat.deepseek.com##div.d9f56c96.ds-button--m.ds-button--rect.ds-button--filled.ds-button--primary.ds-button > .ds-icon > svg > rect
+
+! Jan 7, 2025 https://github.com
+github.com##.BtnGroup-item.btn.btn-sm.btn-with-aria-count.rounded-left-2.js-toggler-target
+github.com###details-user-list-40217904-unstarred > .float-none.px-2.BtnGroup-item.btn.btn-sm
+github.com##.mt-md-0.mt-2.flex-md-order-none.flex-order-1 > .mb-3
+github.com##.btn-block.btn
+github.com##a.Link--muted.pinned-item-meta:nth-of-type(1)
+github.com##a.Link--muted.pinned-item-meta:nth-of-type(2)
+github.com##.flex-lg-nowrap.flex-wrap.flex-lg-row.flex-column-reverse.flex-items-center.flex-justify-center.d-flex
+github.com##.Link--muted.Link
+github.com##.gap-2.mb-2.flex-wrap.d-flex
+github.com##.px-lg-5.px-md-4.px-3.mb-2.d-md-none.d-block > .mb-2
+github.com##.flex-wrap.mb-3.mt-n3.gap-2.d-flex
+github.com##.color-fg-muted.d-flex.mb-2
+github.com##.fvaNTI.Box-sc-g0xbh4-0 > .prc-Button-ButtonBase-c50BI > .prc-Button-ButtonContent-HKbr-
+github.com##.prc-Link-Link-85e08.jJYFGF.Box-sc-g0xbh4-0
+github.com##show-dialog-on-load > .Button.Button--medium.Button--secondary
+
+! Jan 7, 2025 http://www.wyzxwk.com
+www.wyzxwk.com##.g-sd-1
+www.wyzxwk.com##.m-rlt-2
+! Jan 7, 2025 https://www.taobao.com
+www.taobao.com###ice-container > .tbpc-layout
+
+! Jan 7, 2025 https://www.google.com
+www.google.com###botstuff > div > div
+www.google.com##.YNk70c.TrMVnc.f6F9Be
+
+! Jan 7, 2025 https://github.com
+github.com##.jPdcfu.Box-sc-g0xbh4-0
+
+! Jan 7, 2025 https://www.google.com
+www.google.com##.CbazZd
+www.google.com###slim_appbar
+
+! Jan 8, 2025 https://chat.deepseek.com
+chat.deepseek.com##.ds-elevated.ds-modal-content
+chat.deepseek.com##.ds-modal-wrapper.ds-theme
+
+! Jan 10, 2025 https://www.reddit.com
+www.reddit.com##.xs\:mt-xs.xs\:rounded-\[8px\].bg-secondary-background.h-3xl.bg-no-repeat.bg-cover.bg-center.relative.community-banner
+
+! Jan 11, 2025 https://www.google.com
+www.google.com##.qogDvd
+www.google.com##.sfbg
+www.google.com##.dodTBe
+www.google.com##.YNk70c.CvDJxb
+
+
+
+! Jan 13, 2025 https://duckduckgo.com
+duckduckgo.com##.module__footer-carousel__container.js-carousel-module-more
+duckduckgo.com##.js-carousel-module-items.module--carousel__items
+duckduckgo.com##li.L6fj2A3X2mfJl5kE8caF > div
+duckduckgo.com##.RHsWhMlxc4ETEMDS9ltw
+duckduckgo.com##.cw.header
+duckduckgo.com##.footer
+duckduckgo.com##.AgRvhDZlpjWsRz4nVQDb.O9Ipab51rBntYb0pwOQn
+
+! Jan 14, 2025 https://toe-music.bandcamp.com
+toe-music.bandcamp.com##.populated.deets
+toe-music.bandcamp.com##.first-row
+toe-music.bandcamp.com##.recommendations-container
+toe-music.bandcamp.com##page-footer
+toe-music.bandcamp.com##.tralbumCommands
+
+
+
+
+
+! Jan 16, 2025 https://duckduckgo.com
+duckduckgo.com##.VVwKmb7llplcxyVXzHz9.q7VhSk71XgyB1xYfeChb.hUUdRtuaOUx7mcSwc56s.ffON2NH02oMAcqyoh2UU.wE5p3MOcL8UVdJhgH3V1
+
+! Jan 16, 2025 https://chat.deepseek.com
+chat.deepseek.com##div.d9f56c96.ds-button--m.ds-button--rect.ds-button--filled.ds-button--primary.ds-button:nth-of-type(2)
+
+! Jan 23, 2025 https://chat.deepseek.com
+chat.deepseek.com##.abe97156.ds-flex > div.ds-icon-button > .ds-icon > svg
+chat.deepseek.com##.c05b5566.d7dc56a8.f9bf7997 > .ds-flex
+
+! Feb 2, 2025 https://chatgpt.com
+chatgpt.com##.md\:px-\[60px\].empty\:hidden.text-token-text-secondary.text-xs.text-center.py-2.px-2.w-full.relative
+
+! Feb 28, 2025 https://www.google.com.hk
+www.google.com.hk##.P3mIxe.sBbkle
+www.google.com.hk##.dodTBe
+www.google.com.hk##.sfbg
+www.google.com.hk##.RNNXgb
+www.google.com.hk##.gb_A
+www.google.com.hk##.E9hVAb.z1asCe > svg
+www.google.com.hk##.gb_B
+www.google.com.hk##.Pqkn2e.card-section.Aysk6e
+
+! Mar 1, 2025 https://www.google.com.hk
+www.google.com.hk##.YNk70c.dc8jac.f6F9Be
+www.google.com.hk###botstuff > div > div
+
+! Mar 10, 2025 https://www.linuxfromscratch.org
+www.linuxfromscratch.org##[href="/lfs/index.html"]
+www.linuxfromscratch.org###lfsmenulist
+
+! Mar 11, 2025 https://www.zhihu.com
+www.zhihu.com##.JmYzaky7MEPMFcJDLNMG.epMJl0lFQuYbC7jrwr_o.Button--blue.Button--primary.FEfUrdfMIKpQDJDqkjte.SignFlow-submitButton.Button
+www.zhihu.com##.Login-socialButtonGroup
+
+! Mar 11, 2025 https://chatgpt.com
+chatgpt.com##.bottom-5.justify-center.items-center.flex.h-8.w-8.bg-token-main-surface-primary.translate-x-1\/2.right-1\/2.border-token-border-light.text-token-text-secondary.border.bg-clip-padding.rounded-full.z-10.absolute.cursor-pointer
+chatgpt.com##.md\:hidden.pl-0.bg-token-main-surface-primary.border-transparent.justify-center.items-center.min-h-\[60px\].flex.z-10.top-0.sticky.draggable
+chatgpt.com##.md\:px-\[60px\].text-token-text-secondary.text-xs.text-center.p-2.justify-center.items-center.w-full.min-h-8.flex.relative
+
+! Mar 13, 2025 https://chatgpt.com
+chatgpt.com##.\[box-shadow\:var\(--sharp-edge-top-shadow\)\].max-md\:hidden.motion-safe\:transition-shadow.bg-token-main-surface-primary.font-semibold.h-header-height.z-10.justify-between.items-center.flex.p-3.top-0.sticky.no-draggable-children.draggable

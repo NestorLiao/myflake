@@ -6,17 +6,35 @@
   nixConfig = {
     builders-use-substitutes = true;
     experimental-features = ["nix-command" "flakes"];
-    substituters = [
-      "https://mirrors.ustc.edu.cn/nix-channels/store"
-      "https://mirror.sjtu.edu.cn/nix-channels/store"
-      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+    extra-trusted-substituters = [
+      # "https://ai.cachix.org"
+      # "https://cuda-maintainers.cachix.org"
+      # "https://numtide.cachix.org"
       "https://cache.nixos.org/"
+      "https://nix-community.cachix.org"
+      # "https://nix-community.cachix.org"
+      # "https://mirrors.ustc.edu.cn/nix-channels/store"
+      # "https://mirror.sjtu.edu.cn/nix-channels/store"
+      # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
     ];
     extra-substituters = [
+      # "https://ai.cachix.org"
+      # "https://cuda-maintainers.cachix.org"
+      # "https://numtide.cachix.org"
+      "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
+      # "https://helix.cachix.org"
+      # "https://hyprland.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      # "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
+      # "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+      # "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      # "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
+      # "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
+      # "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
 
@@ -39,10 +57,11 @@
       username = "leeao";
       hostname = "nixos";
       email = "gtkndcbfhr@gmail.com";
-      windowmanager = "hyprland";
+      # windowmanager = "hyprland";
+      windowmanager = "sway";
       # windowmanager = "plasma";
       # windowmanager = "gnome";
-      colorscheme = "google-light";
+      # colorscheme = "google-light";
       # colorscheme = "github";
     };
   in {
@@ -68,7 +87,7 @@
           # Import home-manager's NixOS module
           inputs.home-manager.nixosModules.home-manager
 
-          inputs.stylix.nixosModules.stylix
+          # inputs.stylix.nixosModules.stylix
 
           # Import modules
           ./nixos/modules
@@ -98,7 +117,7 @@
     );
 
     # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
+    overlays = import ./overlays/default.nix {inherit inputs;};
     # Reusable nixos modules you might want to export
     # These are usually stuff you would upstream into nixpkgs
     nixosModules = import ./modules/nixos;
@@ -108,50 +127,45 @@
   };
 
   inputs = {
-    ags.url = "github:Aylur/ags";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # ghostty = {
+    #   url = "github:ghostty-org/ghostty";
+    #   # inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
+    # nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
+
+    # hyprland-contrib = {
+    #   url = "github:hyprwm/contrib";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # ags.url = "github:Aylur/ags";
+    # nixvim = {
+    #   url = "github:nix-community/nixvim";
+    #   # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
 
-    hy3 = {
-      url = "github:outfoxxed/hy3"; # where {version} is the hyprland release version
-      # or "github:outfoxxed/hy3" to follow the development branch.
-      # (you may encounter issues if you dont do the same for hyprland)
-      inputs.hyprland.follows = "hyprland";
-    };
+    # daeuniverse.url = "github:daeuniverse/flake.nix";
 
-    nix-doom-emacs-unstraightened = {
-      url = "github:marienz/nix-doom-emacs-unstraightened";
-      # Optional, to download less. Neither the module nor the overlay uses this input.
-      inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.systems.follows = "systems";
-      inputs.emacs-overlay.follows = "emacs-overlay";
-    };
-
-    daeuniverse.url = "github:daeuniverse/flake.nix";
     # Nixpkgs
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs.url = "github:nixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/573c650e8a14b2faa0041645ab18aed7e60f0c9a";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    real-nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # hyprland.url = "github:hyprwm/Hyprland";
     # helix.url = "github:helix-editor/helix/master";
-    xremap-flake.url = "github:xremap/nix-flake";
+    # xremap-flake.url = "github:xremap/nix-flake";
 
-    stylix.url = "github:danth/stylix";
-    stylix.inputs.nixpkgs.follows = "nixpkgs";
+    # stylix.url = "github:danth/stylix";
+    # stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Home manager
     home-manager = {
@@ -168,10 +182,10 @@
     #   url = "gitlab:doronbehar/nix-xilinx";
     # };
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # firefox-addons = {
+    #   url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -225,7 +239,7 @@
     #   inputs.flake-parts.follows = "flake-parts";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    nur.url = "github:nix-community/NUR";
+    # nur.url = "github:nix-community/NUR";
     nur-xddxdd = {
       # url = "/home/lantian/Projects/nur-packages";
       url = "github:xddxdd/nur-packages";
@@ -240,7 +254,7 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
-    nix-colors.url = "github:misterio77/nix-colors";
+    # nix-colors.url = "github:misterio77/nix-colors";
     # secrets = {
     #   # url = "/home/lantian/Projects/nixos-secrets";
     #   url = "github:xddxdd/nixos-secrets";
@@ -268,9 +282,5 @@
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
-
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
   };
 }

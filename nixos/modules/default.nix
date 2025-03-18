@@ -1,34 +1,33 @@
 {
+  config,
+  pkgs,
+  lib,
+  userSetting,
+  ...
+}: {
+  # Always include common imports
   imports = [
-    #ad-blocker
+    ./udev.nix # Cable drives
+    # ./searx.nix  # Seachng service (commented out)
     ./hosts.nix
+    ./privacy.nix
+    ./inputfonts.nix # Fcitx input method and fonts
+    ./nixconf.nix # Nix configuration
+    ./enviroment.nix # Environment packages and variables
+    ./nix-ld.nix # nix-ld CLI tool
+    ./fish.nix # Fish shell
+    # ./zsh.nix # Zshshell
+    ./display.nix # Display config
+    ./network.nix # Network configuration
+    ./pkgs.nix # Custom packages
+    ./ssh.nix # SSH configuration
+    ./system.nix # System settings
+    ./users.nix # User settings
 
-    #cable drives
-    # ./udev.nix
-
-    # searxng service
-    # ./searx.nix
-
-    # fcitx input method and fonts
-    ./inputfonts.nix
-
-    # nix configuration
-    ./nixconf.nix
-
-    # enviroment  package and variable
-    ./enviroment.nix
-
-    # nix-ld cli tool
-    ./nix-ld.nix
-
-    #fish shell
-    ./fish.nix
-    ./display.nix
-
-    ./network.nix
-    ./pkgs.nix
-    ./ssh.nix
-    ./system.nix
-    ./users.nix
+    (
+      if userSetting.windowmanager == "sway"
+      then ./sway.nix
+      else ./users.nix
+    ) # Conditionally add sway.nix if window manager is "sway"
   ];
 }

@@ -2,33 +2,44 @@
   programs.tmux = {
     enable = true;
     clock24 = true;
-    plugins = with pkgs.tmuxPlugins; [sensible yank resurrect continuum];
+    # plugins = with pkgs.tmuxPlugins; [sensible yank resurrect continuum];
+    plugins = with pkgs.tmuxPlugins; [sensible yank];
     prefix = "C-Space";
     baseIndex = 1;
     escapeTime = 0;
     keyMode = "vi";
     mouse = true;
-    shell = "${pkgs.fish}/bin/fish";
+    shell = "${pkgs.unstable.fish}/bin/fish";
     # resurrect_dir="$HOME/.tmux/resurrect"
     # set -g @resurrect-dir $resurrect_dir
     # set -g @resurrect-hook-post-save-all 'target=$(readlink -f $resurrect_dir/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g" $target | sponge $target'
     # set -g @resurrect-capture-pane-contents 'on'
 
     extraConfig = ''
-      resurrect_dir="$HOME/.tmux/resurrect"
-      set -g @resurrect-dir $resurrect_dir
-      set -g @resurrect-capture-pane-contents 'on'
-      set -g @resurrect-hook-post-save-all "sed 's/--cmd[^ ]* [^ ]* [^ ]*//g' $resurrect_dir/last | sponge $resurrect_dir/last"
+      # resurrect_dir="$HOME/.tmux/resurrect"
+      # set -g @resurrect-dir $resurrect_dir
+      # set -g @resurrect-capture-pane-contents 'on'
+      # set -g @resurrect-hook-post-save-all "sed 's/--cmd[^ ]* [^ ]* [^ ]*//g' $resurrect_dir/last | sponge $resurrect_dir/last"
 
-      set -g @plugin 'tmux-plugins/tmux-resurrect'
-      set -g @plugin 'tmux-plugins/tmux-continuum'
+      # set -g @plugin 'tmux-plugins/tmux-resurrect'
+      # set -g @plugin 'tmux-plugins/tmux-continuum'
 
-      set -g @resurrect-processes 'hx bacon'
-      set -g @continuum-restore 'on'
-      set -g @continuum-boot 'on'
-      set  -g default-terminal "tmux-256color"
-      set -ag terminal-overrides ",alacritty:RGB"
-      set-option -sa terminal-overrides ",xterm*:Tc"
+      # set -g @resurrect-processes 'hx bacon'
+      # set -g @continuum-restore 'on'
+      # set -g @continuum-boot 'on'
+
+      set -g automatic-rename on
+      set -g set-titles on
+      set -g set-titles-string "#T"
+      set -g status off
+      setw -g automatic-rename on
+      setw -g window-status-format "#W: #{pane_current_command}"
+      setw -g window-status-current-format "#W: #{pane_current_command}"
+
+
+
+
+      set -g default-terminal "foot"
       set -g status off
 
       bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'wl-copy -in -selection clipboard'
@@ -44,7 +55,6 @@
       bind v copy-mode
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
       bind '"' split-window -v -c "#{pane_current_path}"
       bind-key x kill-pane
       bind j display-popup -E "tms switch"

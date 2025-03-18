@@ -3,9 +3,10 @@
   inputs,
   ...
 }: {
-  # stylix.targets.helix.enable = false;
   programs.helix = {
     # package = inputs.helix.packages.${pkgs.system}.default;
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.helix;
+    enable = true;
     extraPackages = with pkgs; [
       alejandra
       # ccls
@@ -15,6 +16,7 @@
       lua-language-server
       marksman # Markdown
       nil # Nix
+      nixd
       python3Packages.python-lsp-server
       nodePackages.bash-language-server
       nodePackages.prettier
@@ -27,23 +29,30 @@
       # taplo
     ];
     settings = {
-      # theme = "eink";
+      theme = "eink";
       # theme = "emacs";
       keys = {
         normal = {
           esc = ["collapse_selection" "keep_primary_selection"];
           "C-h" = ":open ~/config";
-          "C-g" = ":sh tmux popup -d \"#{pane_current_path}\" -xC -yC -w80% -h80% -E gitui";
-          "C-p" = ":open ~/env";
+          # "C-g" = ":sh tmux popup -d \"#{pane_current_path}\" -xC -yC -w80% -h80% -E gitui";
+          # "C-p" = ":open ~/env";
+          # "C-a" = ["goto_first_nonwhitespace"];
+          # "C-e" = "goto_line_end";
           "\\" = ":reload-all";
           "X" = ["extend_line_up" "extend_to_line_bounds"];
           "A-x" = "extend_to_line_bounds";
           "g" = {"a" = "code_action";};
-          "A-s" = ":sh sudo nixos-rebuild switch --show-trace";
+          # "A-s" = ":sh sudo nixos-rebuild switch --show-trace";
           "ret" = ["open_below" "normal_mode"];
           "A-ret" = ["open_above" "normal_mode"];
         };
-        select = {"X" = ["extend_line_up" "extend_to_line_bounds"];};
+        select = {
+          "X" = ["extend_line_up" "extend_to_line_bounds"];
+          "C-t" = "normal_mode";
+          "tab" = "indent";
+          "S-tab" = "unindent";
+        };
         select.space = {
           "f" = "file_picker_in_current_directory";
           "F" = "file_picker";
@@ -60,6 +69,37 @@
           "backspace" = ":buffer-close!";
 
           "x" = ":sh echo <ctrl-r %> | wl-copy";
+        };
+
+        normal = {
+          "C-/" = "toggle_comments";
+          "C-S-v" = ":clipboard-paste-after";
+          "home" = "goto_first_nonwhitespace";
+          "C-right" = ["move_next_word_end"];
+          "C-left" = ["move_prev_word_start"];
+          "C-up" = ["move_line_up"];
+          "C-down" = ["move_line_down"];
+        };
+
+        insert = let
+          s = ["commit_undo_checkpoint"];
+        in {
+          # selection and movement
+          "C-t" = "normal_mode";
+          # "t" = {"n" = "normal_mode";};
+          "C-right" = ["move_next_word_end"];
+          "C-left" = ["move_prev_word_start"];
+          "C-up" = ["move_line_up"];
+          "C-d" = ["delete_char_forward"];
+          "C-a" = ["goto_first_nonwhitespace"];
+          "C-e" = "goto_line_end";
+          "C-down" = ["move_line_down"];
+          "C-backspace" = ["delete_word_backward"] ++ s;
+          "C-del" = ["delete_word_forward"] ++ s;
+          "home" = ["goto_first_nonwhitespace"];
+          # copy/paste
+          "C-S-v" = [":clipboard-paste-after"] ++ s;
+          "C-k" = ["goto_line_start" "kill_to_line_end"];
         };
         normal.space = {
           "f" = "file_picker_in_current_directory";
@@ -118,6 +158,13 @@
         normal."[" = {
           "[" = "goto_prev_paragraph";
         };
+
+        select."]" = {
+          "]" = "goto_next_paragraph";
+        };
+        select."[" = {
+          "[" = "goto_prev_paragraph";
+        };
       };
 
       editor = {
@@ -126,7 +173,7 @@
           auto-signature-help = false; # https://github.com/helix-editor/helix/discussions/6710
         };
         # gutters = ["diagnostics" "spacer" "diff"];
-        jump-label-alphabet = "gftnseriaodhcjxkblpvuwy";
+        jump-label-alphabet = "gwarstneioqpbluydhcxz";
         bufferline = "multiple";
         auto-info = true;
         auto-save = true;
@@ -171,7 +218,6 @@
         scrolloff = 0;
       };
     };
-    enable = true;
     defaultEditor = true;
     languages = {
       grammar = [
@@ -280,6 +326,10 @@
         #   command = "${pkgs.helix-gpt}/bin/helix-gpt";
         #   args = ["--handler" "codeium"];
         # };
+        nixd-server = {
+          command = "nixd";
+          language-id = "nix";
+        };
         zls = {
           command = "${pkgs.zls}/bin/zls";
         };

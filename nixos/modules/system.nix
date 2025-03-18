@@ -6,10 +6,11 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
   # https://github.com/ghostbuster91/blogposts/blob/main/router2023-part2/main.md
-
+  boot.kernelModules = ["i2c-dev" "i915"];
   # boot.extraModulePackages = with config.boot.kernelPackages; [ wireguard ];
 
   # boot.extraModprobeConfig = ''
@@ -20,6 +21,8 @@
   # boot.resumeDevice = "/dev/disk/by-uuid/c2af3dda-2417-4ed6-b4c2-eeab011a8e34";
   # boot.kernelParams = ["resume_offset=27270400"];
   # boot.kernelParams = ["resume_offset=22816000"];
+
+  # boot.binfmt.emulatedSystems = [ "aarch64-linux" "riscv64-linux" "i686-linux"];
 
   boot = {
     kernel = {
@@ -33,11 +36,11 @@
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.unstable.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages;
 
   # Bootloader
-  boot.loader.timeout = 0;
+  boot.loader.timeout = 3;
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
 
@@ -57,9 +60,26 @@
   #   package = config.boot.kernelPackages.nvidiaPackages.stable;
   # };
   # services.xserver.videoDrivers = ["nvidia"];
-
+  services.xserver.videoDrivers = ["modesetting"];
+  # Please remove "intel" from `services.xserver.videoDrivers` and switch to the "modesetting" driver.
   # services.asusd.enable = true;
   # services.asusd.enableUserService = true;
+
+  hardware = {
+    # always enable bluetooth
+    bluetooth.enable = true;
+
+    # always enable graphics drivers and enable a bunch of layers for it (including vulkan validation)
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiIntel # video acceleration on intel inbuilt graphics
+        vulkan-validation-layers # helps catch and debug vulkan crashes
+      ];
+    };
+  };
+  hardware.enableAllFirmware = true; # enable all firmware regardless of license
 
   # hardware.graphics = {
   #   enable = true;
@@ -76,20 +96,21 @@
   #   nvidiaBusId = "PCI:1:0:0";
   # };
 
-  xdg.portal = {
-    enable = true;
-    # wlr.enable = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
-
-    # xdg-desktop-portal-hyprland
-    # xdg-desktop-portal
-    # xdg-desktop-portal-gtk
-    # xdg-desktop-portal-wlr
-    # xdg-desktop-portal-gnome
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   xdgOpenUsePortal = true;
+  #   extraPortals = [
+  #     # pkgs.xdg-desktop-portal-hyprland
+  #     # inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
+  #     # pkgs.xdg-desktop-portal-gtk
+  #   ];
+  # };
 
   # services.libinput.enable = true;
-  security.rtkit.enable = true;
+
+  # security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -102,6 +123,7 @@
   services.udisks2.mountOnMedia = true;
   services.udisks2.enable = true;
   services.gvfs.enable = true;
+  services.devmon.enable = true;
 
   hardware.pulseaudio.enable = false;
 

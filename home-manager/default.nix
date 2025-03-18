@@ -1,15 +1,11 @@
 {
   imports = [
     ./helix.nix
-    # ./qemu.nix
     ./firefox.nix
     ./hyprland.nix
-    ./lf.nix
-    # ./tmux.nix
-    # ./nixvim.nix
+    ./tmux.nix
     ./alacritty.nix
-    # ./waybar.nix
+    ./foot.nix
     ./clitools.nix
-    # ./emacs.nix
   ];
 }

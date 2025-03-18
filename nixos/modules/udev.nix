@@ -1,6 +1,14 @@
 {pkgs, ...}: {
   services.udev.packages = [
-    pkgs.via
+    # pkgs.via
+
+    (pkgs.writeTextFile {
+      name = "50-i2c.rules";
+      text = ''
+        SUBSYSTEM=="i2c-dev", GROUP="users", MODE="0660"
+      '';
+      destination = "/etc/udev/rules.d/50-i2c.rules";
+    })
     (pkgs.writeTextFile {
       name = "52-xilinx-digilent-usb.rules";
       text = ''

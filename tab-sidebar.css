@@ -1,0 +1,80 @@
+:root {
+  --icon-size: 16px;
+  --item-height: 1.833em;
+}
+
+html {
+  height: 100%;
+}
+
+[data-ctl=items] {
+  font-family: "Bookerly", sans-serif !important;
+  color: #000 !important;  /* Force text to be pure black */
+}
+
+body {
+  overflow: hidden;
+  background-color: #FFF !important;  /* Force background to be pure white */
+}
+
+[data-ctl=items] {
+  overflow: auto;
+  background-color: #FFF !important;  /* Ensure list background is also white */
+}
+
+[data-ctl=items] > [data-item] {
+  display: flex;
+  align-items: center;
+  height: var(--item-height);
+  padding-left: 4px;
+}
+
+/* Hover & Selected - Slight gray highlight */
+[data-ctl=items] > [data-item]:hover,
+[data-ctl=items] > [data-selected] {
+  background-color: rgba(0, 0, 0, 0.1); /* Light gray for visibility */
+}
+
+/* Marker Color */
+[data-ctl=items] > [data-marker] {
+  color: #000 !important;
+  border-top: 1px solid #DDD; /* Light gray separator */
+}
+
+/* Icons: Make Grayscale */
+[data-ctl=items] > [data-item] > [data-icon] {
+  filter: grayscale(100%) !important;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  margin-right: 2px;
+}
+
+/* Loading Icon */
+[data-ctl=items] > [data-loading] > [data-icon] {
+  filter: grayscale(100%) !important;
+  background-size: contain;
+  background-image: url(chrome://browser/skin/tabbrowser/tab-loading.png);
+}
+
+/* Audio/Mute Icons: Grayscale */
+[data-ctl=items] > [data-audible] > [data-audio],
+[data-ctl=items] > [data-muted] > [data-audio] {
+  filter: grayscale(100%) !important;
+  background-size: contain;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  margin-right: 2px;
+}
+
+/* Drop Guide */
+[data-ctl=drop_guide] {
+  background-color: rgba(0, 0, 0, 0.3); /* Darker gray for visibility */
+}
+
+/* Popup */
+[data-ctl=popup] {
+  color: #000 !important;
+  outline: 1px solid #999;
+  border: 3px solid #DDD;
+  background: #FFF !important;
+}
