@@ -1,5 +1,3 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   outputs,
   userSetting,
@@ -9,106 +7,24 @@
   ...
 }: let
 in {
-  # virtualisation.waydroid.enable = true;
-  # programs.vscode = {
-  #   enable = true;
-  #   extensions = with pkgs.vscode-extensions; [
-  #     ms-python.python
-  #     ms-python.vscode-pylance
-  #     # dracula-theme.theme-dracula
-  #     # vscodevim.vim
-  #     # yzhang.markdown-all-in-one
-  #     # rust-lang.rust-analyzer
-  #     # llvm-vs-code-extensions.vscode-clangd
-  #   ];
-  # };
+
+  home.packages = with pkgs; [
+  ];
+
+  programs.bash.enable = true;
+
   home.enableNixpkgsReleaseCheck = false;
 
-  # services.dunst = lib.mkIf (userSetting.windowmanager == "hyprland" || userSetting.windowmanager == "sway") {
-  #   enable = true;
-  # };
-
-  programs.rofi = lib.mkIf (userSetting.windowmanager == "hyprland" || userSetting.windowmanager == "sway") {
+  programs.rofi = lib.mkIf (userSetting.windowmanager == "sway") {
     package = pkgs.rofi-wayland;
     enable = true;
     font = "Bookerly 16";
-    # use base16-horizon-dark a
-    theme = ./interstellar.rasi;
+    theme ="white";
   };
-
-  # stylix.targets.hyprlock.enable = false;
-  # stylix.targets.helix.enable = false;
-  # stylix.targets.dunst.enable = true;
-  # stylix.targets.rofi.enable = false;
-  # stylix.targets.fish.enable = false;
-  # stylix.targets.emacs.enable = false;
-  # stylix.targets.alacritty.enable = false;
-  # stylix.targets.foot.enable = true;
-  # stylix.targets.hyprland.enable = false;
-
-  home.file.".local/share/fonts".source = ./fonts;
-  home.file.".config/sway/white.jpg".source = ./white.jpg;
-  # home.file.".config/sway/config".source = ./swayConfig;
-  home.packages = with pkgs; [
-    adwaita-qt
-    # yt-dlp
-    # discord
-    fd
-
-    curl
-    sqlite
-
-    # for emacs sqlite
-    # org mode dot
-    # graphviz
-    # imagemagick
-
-    # mpvi required
-    # tesseract5
-    # ffmpeg_5
-    # ffmpegthumbnailer
-    # mediainfo
-    # email
-    # mu4e
-    # spell check
-    # aspell
-
-    # for emacs rime
-    # librime
-
-    # libwebp
-    # tdlib
-    # pkg-config
-
-    foliate
-    # (octaveFull.withPackages (opkgs: with opkgs; [symbolic]))
-    # verilator
-    # telegram-desktop
-    # stm32cubemx
-    # logisim-evolution
-    # shotcut
-    # qq
-    # zed-editor
-    bambu-studio
-    # libsForQt5.kdenlive
-    keepassxc
-    opencc
-    # android-studio
-    # yt-dlp-light
-    # android-tools
-    # (arduino-ide.overrideAttrs {extraPkgs = with pkgs; [python311 python311Packages.pyserial pkgs.libsecret];})
-    # arduino-ide
-    # hugo
-    # calibre
-    # gimp
-    # gnome.cheese
-    # kicad
-    # libreoffice
-
-    # cargo
-    # rustc
-    # rust-analyzer
-  ];
+  home.file.".local/share/rofi/themes/white.rasi".source=./theme/config.rasi;
+  home.file.".local/share/fonts".source = ./theme/fonts;
+  home.file.".config/sway/white.jpg".source = ./theme/white.jpg;
+  home.file.".config/sway/takeabreak.png".source = ./theme/takeabreak.png;
 
   # You can import other home-manager modules here
   imports = [
@@ -131,19 +47,6 @@ in {
     enableBashIntegration = true;
     enableZshIntegration = true;
   };
-  # programs.ags = {
-  #   enable = false;
-
-  #   # null or path, leave as null if you don't want hm to manage the config
-  #   configDir = ./ags;
-
-  #   # additional packages to add to gjs's runtime
-  #   extraPackages = with pkgs; [
-  #     gtksourceview
-  #     webkitgtk
-  #     accountsservice
-  #   ];
-  # };
 
   nixpkgs = {
     # You can add overlays here
@@ -209,13 +112,6 @@ in {
     platformTheme.name = "gtk";
     enable = true;
     style.name = "adwaita-highcontrast";
-
-    # detected automatically:
-    # adwaita, adwaita-dark, adwaita-highcontrast,
-    # adwaita-highcontrastinverse, breeze,
-    # bb10bright, bb10dark, cde, cleanlooks,
-    # gtk2, motif, plastique
-
     style.package = pkgs.adwaita-qt6;
   };
 
@@ -225,28 +121,15 @@ in {
     homeDirectory = "/home/${userSetting.username}";
   };
 
-  # xdg.desktopEntries.firefox = {
-  #   name = "firefox";
-  #   exec = "${pkgs.firefox-beta}/bin/firefox-beta";
-  # };
-
-  # xdg.mimeApps = {
-  #   enable = true;
-  #   defaultApplications = {
-  #     "text/html" = "firefox.desktop";
-  #     "x-scheme-handler/http" = "firefox.desktop";
-  #     "x-scheme-handler/https" = "firefox.desktop";
-  #     "x-scheme-handler/about" = "firefox.desktop";
-  #     "x-scheme-handler/unknown" = "firefox.desktop";
-  #   };
-  # };
-
-  # Enable home-manager
-  programs.home-manager.enable = true;
+  xdg.mimeApps.enable = true;
+  # 不在通常位置生成配置文件
+  xdg.configFile."mimeapps.list".enable = false;
+  # 允许桌面应用程序修改文件关联
+  xdg.dataFile."applications/mimeapps.list".force = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.11";
 }

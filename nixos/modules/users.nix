@@ -1,8 +1,3 @@
-#
-# users.nix
-#
-# Configure the users
-#
 {
   pkgs,
   config,
@@ -11,11 +6,8 @@
   outputs,
   ...
 }: {
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
-
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs userSetting;};
-    # useGlobalPkgs = true;
     useUserPackages = true;
     users = {
       # Import your home-manager configuration
@@ -38,7 +30,6 @@
       extraGroups = ["wheel" "networkmanager" "audio" "plugdev" "docker" "dialout" "storage" "wireshark"];
     };
   };
-  # programs.bash.enable = true;
   users.defaultUserShell = pkgs.unstable.fish;
   security.sudo.wheelNeedsPassword = false;
 }

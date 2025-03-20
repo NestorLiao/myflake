@@ -5,12 +5,28 @@
   userSetting,
   ...
 }: {
+  # xdg.desktopEntries.firefox = {
+  #   name = "firefox";
+  #   exec = "${pkgs.unstable.firefox-beta}/bin/firefox-beta";
+  # };
+
+  # xdg.mimeApps = {
+  #   enable = true;
+  #   defaultApplications = {
+  #     "text/html" = "firefox.desktop";
+  #     "x-scheme-handler/http" = "firefox.desktop";
+  #     "x-scheme-handler/https" = "firefox.desktop";
+  #     "x-scheme-handler/about" = "firefox.desktop";
+  #     "x-scheme-handler/unknown" = "firefox.desktop";
+  #   };
+  # };
+
   programs.firefox = {
-    enable = true;
-    package = pkgs.unstable.firefox-devedition.override {
+    enable = false;
+    package = pkgs.unstable.firefox-beta.override {
       nativeMessagingHosts = [
         # pkgs.tridactyl-native
-        pkgs.keepassxc
+        # pkgs.keepassxc
       ];
     };
 
@@ -45,7 +61,7 @@
         SkipOnboarding = true;
       };
       SearchBar = "unified";
-      PasswordManagerEnabled = false;
+      PasswordManagerEnabled = true; # enabled password manager
       NoDefaultBookmarks = true;
       DontCheckDefaultBrowser = true;
       DisableSetDesktopBackground = true;
@@ -60,10 +76,10 @@
 
       DisableFeedbackCommands = true;
       SearchEngines.Default = "Google";
-      BlockAboutAddons = true;
       DisableFormHistory = true;
       AppAutoUpdate = false;
       DisableAppUpdate = true;
+      BlockAboutAddons = false;
     };
 
     profiles.firefox = {
@@ -78,7 +94,7 @@
               #TabsToolbar { font-family: Bookerly !important }
               #sidebar-header {
                 display: none;
-              }
+        }
 
               #statuspanel { display: none !important; }
               :root[tabsintitlebar] #titlebar:-moz-window-inactive {
@@ -126,7 +142,7 @@
 
               :root[sizemode="maximized"]{
                 --uc-toolbox-rotation: 88.5deg;
-              }
+                    }
 
               @media  (-moz-platform: windows){
                 :root:not([lwtheme]) #navigator-toolbox{ background-color: -moz-dialog !important; }
@@ -181,8 +197,8 @@
                     transition-delay: 33ms !important;
                     transform: rotateX(0);
                     opacity: 1;
-                  }
-                }
+                      }
+              }
               }
 
               #navigator-toolbox > *{ line-height: normal; pointer-events: auto }
@@ -217,26 +233,8 @@
               #navigator-toolbox{ flex-direction: column; display: flex; }
               #titlebar{ order: 2 }
               */
-
-
-
-
-                                    }
+              }
       '';
-
-      # nav-bar, #urlbar-container, #searchbar { visibility: collapse !important; }
-      # extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-      #   # tridactyl
-      #   ublacklist
-      #   vimium-c
-      #   decentraleyes
-      #   clearurls
-      #   disconnect
-      #   ublock-origin
-      #   istilldontcareaboutcookies
-      #   keepassxc-browser
-      #   sponsorblock
-      # ];
 
       settings = {
         "browser.tabs.closeTabByDblclick" = true;
@@ -283,7 +281,7 @@
         # Locale.
         "browser.search.region" = "US";
         # Don't save passwords or try to fill forms.
-        "signon.rememberSignons" = false;
+        "signon.rememberSignons" = true; # true is saving
         "signon.autofillForms" = false;
         # Tell Firefox not to trust fake Enterprise-injected certificates.
         "security.enterprise_roots.auto-enabled" = false;
@@ -293,6 +291,4 @@
       };
     };
   };
-
-  # home.file.".config/tridactyl/themes/eink.css".source = ./tridactyl.css;
 }

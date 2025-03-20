@@ -1,18 +1,3 @@
-home-manager/modules/icons
-home-manager/icons
-home-manager/ags
-home-manager/font*
-my-ublock-static-filters_2024-10-24_16.12.41.txt
-ublacklist-settings.json
-uBlacklist.txt
-search
-nixos/modules/tiger-code/rime/
-ovelay
-pkgs
-flake.lock
-README.md
-LICENSE
-pkgs/result
+/nixos/modules/privacy.nix
 
-
-
+./nixos/modules/hosts.nix

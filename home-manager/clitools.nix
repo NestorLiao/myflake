@@ -1,20 +1,24 @@
 {
-  # pkgs-unstable,
   pkgs,
   config,
   inputs,
   ...
 }: {
   imports = [
-    # inputs.nur-xddxdd.nixosModules.setupOverlay
   ];
+
+  programs.btop={
+    enable=true;
+      settings=
+        {
+          color_theme = "adwaita";
+          theme_background = false;
+        };
+  };
 
   programs.mpv = {
     enable = true;
     config = {
-      # osc = false;
-      # osd-bar = false;
-      # hwdec = "auto";
       demuxer-max-back-bytes = 10000000000;
       demuxer-max-bytes = 10000000000;
       save-position-on-quit = true;
@@ -25,73 +29,14 @@
   };
 
   home.packages = with pkgs; [
-    # thefuck
-    # samba4Full
-
-    # sdcv
-    # delta
-    # helix-gpt
-    # nix-index
-    # tectonic #Modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
-    # tailscale #The node agent for Tailscale, a mesh VPN built on WireGuard
-    # watchexec #Executes commands in response to file modifications
-    # manix #A fast CLI documentation searcher for Nix.
-    # mprocs #Run multiple commands in parallel
-    # cargo-info #Query crates.io for crates details
-    # scc #Sloc, Cloc and Code: scc is a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go
-    just #just is a handy way to save and run project-specific commands.
-    # bacon #bacon is a background rust code checker.
-    # samba
-
-    # glxinfo
-    # nvidia-system-monitor-qt
-    # quickemu
-    # (quickemu.override {qemu = qemu_full;})
-    # typst
-
-    # zathura #lightweight document viewer
-    # uutils-coreutils-noprefix #collection of common Unix-like utilities without prefix
-    killall #used to kill processes by name
-    # bat #a cat clone with syntax highlighting and Git integration
-    # ethtool #utility for displaying and modifying Ethernet device settings
-    # eza #command-line JSON processor
-    fd #simple, fast and user-friendly alternative to `find`
-    # imv #image viewer for the terminal
-    fastfetch #command-line system information tool
-    nix-output-monitor #monitor build outputs of Nix package manager
-
-    # pciutils #utilities for viewing and configuring PCI devices
-    ripgrep #line-oriented search tool that recursively searches directories for a regex pattern
-    # strace #diagnostic tool for debugging and profiling Linux processes
-    # sysstat #collection of performance monitoring tools for Linux
-    tldr #simplified and community-driven man pages
-    # tmux-sessionizer #tool for organizing and cleaning up tmux sessions
-    # translate-shell #command-line translator using various translation services
-    tree #displays directory structure in a tree-like format
-    unrar-free #unarchiver for .rar files
-    unzipNLS #decompression tool for .zip archives
-    zip #compression tool and file packaging utility
-    # usbutils #utilities for viewing USB devices and details
-    # xdragon #(No specific description provided)
-    # lm_sensors # for `sensors` command
-    # lsof # list open files
-    # ltrace # library call monitoring
-
-    # (pkgs.writeScriptBin "ts" ''
-    #   #!/usr/bin/env bash
-
-    #   # Execute wl-paste and store sse output in a variable
-    #   clipboard_content=$(wl-paste)
-
-    #   # Translate the clipboard content from English to Simplified Chinese using `trans`
-    #   translated_content=$(sdcv -c -n "$clipboard_content" -u 牛津英汉双解美化版 -u WordNet)
-
-    #   # Remove ANSI escape codes from the translated content using `sed`
-    #   cleaned_content=$(echo "$translated_content" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g")
-
-    #   # Print the final cleaned content
-    #   echo "$cleaned_content"
-    # '')
+    just
+    fd
+    ripgrep
+    tldr
+    tree
+    unrar-free
+    unzipNLS
+    zip
   ];
 
   programs = {
@@ -114,7 +59,6 @@
 
   programs.zoxide = {
     enable = true;
-    # options = ["--cmd t"];
     enableFishIntegration = true;
     enableZshIntegration = true;
   };
@@ -123,11 +67,6 @@
     enable = true;
     userName = "NestorLiao";
     userEmail = "gtkndcbfhr@gmail.com";
-    # extraConfig = {
-    #   credential.helper = "${
-    #     pkgs.git.override {withLibsecret = true;}
-    #   }/bin/git-credential-libsecret";
-    # };
   };
 
   home.file.".config/fish/functions/rcdir.fish".text = ''
@@ -149,13 +88,23 @@
 
   home.file.".config/fish/functions/mcdir.fish".text = ''
     function mcdir
-      command mkdir $argv[1]
-      and cd $argv[1]
+    command mkdir $argv[1]
+    and cd $argv[1]
     end
-  '';
+    '';
 
-  home.file.".cargo/config.toml".source =
-    ./CargoConf.toml;
+  home.file.".cargo/config.toml".text = ''
+    [source.crates-io]
+    replace-with = 'rsproxy-sparse'
+    [source.rsproxy]
+    registry = "https://rsproxy.cn/crates.io-index"
+    [source.rsproxy-sparse]
+    registry = "sparse+https://rsproxy.cn/index/"
+    [registries.rsproxy]
+    index = "https://rsproxy.cn/crates.io-index"
+    [net]
+    git-fetch-with-cli = true
+  '';
 
   programs.command-not-found.enable = false;
 }

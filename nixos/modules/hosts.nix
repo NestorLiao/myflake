@@ -129,7 +129,6 @@
     0.0.0.0 www.huxiu.com
     0.0.0.0 huxiu.com
     0.0.0.0 www.observersnews.com
-    0.0.0.0 emacs-china.org
     0.0.0.0 www.binance.com
     0.0.0.0 www.1point3acres.com
     0.0.0.0 www.uscardforum.com
@@ -377,10 +376,8 @@
     0.0.0.0 www.voachinese.com
     0.0.0.0 m.thepaper.cn
     0.0.0.0 news.cctv.com
-    0.0.0.0 irreal.org
+    # 0.0.0.0 irreal.org
     0.0.0.0 simple.wikipedia.org
-    0.0.0.0 duckduckgo.com
-    0.0.0.0 www.duckduckgo.com
     0.0.0.0 www.lifeweek.com.cn
     0.0.0.0 linux.cn
     0.0.0.0 linuxstory.org
@@ -389,6 +386,45 @@
     0.0.0.0 fandom.com
     0.0.0.0 www.imdb.com
     0.0.0.0 www.goodreads.com
+    0.0.0.0 medium.com
+    0.0.0.0 www.theguardian.com
+    0.0.0.0 www.chinatalk.media
+    0.0.0.0 www.vice.com
+    0.0.0.0 manifold.markets
+    0.0.0.0 www.reuters.com
+    0.0.0.0 cn.chinadaily.com.cn
+    0.0.0.0 emacs-china.org
+    0.0.0.0 www.harpersbazaar.com
+    0.0.0.0 finance.huanqiu.com
+    0.0.0.0 www.takungpao.com
+    0.0.0.0 www.881903.com
+    0.0.0.0 www.i-cable.com
+    0.0.0.0 hlj.rednet.cn
+    0.0.0.0 opinion.people.com.cn
+    0.0.0.0 www.xinhuanet.com
+    0.0.0.0 pl.ifeng.com
+    0.0.0.0 news.sina.com.cn
+    0.0.0.0 star.news.sohu.com
+    0.0.0.0 view.news.qq.com
+    0.0.0.0 news.163.com
+    0.0.0.0 news.cjn.cn
+    0.0.0.0 pinglun.eastday.com
+    0.0.0.0 sp.ycwb.com
+    0.0.0.0 opinion.southcn.com
+    0.0.0.0 focus.cnhubei.com
+    0.0.0.0 opinion.e23.cn
+    0.0.0.0 news.cnfol.com
+    0.0.0.0 comment.workercn.cn
+    0.0.0.0 pinglun.youth.cn
+    0.0.0.0 www.bjnews.com.cn
+    0.0.0.0 www.qstheory.cn
+    0.0.0.0 opinion.gxnews.com.cn
+    0.0.0.0 opinion.hexun.com
+    0.0.0.0 opinion.dahe.cn
+    0.0.0.0 bhc.hebei.com.cn
+    0.0.0.0 comment.scol.com.cn
+    0.0.0.0 opinion.cctv.com
+    0.0.0.0 review.qianlong.com
     // another things: Blocking Can be ADDICTION TOO!!!
   '';
 }

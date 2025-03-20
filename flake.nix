@@ -24,7 +24,6 @@
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
       # "https://helix.cachix.org"
-      # "https://hyprland.cachix.org"
     ];
     extra-trusted-public-keys = [
       # "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
@@ -34,7 +33,6 @@
       # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       # "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
       # "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
-      # "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
 
@@ -57,12 +55,9 @@
       username = "leeao";
       hostname = "nixos";
       email = "gtkndcbfhr@gmail.com";
-      # windowmanager = "hyprland";
       windowmanager = "sway";
       # windowmanager = "plasma";
       # windowmanager = "gnome";
-      # colorscheme = "google-light";
-      # colorscheme = "github";
     };
   in {
     # NixOS configuration entrypoint
@@ -127,45 +122,18 @@
   };
 
   inputs = {
-    # ghostty = {
-    #   url = "github:ghostty-org/ghostty";
-    #   # inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
-    # nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
-
-    # hyprland-contrib = {
-    #   url = "github:hyprwm/contrib";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # ags.url = "github:Aylur/ags";
-    # nixvim = {
-    #   url = "github:nix-community/nixvim";
-    #   # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
-    # daeuniverse.url = "github:daeuniverse/flake.nix";
-
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/573c650e8a14b2faa0041645ab18aed7e60f0c9a";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
-
-    real-nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    # hyprland.url = "github:hyprwm/Hyprland";
-    # helix.url = "github:helix-editor/helix/master";
-    # xremap-flake.url = "github:xremap/nix-flake";
-
-    # stylix.url = "github:danth/stylix";
-    # stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Home manager
     home-manager = {
@@ -175,71 +143,10 @@
 
     hosts.url = "github:StevenBlack/hosts";
 
-    # nix-xilinx = {
-    #   # Recommended if you also override the default nixpkgs flake, common among
-    #   # nixos-unstable users:
-    #   #inputs.nixpkgs.follows = "nixpkgs";
-    #   url = "gitlab:doronbehar/nix-xilinx";
-    # };
-
-    # firefox-addons = {
-    #   url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     flake-utils.url = "github:numtide/flake-utils";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    # attic = {
-    #   url = "github:zhaofengli/attic";
-    #   inputs.flake-compat.follows = "flake-compat";
-    #   inputs.flake-utils.follows = "flake-utils";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.nixpkgs-stable.follows = "nixpkgs-23-05";
-    # };
-    # agenix = {
-    #   url = "github:ryantm/agenix";
-    #   inputs.home-manager.follows = "home-manager";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # cities-json = {
-    #   url = "github:lutangar/cities.json";
-    #   flake = false;
-    # };
-    # colmena = {
-    #   url = "github:zhaofengli/colmena";
-    #   inputs.flake-compat.follows = "flake-compat";
-    #   inputs.flake-utils.follows = "flake-utils";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.stable.follows = "nixpkgs-23-05";
-    # };
-    # composer2nix = {
-    #   url = "github:svanderburg/composer2nix";
-    #   flake = false;
-    # };
-    # dwarffs = {
-    #   url = "github:edolstra/dwarffs";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # nil = {
-    #   url = "github:oxalica/nil";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.flake-utils.follows = "flake-utils";
-    # };
-    # impermanence.url = "github:nix-community/impermanence";
-    # nix-alien = {
-    #   url = "github:thiagokokada/nix-alien";
-    #   inputs.flake-compat.follows = "flake-compat";
-    #   inputs.flake-utils.follows = "flake-utils";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # nix-math = {
-    #   url = "github:xddxdd/nix-math";
-    #   inputs.flake-parts.follows = "flake-parts";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # nur.url = "github:nix-community/NUR";
     nur-xddxdd = {
       # url = "/home/lantian/Projects/nur-packages";
       url = "github:xddxdd/nur-packages";
@@ -254,21 +161,6 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
-    # nix-colors.url = "github:misterio77/nix-colors";
-    # secrets = {
-    #   # url = "/home/lantian/Projects/nixos-secrets";
-    #   url = "github:xddxdd/nixos-secrets";
-    #   flake = false;
-    # };
-    # srvos = {
-    #   url = "github:numtide/srvos";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # terranix = {
-    #   url = "github:terranix/terranix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.flake-utils.follows = "flake-utils";
-    # };
 
     # Common libraries
     # nixpkgs-22-05.url = "github:NixOS/nixpkgs/nixos-22.05";
@@ -279,8 +171,5 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
-
-    # TODO: Add any other flake you might need
-    # hardware.url = "github:nixos/nixos-hardware";
   };
 }

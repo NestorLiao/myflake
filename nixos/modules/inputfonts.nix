@@ -19,18 +19,9 @@
     ];
   };
 
-  environment.variables = {
-    GTK_IM_MODULE = lib.mkForce "";
-  };
-
   imports = [
     inputs.nur-xddxdd.nixosModules.setupOverlay
   ];
-
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
 
   fonts.fontDir.enable = true;
 
@@ -86,59 +77,67 @@
       wqy_zenhei
     ];
 
-      # https://keqingrong.cn/blog/2019-10-01-how-to-display-all-chinese-characters-on-the-computer/
-      fonts.fontconfig =
-        let
-          sansFallback = [
-            "Plangothic P1"
-            "Plangothic P2"
-            "HanaMinA"
-            "HanaMinB"
-          ];
-          serifFallback = [
-            "HanaMinA"
-            "HanaMinB"
-            "Plangothic P1"
-            "Plangothic P2"
-          ];
-        in
-          {
-            defaultFonts = rec {
-              emoji = [ "Blobmoji" ];
-              serif = [
-                "Noto Serif"
-                "Source Han Serif SC"
-              ] ++ emoji ++ serifFallback;
-              sansSerif = [
-                "Ubuntu"
-                "Source Han Sans SC"
-              ] ++ emoji ++ sansFallback;
-              monospace = [
-                "Ubuntu Mono"
-                "Noto Sans Mono CJK SC"
-              ] ++ emoji ++ sansFallback;
-            };
-          };
+  # https://keqingrong.cn/blog/2019-10-01-how-to-display-all-chinese-characters-on-the-computer/
+  fonts.fontconfig = let
+    sansFallback = [
+      "Plangothic P1"
+      "Plangothic P2"
+      "HanaMinA"
+      "HanaMinB"
+    ];
+    serifFallback = [
+      "HanaMinA"
+      "HanaMinB"
+      "Plangothic P1"
+      "Plangothic P2"
+    ];
+  in {
+    defaultFonts = rec {
+      emoji = ["Blobmoji"];
+      serif =
+        [
+          "Bookerly"
+          "Noto Serif"
+          "Source Han Serif SC"
+        ]
+        ++ emoji
+        ++ serifFallback;
+      sansSerif =
+        [
+          "Bookerly"
+          "Ubuntu"
+          "Source Han Sans SC"
+        ]
+        ++ emoji
+        ++ sansFallback;
+      monospace =
+        [
+          "Bookerly"
+          "Ubuntu Mono"
+          "Noto Sans Mono CJK SC"
+        ]
+        ++ emoji
+        ++ sansFallback;
+    };
+  };
 
-      services.xserver.xkb.layout = "us";
-
-      i18n = {
-        defaultLocale = "en_US.UTF-8";
-        extraLocaleSettings = {
-          LC_ADDRESS = "en_US.UTF-8";
-          LC_COLLATE = "en_US.UTF-8";
-          LC_CTYPE = "en_US.UTF-8";
-          LC_IDENTIFICATION = "en_US.UTF-8";
-          LC_MEASUREMENT = "en_US.UTF-8";
-          LC_MESSAGES = "en_US.UTF-8";
-          LC_MONETARY = "en_US.UTF-8";
-          LC_NAME = "en_US.UTF-8";
-          LC_NUMERIC = "en_US.UTF-8";
-          LC_PAPER = "en_US.UTF-8";
-          LC_TELEPHONE = "en_US.UTF-8";
-          LC_TIME = "en_US.UTF-8";
-          LC_ALL = "en_US.UTF-8";
-        };
-        supportedLocales = ["en_US.UTF-8/UTF-8"];
-      };
-    }
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_COLLATE = "en_US.UTF-8";
+      LC_CTYPE = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MESSAGES = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+      LC_ALL = "en_US.UTF-8";
+    };
+    supportedLocales = ["en_US.UTF-8/UTF-8"];
+  };
+}

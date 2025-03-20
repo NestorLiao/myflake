@@ -4,10 +4,9 @@
   ...
 }: {
   programs.helix = {
-    # package = inputs.helix.packages.${pkgs.system}.default;
-    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.helix;
+    package = pkgs.unstable.helix;
     enable = true;
-    extraPackages = with pkgs; [
+    extraPackages = with pkgs.unstable; [
       alejandra
       # ccls
       lldb
@@ -110,47 +109,47 @@
           "i" = ["page_up" "goto_window_center"];
           "q" = ":quit!";
           "r" = ":write";
-          "n" = ":buffer-close";
-          "t" = ["yank_to_clipboard" ":sh ts  2>&1 || true"];
-          "o" = "file_picker_in_current_buffer_directory";
-          "ret" = ":hsplit-new";
-          "backspace" = ":buffer-close!";
+                                                       "n" = ":buffer-close";
+                                                       "t" = ["yank_to_clipboard" ":sh ts  2>&1 || true"];
+                                                       "o" = "file_picker_in_current_buffer_directory";
+                                                       "ret" = ":hsplit-new";
+                                                       "backspace" = ":buffer-close!";
 
-          "x" = ":sh echo <ctrl-r %> | wl-copy";
+                                                       "x" = ":sh echo <ctrl-r %> | wl-copy";
 
-          # r write-rite-r
-          # t translate-t
-          # n close-buffer_no need this buffer
-          # e pagedown-mybroswerlike
-          # i pageup-mybroswerlike
-          # o open file in buffer dir-open
-        };
-        normal.backspace = {
-          "backspace" = ":buffer-next";
-          "z" = ":bco";
-          "C-c" = ["toggle_comments" "move_visual_line_down" "toggle_comments" "move_visual_line_up" ":write"];
-          "a" = [":write" ":sh just a"];
-          "r" = [":write" ":sh just r"];
-          "s" = [":write" ":sh just s"];
-          "t" = [":write" ":sh just t"];
-          "n" = [":write" ":sh just n"];
-          "e" = [":write" ":sh just e"];
-          "i" = [":write" ":sh just i"];
-          "o" = [":write" ":sh just o"];
-          "l" = [":write" ":sh just l"];
-          "c" = [":write" ":sh just c"];
+                                                       # r write-rite-r
+                                                       # t translate-t
+                                                       # n close-buffer_no need this buffer
+                                                       # e pagedown-mybroswerlike
+                                                       # i pageup-mybroswerlike
+                                                       # o open file in buffer dir-open
+                                                     };
+                                                     normal.backspace = {
+                                                       "backspace" = ":buffer-next";
+                                                       "z" = ":bco";
+                                                       "C-c" = ["toggle_comments" "move_visual_line_down" "toggle_comments" "move_visual_line_up" ":write"];
+                                                       "a" = [":write" ":sh just a"];
+                                                       "r" = [":write" ":sh just r"];
+                                                       "s" = [":write" ":sh just s"];
+                                                       "t" = [":write" ":sh just t"];
+                                                       "n" = [":write" ":sh just n"];
+                                                       "e" = [":write" ":sh just e"];
+                                                       "i" = [":write" ":sh just i"];
+                                                       "o" = [":write" ":sh just o"];
+                                                       "l" = [":write" ":sh just l"];
+                                                       "c" = [":write" ":sh just c"];
 
-          "u" = [":write" ":sh just u"];
-          "d" = [":write" ":sh just d"];
+                                                       "u" = [":write" ":sh just u"];
+                                                       "d" = [":write" ":sh just d"];
 
-          "h" = [":write" ":sh just h"];
-          "j" = [":write" ":sh just j"];
-          "k" = [":write" ":sh just k"];
-          "x" = [":write" ":sh just x"];
+                                                       "h" = [":write" ":sh just h"];
+                                                       "j" = [":write" ":sh just j"];
+                                                       "k" = [":write" ":sh just k"];
+                                                       "x" = [":write" ":sh just x"];
           "b" = [":write" ":sh just b"];
           "q" = [":write" ":sh just q"];
 
-          "p" = ":open ~/nink/inklife";
+          "p" = ":open ~/fun/notes";
         };
         normal."]" = {
           "]" = "goto_next_paragraph";

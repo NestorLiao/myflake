@@ -47,10 +47,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
 
-  # hardware.bluetooth.package = pkgs.bluez;
-  # hardware.bluetooth.enable = false;
-  # hardware.bluetooth.powerOnBoot = false;
-
   # hardware.nvidia = {
   #   modesetting.enable = true;
   #   powerManagement.enable = false;
@@ -59,15 +55,16 @@
   #   nvidiaSettings = true;
   #   package = config.boot.kernelPackages.nvidiaPackages.stable;
   # };
+
   # services.xserver.videoDrivers = ["nvidia"];
   services.xserver.videoDrivers = ["modesetting"];
-  # Please remove "intel" from `services.xserver.videoDrivers` and switch to the "modesetting" driver.
+    # Please remove "intel" from `services.xserver.videoDrivers` and switch to the "modesetting" driver.
   # services.asusd.enable = true;
   # services.asusd.enableUserService = true;
 
   hardware = {
     # always enable bluetooth
-    bluetooth.enable = true;
+    # bluetooth.enable = true;
 
     # always enable graphics drivers and enable a bunch of layers for it (including vulkan validation)
     graphics = {
@@ -96,39 +93,32 @@
   #   nvidiaBusId = "PCI:1:0:0";
   # };
 
-  # xdg.portal = {
-  #   enable = true;
-  #   wlr.enable = true;
-  #   xdgOpenUsePortal = true;
-  #   extraPortals = [
-  #     # pkgs.xdg-desktop-portal-hyprland
-  #     # inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
-  #     # pkgs.xdg-desktop-portal-gtk
-  #   ];
-  # };
-
-  # services.libinput.enable = true;
-
-  # security.rtkit.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
   time.timeZone = "Asia/Shanghai";
   services.udisks2.mountOnMedia = true;
   services.udisks2.enable = true;
   services.gvfs.enable = true;
   services.devmon.enable = true;
 
+  programs.bash.undistractMe.playSound = false;
+
+  programs.soundmodem.enable = false;
+
+  xdg.sounds.enable = false;
+
+  services.jack.alsa.support32Bit = false;
+
   hardware.pulseaudio.enable = false;
 
-  # hardware.keyboard.qmk.enable = true;
+  programs.nano.enable = false;
+
+  services.pipewire = {
+    enable = false;
+    alsa.enable = false;
+    alsa.support32Bit = false;
+    pulse.enable = false;
+    jack.enable = false;
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }

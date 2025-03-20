@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    # inputs.daeuniverse.nixosModules.dae
     inputs.hosts.nixosModule
     {
       networking.stevenBlackHosts = {
@@ -18,17 +17,28 @@
     }
   ];
 
-  services.v2raya.enable = true;
   # with dae
-  services.dae = {
-    package = pkgs.unstable.dae;
-    enable = true;
-    disableTxChecksumIpGeneric = false;
-    configFile = "/home/${userSetting.username}/fun/sundry/config.dae";
-    assets = with pkgs.unstable; [v2ray-geoip v2ray-domain-list-community];
-    openFirewall = {
+  services={
+    create_ap={
+      enable = false;
+      settings = {
+        INTERNET_IFACE = "enp46s0";
+        PASSPHRASE = "12345678";
+        SSID = "{$userSetting.hostname} Hotspot";
+        WIFI_IFACE = "wlp45s0";
+      };
+    };
+    v2raya.enable = false;
+    dae = {
+      package = pkgs.unstable.dae;
       enable = true;
-      port = 12345;
+      disableTxChecksumIpGeneric = false;
+      configFile = "/home/${userSetting.username}/fun/sundry/config.dae";
+      assets = with pkgs.unstable; [v2ray-geoip v2ray-domain-list-community];
+      openFirewall = {
+        enable = true;
+        port = 12345;
+      };
     };
   };
 
@@ -45,13 +55,7 @@
     networkmanager.enable = true;
   };
 
-  services.create_ap.enable = false;
-  services.create_ap.settings = {
-    INTERNET_IFACE = "enp46s0";
-    PASSPHRASE = "12345678";
-    SSID = "{$userSetting.hostname} Hotspot";
-    WIFI_IFACE = "wlp45s0";
-  };
+
 
   # services.dnsmasq = {
   #   enable = true;
@@ -80,20 +84,6 @@
   #     no-resolv = true;
   #     # Cache dns queries.
   #     cache-size = 1000;
-  #   };
-  # };
-
-  # services.dnsmasq = {
-  #   enable = true;
-  #   resolveLocalQueries = false; # 确保禁用本地解析
-  #   alwaysKeepRunning = true;
-  #   settings = {
-  #     server = []; # 清空上游 DNS 服务器，避免与 dae 冲突
-  #     strict-order = false; # 不需要严格顺序
-  #     domain-needed = true;
-  #     bogus-priv = true;
-  #     no-resolv = true; # 禁用 /etc/resolv.conf 的读取
-  #     cache-size = 1000; # 可以保留缓存
   #   };
   # };
 
