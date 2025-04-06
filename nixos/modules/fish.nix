@@ -1,5 +1,177 @@
-{pkgs, ...}:
-let
+{pkgs, ...}: let
+  myterm=''
+if swaymsg -t get_tree | jq -r '.. | select(.focused? == true) | .name' | grep -q 'Emacs';then
+    if swaymsg -t get_tree | jq -e '.. | select(.focused? == true and .fullscreen_mode == 1)' >/dev/null; then
+        wtype -M ctrl n -m ctrl  -M ctrl . -m ctrl
+        sleep 0.1
+    else
+        swaymsg fullscreen
+        sleep 0.2
+        wtype -M ctrl n -m ctrl  -M ctrl . -m ctrl
+        sleep 0.1
+    fi
+else
+    if swaymsg -t get_tree | jq -e '.. | select(.focused? == true and .fullscreen_mode == 1)' >/dev/null; then
+        swaymsg '[title=".*Emacs.*"] focus'
+        sleep 0.2
+        wtype -M ctrl n -m ctrl  -M ctrl . -m ctrl
+        sleep 0.1
+        swaymsg fullscreen
+    else
+        swaymsg '[title=".*Emacs.*"] focus'
+        sleep 0.2
+        wtype -M ctrl n -m ctrl  -M ctrl . -m ctrl
+        sleep 0.1
+        swaymsg fullscreen
+    fi
+fi
+
+'';
+  switchframeup = ''
+    #!/usr/bin/env bash
+
+    # Check if focused window is in fullscreen mode
+    if swaymsg -t get_tree | jq -e '.. | select(.focused? == true and .fullscreen_mode == 1)' >/dev/null; then
+        # If in fullscreen: exit fullscreen, focus down, then re-enter fullscreen
+        swaymsg fullscreen
+        swaymsg focus up
+        swaymsg fullscreen
+    else
+        # If not in fullscreen: simply focus down
+        swaymsg focus up
+    fi
+  '';
+  togglemonitor=''
+#!/usr/bin/env bash
+
+STATE_FILE="$HOME/.paperlike_state"
+
+# Read current state or default to "watch"
+if [ -f "$STATE_FILE" ]; then
+    CURRENT_STATE=$(cat "$STATE_FILE")
+else
+    CURRENT_STATE="watch"
+fi
+
+if [ "$CURRENT_STATE" == "watch" ]; then
+    echo "Switching to reading mode"
+    echo "read" > "$STATE_FILE"
+    paperlike-cli -i2c /dev/i2c-4 -contrast 9
+    sleep 1.5
+    paperlike-cli -i2c /dev/i2c-4 -speed 5
+    sleep 1.5
+    paperlike-cli -i2c /dev/i2c-4 -mode 1
+    sleep 2.5
+    paperlike-cli -i2c /dev/i2c-4 -clear
+else
+    echo "Switching to watching mode"
+    echo "watch" > "$STATE_FILE"
+    paperlike-cli -i2c /dev/i2c-4 -contrast 1
+    sleep 1.5
+    paperlike-cli -i2c /dev/i2c-4 -speed 1
+    sleep 1.5
+    paperlike-cli -i2c /dev/i2c-4 -mode 4
+    sleep 2.5
+    paperlike-cli -i2c /dev/i2c-4 -clear
+fi
+  '';
+  onlyemacs = ''
+    #!/usr/bin/env bash
+
+    # Workspace 5: Center - emacs with vterm
+    swaymsg workspace 5
+    sleep 1.0
+    paperlike-cli -i2c /dev/i2c-4 -light2 0
+    sleep 1.3
+    emacsclient -c -a 'emacs' &
+    sleep 2.5
+    wtype -M ctrl c -m ctrl a -d 100 t
+    sleep 0.5
+    wtype -M ctrl n -m ctrl 1 -d 10 -k F12
+    sleep 0.3
+    swaymsg fullscreen
+    sleep 0.5
+
+    wl-paste --type text --watch cliphist store &
+    wl-gammarelay-rs &
+    fcitx5 -d --replace &
+    # sleep 0.2
+  '';
+
+  switchframe = ''
+    #!/usr/bin/env bash
+
+    # Check if focused window is in fullscreen mode
+    if swaymsg -t get_tree | jq -e '.. | select(.focused? == true and .fullscreen_mode == 1)' >/dev/null; then
+        # If in fullscreen: exit fullscreen, focus down, then re-enter fullscreen
+        swaymsg fullscreen
+        swaymsg focus down
+        swaymsg fullscreen
+    else
+        # If not in fullscreen: simply focus down
+        swaymsg focus down
+    fi
+  '';
+  genemacs = ''
+    #!/usr/bin/env bash
+
+    sleep 5.0
+    # Workspace 4: Left - eww + gptel
+    swaymsg workspace 4
+    sleep 1.0
+    emacsclient -c -a 'emacs' &
+    sleep 5.0
+    wtype -M alt n -m alt eww -P Return -p Return -P Return -p Return
+    sleep 0.5
+    emacsclient -c -a 'emacs' &
+    sleep 0.5
+    wtype -M alt n -m alt -d 10 "gptel"
+    sleep 0.5
+    wtype -P Return -p Return -P Return -p Return
+    sleep 0.5
+    wtype -M ctrl n -m ctrl 1
+    sleep 0.5
+    swaymsg focus down
+    sleep 0.3
+    swaymsg fullscreen
+    sleep 0.3
+
+    # Workspace 6: Right - Firefox + Foot
+    swaymsg workspace 6
+    sleep 0.3
+    firefox-beta &
+    sleep 2.5
+    swaymsg workspace 1
+    sleep 0.3
+    swaymsg move container to workspace number 6
+    sleep 0.3
+    swaymsg workspace 6
+    sleep 0.3
+    foot &
+    swaymsg workspace 6
+    sleep 0.3
+    swaymsg focus down
+    sleep 0.3
+    swaymsg fullscreen
+    sleep 0.3
+
+    # Workspace 5: Center - emacs with vterm
+    swaymsg workspace 5
+    sleep 0.3
+    emacsclient -c -a 'emacs' &
+    emacsclient -c -a 'emacs' &
+    sleep 0.5
+    wtype -M ctrl c -m ctrl a -d 100 t
+    sleep 0.5
+    wtype -M ctrl n -m ctrl 1 -d 10 -k F12
+    sleep 0.3
+    swaymsg fullscreen
+
+    wl-paste --type text --watch cliphist store &
+    wl-gammarelay-rs &
+    # fcitx5 -d --replace &
+    # sleep 0.2
+  '';
   # Define the script content for toggling workspaces
   toggleSpeechtotextScript = ''
     #!/usr/bin/env bash
@@ -55,17 +227,26 @@ let
   toggleWorkspaceScript = ''
     #!/usr/bin/env bash
 
-    # Get the current workspace name (assumes workspace names are "4" and "5")
+    # Ensure exactly two arguments are provided
+    if [ "$#" -ne 2 ]; then
+        echo "Usage: $0 <workspace1> <workspace2>"
+        exit 1
+    fi
+
+    workspace1="$1"
+    workspace2="$2"
+
+    # Get the current workspace name
     current_workspace=$(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true) | .name')
 
-    # Toggle between workspace "4" and "5"
-    if [ "$current_workspace" = "5" ]; then
-        swaymsg workspace number 4
-    elif [ "$current_workspace" = "4" ]; then
-        swaymsg workspace number 5
+    # Toggle between the provided workspaces
+    if [ "$current_workspace" = "$workspace2" ]; then
+        swaymsg workspace number "$workspace1"
+    elif [ "$current_workspace" = "$workspace1" ]; then
+        swaymsg workspace number "$workspace2"
     else
-        # If not in workspace "4" or "5", jump to workspace "4" by default
-        swaymsg workspace number 4
+        # If not in either workspace, jump to workspace1 by default
+        swaymsg workspace number "$workspace1"
     fi
   '';
 
@@ -128,11 +309,17 @@ let
         sleep 10  # 10 seconds
     done
   '';
-in{
+in {
   environment.systemPackages = with pkgs; [
     (writeShellScriptBin "toggle-workspace" toggleWorkspaceScript)
     (writeShellScriptBin "start-pomodoro" startPomodoro)
     (writeShellScriptBin "sendspeech" toggleSpeechtotextScript)
+    (writeShellScriptBin "genemacs" genemacs)
+    (writeShellScriptBin "onlyemacs" onlyemacs)
+    (writeShellScriptBin "switchframe" switchframe)
+    (writeShellScriptBin "switchframeup" switchframeup)
+    (writeShellScriptBin "togglemonitor" togglemonitor)
+    (writeShellScriptBin "myterm" myterm)
     wtype
   ];
   programs.fish = {
@@ -171,5 +358,4 @@ in{
       end
     '';
   };
-
 }

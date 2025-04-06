@@ -31,10 +31,8 @@
     };
   };
 
-
-
   console = {
-    font = " 16";
+    font = "Lat2-Terminus16";
     keyMap = "us";
     colors = [
       "FFFFFF" # Black → Off-White (Background)
@@ -55,6 +53,5 @@
       "2A2A2A" # Bright White → Almost Black
     ];
   };
-
 
 }

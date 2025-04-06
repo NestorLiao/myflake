@@ -1,9 +1,12 @@
 {pkgs, ...}: {
   programs.nix-ld.enable = true;
-  programs.nix-ld.package = pkgs.nix-ld-rs;
-  programs.nix-ld.libraries = with pkgs; [
+  programs.nix-ld.package = pkgs.unstable.nix-ld;
+  programs.nix-ld.libraries = with pkgs.unstable; [
     stdenv.cc.cc
-    openssl
+    openssl.dev
+    # openssl
+    openssl_3_4
+    gcc13
     xorg.libXcomposite
     xorg.libXtst
     xorg.libXrandr
@@ -17,13 +20,26 @@
     xorg.libXdamage
     xorg.libxshmfence
     xorg.libXxf86vm
+    nix-ld
     sqlite
     libelf
     libayatana-appindicator
+    webkitgtk_4_1
     # Required
     glib
     gtk2
+    gtk3
     bzip2
+    libsoup_2_4
+    at-spi2-atk
+    atkmm
+    cairo
+    gdk-pixbuf
+    harfbuzz
+    librsvg
+    libsoup_3
+    pango
+    openssl
     # Without these it silently fails
     xorg.libXinerama
     xorg.libXcursor
@@ -66,9 +82,9 @@
     pixman
     speex
     SDL_image
-    SDL_ttf
+    # SDL_ttf
     SDL_mixer
-    SDL2_ttf
+    # SDL2_ttf
     SDL2_mixer
     libappindicator-gtk2
     libappindicator-gtk3
@@ -79,18 +95,17 @@
     libcaca
     libcanberra
     libgcrypt
+    util-linux
     libvpx
-    librsvg
     xorg.libXft
     libvdpau
     # gnome2.pango
-    cairo
     atk
-    gdk-pixbuf
     fontconfig
     freetype
     dbus
     alsa-lib
     expat
   ];
+
 }

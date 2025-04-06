@@ -22,7 +22,7 @@
   # };
 
   programs.firefox = {
-    enable = false;
+    enable = true;
     package = pkgs.unstable.firefox-beta.override {
       nativeMessagingHosts = [
         # pkgs.tridactyl-native
@@ -94,7 +94,7 @@
               #TabsToolbar { font-family: Bookerly !important }
               #sidebar-header {
                 display: none;
-        }
+              }
 
               #statuspanel { display: none !important; }
               :root[tabsintitlebar] #titlebar:-moz-window-inactive {
@@ -120,7 +120,6 @@
               #contentAreaContextMenu #context-viewpartialsource-selection {
               	display: none !important;
               }
-
 
               :root {
               	scrollbar-color: #ffffff #FFFFFF;

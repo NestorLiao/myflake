@@ -18,8 +18,8 @@
   ];
 
   # with dae
-  services={
-    create_ap={
+  services = {
+    create_ap = {
       enable = false;
       settings = {
         INTERNET_IFACE = "enp46s0";
@@ -29,6 +29,7 @@
       };
     };
     v2raya.enable = false;
+    # https://login.ouonetwork.com/login
     dae = {
       package = pkgs.unstable.dae;
       enable = true;
@@ -54,8 +55,6 @@
     hostName = userSetting.hostname;
     networkmanager.enable = true;
   };
-
-
 
   # services.dnsmasq = {
   #   enable = true;

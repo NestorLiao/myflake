@@ -20,7 +20,7 @@
   };
 
   imports = [
-    inputs.nur-xddxdd.nixosModules.setupOverlay
+    # inputs.nur-xddxdd.nixosModules.setupOverlay
   ];
 
   fonts.fontDir.enable = true;
@@ -37,44 +37,9 @@
           "UbuntuMono"
         ];
       })
-
-      # nerd-fonts.fira-code
-      # nerd-fonts.fira-mono
-      # nerd-fonts.noto
-      # nerd-fonts.terminess-ttf
-      # nerd-fonts.ubuntu
-      # nerd-fonts.ubuntu-mono
-
-      corefonts
-      fira-code
-      fira-code-symbols
-      font-awesome
-      hanazono
-      liberation_ttf
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-emoji-blob-bin
-      noto-fonts-extra
-      hoyo-glyphs
-      kaixinsong-fonts
-      plangothic-fonts.allideo
-      source-code-pro
-      source-han-code-jp
-      source-han-mono
-      source-han-sans
-      source-han-serif
-      source-sans
-      source-sans-pro
-      source-serif
-      source-serif-pro
-      terminus_font_ttf
-      ubuntu_font_family
-      vistafonts
-      vistafonts-chs
-      vistafonts-cht
-      wqy_microhei
-      wqy_zenhei
+        noto-fonts-emoji-blob-bin
+      # hanazono
+      # plangothic-fonts.allideo
     ];
 
   # https://keqingrong.cn/blog/2019-10-01-how-to-display-all-chinese-characters-on-the-computer/
@@ -97,16 +62,16 @@
       serif =
         [
           "Bookerly"
+          "Source Han Sans SC"
           "Noto Serif"
-          "Source Han Serif SC"
         ]
         ++ emoji
         ++ serifFallback;
       sansSerif =
         [
           "Bookerly"
-          "Ubuntu"
           "Source Han Sans SC"
+          "Ubuntu"
         ]
         ++ emoji
         ++ sansFallback;

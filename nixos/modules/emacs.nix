@@ -3,10 +3,8 @@
   inputs,
   ...
 }: let
-  # Use Emacs from the unstable overlay
   myEmacs = inputs.emacs-overlay.packages.${pkgs.system}.emacs-git-pgtk;
 
-  # Use unstable packages from nixpkgs-unstable
   unstablePkgs = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
 
   # This generates an emacsWithPackages function. It takes a single
@@ -39,14 +37,5 @@ in
         # auctex
       ])
       ++ [
-        # unstablePkgs.notmuch # Use unstable notmuch
-        # unstablePkgs.emacsPackages.pdf-tools
-        # unstablePkgs.emacsPackages.nov
-        # unstablePkgs.emacsPackages.eat
-        # unstablePkgs.emacsPackages.darkroom
-        # unstablePkgs.emacsPackages.aggressive-indent
-        # unstablePkgs.emacsPackages.pyim
-        # unstablePkgs.emacsPackages.sicp
-        # unstablePkgs.emacsPackages.racket-mode
       ]
   )

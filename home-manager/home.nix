@@ -7,8 +7,13 @@
   ...
 }: let
 in {
+  home.file.".local/share/rofi/themes/white.rasi".source=./theme/config.rasi;
+  home.file.".local/share/fonts".source = ./theme/fonts;
+  home.file.".config/sway/white.jpg".source = ./theme/white.jpg;
+  home.file.".config/sway/takeabreak.png".source = ./theme/takeabreak.png;
 
   home.packages = with pkgs; [
+    nix-ld
   ];
 
   programs.bash.enable = true;
@@ -21,10 +26,6 @@ in {
     font = "Bookerly 16";
     theme ="white";
   };
-  home.file.".local/share/rofi/themes/white.rasi".source=./theme/config.rasi;
-  home.file.".local/share/fonts".source = ./theme/fonts;
-  home.file.".config/sway/white.jpg".source = ./theme/white.jpg;
-  home.file.".config/sway/takeabreak.png".source = ./theme/takeabreak.png;
 
   # You can import other home-manager modules here
   imports = [
@@ -89,7 +90,7 @@ in {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Ice";
-    size = 20;
+    size = 30;
   };
 
   gtk = {

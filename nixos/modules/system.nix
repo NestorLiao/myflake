@@ -4,13 +4,23 @@
 # Configure the system
 #
 {
+  lib,
   pkgs,
   config,
   inputs,
   ...
-}: {
+}: let
+  # ch341 = pkgs.callPackage ./ch341_kmod.nix {
+  #   kernel = config.boot.kernelPackages.kernel;
+  # };
+in {
   # https://github.com/ghostbuster91/blogposts/blob/main/router2023-part2/main.md
-  boot.kernelModules = ["i2c-dev" "i915"];
+  boot.kernelModules = ["i2c-dev" "i915" "spi-ch341"];
+
+  boot.extraModulePackages = [
+    # ch341
+  ];
+
   # boot.extraModulePackages = with config.boot.kernelPackages; [ wireguard ];
 
   # boot.extraModprobeConfig = ''
@@ -38,6 +48,7 @@
 
   boot.kernelPackages = pkgs.unstable.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages_6_11;
 
   # Bootloader
   boot.loader.timeout = 3;
@@ -57,14 +68,26 @@
   # };
 
   # services.xserver.videoDrivers = ["nvidia"];
+
   services.xserver.videoDrivers = ["modesetting"];
-    # Please remove "intel" from `services.xserver.videoDrivers` and switch to the "modesetting" driver.
+  # Please remove "intel" from `services.xserver.videoDrivers` and switch to the "modesetting" driver.
   # services.asusd.enable = true;
   # services.asusd.enableUserService = true;
 
+  # Forces a reset for specified bluetooth usb dongle.
+  systemd.services.fix-generic-usb-bluetooth-dongle = {
+    description = "Fixes for generic USB bluetooth dongle.";
+    wantedBy = ["post-resume.target"];
+    after = ["post-resume.target"];
+    script = builtins.readFile ./reset.sh;
+    scriptArgs = "0a12:0001"; # Vendor ID and Product ID here
+    serviceConfig.Type = "oneshot";
+  };
+
   hardware = {
     # always enable bluetooth
-    # bluetooth.enable = true;
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
 
     # always enable graphics drivers and enable a bunch of layers for it (including vulkan validation)
     graphics = {

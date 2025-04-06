@@ -28,17 +28,6 @@
     };
   };
 
-  home.packages = with pkgs; [
-    just
-    fd
-    ripgrep
-    tldr
-    tree
-    unrar-free
-    unzipNLS
-    zip
-  ];
-
   programs = {
     fzf = {
       enable = true;
