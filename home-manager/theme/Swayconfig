@@ -1,0 +1,140 @@
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+# Preferred terminal and launcher
+set $term foot
+# set $menu  rofi
+set $menu wmenu-run -N "#ffffff" -n "#000000" -M "#000000" -m "#ffffff" -S "#000000" -s "#ffffff" -f "monospace 16" -b -i
+# Background and output configuration
+output * bg  ~/.config/sway/white.jpg fill
+output * transform 270
+
+# Hybrid sleep after idle
+# exec swayidle -w timeout 2400 'systemctl hybrid-sleep'
+
+# Screenshots and screen recording
+bindsym Print exec grim -g "$(slurp)" - | wl-copy && wl-paste > ~/save/.media/recordings/pic/Screenshot-$(date +%F%T).png | dunstify "Screenshot of the region taken" -t 1000
+bindsym Shift+Print exec grim -g "$(slurp -o -r -c '#ff0000ff')" -t ppm - | satty --filename - --fullscreen --output-filename ~/save/.media/recording/pic/satty-$(date '+%Y%m%d-%H:%M:%S').png
+bindsym Mod1+Shift+Print exec wf-recorder
+
+# Lock screen
+bindsym $mod+p exec swaylock -i ~/.config/sway/takeabreak.png
+
+# Launch onlyemacs on startup
+exec onlyemacs &
+exec swaymsg workspace 5
+
+# Emacs window management
+bindsym $mod+e exec bash -c "swaymsg workspace 5 && emacsclient -c -a 'emacs'"
+
+for_window [app_id="emacs"] border none
+for_window [app_id="emacs"] titlebar_padding 0
+for_window [app_id="emacs"] titlebar_border_thickness 0
+
+# Foot terminal styling
+for_window [app_id="foot"] border none
+for_window [app_id="foot"] titlebar_padding 0
+for_window [app_id="foot"] titlebar_border_thickness 0
+
+# Firefox beta styling
+for_window [app_id="firefox-beta"] border none
+for_window [app_id="firefox-beta"] titlebar_padding 0
+for_window [app_id="firefox-beta"] titlebar_border_thickness 0
+
+# Monitor toggle
+bindsym $mod+r exec togglemonitor
+
+# Frame switching
+bindsym $mod+d exec switchframe
+bindsym $mod+u exec switchframeup
+
+# Workspace bindings (keypad)
+bindsym KP_1 workspace 1
+bindsym KP_2 workspace 2
+bindsym KP_3 workspace 3
+bindsym KP_4 workspace 4
+bindsym KP_5 workspace 5
+bindsym KP_6 workspace 6
+bindsym KP_7 workspace 7
+bindsym KP_8 workspace 8
+bindsym KP_9 workspace 9
+bindsym KP_0 workspace next
+
+# Basic window management
+bindsym $mod+Shift+w kill
+bindsym $mod+Return exec myterm
+
+# Application launcher and clipboard history
+# bindsym $mod+t exec $menu -show drun
+bindsym $mod+t exec $menu
+# bindsym $mod+c exec cliphist list | $menu -dmenu -i | cliphist decode | wl-copy
+bindsym $mod+c exec cliphist list | wmenu -N "#ffffff" -n "#000000" -M "#000000" -m "#ffffff" -S "#000000" -s "#ffffff" -f "monospace 16" -b -i -l 10  | cliphist decode | wl-copy
+bindsym $mod+Shift+d exec cliphist list | wmenu -N "#ffffff" -n "#000000" -M "#000000" -m "#ffffff" -S "#000000" -s "#ffffff" -f "monospace 16" -b -i -l 10  | cliphist delete
+
+# Sleep shortcut
+bindsym $mod+Shift+h exec systemctl hybrid-sleep
+
+# Floating window modifier
+floating_modifier $mod normal
+
+# Reload config
+bindsym $mod+Shift+c reload
+
+# Fullscreen toggle
+bindsym $mod+f fullscreen
+
+# Toggle floating
+bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+tab layout toggle split
+    
+# Swap focus between floating and tiling
+bindsym $mod+space focus mode_toggle
+
+# Hide cursor after 1 second of inactivity
+seat * hide_cursor 888
+
+# Gaps
+gaps top 0
+gaps outer 0
+gaps inner 0
+
+# Bar configuration
+bar {
+    position bottom
+    tray_output none
+    status_command while true; do date +'%H:%M'; sleep 1; done
+    mode hide
+    swaybar_command true
+    colors {
+        background #ffffff
+        statusline #000000
+        separator  #000000
+        focused_background #ffffff
+        focused_statusline #000000
+        focused_separator  #000000
+        focused_workspace  #ffffff #ffffff #000000
+        active_workspace   #ffffff #ffffff #000000
+        inactive_workspace #ffffff #000000 #ffffff
+        urgent_workspace   #ffffff #ffffff #000000
+        binding_mode       #ffffff #ffffff #000000
+    }
+}
+bindsym $mod+Shift+b exec swaymsg bar mode toggle
+
+# Client window styles
+client.focused           #ffffff  #ffffff  #000000  #ffffff  #ffffff
+client.focused_inactive  #ffffff  #000000  #ffffff  #ffffff  #ffffff
+client.focused_tab_title #ffffff  #ffffff  #000000
+client.unfocused         #ffffff  #000000  #ffffff  #ffffff  #ffffff
+client.urgent            #ffffff  #ffffff  #000000  #ffffff  #ffffff
+client.placeholder       #ffffff  #ffffff  #000000  #ffffff  #ffffff
+client.background        #ffffff
+
+# UI styling
+font pango:Bookerly 1
+titlebar_padding 1
+titlebar_border_thickness 0
+
+# Include additional config files
+include /etc/sway/config.d/*

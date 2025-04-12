@@ -1,7 +1,1 @@
-{
-  imports = [
-    ./firefox.nix
-    ./foot.nix
-    ./clitools.nix
-  ];
-}
+{ imports = [ ./foot.nix ./clitools.nix ]; }

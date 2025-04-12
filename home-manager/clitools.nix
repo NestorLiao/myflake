@@ -1,19 +1,12 @@
-{
-  pkgs,
-  config,
-  inputs,
-  ...
-}: {
-  imports = [
-  ];
+{ pkgs, lib, userSetting, config, inputs, ... }: {
+  imports = [ ];
 
-  programs.btop={
-    enable=true;
-      settings=
-        {
-          color_theme = "adwaita";
-          theme_background = false;
-        };
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = "adwaita";
+      theme_background = false;
+    };
   };
 
   programs.mpv = {
@@ -28,34 +21,55 @@
     };
   };
 
-  programs = {
-    fzf = {
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+  };
+
+  programs.bash.enable = true;
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper = {
       enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
+      hosts = [ "https://github.com" ];
+    };
+    extensions = with pkgs; [ gh-markdown-preview ];
+    settings = {
+      git_protocol = "ssh";
+      prompt = "enabled";
     };
   };
 
-  programs = {
-    direnv = {
-      enable = true;
-      enableBashIntegration = true;
-      nix-direnv.enable = true;
-    };
-    bash.enable = true;
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+    nix-direnv.enable = true;
+    silent = true;
   };
 
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
-    enableZshIntegration = true;
   };
 
   programs.git = {
     enable = true;
     userName = "NestorLiao";
     userEmail = "gtkndcbfhr@gmail.com";
+    extraConfig = {
+      credential.helper = "${
+        pkgs.git.override { withLibsecret = true; }
+      }/bin/git-credential-libsecret";
+    };
   };
 
   home.file.".config/fish/functions/rcdir.fish".text = ''
@@ -80,7 +94,7 @@
     command mkdir $argv[1]
     and cd $argv[1]
     end
-    '';
+  '';
 
   home.file.".cargo/config.toml".text = ''
     [source.crates-io]

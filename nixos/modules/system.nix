@@ -1,21 +1,15 @@
-#
 # system.nix
 #
 # Configure the system
 #
-{
-  lib,
-  pkgs,
-  config,
-  inputs,
-  ...
-}: let
+{ lib, pkgs, config, inputs, ... }:
+let
   # ch341 = pkgs.callPackage ./ch341_kmod.nix {
   #   kernel = config.boot.kernelPackages.kernel;
   # };
 in {
   # https://github.com/ghostbuster91/blogposts/blob/main/router2023-part2/main.md
-  boot.kernelModules = ["i2c-dev" "i915" "spi-ch341"];
+  boot.kernelModules = [ "i2c-dev" "i915" "spi-ch341" ];
 
   boot.extraModulePackages = [
     # ch341
@@ -58,31 +52,19 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
 
-  # hardware.nvidia = {
-  #   modesetting.enable = true;
-  #   powerManagement.enable = false;
-  #   powerManagement.finegrained = false;
-  #   open = false;
-  #   nvidiaSettings = true;
-  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-  # };
-
-  # services.xserver.videoDrivers = ["nvidia"];
-
-  services.xserver.videoDrivers = ["modesetting"];
-  # Please remove "intel" from `services.xserver.videoDrivers` and switch to the "modesetting" driver.
-  # services.asusd.enable = true;
-  # services.asusd.enableUserService = true;
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   # Forces a reset for specified bluetooth usb dongle.
   systemd.services.fix-generic-usb-bluetooth-dongle = {
     description = "Fixes for generic USB bluetooth dongle.";
-    wantedBy = ["post-resume.target"];
-    after = ["post-resume.target"];
+    wantedBy = [ "post-resume.target" ];
+    after = [ "post-resume.target" ];
     script = builtins.readFile ./reset.sh;
     scriptArgs = "0a12:0001"; # Vendor ID and Product ID here
     serviceConfig.Type = "oneshot";
   };
+
+  boot.loader.grub.theme="${pkgs.libsForQt5.breeze-grub}/grub/themes/breeze";
 
   hardware = {
     # always enable bluetooth
@@ -101,47 +83,46 @@ in {
   };
   hardware.enableAllFirmware = true; # enable all firmware regardless of license
 
-  # hardware.graphics = {
-  #   enable = true;
-  #   enable32Bit = true;
-  # };
-
-  # hardware.nvidia.prime = {
-  #   sync.enable = true;
-  #   # offload = {
-  #   #   enable = true;
-  #   #   enableOffloadCmd = true;
-  #   # };
-  #   intelBusId = "PCI:0:2:0";
-  #   nvidiaBusId = "PCI:1:0:0";
-  # };
-
   time.timeZone = "Asia/Shanghai";
   services.udisks2.mountOnMedia = true;
   services.udisks2.enable = true;
   services.gvfs.enable = true;
   services.devmon.enable = true;
 
-  programs.bash.undistractMe.playSound = false;
+  programs.bash.undistractMe.playSound = true;
 
-  programs.soundmodem.enable = false;
+  programs.soundmodem.enable = true;
 
-  xdg.sounds.enable = false;
-
-  services.jack.alsa.support32Bit = false;
-
+  xdg.sounds.enable = true;
+  security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
-
-  programs.nano.enable = false;
+  programs.nano.enable = true;
 
   services.pipewire = {
-    enable = false;
-    alsa.enable = false;
-    alsa.support32Bit = false;
-    pulse.enable = false;
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
     jack.enable = false;
+    wireplumber.enable = true;
   };
 
+  services.power-profiles-daemon.enable = false;
+
+  environment.etc = {
+    "wireplumber/main.lua.d/90-suspend-timeout.lua".text = ''
+      apply_properties = {
+        ["session.suspend-timeout-seconds"] = 0;
+                         };
+    '';
+  };
+
+  boot.extraModprobeConfig = ''
+    options snd-hda-intel power_save=0 power_save_controller=N
+  '';
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";
 }

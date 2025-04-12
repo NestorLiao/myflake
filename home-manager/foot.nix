@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{ pkgs, config, ... }: {
   programs.foot = {
     package = pkgs.unstable.foot;
     enable = true;

@@ -1,56 +1,18 @@
-{
-  outputs,
-  userSetting,
-  inputs,
-  lib,
-  pkgs,
-  ...
-}: let
+{ outputs, userSetting, inputs, lib, pkgs, ... }:
+let
 in {
-  home.file.".local/share/rofi/themes/white.rasi".source=./theme/config.rasi;
+  imports = [ ./default.nix ];
+
   home.file.".local/share/fonts".source = ./theme/fonts;
   home.file.".config/sway/white.jpg".source = ./theme/white.jpg;
+  home.file.".config/sway/config".source = ./theme/Swayconfig;
   home.file.".config/sway/takeabreak.png".source = ./theme/takeabreak.png;
 
-  home.packages = with pkgs; [
-    nix-ld
-  ];
-
-  programs.bash.enable = true;
+  home.packages = with pkgs; [ ];
 
   home.enableNixpkgsReleaseCheck = false;
 
-  programs.rofi = lib.mkIf (userSetting.windowmanager == "sway") {
-    package = pkgs.rofi-wayland;
-    enable = true;
-    font = "Bookerly 16";
-    theme ="white";
-  };
-
-  # You can import other home-manager modules here
-  imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
-
-    # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
-    # inputs.homeManagerModules.nixvim
-    # inputs.nix-colors.homeManagerModules.default
-    # inputs.ags.homeManagerModules.default
-
-    # You can also split up your configuration and import pieces of it here:
-    ./default.nix
-  ];
-
-  programs.nix-index = {
-    enable = true;
-    enableFishIntegration = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
-
   nixpkgs = {
-    # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
@@ -62,13 +24,6 @@ in {
       # (final: prev: {
       #   blender = prev.blender.override {cudaSupport = true;};
       # })
-
-      # Helix bleeding edge
-      # (
-      #   self: super: {
-      #     helix = inputs.helix.packages.${self.system}.default;
-      #   }
-      # )
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -90,7 +45,7 @@ in {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Ice";
-    size = 30;
+    size = 40;
   };
 
   gtk = {
