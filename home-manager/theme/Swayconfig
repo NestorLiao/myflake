@@ -67,8 +67,8 @@ bindsym $mod+Return exec myterm
 # Application launcher and clipboard history
 # bindsym $mod+t exec $menu -show drun
 bindsym $mod+t exec $menu
-# bindsym $mod+c exec cliphist list | $menu -dmenu -i | cliphist decode | wl-copy
-bindsym $mod+c exec cliphist list | wmenu -N "#ffffff" -n "#000000" -M "#000000" -m "#ffffff" -S "#000000" -s "#ffffff" -f "monospace 16" -b -i -l 10  | cliphist decode | wl-copy
+bindsym $mod+c exec cliphist list | wmenu -N "#ffffff" -n "#000000" -M "#000000" -m "#ffffff" -s "#000000" -S "#ffffff" -f "monospace 16" -b -i -l 1  | cliphist decode | wl-copy
+bindsym $mod+Shift+c exec cliphist list | wmenu -N "#ffffff" -n "#000000" -M "#000000" -m "#ffffff" -S "#000000" -s "#ffffff" -f "monospace 16" -b -i -l 16  | cliphist decode | wl-copy
 bindsym $mod+Shift+d exec cliphist list | wmenu -N "#ffffff" -n "#000000" -M "#000000" -m "#ffffff" -S "#000000" -s "#ffffff" -f "monospace 16" -b -i -l 10  | cliphist delete
 
 # Sleep shortcut
@@ -78,7 +78,7 @@ bindsym $mod+Shift+h exec systemctl hybrid-sleep
 floating_modifier $mod normal
 
 # Reload config
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload
 
 # Fullscreen toggle
 bindsym $mod+f fullscreen

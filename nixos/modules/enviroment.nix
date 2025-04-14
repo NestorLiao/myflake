@@ -3,14 +3,10 @@
     (import ./emacs.nix { inherit pkgs inputs; })
     fishPlugins.done
     fishPlugins.sponge
-
-    # ch341eeprom
     cmake
     coreutils-full
-    # wpsoffice-cn
     curl
     dash
-    # qq
     fd
     ffmpeg
     file
@@ -19,7 +15,6 @@
     glibcInfo
     global
     gnumake
-    # imsprog
     jq
     just
     leetcode-cli
@@ -33,12 +28,7 @@
     nixfmt-classic
     pandoc
     paperlike-go
-    (python3.withPackages (python-pkgs:
-      with python-pkgs; [
-        requests
-        promise
-        # neurokit2
-      ]))
+    (python3.withPackages (python-pkgs: with python-pkgs; [ requests promise ]))
     qemu_full
     quickemu
     ripgrep
@@ -52,6 +42,22 @@
     wget
     zip
   ];
+
+  systemd.timers.shutdown-at-23 = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "23:00";
+      Persistent = true;
+    };
+  };
+
+  systemd.services.shutdown-at-23 = {
+    script = ''
+      echo "系统将于 $(date) 自动关机" >> /var/log/shutdown-timer.log
+      /run/current-system/sw/bin/systemctl poweroff
+    '';
+    serviceConfig = { Type = "oneshot"; };
+  };
 
   environment.etc = {
     "xdg/user-dirs.defaults".text = ''
@@ -84,6 +90,8 @@
     garbage = "nix-collect-garbage -d";
     nixh = "nix-prefetch-url";
     nixhu = "nix-prefetch-url --unpack";
+    rso =
+      "sudo nixos-rebuild switch --flake /home/${userSetting.username}/.config/nixos#${userSetting.hostname} --offline";
     rs =
       "sudo nixos-rebuild switch --flake /home/${userSetting.username}/.config/nixos#${userSetting.hostname}";
     rb =

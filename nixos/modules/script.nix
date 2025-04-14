@@ -1,6 +1,66 @@
 { pkgs, ... }:
 let
+  timer = ''
+    #!/usr/bin/env bash
+    # ./time.sh 1 "2025-04-12 16:00:00"
+    # to not jerk off!
+    # ./time.sh 0 "2025-06-12 16:00:00"
+    # to not be fuck loser!!
+    CURRENT_TIMESTAMP=$(date +%s)
+
+    MODE="$1"
+
+    case "$MODE" in
+    "" )
+        echo "无参数，你应该使用 0/1 + time"
+        ;;
+    0 )
+        TARGET_DATE="$2";
+        TARGET_TIMESTAMP=$(date -d "$TARGET_DATE" +%s)
+        while [ "$CURRENT_TIMESTAMP" -lt "$TARGET_TIMESTAMP" ]; do
+            CURRENT_TIMESTAMP=$(date +%s)
+            REMAINING=$((CURRENT_TARGET - TIMESTAMP_TIMESTAMP))
+
+            DAYS=$((REMAINING / 86400))
+            HOURS=$(((REMAINING % 86400) / 3600))
+            MINUTES=$(((REMAINING % 3600) / 60))
+            SECONDS=$((REMAINING % 60))
+
+            printf "\rCountdown: %d days, %02d:%02d:%02d remaining" "$DAYS" "$HOURS" "$MINUTES" "$SECONDS"
+            sleep 1
+        done
+
+        echo -e "\nTime's up!"
+        ;;
+    1 )
+        TARGET_DATE="$2";
+        TARGET_TIMESTAMP=$(date -d "$TARGET_DATE" +%s)
+        while [ "$CURRENT_TIMESTAMP" -gt "$TARGET_TIMESTAMP" ]; do
+            CURRENT_TIMESTAMP=$(date +%s)
+            REMAINING=$((CURRENT_TIMESTAMP - TARGET_TIMESTAMP))
+
+            DAYS=$((REMAINING / 86400))
+            HOURS=$(((REMAINING % 86400) / 3600))
+            MINUTES=$(((REMAINING % 3600) / 60))
+            SECONDS=$((REMAINING % 60))
+
+            printf "\rCount: %d days, %02d:%02d:%02d remaining" "$DAYS" "$HOURS" "$MINUTES" "$SECONDS"
+            sleep 1
+        done
+
+        echo -e "\nTime's is upcomming!"
+        ;;
+    * )
+        echo "未知参数：$MODE，退出"
+        exit 1
+        ;;
+    esac
+
+  '';
+
   myterm = ''
+    #!/usr/bin/env bash
+
     if swaymsg -t get_tree | jq -r '.. | select(.focused? == true) | .name' | grep -q 'Emacs';then
         if swaymsg -t get_tree | jq -e '.. | select(.focused? == true and .fullscreen_mode == 1)' >/dev/null; then
             wtype -M ctrl n -m ctrl  -M ctrl . -m ctrl
@@ -88,9 +148,9 @@ let
     sleep 0.3
     emacsclient -c -a 'emacs' &
     sleep 3.5
-    wtype -M atl n -m atl org-agenda-list  -P Return -p
+    wtype -M alt n -m alt  org-agenda-list -P Return -p Return
     sleep 0.6
-    wtype -M ctrl n -m ctrl 1 -d 10 -k F12
+    wtype -M ctrl n -m ctrl 1
     sleep 0.3
     swaymsg fullscreen
     sleep 0.5
@@ -323,5 +383,6 @@ in {
     (writeShellScriptBin "switchframeup" switchframeup)
     (writeShellScriptBin "togglemonitor" togglemonitor)
     (writeShellScriptBin "myterm" myterm)
+    (writeShellScriptBin "timer" timer)
   ];
 }

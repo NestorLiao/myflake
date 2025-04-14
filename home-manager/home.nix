@@ -1,7 +1,7 @@
 { outputs, userSetting, inputs, lib, pkgs, ... }:
 let
 in {
-  imports = [ ./default.nix ];
+  imports = [ ./foot.nix ./clitools.nix ];
 
   home.file.".local/share/fonts".source = ./theme/fonts;
   home.file.".config/sway/white.jpg".source = ./theme/white.jpg;
